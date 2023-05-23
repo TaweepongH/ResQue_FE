@@ -15,7 +15,7 @@ const LoginEmail = () => {
   const handleSubmit = () => {
     // Perform the necessary logic when the form is submitted
     console.log('Email:', email);
-     console.log('Password:', password);
+    console.log('Password:', password);
   };
 
   return (
@@ -28,7 +28,6 @@ const LoginEmail = () => {
         value={email}
         onChangeText={handleEmailChange}
       />
-
 
       <TextInput
         style={styles.input}

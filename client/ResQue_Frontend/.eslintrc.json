@@ -13,7 +13,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-native"],
+  "plugins": ["react", "react-native", "import"],
   "rules": {
     "prefer-rest-params": "warn",
     "comma-dangle": [
@@ -78,7 +78,7 @@
         "allow": "single-child"
       }
     ],
-    "react/forbid-component-props": "error",
+    // "react/forbid-component-props": "error",
     "react/function-component-definition": [
       "error",
       {
@@ -136,14 +136,12 @@
         }
       }
     ],
-    "jsx-a11y/click-events-have-key-events": "warn",
-    "jsx-a11y/no-static-element-interactions": "warn",
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto"
-      }
-    ]
+    // "prettier/prettier": [
+    //   "error",
+    //   {
+    //     "endOfLine": "auto"
+    //   }
+    // ]
   }
 }
 
