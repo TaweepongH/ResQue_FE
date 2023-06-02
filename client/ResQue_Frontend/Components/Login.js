@@ -14,11 +14,11 @@ const Login = () => {
       <Text style={styles.title}>ResQue</Text>
       <Text style={styles.subtitle}>Skip the line, Save your time!</Text>
       {/* need to set up for redirect to each login method */}
-      <CustomButton style={styles.button} title="Log in with FaceBook" onPress={() => console.log("Button1 pressed")} />
-      <CustomButton style={styles.button} title="Log in with LINE" onPress={() => console.log("Button2 pressed")} />
-      <CustomButton style={styles.button} title="Log in with Google" onPress={() => console.log("Button3 pressed")} />
-      <CustomButton style={styles.button} title="Log in with E-mail" onPress={() => console.log("Button4 pressed")} />
-      <CustomButton style={styles.button} title="Log in with Apple" onPress={() => console.log("Button5 pressed")} />
+      <CustomButton style={styles.button} title="Log in with FaceBook" onPress={() => console.log('Button1 pressed')} />
+      <CustomButton style={styles.button} title="Log in with LINE" onPress={() => console.log('Button2 pressed')} />
+      <CustomButton style={styles.button} title="Log in with Google" onPress={() => console.log('Button3 pressed')} />
+      <CustomButton style={styles.button} title="Log in with E-mail" onPress={() => console.log('Button4 pressed')} />
+      <CustomButton style={styles.button} title="Log in with Apple" onPress={() => console.log('Button5 pressed')} />
     </View>
   );
 };
@@ -37,16 +37,16 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 18,
     color: 'gray',
-    marginBottom:40
+    marginBottom: 40,
   },
-button: {
+  button: {
     backgroundColor: 'gray',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 2,
     marginTop: 10,
-    width:210,
-    height:40,
+    width: 210,
+    height: 40,
   },
   buttonText: {
     color: 'white',
