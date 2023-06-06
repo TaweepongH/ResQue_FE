@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import logo from '../Image/logo.png';
 
 const CustomButton = ({ title, onPress, style }) => {
   return (
@@ -24,19 +25,16 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>ResQue</Text>
-      <Text style={styles.subtitle}>Skip the line, Save your time!</Text>
-      {/* Set up the redirect to Signup */}
+      <Image source={logo} style={styles.logo} />
       <CustomButton style={styles.button} title="Log in with FaceBook" onPress={() => console.log("Button1 pressed")} />
-      <CustomButton style={styles.button} title="Log in with LINE" onPress={() => console.log("Button2 pressed")} />
       <CustomButton style={styles.button} title="Log in with Google" onPress={() => console.log("Button3 pressed")} />
       <CustomButton style={styles.button} title="Log in with E-mail" onPress={() => console.log("Button4 pressed")} />
-      <CustomButton style={styles.button} title="Log in with Apple" onPress={() => console.log("Button5 pressed")} />
-      {/* <Text style={styles.linkText}>Don't have an account? 
-        <Text style={styles.linkText} onPress={handleSignUp}>
-          Sign up
-        </Text>
-      </Text> */}
+    <Text style={styles.signup}>
+        Don't have an account ?
+        <TouchableOpacity>
+          <Text style={styles.signup_btn}>Sign up</Text>
+        </TouchableOpacity>
+      </Text>
     </View>
   );
 };
@@ -46,35 +44,41 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor:'#FEEEEF',
+   
   },
   title: {
     fontSize: 40,
     fontWeight: 'bold',
     marginBottom: 5,
   },
-  subtitle: {
-    fontSize: 18,
-    color: 'gray',
-    marginBottom: 20,
-  },
+ logo:{
+marginBottom:90,
+ },
   button: {
-    backgroundColor: 'gray',
+    backgroundColor: '#CC313D',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 2,
+    borderRadius: 4,
     marginTop: 10,
-    width: 210,
-    height: 40,
+    width:'80%',
+
   },
   buttonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+    alignSelf:'center',
   },
-  linkText: {
-    marginTop: 40,
-    fontSize: 12,
+  signup:{
+    color:'grey'
   },
+  signup_btn:{
+    color:'#CC313D',
+     textDecorationLine: 'underline',
+     marginTop:10,
+  }
+
 });
 
 export default Login;

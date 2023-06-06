@@ -6,28 +6,30 @@ const Register = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Register</Text>
-
+      <Text style={styles.text}>Email</Text>
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder="helloitsme@example.com"
       />
+      <Text style={styles.text}>Password</Text>
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        placeholder="Please enter 8 - 16 characters"
       />
+      <Text style={styles.text}>Confirm Password</Text>
       <TextInput
         style={styles.input}
-        placeholder="Confirm Password"
-      />      
+        placeholder="**********"
+      />  
+      <Text style={styles.text}>Name</Text>    
        <TextInput
         style={styles.input}
-        placeholder="Name"
+        placeholder="Please enter 2 - 16 characters"
       />
         <TouchableOpacity style={styles.button} >
         <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>     
 
-      <Text style={styles.title}>Terms and Condition</Text>
 
     </View>
   );
@@ -35,25 +37,31 @@ const Register = () => {
 
 const styles = {
   container:{
-    marginTop:60,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor:'#FEEEEF',
+    paddingBottom:190,
+    width:'100%',
+    height:'100%',
   },
   input: {
-    borderWidth: 1,
-    borderColor: 'gray',
+    backgroundColor:'white',
     borderRadius: 5,
     padding: 10,
-    marginBottom: 10,
+    marginBottom: 15,
     width:300,
   },
   title:{
     marginBottom:20
   },
+  text:{
+    alignSelf:'flex-start',
+    marginLeft:40,
+  },
   button:{
-     backgroundColor: 'grey',
+     backgroundColor: '#CC313D',
      borderRadius:3,
-     width:100,
+     width:"80%",
      height:35,
      alignItems:'center',
      marginBottom:15,
@@ -62,6 +70,7 @@ const styles = {
   buttonText:{
     marginTop:8,
     color: 'white',
+    fontWeight:'bold',
     
   }
 

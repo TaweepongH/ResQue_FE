@@ -14,9 +14,9 @@ function App(): JSX.Element {
 
   return (
    <>
-   <Login />
+   {/* <Login /> */}
    {/* <Register/> */}
-   {/* <LoginEmail /> */}
+   <LoginEmail />
    </>
   );
 }
