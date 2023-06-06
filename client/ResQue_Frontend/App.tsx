@@ -24,6 +24,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Navbar from './Components/Navbar/Navbar';
 
 type SectionProps = PropsWithChildren<{
   title: string;
