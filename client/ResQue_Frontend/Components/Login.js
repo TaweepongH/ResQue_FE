@@ -52,9 +52,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
   },
+
  logo:{
-marginBottom:90,
+ marginBottom:90,
  },
+
   button: {
     backgroundColor: '#CC313D',
     paddingVertical: 10,
@@ -62,7 +64,7 @@ marginBottom:90,
     borderRadius: 4,
     marginTop: 10,
     width:'80%',
-
+    height: 40,
   },
   buttonText: {
     color: 'white',
