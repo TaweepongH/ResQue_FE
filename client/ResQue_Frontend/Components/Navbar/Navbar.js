@@ -24,6 +24,7 @@ const Navbar = () => {
       initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: '#CC313D',
+        tabBarInactiveTintColor: '#1E1E1E',
         // Attention: You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar.  src: https://reactnavigation.org/docs/bottom-tab-navigator
         tabBarStyle: { position: 'absolute', height: 80},
         tabBarLabelStyle: { marginBottom: 20, marginTop: -15 }
