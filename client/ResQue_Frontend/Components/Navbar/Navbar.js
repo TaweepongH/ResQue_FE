@@ -1,56 +1,81 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import More from '../../screens/More';
+import MyInfo from '../../screens/MyInfo';
+import Search from '../../screens/Search';
 
-const Navbar = () => {
-  // const navigation = useNavigation();
-
-  // const navigateToScreen = (screenName) => {
-  //   navigation.navigate(screenName);
-  // };
-
+// This is a placeholder for Main.js page. Should be deleted after merging Ari's task
+const Main = () => {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.iconContainer}>
-        <Icon name="home-outline" size={24} color="#000" />
-        <Text style={styles.iconText}>Home</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.iconContainer}>
-        <Icon name="search-outline" size={24} color="#000" />
-        <Text style={styles.iconText}>Search</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.iconContainer}>
-        <Icon name="person-outline" size={24} color="#000" />
-        <Text style={styles.iconText}>My Info</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.iconContainer}>
-        <Icon name="ellipsis-horizontal-outline" size={24} color="#000" />
-        <Text style={styles.iconText}>More</Text>
-      </TouchableOpacity>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home</Text>
     </View>
   );
-};
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#D9D9D9',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 80,
-  },
-  iconContainer: {
-    alignItems: 'center',
-  },
-  iconText: {
-    fontSize: 12,
-    marginTop: 4,
-  },
-});
+const Tab = createBottomTabNavigator();
+
+const Navbar = () => {
+
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        tabBarActiveTintColor: '#CC313D',
+        // Attention: You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar.  src: https://reactnavigation.org/docs/bottom-tab-navigator
+        tabBarStyle: { position: 'absolute', height: 80},
+        tabBarLabelStyle: { marginBottom: 20, marginTop: -15 }
+      }}
+      
+    >
+      <Tab.Screen
+        name="Home"
+        component={Main}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarLabel: 'Search',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="magnify" color={color} size={size} />
+          ),
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="My Info"
+        component={MyInfo}
+        options={{
+          tabBarLabel: 'My Info',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account-outline" color={color} size={size} />
+          ),
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="More"
+        component={More}
+        options={{
+          tabBarLabel: 'More',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="dots-horizontal" color={color} size={size} />
+          ),
+          headerShown: false,
+        }}
+      />
+    </Tab.Navigator>
+  ); 
+};
 
 export default Navbar;

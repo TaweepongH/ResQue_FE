@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Navbar from './Navbar/Navbar';
 
 const CustomButton = ({ title, onPress, style }) => {
   return (
@@ -20,7 +19,6 @@ const Login = () => {
       <CustomButton style={styles.button} title="Log in with Google" onPress={() => console.log('Button3 pressed')} />
       <CustomButton style={styles.button} title="Log in with E-mail" onPress={() => console.log('Button4 pressed')} />
       <CustomButton style={styles.button} title="Log in with Apple" onPress={() => console.log('Button5 pressed')} />
-      <Navbar />
     </View>
   );
 };
