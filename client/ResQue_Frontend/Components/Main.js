@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import renderButtons from './Components/renderButtons';
 
 const Main = () => {
   // FIX ME: test data(to be received from the backend later)
@@ -15,58 +16,11 @@ const Main = () => {
     { id: 9, name: 'Delta' },
   ];
 
-  const renderButton = (name) => {
-    return (
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>{name}</Text>
-      </TouchableOpacity>
-    );
-  };
-
-  const renderButtons = () => {
-    const rows = [];
-    const columns = 3;
-    const totalButtons = data.length;
-
-    let startIndex = 0;
-    let endIndex = columns + 1;
-
-    while (startIndex < totalButtons) {
-      const rowData = data.slice(startIndex, endIndex);
-      const rowButtons = [];
-
-      for (let i = 0; i < columns; i++) {
-        const item = rowData[i];
-
-        if (item) {
-          rowButtons.push(
-            <View style={styles.column} key={item.id}>
-              {renderButton(item.name)}
-            </View>
-          );
-        } else {
-          rowButtons.push(<View style={styles.column} key={i} />);
-        }
-      }
-
-      rows.push(
-        <View style={styles.row} key={startIndex}>
-          {rowButtons}
-        </View>
-      );
-
-      startIndex += columns;
-      endIndex += columns;
-    }
-
-    return rows;
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.subtitle}>Reservation BEST Restaurant</Text>
       <Text style={styles.title}>Vancouver</Text>
-      {renderButtons()}
+      {renderButtons(data)}
       <View style={styles.mapContainer}>
         <View>
           <Text style={styles.mapText}>
@@ -87,14 +41,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 80,
   },
-  row: {
-    flexDirection: 'row',
-    marginBottom: 10,
-  },
-  column: {
-    flex: 1,
-    marginRight: 10,
-  },
   title: {
     fontSize: 30,
     fontWeight: 'bold',
@@ -104,20 +50,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
     marginBottom: 10,
-  },
-  button: {
-    height: 48,
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonText: {
-    fontSize: 11,
-    fontWeight: 'bold',
-    color: 'black',
   },
   mapContainer: {
     backgroundColor: '#f2f2f2',
@@ -140,8 +72,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 30,
   },
-
-
 });
 
 export default Main;
