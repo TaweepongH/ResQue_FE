@@ -1,110 +1,110 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-// import { useNavigation } from '@react-navigation/native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 const LoginEmail = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const navigation = useNavigation();
+
   const handleEmailChange = (text) => {
     setEmail(text);
   };
+
   const handlePasswordChange = (text) => {
     setPassword(text);
   };
-  const handleRegister = () => {
-    navigation.navigate('Register'); // Replace 'Register' with the actual name of your signup screen
-  };
-
-  const handleSubmit = () => {
-    // Perform the necessary logic when the form is submitted
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Log in</Text>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={handleEmailChange}
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={handleEmailChange}
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={handlePasswordChange}
-      />
-      
-      <View style={styles.forgotContainer}>
-        <TouchableOpacity>
-          <Text style={styles.btn_pw}>Forgot Password ?</Text>
-        </TouchableOpacity>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your password"
+          value={password}
+          onChangeText={handlePasswordChange}
+        />
       </View>
-      
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Log in</Text>
+
+      <TouchableOpacity style={styles.forgotButton}>
+        <Text style={styles.forgotText}>Forgot Password ?</Text>
       </TouchableOpacity>
 
-      <Text style={styles.signup}>
-        Don't have an account?
+      <TouchableOpacity style={styles.loginButton} >
+        <Text style={styles.loginText}>Log in</Text>
+      </TouchableOpacity>
+
+      <View style={styles.signupContainer}>
+        <Text style={styles.noAccountText}>Don't have an account?  </Text>
         <TouchableOpacity>
-          <Text style={styles.signup_btn}> Sign up</Text>
+          <Text style={styles.signupText}>Sign up</Text>
         </TouchableOpacity>
-      </Text>
+      </View>
     </View>
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
     backgroundColor: '#FEEEEF',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom:290,
+    paddingBottom: 290,
+  },
+  inputContainer: {
+    width: '80%',
+    marginBottom: 10,
   },
   input: {
     backgroundColor: 'white',
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
-    width: 300,
+    width: '100%',
   },
   title: {
     marginBottom: 20,
   },
-  button: {
+  loginButton: {
     backgroundColor: '#CC313D',
     borderRadius: 3,
     width: '80%',
     height: 35,
     alignItems: 'center',
-    marginBottom: 15,
+
   },
-  btn_pw: {
+  forgotButton: {
+    alignSelf: 'flex-end',
+    marginBottom: 20,
+    marginRight: 40,
+  },
+  forgotText: {
     color: '#CC313D',
-    textAlign: 'right', // Align the text to the right
+    textAlign: 'right',
   },
-  buttonText: {
+  loginText: {
     marginTop: 8,
     color: 'white',
-    fontWeight:'bold',
+    fontWeight: 'bold',
   },
-  signup_btn: {
+  signupContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  noAccountText: {
+    color: 'grey',
+  },
+  signupText: {
     color: '#CC313D',
     textDecorationLine: 'underline',
   },
-  forgotContainer: {
-    alignSelf: 'flex-end', // Align the container to the right side
-    marginBottom: 20,
-    marginRight:40,
-  },
-};
+});
 
 export default LoginEmail;
+

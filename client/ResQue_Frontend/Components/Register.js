@@ -1,79 +1,71 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 const Register = () => {
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Register</Text>
-      <Text style={styles.text}>Email</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="helloitsme@example.com"
-      />
-      <Text style={styles.text}>Password</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Please enter 8 - 16 characters"
-      />
-      <Text style={styles.text}>Confirm Password</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="**********"
-      />  
-      <Text style={styles.text}>Name</Text>    
-       <TextInput
-        style={styles.input}
-        placeholder="Please enter 2 - 16 characters"
-      />
-        <TouchableOpacity style={styles.button} >
-        <Text style={styles.buttonText}>Register</Text>
-        </TouchableOpacity>     
-
-
+      <InputField label="Email" placeholder="helloitsme@example.com" />
+      <InputField label="Password" placeholder="Please enter 8 - 16 characters" />
+      <InputField label="Confirm Password" placeholder="**********" />
+      <InputField label="Name" placeholder="Please enter 2 - 16 characters" />
+      <TouchableOpacity style={styles.registerButton}>
+        <Text style={styles.registerButtonText}>Register</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-const styles = {
-  container:{
-    alignItems: 'center',
+const InputField = ({ label, placeholder }) => {
+  return (
+    <View style={styles.inputContainer}>
+      <Text style={styles.labelText}>{label}</Text>
+      <TextInput style={styles.infoInput} placeholder={placeholder} />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
     justifyContent: 'center',
-    backgroundColor:'#FEEEEF',
-    paddingBottom:190,
-    width:'100%',
-    height:'100%',
+    backgroundColor: '#FEEEEF',
+    paddingBottom: 190,
   },
-  input: {
-    backgroundColor:'white',
+  inputContainer: {
+    marginLeft: 40,
+    marginBottom: 15,
+  },
+  infoInput: {
+    backgroundColor: 'white',
     borderRadius: 5,
     padding: 10,
-    marginBottom: 15,
-    width:300,
+    width: '90%',
   },
-  title:{
-    marginBottom:20
-  },
-  text:{
-    alignSelf:'flex-start',
-    marginLeft:40,
-  },
-  button:{
-     backgroundColor: '#CC313D',
-     borderRadius:3,
-     width:"80%",
-     height:35,
-     alignItems:'center',
-     marginBottom:15,
-     marginTop:10,
-  },
-  buttonText:{
-    marginTop:8,
-    color: 'white',
-    fontWeight:'bold',
-    
-  }
+ registerTitle: {
+  alignSelf: 'center',
+  marginBottom: 20,
+},
 
-};
+  labelText: {
+    marginBottom: 5,
+  },
+registerButton: {
+  backgroundColor: '#CC313D',
+  borderRadius: 3,
+  width: '80%',
+  height: 35,
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginBottom: 15,
+  marginTop: 10,
+  alignSelf: 'center', 
+},
+
+  registerButtonText: {
+    marginTop: 8,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+});
 
 export default Register;
