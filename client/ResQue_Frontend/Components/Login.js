@@ -2,10 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import logo from '../Image/logo.png';
 
-const CustomButton = ({ title, onPress, style }) => {
+const CustomButton = ({ children, onPress, style, icon }) => {
   return (
     <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-      <Text style={styles.buttonText}>{title}</Text>
+      <View style={styles.buttonContent}>
+        <Image source={icon} style={styles.login_logo} />
+        <Text style={styles.buttonText}>{children}</Text>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -52,7 +55,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: 'white',
+    color: '#FEEEEF',
+    marginLeft: 10, // Adjust the margin as needed
     fontSize: 16,
     fontWeight: 'bold',
   },

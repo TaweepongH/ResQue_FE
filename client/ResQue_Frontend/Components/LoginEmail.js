@@ -4,7 +4,6 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 const LoginEmail = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const handleEmailChange = (text) => {
     setEmail(text);
   };
@@ -61,7 +60,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   input: {
-    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: 'gray',
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
