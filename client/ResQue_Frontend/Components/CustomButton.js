@@ -2,10 +2,11 @@ import React from 'react';
 import { Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 
-const CustomButton = ({ title, onPress, style }) => {
+const CustomButton = ({ title, onPress, style, icon }) => {
   return (
     <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-      <Text style={styles.buttonText}>{title}</Text>
+        <Image source={icon} style={styles.login_logo} />
+        <Text style={styles.buttonText}>{title}</Text> 
     </TouchableOpacity>
   );
 };
@@ -21,7 +22,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: 'white',
+    color: '#FEEEEF',
+    marginLeft: 10, 
     fontSize: 16,
     fontWeight: 'bold',
   },

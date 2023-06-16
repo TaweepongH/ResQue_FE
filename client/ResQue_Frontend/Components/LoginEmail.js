@@ -15,14 +15,14 @@ const LoginEmail = () => {
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
-          style={styles.input}
+          style={styles.input_info}
           placeholder="Enter your email"
           value={email}
           onChangeText={handleEmailChange}
         />
 
         <TextInput
-          style={styles.input}
+          style={styles.input_info}
           placeholder="Enter your password"
           value={password}
           onChangeText={handlePasswordChange}
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     width: '80%',
     marginBottom: 10,
   },
-  input: {
-    borderWidth: 1,
+  input_info: {
+    backgroundColor:'white',
     borderColor: 'gray',
     borderRadius: 5,
     padding: 10,
