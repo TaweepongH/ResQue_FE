@@ -5,7 +5,6 @@ import renderButtons from './renderButtons';
 const Main = () => {
   const [showMap, setShowMap] = useState(true);
 
-  // 예시 데이터 - 지역 목록
   const location = [
     { id: 1, name: 'All' },
     { id: 2, name: 'Downtown' },
@@ -18,7 +17,6 @@ const Main = () => {
     { id: 9, name: 'More>' },
   ];
 
-  // 예시 데이터 - 근처 레스토랑 리스트
   const nearbyRestaurants = [
     {
       id: 1,
@@ -76,7 +74,7 @@ const Main = () => {
           {nearbyRestaurants.map((restaurant) => (
             <View style={styles.restaurantContainer} key={restaurant.id}>
               <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
-              <View style={styles.restaurantInfo}>
+              <View>
                 <Text style={styles.restaurantName}>{restaurant.name}</Text>
                 <Text style={styles.restaurantAddress}>{restaurant.address}</Text>
                 <Text style={styles.restaurantDistance}>{restaurant.distance}m from me</Text>
@@ -160,9 +158,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginRight: 10,
   },
-  // restaurantInfo: {
-  //   flex: 1,
-  // },
   restaurantName: {
     fontSize: 16,
     fontWeight: 'bold',
