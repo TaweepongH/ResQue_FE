@@ -1,17 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import logo from '../Image/logo.png';
-
-const CustomButton = ({ children, onPress, style, icon }) => {
-  return (
-    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-      <View style={styles.buttonContent}>
-        <Image source={icon} style={styles.login_logo} />
-        <Text style={styles.buttonText}>{children}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-};
+import CustomButton from './CustomButton';
 
 const Login = () => {
   const handleSignUp = () => {

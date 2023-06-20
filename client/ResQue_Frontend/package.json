@@ -8,8 +8,11 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"
+    
   },
   "dependencies": {
+
+    "@react-native-community/masked-view": "^0.1.11",
     "@react-native-community/cli": "^11.3.2",
     "@react-native-community/cli-platform-android": "^11.3.2",
     "@react-navigation/bottom-tabs": "^6.5.7",
