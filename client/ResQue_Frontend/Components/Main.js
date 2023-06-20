@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import renderButtons from './renderButtons';
 
 const Main = () => {
-  // FIX ME: test data(to be received from the backend later)
-  const data = [
+  const [showMap, setShowMap] = useState(true);
+
+  // 예시 데이터 - 지역 목록
+  const location = [
     { id: 1, name: 'All' },
     { id: 2, name: 'Downtown' },
     { id: 3, name: 'Burnaby' },
@@ -16,35 +18,91 @@ const Main = () => {
     { id: 9, name: 'More>' },
   ];
 
+  // 예시 데이터 - 근처 레스토랑 리스트
+  const nearbyRestaurants = [
+    {
+      id: 1,
+      name: 'Restaurant A',
+      address: '123 Main St',
+      distance: '200',
+      waitlist: 3,
+      thumbnailImage: 'https://example.com/restaurant-a-thumbnail.jpg',
+    },
+    {
+      id: 2,
+      name: 'Restaurant B',
+      address: '456 Elm St',
+      distance: '500',
+      waitlist: 5,
+      thumbnailImage: 'https://example.com/restaurant-b-thumbnail.jpg',
+    },
+    {
+      id: 3,
+      name: 'Restaurant C',
+      address: '789 Oak St',
+      distance: '1000',
+      waitlist: 2,
+      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
+    },
+    // ...
+  ];
+
+  const handleAllowButtonPress = () => {
+    setShowMap(false);
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
-      <Text style={styles.title}>Vancouver</Text>
-      {renderButtons(data)}
-      <View style={styles.mapContainer}>
-        <View style={styles.borderTop} />
-        <View style={styles.locationContainer}>
-          <Image
-            source={require('../src/img/maps-and-flags.png')}
-            style={styles.locationIcon}
-          />
-          <Text style={styles.mapText}>
-            Please allow location access to discover the best restaurants near me!
-          </Text>
-        </View>
-        <TouchableOpacity style={styles.allowButton}>
-          <Text style={styles.buttonText}>Allow</Text>
-        </TouchableOpacity>
+      <View style={styles.locations}>
+        <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
+        <Text style={styles.title}>Vancouver</Text>
+        {renderButtons(location)}
       </View>
+      {showMap ? (
+        <View style={styles.mapContainer}>
+          <View>
+            {/* FIXME: React Native icon insertion area. */}
+            <Text style={styles.mapText}>
+              Please allow location access to discover the best restaurants near me!
+            </Text>
+          </View>
+          <TouchableOpacity style={styles.allowButton} onPress={handleAllowButtonPress}>
+            <Text style={styles.buttonText}>Allow</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View style={styles.nearbyRestaurants}>
+          <Text style={styles.sectionTitle}>Explore restaurants near me</Text>
+          {nearbyRestaurants.map((restaurant) => (
+            <View style={styles.restaurantContainer} key={restaurant.id}>
+              <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
+              <View style={styles.restaurantInfo}>
+                <Text style={styles.restaurantName}>{restaurant.name}</Text>
+                <Text style={styles.restaurantAddress}>{restaurant.address}</Text>
+                <Text style={styles.restaurantDistance}>{restaurant.distance}m from me</Text>
+              </View>
+              <View style={styles.waitlistContainer}>
+                <View style={styles.waitlistBadge}>
+                  <Text style={styles.waitlistText}>{restaurant.waitlist}</Text>
+                </View>
+              </View>
+            </View>
+          ))}
+        </View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingHorizontal: 10,
-    paddingVertical: 80,
+    marginTop: 50,
+  },
+  locations: {
+    borderBottomColor: '#D9D9D9',
+    borderBottomWidth: 5,
+    paddingBottom: 15,
   },
   title: {
     fontSize: 30,
@@ -61,14 +119,6 @@ const styles = StyleSheet.create({
     paddingVertical: 70,
     marginVertical: 20,
   },
-  borderTop: {
-    borderTopWidth: 5,
-    borderTopColor: '#D9D9D9',
-    position: 'absolute',
-    top: 0,
-    left: -10,
-    right: -10,
-  },
   allowButton: {
     height: 35,
     width: 100,
@@ -78,18 +128,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     alignSelf: 'center',
-    marginTop: 20,
+    marginTop: 25,
   },
   buttonText: {
     fontSize: 13,
     fontWeight: 'bold',
     color: 'white',
-  },
-  locationContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
   },
   mapText: {
     fontSize: 16,
@@ -97,14 +141,53 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     textAlign: 'center',
   },
-  locationIcon: {
-    width: 37,
-    height: 37,
-    marginRight: 5,
-    position: 'absolute',
-    left: '50%',
-    top: '-20%',
-    marginLeft: -18.5,
+  nearbyRestaurants: {
+    marginTop: 20,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  restaurantContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  thumbnailImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 10,
+  },
+  // restaurantInfo: {
+  //   flex: 1,
+  // },
+  restaurantName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  restaurantAddress: {
+    fontSize: 12,
+    color: '#777',
+  },
+  restaurantDistance: {
+    fontSize: 12,
+    color: '#777',
+  },
+  waitlistContainer: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: '#CC313D',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 120,
+  },
+  waitlistText: {
+    fontSize: 12,
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 
