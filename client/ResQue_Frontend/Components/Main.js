@@ -63,10 +63,10 @@ const Main = () => {
             <Text style={styles.mapText}>
               Please allow location access to discover the best restaurants near me!
             </Text>
+            <TouchableOpacity style={styles.allowButton} onPress={handleAllowButtonPress}>
+              <Text style={styles.buttonText}>Allow</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.allowButton} onPress={handleAllowButtonPress}>
-            <Text style={styles.buttonText}>Allow</Text>
-          </TouchableOpacity>
         </View>
       ) : (
         <View style={styles.nearbyRestaurants}>
