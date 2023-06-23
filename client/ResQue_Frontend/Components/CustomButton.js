@@ -21,25 +21,22 @@ const styles = StyleSheet.create({
     width: '80%',
     height: 40,
     justifyContent: 'center',
-    alignItems: 'center',
   },
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 10,
+    paddingHorizontal: 20, 
   },
   buttonText: {
     color: '#FEEEEF',
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   icon: {
-    marginRight: 10,
     color:'white',
+    marginRight: 30, 
   },
 });
 
 export default CustomButton;
-
-

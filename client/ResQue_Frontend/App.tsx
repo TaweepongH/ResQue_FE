@@ -10,8 +10,9 @@ import Navbar from './Components/Navbar/Navbar';
 import { NavigationContainer } from '@react-navigation/native';
 import Login from './Components/Login';
 
+
 function App(): JSX.Element {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <NavigationContainer>
