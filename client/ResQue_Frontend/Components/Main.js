@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   restaurantContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 20,
   },
   thumbnailImage: {
     width: 60,
