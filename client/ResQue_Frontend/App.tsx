@@ -11,6 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Login from './Components/Login';
 
 
+
 function App(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -18,6 +19,7 @@ function App(): JSX.Element {
     <NavigationContainer>
       {/* TODO: Need to handle setIsLoggedIn based on authentication. Skip this for now.*/}
       {isLoggedIn ? <Navbar /> : <Login />}
+  
     </NavigationContainer>
   );
 }
