@@ -6,20 +6,26 @@
  */
 
 import React, { useState } from 'react';
-import Navbar from './Components/Navbar/Navbar';
 import { NavigationContainer } from '@react-navigation/native';
-import Login from './Components/Login';
 
+import TabNavigator from './Components/TabNavigator/TabNavigator'
+import StackNavigator from './Components/StackNavigator/StackNavigator';
 
 
 function App(): JSX.Element {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // TODO: change this when implementing authentication. This is just for easy testing
+  const [user, setUser] = useState(true);
 
   return (
     <NavigationContainer>
-      {/* TODO: Need to handle setIsLoggedIn based on authentication. Skip this for now.*/}
-      {isLoggedIn ? <Navbar /> : <Login />}
-  
+
+        {/* TODO: Need to handle setIsLoggedIn based on authentication. Skip this for now.*/}
+      {user ? (<>
+          <TabNavigator />
+        </>) : (
+          <StackNavigator />
+        )}
+
     </NavigationContainer>
   );
 }
