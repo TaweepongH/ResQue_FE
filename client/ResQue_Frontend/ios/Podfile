@@ -21,8 +21,14 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+# fixing a swift podfile error associated with RNFB pod
+# use_modular_headers!
+
 target 'ResQue_Frontend' do
   config = use_native_modules!
+
+  # in hopes of fixing the RNFBApp error
+  # pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
 
   # Flags change depending on the env values.
   flags = get_default_flags()

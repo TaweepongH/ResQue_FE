@@ -1,15 +1,43 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
+// before using this component please follow the instructions in the sendingDataToBackend.md file. The file is in this same components folder.
+// these two consts will need to changed by the dev based off of the instructions in the sendingDataToBackend.md file. 
+const ipAddress = '127.0.0.1';
+const portNum = 3000;
+
 const LoginEmail = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const handleEmailChange = (text) => {
     setEmail(text);
   };
 
   const handlePasswordChange = (text) => {
     setPassword(text);
+  };
+
+  const handleLogin = () => {
+    
+    console.log('User Email:', email);
+    console.log('User Password:', password);
+
+    fetch(`http://${ipAddress}:${portNum}/addUser`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: `${email}`,
+      password: `${password}`
+    }),
+  }).then((response) => response.text())
+    .then((data) => {
+      console.log(data); // Success message from the server
+    }).catch((error) => {
+      console.error('Error:', error);
+    });
+
   };
   return (
     <View style={styles.container}>
@@ -33,7 +61,8 @@ const LoginEmail = () => {
         <Text style={styles.forgotText}>Forgot Password ?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginButton} >
+      {/* where the handleLogin function is called */}
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogin} >
         <Text style={styles.loginText}>Log in</Text>
       </TouchableOpacity>
 
