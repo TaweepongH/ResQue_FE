@@ -23,9 +23,9 @@ const LoginEmail = () => {
     console.log('User Email:', email);
     console.log('User Password:', password);
 
-    fetch(`http://${ipAddress}:${portNum}/addUser`, {
+    fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/login`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json',
+      headers: {'Content-Type': 'application/json; charset=utf-8',
     },
     body: JSON.stringify({
       email: `${email}`,
@@ -33,7 +33,7 @@ const LoginEmail = () => {
     }),
   }).then((response) => response.text())
     .then((data) => {
-      console.log(data); // Success message from the server
+      console.log("data: ", data); // Success message from the server
     }).catch((error) => {
       console.error('Error:', error);
     });
