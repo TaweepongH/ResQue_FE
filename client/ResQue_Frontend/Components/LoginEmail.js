@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-// before using this component please follow the instructions in the sendingDataToBackend.md file. The file is in this same components folder.
-// these two consts will need to changed by the dev based off of the instructions in the sendingDataToBackend.md file. 
-const ipAddress = '127.0.0.1';
-const portNum = 3000;
-
 const LoginEmail = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
