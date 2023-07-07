@@ -57,29 +57,44 @@ const Register = () => {
 
   return (
     <View style={styles.container}>
+      <Text
+        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
+      >Email</Text>
       <TextInput 
         style={styles.input_info}
         label="Email" 
         placeholder="helloitsme@example.com"
         onChangeText={handleEmailChange}  
       />
+      <Text
+        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
+      >Password</Text>
       <TextInput
         style={styles.input_info}
         label="Password" 
         placeholder="Please enter 8 - 16 characters" 
         onChangeText={handlePasswordChange}
       />
+      <Text
+        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
+      >Confirm Password</Text>
       <TextInput
         style={styles.input_info}
         label="Confirm Password" 
         placeholder="**********" 
       />
+      <Text
+        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
+      >First Name</Text>
       <TextInput
         style={styles.input_info}
         label="First Name"
         placeholder="Please enter 2 - 16 characters" 
         onChangeText={handleFirstNameChange}
       />
+      <Text
+        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
+      >Last Name</Text>
       <TextInput
         style={styles.input_info}
         label="Last Name"
@@ -142,8 +157,9 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 5,
     padding: 10,
-    marginBottom: 10,
-    width: '100%',
+    marginBottom: 20,
+    marginLeft: 40,
+    width: '80%',
   },
   infoInput: {
     backgroundColor: 'white',
