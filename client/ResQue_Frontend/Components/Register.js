@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
@@ -15,6 +16,10 @@ const Register = () => {
   const handlePasswordChange = (text) => {
     setPassword(text);
     console.log("password value: ", password);
+  };
+
+  const handleConfirmPasswordChange = (text) => {
+    setConfirmPassword(text);
   };
 
   const handleFirstNameChange = (text) => {
@@ -34,7 +39,11 @@ const Register = () => {
     console.log('user first name: ', firstName);
     console.log('user last name: ', lastName);
 
-    fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/register`, {
+    if (password !== confirmPassword) {
+      Alert.alert('Passwords do not match');
+    return;
+    } else {
+      fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/register`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8',
     },
@@ -47,9 +56,21 @@ const Register = () => {
   }).then((response) => response.text())
     .then((data) => {
       console.log("data: ", data); // Success message from the server
+      
+      if (data.substring(2, 9) === 'message') {
+        Alert.alert(data.substring(12, data.length - 2));  
+      }
+
+      if (data.substring(2, 4) === 'id') {
+        Alert.alert("Success! Thank you");  
+      }
+      
     }).catch((error) => {
       console.error('Error:', error);
     });
+    }
+
+    
 
     
   }
@@ -82,6 +103,7 @@ const Register = () => {
         style={styles.input_info}
         label="Confirm Password" 
         placeholder="**********" 
+        onChangeText={handleConfirmPasswordChange}
       />
       <Text
         style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
