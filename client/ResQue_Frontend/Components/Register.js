@@ -10,12 +10,10 @@ const Register = () => {
 
   const handleEmailChange = (text) => {
     setEmail(text);
-    console.log("email value: ", email);
   };
 
   const handlePasswordChange = (text) => {
     setPassword(text);
-    console.log("password value: ", password);
   };
 
   const handleConfirmPasswordChange = (text) => {
@@ -24,12 +22,10 @@ const Register = () => {
 
   const handleFirstNameChange = (text) => {
     setFirstName(text);
-    console.log("first name value: ", firstName);
   }
 
   const handleLastNameChange = (text) => {
     setLastName(text)
-    console.log("last name value: ", lastName);
   }
 
   const handleRegistration = () => {
@@ -40,8 +36,8 @@ const Register = () => {
     console.log('user last name: ', lastName);
 
     if (password !== confirmPassword) {
-      Alert.alert('Passwords do not match');
-    return;
+      Alert.alert('Passwords do not match.');
+      return;
     } else {
       fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/register`, {
       method: 'POST',
@@ -55,14 +51,17 @@ const Register = () => {
     }),
   }).then((response) => response.text())
     .then((data) => {
-      console.log("data: ", data); // Success message from the server
+
+      console.log("data: ", data);
       
       if (data.substring(2, 9) === 'message') {
+        // if the email entered is already registered
         Alert.alert(data.substring(12, data.length - 2));  
       }
 
       if (data.substring(2, 4) === 'id') {
-        Alert.alert("Success! Thank you");  
+        // upon successful registration
+        Alert.alert("Success! Thank you.");  
       }
       
     }).catch((error) => {
@@ -123,6 +122,8 @@ const Register = () => {
         placeholder="Please enter 2 - 16 characters" 
         onChangeText={handleLastNameChange}
       />
+      {/* the input fields weren't logging any data, so i just commented them out and used some text inputs for the time being */}
+
       {/* <InputField 
         label="Email" 
         placeholder="helloitsme@example.com"
