@@ -54,8 +54,8 @@ const RestaurantList = () => {
               <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
               <View>
                 <Text style={styles.restaurantName}>{restaurant.name}</Text>
-                <Text style={styles.restaurantAddress}>{restaurant.address}</Text>
-                <Text style={styles.restaurantDistance}>{restaurant.distance}m from me</Text>
+                <Text style={styles.restaurantInfo}>{restaurant.address}</Text>
+                <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
               </View>
               <View style={styles.waitlistContainer}>
                 <View style={styles.waitlistBadge}>
@@ -97,11 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  restaurantAddress: {
-    fontSize: 12,
-    color: '#777',
-  },
-  restaurantDistance: {
+  restaurantInfo: {
     fontSize: 12,
     color: '#777',
   },
