@@ -19,6 +19,7 @@ import LoginEmail from './Components/LoginEmail';
 import Register from './Components/Register';
 
 
+
 function App(): JSX.Element {
   // TODO: change this when implementing authentication. This is just for easy testing
   const [user, setUser] = useState(true);
@@ -35,7 +36,8 @@ function App(): JSX.Element {
 
     // </NavigationContainer>
     
-    <Register></Register>
+    // <Register></Register>
+    <Map></Map>
     
   );
 }
