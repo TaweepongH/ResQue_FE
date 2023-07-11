@@ -122,47 +122,13 @@ const Register = () => {
         placeholder="Please enter 2 - 16 characters" 
         onChangeText={handleLastNameChange}
       />
-      {/* the input fields weren't logging any data, so i just commented them out and used some text inputs for the time being */}
-
-      {/* <InputField 
-        label="Email" 
-        placeholder="helloitsme@example.com"
-        onChangeText={handleEmailChange}  
-      />
-      <InputField 
-        label="Password" 
-        placeholder="Please enter 8 - 16 characters" 
-        onChangeText={handlePasswordChange}
-      />
-      <InputField 
-        label="Confirm Password" 
-        placeholder="**********" 
-      />
-      <InputField 
-        label="First Name"
-        placeholder="Please enter 2 - 16 characters" 
-        onChangeText={handleFirstNameChange}
-      />
-      <InputField 
-        label="Last Name"
-        placeholder="Please enter 2 - 16 characters" 
-        onChangeText={handleLastNameChange}
-      /> */}
+      
       <TouchableOpacity style={styles.registerButton} onPress={handleRegistration}>
         <Text style={styles.registerButtonText}>Register</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-// const InputField = ({ label, placeholder }) => {
-//   return (
-//     <View style={styles.inputContainer}>
-//       <Text style={styles.labelText}>{label}</Text>
-//       <TextInput style={styles.infoInput} placeholder={placeholder} />
-//     </View>
-//   );
-// };
 
 const styles = StyleSheet.create({
   container: {

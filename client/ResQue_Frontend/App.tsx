@@ -37,7 +37,9 @@ function App(): JSX.Element {
     // </NavigationContainer>
     
     // <Register></Register>
-    <Map></Map>
+    // <LoginEmail></LoginEmail>
+    // <Register></Register>
+    <QueData></QueData>
     
   );
 }

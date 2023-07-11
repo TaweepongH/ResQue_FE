@@ -6,12 +6,12 @@ const QueData = () => {
     const [queueData, setQueueData] = useState(null);
 
     const retrieveData = () => {
-        fetch('https://app-57vwexmexq-uc.a.run.app/api/queues/userqueue', {
+        fetch('https://app-57vwexmexq-uc.a.run.app/api/queues/user/currentqueue', {
           method: 'GET',
           
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkF2MGE3ZlBTWjVpcE9aNE9jMGQzIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODg3NjIwNDgsImV4cCI6MTY4ODc2MjY0OH0.INd0ZVQtA4-YOS3ZtOmkTfsgKi9nDArELx-jRHeePiY'                   
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkF2MGE3ZlBTWjVpcE9aNE9jMGQzIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODkwNDgzMjMsImV4cCI6MTY4OTA1MTkyM30.O_sMSvyr8hPIoIE4FjxqpwOxnthY9JuIwFUZjnTsXTo'                                            
             // the authorization token currently needs to be changed every 5 min. To change it, login with: hello@hii.com, password: 99999999 and a new token will be generated and show in the console logs via the LoginEmail component
           },
         })
