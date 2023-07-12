@@ -10,14 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import TabNavigator from './Components/TabNavigator/TabNavigator'
 import StackNavigator from './Components/StackNavigator/StackNavigator';
-
-import Login from './Components/Login';
-
-import Map from './Components/Map';
-import QueData from './Components/QueData';
-import LoginEmail from './Components/LoginEmail';
 import Register from './Components/Register';
-
 
 
 function App(): JSX.Element {
@@ -35,12 +28,7 @@ function App(): JSX.Element {
     //     )}
 
     // </NavigationContainer>
-    
-    // <Register></Register>
-    // <LoginEmail></LoginEmail>
-    // <Register></Register>
-    <QueData></QueData>
-    
+    <Register></Register>
   );
 }
 
