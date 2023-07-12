@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 const QueData = () => {
 
     const [queueData, setQueueData] = useState(null);
 
     const retrieveData = () => {
-        fetch('https://app-57vwexmexq-uc.a.run.app/api/queues/user/currentqueue', {
+        fetch('https://app-57vwexmexq-uc.a.run.app/api/queues/userqueue', {
           method: 'GET',
           
           headers: {
@@ -25,16 +25,17 @@ const QueData = () => {
           });
       };
 
-    useEffect( () => {
-        retrieveData();
+    useEffect(() => {
+        retrieveData(); 
     }, []);
 
     return (
-        <View>
-            
+        
+        <View style={styles.container}>
             <Text>{queueData}</Text>
-            
         </View>
+            
+        
     )
 
 }
@@ -47,58 +48,9 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       paddingBottom: 290,
     },
-    inputContainer: {
-      width: '80%',
-      marginBottom: 10,
-    },
-    input_info: {
-      backgroundColor:'white',
-      borderColor: 'gray',
-      borderRadius: 5,
-      padding: 10,
-      marginBottom: 10,
-      width: '100%',
-    },
-    title: {
-      marginBottom: 20,
-    },
-    loginButton: {
-      backgroundColor: '#CC313D',
-      borderRadius: 3,
-      width: '80%',
-      height: 35,
-      alignItems: 'center',
-  
-    },
-    forgotButton: {
-      alignSelf: 'flex-end',
-      marginBottom: 20,
-      marginRight: 40,
-    },
-    forgotText: {
-      color: '#CC313D',
-      textAlign: 'right',
-    },
-    loginText: {
-      marginTop: 8,
-      color: 'white',
-      fontWeight: 'bold',
-    },
-    signupContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginTop: 20,
-    },
-    noAccountText: {
-      color: 'grey',
-    },
-    signupText: {
-      color: '#CC313D',
-      textDecorationLine: 'underline',
-    },
   });
   
-  export default QueData;
+export default QueData;
   
   
 

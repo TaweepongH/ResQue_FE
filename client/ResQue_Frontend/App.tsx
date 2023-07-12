@@ -12,6 +12,7 @@ import TabNavigator from './Components/TabNavigator/TabNavigator'
 import StackNavigator from './Components/StackNavigator/StackNavigator';
 import Register from './Components/Register';
 import Map from './Components/Map';
+import QueData from './Components/QueData';
 
 
 function App(): JSX.Element {
@@ -30,7 +31,8 @@ function App(): JSX.Element {
 
     // </NavigationContainer>
     // <Register></Register>
-    <Map></Map>
+    // <Map></Map>
+    <QueData></QueData>
   );
 }
 
