@@ -5,6 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import More from '../../screens/More';
 import MyInfo from '../../screens/MyInfo';
 import Search from '../../screens/Search';
+import QueueConfirm from '../../screens/QueueConfirm';
 
 // This is a placeholder for Main.js page. Should be deleted after merging Ari's task
 const Main = () => {
@@ -17,7 +18,7 @@ const Main = () => {
 
 const Tab = createBottomTabNavigator();
 
-const Navbar = () => {
+const TabNavigator = () => {
 
   return (
     <Tab.Navigator
@@ -27,7 +28,14 @@ const Navbar = () => {
         tabBarInactiveTintColor: '#1E1E1E',
         // Attention: You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar.  src: https://reactnavigation.org/docs/bottom-tab-navigator
         tabBarStyle: { position: 'absolute', height: 80},
-        tabBarLabelStyle: { marginBottom: 20, marginTop: -15 }
+        tabBarLabelStyle: { marginBottom: 20, marginTop: -15 },
+        headerStyle: {
+          backgroundColor: '#F7C5CC',
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerTitleAlign: 'center',
       }}
       
     >
@@ -50,7 +58,6 @@ const Navbar = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="magnify" color={color} size={size} />
           ),
-          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -61,7 +68,6 @@ const Navbar = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account-outline" color={color} size={size} />
           ),
-          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -72,11 +78,10 @@ const Navbar = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="dots-horizontal" color={color} size={size} />
           ),
-          headerShown: false,
         }}
       />
     </Tab.Navigator>
   ); 
 };
 
-export default Navbar;
+export default TabNavigator;

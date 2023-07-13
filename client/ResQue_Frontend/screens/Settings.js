@@ -2,7 +2,7 @@ import { View, Text , TouchableOpacity, StyleSheet } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 
-const MoreItem = ({ text,icon }) => {
+const SettingItem = ({ text,icon }) => {
   return (
     <View style={styles.btn_more}>
       <TouchableOpacity style={styles.row}>
@@ -14,13 +14,12 @@ const MoreItem = ({ text,icon }) => {
   );
 };
 
-const More = () => {
+const Settings = () => {
   return (
     <View style={styles.container}>
-      <MoreItem icon="warning" text="Notice" />
-      <MoreItem icon="settings" text="Settings" />
-      <MoreItem icon="insert-comment" text="Feedback" />
-      <MoreItem icon="policy-tip" text="Terms and Policies" />
+      <SettingItem icon="location-pin" text="Location Services" />
+      <SettingItem icon="notifications-active" text="Notifications" />
+      <SettingItem icon="info-outline" text="Version 1.1" />
     </View>
   );
 };
@@ -53,5 +52,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default More;
+export default Settings;
 
