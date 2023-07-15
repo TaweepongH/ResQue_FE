@@ -51,28 +51,38 @@ const RestaurantData = () => {
       }, [makePostRequests]);
 
       const makePostRequests = (businesses) => {
+
         businesses.forEach(restaurant => {
+
+            const { name, url, phone, location, categories } = restaurant;
+
+            const address = [
+            location.address1,
+            location.city,
+            location.state,
+            location.country
+            ];
+
+            const payload = {
+            firstName: 'John',
+            lastName: 'Johnson',
+            companyName: name,
+            email: url,
+            password: '12345678',
+            phone: phone,
+            address: address,
+            operationDate: "Mon,Tue,Wed,Thur,Fri",
+            operationTime: ["10.00-11.30"],
+            genre: categories[0].title
+            };
+
           fetch('https://app-57vwexmexq-uc.a.run.app/api/partners/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkF2MGE3ZlBTWjVpcE9aNE9jMGQzIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODkzNzYyMDYsImV4cCI6MTY4OTM3OTgwNn0.io9GX3EXebr7Z7MVrATzj5YGnkjZzPfGvdISO-KmcJ0',
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkF2MGE3ZlBTWjVpcE9aNE9jMGQzIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODkzODQ2NjYsImV4cCI6MTY4OTM4ODI2Nn0.CRd0C_QxMaKGQsZ6QK7FjHcQiTGWwrPCy0ZhU6_8yjQ',
             },
-            body: JSON.stringify({
-              firstName: 'John',
-              lastName: 'Johnson',
-              companyName: restaurant.name,
-              email: restaurant.url,
-              password: '12345678',
-              phone: restaurant.phone,
-              address: [
-                restaurant.location['address1'],
-                restaurant.location['city'],
-                restaurant.location['state'],
-                restaurant.location['country']
-              ],
-              genre: restaurant.categories[0].title,
-            }),
+            body: JSON.stringify(payload),
           })
             .then(response => response.json())
             .then(result => {
