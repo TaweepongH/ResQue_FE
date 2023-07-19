@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 const LoginEmail = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
+
+  const handleSignUp = () => {
+     navigation.navigate('Register');
+  };
   const handleEmailChange = (text) => {
     setEmail(text);
   };
 
   const handlePasswordChange = (text) => {
     setPassword(text);
+  };
+   const handleForgotPwd = (text) => {
+     navigation.navigate('ResetPwd');
   };
   return (
     <View style={styles.container}>
@@ -30,7 +39,7 @@ const LoginEmail = () => {
       </View>
 
       <TouchableOpacity style={styles.forgotButton}>
-        <Text style={styles.forgotText}>Forgot Password ?</Text>
+        <Text style={styles.forgotText} onPress={handleForgotPwd}>Forgot Password ?</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.loginButton} >
@@ -40,7 +49,7 @@ const LoginEmail = () => {
       <View style={styles.signupContainer}>
         <Text style={styles.noAccountText}>Don't have an account?  </Text>
         <TouchableOpacity>
-          <Text style={styles.signupText}>Sign up</Text>
+          <Text style={styles.signupText} onPress={handleSignUp}>Sign up</Text>
         </TouchableOpacity>
       </View>
     </View>
