@@ -52,8 +52,6 @@ const RestaurantData = () => {
 
         // businesses.forEach(restaurant => {
 
-            
-
                 fetch(`https://api.yelp.com/v3/businesses/${restaurant.id}`, {
                     method: 'GET',
                     headers: {
