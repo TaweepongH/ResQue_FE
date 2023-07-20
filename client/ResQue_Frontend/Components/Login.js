@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import logo from '../Image/RQ_logo.png';
+import logo from '../Image/newLogo.png';
 import CustomButton from './CustomButton';
 
 const Login = () => {
