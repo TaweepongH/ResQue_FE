@@ -5,7 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import More from '../../screens/More';
 import MyInfo from '../../screens/MyInfo';
 import Search from '../../screens/Search';
-import ResetPwd from '../../screens/ResetPwd';
+
 
 // This is a placeholder for Main.js page. Should be deleted after merging Ari's task
 const Main = () => {
