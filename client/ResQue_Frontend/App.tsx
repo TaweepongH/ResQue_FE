@@ -11,7 +11,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './Components/TabNavigator/TabNavigator'
 import StackNavigator from './Components/StackNavigator/StackNavigator';
 
-import Login from './Components/Login';
 
 import Map from './Components/Map';
 import QueData from './Components/QueData';
@@ -25,19 +24,17 @@ function App(): JSX.Element {
   const [user, setUser] = useState(true);
 
   return (
-    // <NavigationContainer>
-
-    //     {/* TODO: Need to handle setIsLoggedIn based on authentication. Skip this for now.*/}
-    //   {user ? (<>
-    //       <TabNavigator />
-    //     </>) : (
-    //       <StackNavigator />
-    //     )}
-
-    // </NavigationContainer>
     
-    // <Register></Register>
-    <Map></Map>
+    <NavigationContainer>
+
+        {/* TODO: Need to handle setIsLoggedIn based on authentication. Skip this for now.*/}
+      {user ? (<>
+          <TabNavigator />
+        </>) : (
+          <StackNavigator />
+        )}
+
+    </NavigationContainer>
     
   );
 }
