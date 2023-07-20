@@ -20,7 +20,7 @@ const More = () => {
       <MoreItem icon="warning" text="Notice" />
       <MoreItem icon="settings" text="Settings" />
       <MoreItem icon="insert-comment" text="Feedback" />
-      <MoreItem icon="policy-tip" text="Terms and Policies" />
+      <MoreItem icon="policy" text="Terms and Policies" />
     </View>
   );
 };
