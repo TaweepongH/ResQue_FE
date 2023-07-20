@@ -17,7 +17,6 @@ function App(): JSX.Element {
   const [user, setUser] = useState(true);
 
   return (
-
     <NavigationContainer>
 
         {/* TODO: Need to handle setIsLoggedIn based on authentication. Skip this for now.*/}
@@ -28,7 +27,7 @@ function App(): JSX.Element {
         )}
 
     </NavigationContainer>
-  
+    
   );
 }
 
