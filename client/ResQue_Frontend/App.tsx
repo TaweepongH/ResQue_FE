@@ -27,6 +27,7 @@ function App(): JSX.Element {
         )}
 
     </NavigationContainer>
+    
   );
 }
 

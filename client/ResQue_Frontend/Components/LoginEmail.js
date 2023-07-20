@@ -4,12 +4,35 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 const LoginEmail = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const handleEmailChange = (text) => {
     setEmail(text);
   };
 
   const handlePasswordChange = (text) => {
     setPassword(text);
+  };
+
+  const handleLogin = () => {
+    
+    console.log('User Email:', email);
+    console.log('User Password:', password);
+
+    fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/login`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify({
+      email: `${email}`,
+      password: `${password}`
+    }),
+  }).then((response) => response.text())
+    .then((data) => {
+      console.log("data: ", data); // Success message from the server
+    }).catch((error) => {
+      console.error('Error:', error);
+    });
+
   };
   return (
     <View style={styles.container}>
@@ -33,7 +56,8 @@ const LoginEmail = () => {
         <Text style={styles.forgotText}>Forgot Password ?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginButton} >
+      {/* where the handleLogin function is called */}
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogin} >
         <Text style={styles.loginText}>Log in</Text>
       </TouchableOpacity>
 
