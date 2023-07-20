@@ -10,7 +10,6 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import TabNavigator from './Components/TabNavigator/TabNavigator'
 import StackNavigator from './Components/StackNavigator/StackNavigator';
-import RestaurantData from './Components/RestaurantData';
 
 
 function App(): JSX.Element {
