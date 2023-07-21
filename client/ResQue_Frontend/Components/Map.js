@@ -1,5 +1,4 @@
 
-
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, PermissionsAndroid, Platform } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';

@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
 
   });
   
-export default QueData;
+export default QueData;    

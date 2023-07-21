@@ -46,7 +46,6 @@ const Register = () => {
     setName((prevName) => ({ ...prevName, [key]: value }));
   };
 
-
   const handleRegistration = () => {
 
     console.log('User Email:', email);
@@ -54,7 +53,6 @@ const Register = () => {
 
     console.log('user first name: ', name.firstName);
     console.log('user last name: ', name.lastName);
-
 
     if (password !== confirmPassword) {
       Alert.alert('Passwords do not match.');
@@ -67,7 +65,6 @@ const Register = () => {
     body: JSON.stringify({
       email: `${email}`,
       password: `${password}`, 
-
       firstName: `${name.firstName}`,
       lastName: `${name.lastName}`
 
@@ -134,8 +131,6 @@ const Register = () => {
     </View>
   );
 };
-
-
 
 const styles = StyleSheet.create({
   container: {
