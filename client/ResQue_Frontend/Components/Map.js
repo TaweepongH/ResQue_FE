@@ -1,6 +1,6 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, PermissionsAndroid } from 'react-native';
+import { View, PermissionsAndroid, Platform } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 
@@ -41,6 +41,7 @@ const Map = () => {
 
   // chat GPT suggested that I "memoize" this function by assinging it to the useCallback hook. I guess that's to cache output for common inputs rather than having to compute the same inputs each time
   const getCurrentLocation = useCallback(() => {
+
     Geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
@@ -53,7 +54,9 @@ const Map = () => {
       },
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
     );
+
   }, []);
+
   
     return (
       <View style={{ flex: 1 }}>
@@ -62,7 +65,7 @@ const Map = () => {
           region={deviceLocation}
           showsUserLocation={true}
         />
-        {/* <Marker coordinate={tokyoRegion}/> */}
+        {/* <Marker coordinate={Vancouver}/> */}
       </View>
     );
   

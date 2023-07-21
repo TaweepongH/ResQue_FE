@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   View,
   Text,
@@ -28,6 +29,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState({ firstName: '', lastName: '' });
 
+
   const handleEmailChange = (text) => {
     setEmail(text);
   };
@@ -48,6 +50,7 @@ const Register = () => {
 
     console.log('User Email:', email);
     console.log('User Password:', password);
+
     console.log('user first name: ', name.firstName);
     console.log('user last name: ', name.lastName);
 
@@ -64,6 +67,7 @@ const Register = () => {
       password: `${password}`, 
       firstName: `${name.firstName}`,
       lastName: `${name.lastName}`
+
     }),
   }).then((response) => response.text())
     .then((data) => {
