@@ -1,28 +1,168 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 const Register = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const handleEmailChange = (text) => {
+    setEmail(text);
+  };
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+  };
+
+  const handleConfirmPasswordChange = (text) => {
+    setConfirmPassword(text);
+  };
+
+  const handleFirstNameChange = (text) => {
+    setFirstName(text);
+  }
+
+  const handleLastNameChange = (text) => {
+    setLastName(text)
+  }
+
+  const handleRegistration = () => {
+
+    console.log('User Email:', email);
+    console.log('User Password:', password);
+    console.log('user first name: ', firstName);
+    console.log('user last name: ', lastName);
+
+    if (password !== confirmPassword) {
+      Alert.alert('Passwords do not match.');
+      return;
+    } else {
+      fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/register`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify({
+      email: `${email}`,
+      password: `${password}`, 
+      firstName: `${firstName}`,
+      lastName: `${lastName}`
+    }),
+  }).then((response) => response.text())
+    .then((data) => {
+
+      console.log("data: ", data);
+      
+      if (data.substring(2, 9) === 'message') {
+        // if the email entered is already registered
+        Alert.alert(data.substring(12, data.length - 2));  
+      }
+
+      if (data.substring(2, 4) === 'id') {
+        // upon successful registration
+        Alert.alert("Success! Thank you.");  
+      }
+      
+    }).catch((error) => {
+      console.error('Error:', error);
+    });
+    }
+
+    
+
+    
+  }
+
+
   return (
     <View style={styles.container}>
-      <InputField label="Email" placeholder="helloitsme@example.com" />
-      <InputField label="Password" placeholder="Please enter 8 - 16 characters" />
-      <InputField label="Confirm Password" placeholder="**********" />
-      <InputField label="Name" placeholder="Please enter 2 - 16 characters" />
-      <TouchableOpacity style={styles.registerButton}>
+      <Text
+        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
+      >Email</Text>
+      <TextInput 
+        style={styles.input_info}
+        label="Email" 
+        placeholder="helloitsme@example.com"
+        onChangeText={handleEmailChange}  
+      />
+      <Text
+        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
+      >Password</Text>
+      <TextInput
+        style={styles.input_info}
+        label="Password" 
+        placeholder="Please enter 8 - 16 characters" 
+        onChangeText={handlePasswordChange}
+      />
+      <Text
+        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
+      >Confirm Password</Text>
+      <TextInput
+        style={styles.input_info}
+        label="Confirm Password" 
+        placeholder="**********" 
+        onChangeText={handleConfirmPasswordChange}
+      />
+      <Text
+        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
+      >First Name</Text>
+      <TextInput
+        style={styles.input_info}
+        label="First Name"
+        placeholder="Please enter 2 - 16 characters" 
+        onChangeText={handleFirstNameChange}
+      />
+      <Text
+        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
+      >Last Name</Text>
+      <TextInput
+        style={styles.input_info}
+        label="Last Name"
+        placeholder="Please enter 2 - 16 characters" 
+        onChangeText={handleLastNameChange}
+      />
+      {/* the input fields weren't logging any data, so i just commented them out and used some text inputs for the time being */}
+
+      {/* <InputField 
+        label="Email" 
+        placeholder="helloitsme@example.com"
+        onChangeText={handleEmailChange}  
+      />
+      <InputField 
+        label="Password" 
+        placeholder="Please enter 8 - 16 characters" 
+        onChangeText={handlePasswordChange}
+      />
+      <InputField 
+        label="Confirm Password" 
+        placeholder="**********" 
+      />
+      <InputField 
+        label="First Name"
+        placeholder="Please enter 2 - 16 characters" 
+        onChangeText={handleFirstNameChange}
+      />
+      <InputField 
+        label="Last Name"
+        placeholder="Please enter 2 - 16 characters" 
+        onChangeText={handleLastNameChange}
+      /> */}
+      <TouchableOpacity style={styles.registerButton} onPress={handleRegistration}>
         <Text style={styles.registerButtonText}>Register</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-const InputField = ({ label, placeholder }) => {
-  return (
-    <View style={styles.inputContainer}>
-      <Text style={styles.labelText}>{label}</Text>
-      <TextInput style={styles.infoInput} placeholder={placeholder} />
-    </View>
-  );
-};
+// const InputField = ({ label, placeholder }) => {
+//   return (
+//     <View style={styles.inputContainer}>
+//       <Text style={styles.labelText}>{label}</Text>
+//       <TextInput style={styles.infoInput} placeholder={placeholder} />
+//     </View>
+//   );
+// };
 
 const styles = StyleSheet.create({
   container: {
@@ -34,6 +174,15 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginLeft: 40,
     marginBottom: 15,
+  },
+  input_info: {
+    backgroundColor:'white',
+    borderColor: 'gray',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 20,
+    marginLeft: 40,
+    width: '80%',
   },
   infoInput: {
     backgroundColor: 'white',
