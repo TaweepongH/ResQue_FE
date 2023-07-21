@@ -25,6 +25,7 @@ const QueData = () => {
           });
       };
 
+
     useEffect(() => {
         retrieveData(); 
     }, []);
@@ -35,7 +36,6 @@ const QueData = () => {
             <Text>{queueData}</Text>
         </View>
             
-        
     )
 
 }
@@ -48,9 +48,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       paddingBottom: 290,
     },
+
   });
   
 export default QueData;
-  
-  
-
