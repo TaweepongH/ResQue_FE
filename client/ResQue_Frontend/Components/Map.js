@@ -1,20 +1,21 @@
 
-import React, { useEffect, useState } from 'react';
-import { View, PermissionsAndroid } from 'react-native';
+
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, PermissionsAndroid, Platform } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
+
+const vancouver = {
+    latitude: 49.2004,
+    longitude: -122.8582748,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.90421
+};
 
 const Map = () => {
 
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
-
-    const vancouver = {
-        latitude: 49.2004,
-        longitude: -122.8582748,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.90421
-    };
     
     const deviceLocation = {
         latitude: latitude, 
@@ -37,9 +38,11 @@ const Map = () => {
     } else {
       getCurrentLocation();
     }
-  }, []);
+  }, [getCurrentLocation]);
 
-  const getCurrentLocation = () => {
+  // chat GPT suggested that I "memoize" this function by assinging it to the useCallback hook. I guess that's to cache output for common inputs rather than having to compute the same inputs each time
+  const getCurrentLocation = useCallback(() => {
+
     Geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
@@ -52,7 +55,9 @@ const Map = () => {
       },
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
     );
-  };
+
+  }, []);
+
   
     return (
       <View style={{ flex: 1 }}>
@@ -61,7 +66,7 @@ const Map = () => {
           region={deviceLocation}
           showsUserLocation={true}
         />
-        {/* <Marker coordinate={tokyoRegion}/> */}
+        {/* <Marker coordinate={Vancouver}/> */}
       </View>
     );
   

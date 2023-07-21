@@ -1,12 +1,34 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from 'react-native';
+
+const InputField = ({ label, placeholder, onChangeText }) => (
+  <>
+    <Text style={{ color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3 }}>
+      {label}
+    </Text>
+    <TextInput
+      style={styles.input_info}
+      label={label}
+      placeholder={placeholder}
+      onChangeText={onChangeText}
+    />
+  </>
+);
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [name, setName] = useState({ firstName: '', lastName: '' });
+
 
   const handleEmailChange = (text) => {
     setEmail(text);
@@ -20,20 +42,19 @@ const Register = () => {
     setConfirmPassword(text);
   };
 
-  const handleFirstNameChange = (text) => {
-    setFirstName(text);
-  }
+  const handleNameChange = (key, value) => {
+    setName((prevName) => ({ ...prevName, [key]: value }));
+  };
 
-  const handleLastNameChange = (text) => {
-    setLastName(text)
-  }
 
   const handleRegistration = () => {
 
     console.log('User Email:', email);
     console.log('User Password:', password);
-    console.log('user first name: ', firstName);
-    console.log('user last name: ', lastName);
+
+    console.log('user first name: ', name.firstName);
+    console.log('user last name: ', name.lastName);
+
 
     if (password !== confirmPassword) {
       Alert.alert('Passwords do not match.');
@@ -46,8 +67,10 @@ const Register = () => {
     body: JSON.stringify({
       email: `${email}`,
       password: `${password}`, 
-      firstName: `${firstName}`,
-      lastName: `${lastName}`
+
+      firstName: `${name.firstName}`,
+      lastName: `${name.lastName}`
+
     }),
   }).then((response) => response.text())
     .then((data) => {
@@ -68,86 +91,43 @@ const Register = () => {
       console.error('Error:', error);
     });
     }
-
-    
-
     
   }
 
 
   return (
     <View style={styles.container}>
-      <Text
-        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
-      >Email</Text>
-      <TextInput 
-        style={styles.input_info}
-        label="Email" 
+      
+      <InputField
+        label="Email"
         placeholder="helloitsme@example.com"
-        onChangeText={handleEmailChange}  
-      />
-      <Text
-        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
-      >Password</Text>
-      <TextInput
-        style={styles.input_info}
+        onChangeText={handleEmailChange}
+      ></InputField>
+      
+      <InputField
         label="Password" 
         placeholder="Please enter 8 - 16 characters" 
         onChangeText={handlePasswordChange}
-      />
-      <Text
-        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
-      >Confirm Password</Text>
-      <TextInput
-        style={styles.input_info}
-        label="Confirm Password" 
-        placeholder="**********" 
-        onChangeText={handleConfirmPasswordChange}
-      />
-      <Text
-        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
-      >First Name</Text>
-      <TextInput
-        style={styles.input_info}
+      ></InputField>
+      
+      <InputField
+         label="Confirm Password" 
+         placeholder="**********" 
+         onChangeText={handleConfirmPasswordChange}
+      ></InputField>
+      
+      <InputField
         label="First Name"
-        placeholder="Please enter 2 - 16 characters" 
-        onChangeText={handleFirstNameChange}
-      />
-      <Text
-        style={{color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3}}
-      >Last Name</Text>
-      <TextInput
-        style={styles.input_info}
+        placeholder="Please enter 2 - 16 characters"
+        onChangeText={(text) => handleNameChange('firstName', text)}
+      ></InputField>
+      
+      <InputField
         label="Last Name"
-        placeholder="Please enter 2 - 16 characters" 
-        onChangeText={handleLastNameChange}
-      />
-      {/* the input fields weren't logging any data, so i just commented them out and used some text inputs for the time being */}
-
-      {/* <InputField 
-        label="Email" 
-        placeholder="helloitsme@example.com"
-        onChangeText={handleEmailChange}  
-      />
-      <InputField 
-        label="Password" 
-        placeholder="Please enter 8 - 16 characters" 
-        onChangeText={handlePasswordChange}
-      />
-      <InputField 
-        label="Confirm Password" 
-        placeholder="**********" 
-      />
-      <InputField 
-        label="First Name"
-        placeholder="Please enter 2 - 16 characters" 
-        onChangeText={handleFirstNameChange}
-      />
-      <InputField 
-        label="Last Name"
-        placeholder="Please enter 2 - 16 characters" 
-        onChangeText={handleLastNameChange}
-      /> */}
+        placeholder="Please enter 2 - 16 characters"
+        onChangeText={(text) => handleNameChange('lastName', text)}
+      ></InputField>
+    
       <TouchableOpacity style={styles.registerButton} onPress={handleRegistration}>
         <Text style={styles.registerButtonText}>Register</Text>
       </TouchableOpacity>
@@ -155,14 +135,7 @@ const Register = () => {
   );
 };
 
-// const InputField = ({ label, placeholder }) => {
-//   return (
-//     <View style={styles.inputContainer}>
-//       <Text style={styles.labelText}>{label}</Text>
-//       <TextInput style={styles.infoInput} placeholder={placeholder} />
-//     </View>
-//   );
-// };
+
 
 const styles = StyleSheet.create({
   container: {

@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 const LoginEmail = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleEmailChange = (text) => {
+  // chat gpt suggested i "memoize" these handlers with the useCallback hook because they're likely to receive the same input often. ie. when a user signs in multiple times
+  const handleEmailChange = useCallback((text) => {
     setEmail(text);
-  };
+  }, []);
 
-  const handlePasswordChange = (text) => {
+  const handlePasswordChange = useCallback((text) => {
     setPassword(text);
-  };
+  }, []);
 
-  const handleLogin = () => {
+  //for optimization, chat gpt suggested I assign this function to the useCallback hook to prevent it from being called upon each render
+  const handleLogin = useCallback(() => {
     
     console.log('User Email:', email);
     console.log('User Password:', password);
@@ -23,17 +25,19 @@ const LoginEmail = () => {
       headers: {'Content-Type': 'application/json; charset=utf-8',
     },
     body: JSON.stringify({
-      email: `${email}`,
-      password: `${password}`
+      email: email,
+      password: password
     }),
   }).then((response) => response.text())
     .then((data) => {
       console.log("data: ", data); // Success message from the server
+      Alert.alert(data);
     }).catch((error) => {
       console.error('Error:', error);
     });
 
-  };
+  }, [email, password]);
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -49,6 +53,8 @@ const LoginEmail = () => {
           placeholder="Enter your password"
           value={password}
           onChangeText={handlePasswordChange}
+          // in the future we can include the secureTextEntry property to hide the password when it's being typed in
+          // secureTextEntry
         />
       </View>
 
