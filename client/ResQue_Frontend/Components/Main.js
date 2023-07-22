@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import renderButtons from './renderButtons';
 
 const Main = () => {
@@ -42,7 +42,31 @@ const Main = () => {
       waitlist: 2,
       thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
     },
-    // ...
+    {
+      id: 4,
+      name: 'Restaurant D',
+      address: '789 Oak St',
+      distance: '1000',
+      waitlist: 2,
+      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
+    },
+    {
+      id: 5,
+      name: 'Restaurant E',
+      address: '789 Oak St',
+      distance: '1000',
+      waitlist: 2,
+      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
+    },
+    {
+      id: 6,
+      name: 'Restaurant F',
+      address: '789 Oak St',
+      distance: '1000',
+      waitlist: 2,
+      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
+    },
+
   ];
 
   const handleAllowButtonPress = () => {
@@ -50,45 +74,47 @@ const Main = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.locations}>
-        <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
-        <Text style={styles.title}>Vancouver</Text>
-        {renderButtons(location)}
-      </View>
-      {showMap ? (
-        <View style={styles.mapContainer}>
-          <View>
-            {/* FIXME: React Native icon insertion area. */}
-            <Text style={styles.mapText}>
-              Please allow location access to discover the best restaurants near me!
-            </Text>
-            <TouchableOpacity style={styles.allowButton} onPress={handleAllowButtonPress}>
-              <Text style={styles.buttonText}>Allow</Text>
-            </TouchableOpacity>
-          </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.locations}>
+          <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
+          <Text style={styles.title}>Vancouver</Text>
+          {renderButtons(location)}
         </View>
-      ) : (
-        <View style={styles.nearbyRestaurants}>
-          <Text style={styles.sectionTitle}>Explore restaurants near me</Text>
-          {nearbyRestaurants.map((restaurant) => (
-            <View style={styles.restaurantContainer} key={restaurant.id}>
-              <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
-              <View>
-                <Text style={styles.restaurantName}>{restaurant.name}</Text>
-                <Text style={styles.restaurantInfo}>{restaurant.address}</Text>
-                <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
-              </View>
-              <View style={styles.waitlistContainer}>
-                <View style={styles.waitlistBadge}>
-                  <Text style={styles.waitlistText}>{restaurant.waitlist}</Text>
+        {showMap ? (
+          <View style={styles.mapContainer}>
+            <View>
+              {/* FIXME: React Native icon insertion area. */}
+              <Text style={styles.mapText}>
+                Please allow location access to discover the best restaurants near me!
+              </Text>
+              <TouchableOpacity style={styles.allowButton} onPress={handleAllowButtonPress}>
+                <Text style={styles.buttonText}>Allow</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        ) : (
+          <View style={styles.nearbyRestaurants}>
+            <Text style={styles.sectionTitle}>Explore restaurants near me</Text>
+            {nearbyRestaurants.map((restaurant) => (
+              <View style={styles.restaurantContainer} key={restaurant.id}>
+                <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
+                <View>
+                  <Text style={styles.restaurantName}>{restaurant.name}</Text>
+                  <Text style={styles.restaurantInfo}>{restaurant.address}</Text>
+                  <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
+                </View>
+                <View style={styles.waitlistContainer}>
+                  <View style={styles.waitlistBadge}>
+                    <Text style={styles.waitlistText}>{restaurant.waitlist}</Text>
+                  </View>
                 </View>
               </View>
-            </View>
-          ))}
-        </View>
-      )}
-    </View>
+            ))}
+          </View>
+        )}
+      </View>
+    </ScrollView>
   );
 };
 
