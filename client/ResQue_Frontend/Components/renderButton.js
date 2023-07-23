@@ -1,9 +1,17 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const renderButton = (name) => {
+  const navigation = useNavigation();
+
+  const handleButtonPress = () => {
+    alert('RenderButton Data: ' + JSON.stringify(name));
+    navigation.navigate('RestaurantList', { location: name });
+  }
+
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
       <Text style={styles.buttonText}>{name}</Text>
     </TouchableOpacity>
   );
