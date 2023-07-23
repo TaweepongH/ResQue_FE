@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const QueueRegistration = () => {
@@ -55,71 +55,72 @@ const QueueRegistration = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.restaurantContainer} key={restaurant.id}>
-        <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
-        <View style={styles.restaurantInfoContainer}>
-          <View style={styles.restaurantInfoHeader}>
-            <Text style={styles.restaurantName}>{restaurant.name}</Text>
-            <TouchableOpacity style={styles.detailButton} onPress={handleRestaurantDetail}>
-              {/* FIXME: add icon */}
-              {/* <Icon name="chevron-right" size={30} color="black" /> */}
-            </TouchableOpacity>
-
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.restaurantContainer} key={restaurant.id}>
+          <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
+          <View style={styles.restaurantInfoContainer}>
+            <View style={styles.restaurantInfoHeader}>
+              <Text style={styles.restaurantName}>{restaurant.name}</Text>
+              <TouchableOpacity style={styles.detailButton} onPress={handleRestaurantDetail}>
+                {/* FIXME: add icon */}
+                {/* <Icon name="chevron-right" size={30} color="black" /> */}
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.restaurantInfo}>{restaurant.address}</Text>
+            <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
           </View>
-          <Text style={styles.restaurantInfo}>{restaurant.address}</Text>
-          <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
         </View>
-      </View>
-      <Text style={styles.titles}>Name</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your name"
-        value={name}
-        onChangeText={setName}
-      />
-      <Text style={styles.titles}>Phone Number</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your phone number"
-        value={phoneNumber}
-        onChangeText={setPhoneNumber}
-      />
-      <Text style={styles.titles}>Please select the number of visitors</Text>
-      <View style={styles.counterContainer}>
-        <Text style={styles.counterLabel}>Adult</Text>
-        <TouchableOpacity style={styles.counterButton} onPress={handleDecreaseAdult}>
-          <Text style={styles.counterButtonText}>-</Text>
-        </TouchableOpacity>
-        <View style={styles.counterValueContainer}>
-          <Text style={styles.counterValue}>{adultCount}</Text>
+        <Text style={styles.titles}>Name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your name"
+          value={name}
+          onChangeText={setName}
+        />
+        <Text style={styles.titles}>Phone Number</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your phone number"
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
+        />
+        <Text style={styles.titles}>Please select the number of visitors</Text>
+        <View style={styles.counterContainer}>
+          <Text style={styles.counterLabel}>Adult</Text>
+          <TouchableOpacity style={styles.counterButton} onPress={handleDecreaseAdult}>
+            <Text style={styles.counterButtonText}>-</Text>
+          </TouchableOpacity>
+          <View style={styles.counterValueContainer}>
+            <Text style={styles.counterValue}>{adultCount}</Text>
+          </View>
+          <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseAdult}>
+            <Text style={styles.counterButtonText}>+</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseAdult}>
-          <Text style={styles.counterButtonText}>+</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.counterContainer}>
-        <Text style={styles.counterLabel}>Child (under the age of 5)</Text>
-        <TouchableOpacity style={styles.counterButton} onPress={handleDecreaseChild}>
-          <Text style={styles.counterButtonText}>-</Text>
-        </TouchableOpacity>
-        <View style={styles.counterValueContainer}>
-          <Text style={styles.counterValue}>{childCount}</Text>
+        <View style={styles.counterContainer}>
+          <Text style={styles.counterLabel}>Child (under the age of 5)</Text>
+          <TouchableOpacity style={styles.counterButton} onPress={handleDecreaseChild}>
+            <Text style={styles.counterButtonText}>-</Text>
+          </TouchableOpacity>
+          <View style={styles.counterValueContainer}>
+            <Text style={styles.counterValue}>{childCount}</Text>
+          </View>
+          <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseChild}>
+            <Text style={styles.counterButtonText}>+</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseChild}>
-          <Text style={styles.counterButtonText}>+</Text>
+        <Text style={styles.titles}>Request</Text>
+        <TextInput
+          style={styles.requestInput}
+          placeholder="You can write up to 50 characters maximum."
+          multiline
+          value={request}
+          onChangeText={setRequest}
+        />
+        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={styles.submitButtonText}>Apply</Text>
         </TouchableOpacity>
-      </View>
-      <Text style={styles.titles}>Request</Text>
-      <TextInput
-        style={styles.requestInput}
-        placeholder="You can write up to 50 characters maximum."
-        multiline
-        value={request}
-        onChangeText={setRequest}
-      />
-      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-        <Text style={styles.submitButtonText}>Apply</Text>
-      </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
@@ -129,6 +130,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
     paddingTop: 50,
+  },
+  scrollViewContent: {
+    flexGrow: 1,
   },
   titles: {
     fontWeight: 'bold',
@@ -191,11 +195,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: 'center',
     marginTop: 25,
-  },
-  submitButtonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'white',
+    marginBottom: 90,
   },
   restaurantContainer: {
     flexDirection: 'row',
