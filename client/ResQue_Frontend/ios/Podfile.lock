@@ -338,7 +338,6 @@ PODS:
     - RCTRequired
     - RCTTypeSafety
     - React-Core
-    - ReactCommon/turbomodule/core
   - React-perflogger (0.71.8)
   - React-RCTActionSheet (0.71.8):
     - React-Core/RCTActionSheetHeaders (= 0.71.8)
@@ -456,7 +455,7 @@ PODS:
     - React-RCTText
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.20.0):
+  - RNScreens (3.22.1):
     - React-Core
     - React-RCTImage
   - RNVectorIcons (9.2.0):
@@ -692,7 +691,7 @@ SPEC CHECKSUMS:
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNGestureHandler: dec4645026e7401a0899f2846d864403478ff6a5
   RNReanimated: 9976fbaaeb8a188c36026154c844bf374b3b7eeb
-  RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
+  RNScreens: 50ffe2fa2342eabb2d0afbe19f7c1af286bc7fb3
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: 065f0b74dba4832d6e328238de46eb72c5de9556

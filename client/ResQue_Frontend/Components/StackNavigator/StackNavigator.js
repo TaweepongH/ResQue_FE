@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../Login';
 import LoginEmail from '../LoginEmail';
 import Register from '../Register';
+import ResetPwd from '../../screens/ResetPwd';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,9 +18,10 @@ const StackNavigator = () => {
         headerTitleAlign: 'center',
       }}
     >
-      <Stack.Screen name='Login In' component={LoginEmail} />
-      <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
+      <Stack.Screen name='Login' component={Login} />
+      <Stack.Screen name='LoginEmail' component={LoginEmail} />
       <Stack.Screen name='Register' component={Register} />
+      <Stack.Screen name='ResetPwd' component={ResetPwd} />
     </Stack.Navigator>
   )
 }

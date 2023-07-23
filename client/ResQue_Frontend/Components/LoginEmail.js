@@ -1,9 +1,18 @@
+
 import React, { useState, useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+
 
 const LoginEmail = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigation = useNavigation();
+
+  const handleSignUp = () => {
+     navigation.navigate('Register');
+  };
 
   // chat gpt suggested i "memoize" these handlers with the useCallback hook because they're likely to receive the same input often. ie. when a user signs in multiple times
   const handleEmailChange = useCallback((text) => {
@@ -13,6 +22,10 @@ const LoginEmail = () => {
   const handlePasswordChange = useCallback((text) => {
     setPassword(text);
   }, []);
+                                           
+   const handleForgotPwd = (text) => {
+     navigation.navigate('ResetPwd');
+  };
 
   //for optimization, chat gpt suggested I assign this function to the useCallback hook to prevent it from being called upon each render
   const handleLogin = useCallback(() => {
@@ -59,7 +72,7 @@ const LoginEmail = () => {
       </View>
 
       <TouchableOpacity style={styles.forgotButton}>
-        <Text style={styles.forgotText}>Forgot Password ?</Text>
+        <Text style={styles.forgotText} onPress={handleForgotPwd}>Forgot Password ?</Text>
       </TouchableOpacity>
 
       {/* where the handleLogin function is called */}
@@ -70,7 +83,7 @@ const LoginEmail = () => {
       <View style={styles.signupContainer}>
         <Text style={styles.noAccountText}>Don't have an account?  </Text>
         <TouchableOpacity>
-          <Text style={styles.signupText}>Sign up</Text>
+          <Text style={styles.signupText} onPress={handleSignUp}>Sign up</Text>
         </TouchableOpacity>
       </View>
     </View>
