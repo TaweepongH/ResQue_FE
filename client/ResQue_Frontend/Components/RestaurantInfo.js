@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
   joinQueueButton: {
     backgroundColor: '#CC313D',
-    padding: 12,
+    padding: 10,
     alignItems: 'center',
     borderRadius: 10,
     marginTop: 30,
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   },
   joinQueueButtonText: {
     color: 'white',
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   horizontalSeparator: {
