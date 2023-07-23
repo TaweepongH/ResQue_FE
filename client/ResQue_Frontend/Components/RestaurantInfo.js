@@ -1,5 +1,9 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, TouchableHighlight, StyleSheet, ScrollView, Linking } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const RestaurantInfo = ({ route }) => {
   const restaurant = {
@@ -27,18 +31,41 @@ const RestaurantInfo = ({ route }) => {
       <Image source={{ uri: restaurant.thumbnailImage }} style={styles.restaurantImage} />
       <ScrollView style={styles.contentContainer}>
         <Text style={styles.restaurantName}>{restaurant.name}</Text>
-        <Text style={styles.addressInfo}>{restaurant.address}</Text>
+        <View style={styles.infoContainer}>
+          <EvilIcons name="location" size={20} color="#797979" style={{ marginBottom: 10 }}/>
+          <Text style={styles.addressInfo}>{restaurant.address}</Text>
+        </View>
         <View style={styles.separator} />
-        <Text style={styles.infoTitle}>Cuisine</Text>
-        <Text style={styles.infoText}>{restaurant.type}</Text>
-        <Text style={styles.infoTitle}>Business Hours</Text>
-        <Text style={styles.infoText}>{restaurant.businessHours}</Text>
-        <Text style={styles.infoTitle}>Call</Text>
-        <Text style={styles.infoText}>{restaurant.phoneNumber}</Text>
-        <Text style={styles.infoTitle}>Website</Text>
-        <TouchableHighlight underlayColor="transparent" onPress={handleOpenWebsite}>
-          <Text style={styles.websiteLink}>{restaurant.website}</Text>
-        </TouchableHighlight>
+        <View style={styles.infoContainer}>
+          <FontAwesome name="cutlery" size={15} />
+          <View style={styles.infoTextContainer}>
+            <Text style={styles.infoTitle}>Cuisine</Text>
+            <Text style={styles.infoText}>{restaurant.type}</Text>
+          </View>
+        </View>
+        <View style={styles.infoContainer}>
+          <MaterialCommunityIcons name="clock-time-four-outline" size={15} />
+          <View style={styles.infoTextContainer}>
+            <Text style={styles.infoTitle}>Business Hours</Text>
+            <Text style={styles.infoText}>{restaurant.businessHours}</Text>
+          </View>
+        </View>
+        <View style={styles.infoContainer}>
+          <Ionicons name="call" size={15} />
+          <View style={styles.infoTextContainer}>
+            <Text style={styles.infoTitle}>Call</Text>
+            <Text style={styles.infoText}>{restaurant.phoneNumber}</Text>
+          </View>
+        </View>
+        <View style={styles.infoContainer}>
+          <MaterialCommunityIcons name="web" size={15} style={{ marginTop: -17 }}/>
+          <View style={styles.infoTextContainer}>
+            <Text style={styles.infoTitle}>Website</Text>
+            <TouchableHighlight underlayColor="transparent" onPress={handleOpenWebsite}>
+              <Text style={styles.websiteLink}>{restaurant.website}</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
         <View style={styles.horizontalSeparator} />
         <TouchableOpacity style={styles.joinQueueButton} onPress={handleJoinQueue}>
           <Text style={styles.joinQueueButtonText}>Join a Queue!</Text>
@@ -75,19 +102,18 @@ const styles = StyleSheet.create({
   addressInfo: {
     fontSize: 13,
     color: '#797979',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   infoTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 20,
     marginBottom: 5,
   },
   infoText: {
     fontSize: 15,
   },
   separator: {
-    width:450,
+    width: 450,
     borderBottomWidth: 6,
     borderBottomColor: '#D9D9D9',
     marginStart: -30,
@@ -116,6 +142,15 @@ const styles = StyleSheet.create({
     borderBottomColor: '#D9D9D9',
     width: '100%',
     bottom: -3,
+  },
+  infoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  infoTextContainer: {
+    marginLeft: 5,
+    marginTop: 20,
   },
 });
 
