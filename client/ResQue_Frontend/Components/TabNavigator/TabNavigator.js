@@ -7,6 +7,7 @@ import MyInfo from '../../screens/MyInfo';
 import Search from '../../screens/Search';
 
 
+
 // This is a placeholder for Main.js page. Should be deleted after merging Ari's task
 const Main = () => {
   return (
