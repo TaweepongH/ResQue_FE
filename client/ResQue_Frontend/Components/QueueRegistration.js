@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const QueueRegistration = () => {
   const [name, setName] = useState('');
@@ -41,11 +42,11 @@ const QueueRegistration = () => {
   // test data
   const restaurant = {
     id: 1,
-    name: 'Restaurant A',
+    name: 'Tacofino Taco Bar (Gastown)',
     address: '123 Main St',
     distance: '200',
     waitlist: 3,
-    thumbnailImage: 'https://example.com/restaurant-a-thumbnail.jpg',
+    thumbnailImage: 'https://cdn.pixabay.com/photo/2017/01/22/19/12/pizza-2000602_1280.jpg',
   };
 
   const handleRestaurantDetail = () => {
@@ -62,14 +63,17 @@ const QueueRegistration = () => {
             <View style={styles.restaurantInfoHeader}>
               <Text style={styles.restaurantName}>{restaurant.name}</Text>
               <TouchableOpacity style={styles.detailButton} onPress={handleRestaurantDetail}>
-                {/* FIXME: add icon */}
-                {/* <Icon name="chevron-right" size={30} color="black" /> */}
+                <SimpleLineIcons name="arrow-right" size={20} style={{ marginTop: 10 }}/>
               </TouchableOpacity>
             </View>
+            <View style={styles.restaurantInfoRow}>
+              <FontAwesome name="location-arrow" size={11} style={{ marginRight: 5 }} />
+              <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
+            </View>
             <Text style={styles.restaurantInfo}>{restaurant.address}</Text>
-            <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
           </View>
         </View>
+        <View style={styles.separator} />
         <Text style={styles.titles}>Name</Text>
         <TextInput
           style={styles.input}
@@ -134,6 +138,12 @@ const styles = StyleSheet.create({
   scrollViewContent: {
     flexGrow: 1,
   },
+  separator: {
+    width: 400,
+    borderBottomWidth: 6,
+    borderBottomColor: '#D9D9D9',
+    marginStart: -30,
+  },
   titles: {
     fontWeight: 'bold',
     marginTop: 15,
@@ -186,28 +196,27 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
   submitButton: {
-    height: 35,
-    width: '100%',
     backgroundColor: '#CC313D',
-    borderColor: '#797979',
-    justifyContent: 'center',
+    padding: 10,
     alignItems: 'center',
     borderRadius: 10,
-    alignSelf: 'center',
-    marginTop: 25,
-    marginBottom: 90,
+    marginTop: 30,
+    marginBottom: 100,
+  },
+  submitButtonText: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   restaurantContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomColor: '#D9D9D9',
-    borderBottomWidth: 5,
     paddingBottom: 15,
   },
   thumbnailImage: {
     width: 60,
     height: 60,
-    borderRadius: 30,
+    borderRadius: 5,
     marginRight: 10,
   },
   restaurantInfoContainer: {
@@ -224,6 +233,11 @@ const styles = StyleSheet.create({
   restaurantInfo: {
     fontSize: 12,
     color: '#777',
+  },
+  restaurantInfoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
   },
 });
 
