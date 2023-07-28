@@ -7,6 +7,7 @@ import MyInfo from '../../screens/MyInfo';
 import Search from '../../screens/Search';
 import Main from '../Main.js';
 
+
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
