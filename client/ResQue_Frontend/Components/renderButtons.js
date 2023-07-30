@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import renderButton from './renderButton';
 
-const renderButtons = (data) => {
+const renderButtons = (data, handleAllButtonPress) => {
   const rows = [];
   const columns = 3;
   const totalButtons = data.length;
@@ -20,7 +20,7 @@ const renderButtons = (data) => {
       if (item) {
         rowButtons.push(
           <View style={styles.column} key={item.id}>
-            {renderButton(item.name)}
+            {renderButton(item.name, () => handleAllButtonPress(item.name))}
           </View>
         );
       } else {

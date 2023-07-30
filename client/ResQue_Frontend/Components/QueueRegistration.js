@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const QueueRegistration = () => {
   const [name, setName] = useState('');
@@ -41,11 +42,11 @@ const QueueRegistration = () => {
   // test data
   const restaurant = {
     id: 1,
-    name: 'Restaurant A',
+    name: 'Tacofino Taco Bar (Gastown)',
     address: '123 Main St',
     distance: '200',
     waitlist: 3,
-    thumbnailImage: 'https://example.com/restaurant-a-thumbnail.jpg',
+    thumbnailImage: 'https://cdn.pixabay.com/photo/2017/01/22/19/12/pizza-2000602_1280.jpg',
   };
 
   const handleRestaurantDetail = () => {
@@ -55,71 +56,75 @@ const QueueRegistration = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.restaurantContainer} key={restaurant.id}>
-        <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
-        <View style={styles.restaurantInfoContainer}>
-          <View style={styles.restaurantInfoHeader}>
-            <Text style={styles.restaurantName}>{restaurant.name}</Text>
-            <TouchableOpacity style={styles.detailButton} onPress={handleRestaurantDetail}>
-              {/* FIXME: add icon */}
-              {/* <Icon name="chevron-right" size={30} color="black" /> */}
-            </TouchableOpacity>
-
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.restaurantContainer} key={restaurant.id}>
+          <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
+          <View style={styles.restaurantInfoContainer}>
+            <View style={styles.restaurantInfoHeader}>
+              <Text style={styles.restaurantName}>{restaurant.name}</Text>
+              <TouchableOpacity style={styles.detailButton} onPress={handleRestaurantDetail}>
+                <SimpleLineIcons name="arrow-right" size={20} style={{ marginTop: 10 }}/>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.restaurantInfoRow}>
+              <FontAwesome name="location-arrow" size={11} style={{ marginRight: 5 }} />
+              <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
+            </View>
+            <Text style={styles.restaurantInfo}>{restaurant.address}</Text>
           </View>
-          <Text style={styles.restaurantInfo}>{restaurant.address}</Text>
-          <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
         </View>
-      </View>
-      <Text style={styles.titles}>Name</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your name"
-        value={name}
-        onChangeText={setName}
-      />
-      <Text style={styles.titles}>Phone Number</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your phone number"
-        value={phoneNumber}
-        onChangeText={setPhoneNumber}
-      />
-      <Text style={styles.titles}>Please select the number of visitors</Text>
-      <View style={styles.counterContainer}>
-        <Text style={styles.counterLabel}>Adult</Text>
-        <TouchableOpacity style={styles.counterButton} onPress={handleDecreaseAdult}>
-          <Text style={styles.counterButtonText}>-</Text>
-        </TouchableOpacity>
-        <View style={styles.counterValueContainer}>
-          <Text style={styles.counterValue}>{adultCount}</Text>
+        <View style={styles.separator} />
+        <Text style={styles.titles}>Name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your name"
+          value={name}
+          onChangeText={setName}
+        />
+        <Text style={styles.titles}>Phone Number</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your phone number"
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
+        />
+        <Text style={styles.titles}>Please select the number of visitors</Text>
+        <View style={styles.counterContainer}>
+          <Text style={styles.counterLabel}>Adult</Text>
+          <TouchableOpacity style={styles.counterButton} onPress={handleDecreaseAdult}>
+            <Text style={styles.counterButtonText}>-</Text>
+          </TouchableOpacity>
+          <View style={styles.counterValueContainer}>
+            <Text style={styles.counterValue}>{adultCount}</Text>
+          </View>
+          <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseAdult}>
+            <Text style={styles.counterButtonText}>+</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseAdult}>
-          <Text style={styles.counterButtonText}>+</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.counterContainer}>
-        <Text style={styles.counterLabel}>Child (under the age of 5)</Text>
-        <TouchableOpacity style={styles.counterButton} onPress={handleDecreaseChild}>
-          <Text style={styles.counterButtonText}>-</Text>
-        </TouchableOpacity>
-        <View style={styles.counterValueContainer}>
-          <Text style={styles.counterValue}>{childCount}</Text>
+        <View style={styles.counterContainer}>
+          <Text style={styles.counterLabel}>Child (under the age of 5)</Text>
+          <TouchableOpacity style={styles.counterButton} onPress={handleDecreaseChild}>
+            <Text style={styles.counterButtonText}>-</Text>
+          </TouchableOpacity>
+          <View style={styles.counterValueContainer}>
+            <Text style={styles.counterValue}>{childCount}</Text>
+          </View>
+          <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseChild}>
+            <Text style={styles.counterButtonText}>+</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseChild}>
-          <Text style={styles.counterButtonText}>+</Text>
+        <Text style={styles.titles}>Request</Text>
+        <TextInput
+          style={styles.requestInput}
+          placeholder="You can write up to 50 characters maximum."
+          multiline
+          value={request}
+          onChangeText={setRequest}
+        />
+        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={styles.submitButtonText}>Apply</Text>
         </TouchableOpacity>
-      </View>
-      <Text style={styles.titles}>Request</Text>
-      <TextInput
-        style={styles.requestInput}
-        placeholder="You can write up to 50 characters maximum."
-        multiline
-        value={request}
-        onChangeText={setRequest}
-      />
-      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-        <Text style={styles.submitButtonText}>Apply</Text>
-      </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
@@ -129,6 +134,15 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
     paddingTop: 50,
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+  },
+  separator: {
+    width: 400,
+    borderBottomWidth: 6,
+    borderBottomColor: '#D9D9D9',
+    marginStart: -30,
   },
   titles: {
     fontWeight: 'bold',
@@ -182,32 +196,27 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
   submitButton: {
-    height: 35,
-    width: '100%',
     backgroundColor: '#CC313D',
-    borderColor: '#797979',
-    justifyContent: 'center',
+    padding: 10,
     alignItems: 'center',
     borderRadius: 10,
-    alignSelf: 'center',
-    marginTop: 25,
+    marginTop: 30,
+    marginBottom: 100,
   },
   submitButtonText: {
-    fontSize: 16,
+    color: "white",
+    fontSize: 20,
     fontWeight: 'bold',
-    color: 'white',
   },
   restaurantContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomColor: '#D9D9D9',
-    borderBottomWidth: 5,
     paddingBottom: 15,
   },
   thumbnailImage: {
     width: 60,
     height: 60,
-    borderRadius: 30,
+    borderRadius: 5,
     marginRight: 10,
   },
   restaurantInfoContainer: {
@@ -224,6 +233,11 @@ const styles = StyleSheet.create({
   restaurantInfo: {
     fontSize: 12,
     color: '#777',
+  },
+  restaurantInfoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
   },
 });
 

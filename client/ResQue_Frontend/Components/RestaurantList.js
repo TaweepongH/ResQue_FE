@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-const RestaurantList = () => {
+const RestaurantList = ({route}) => {
+
+  // const { location } = route.params;
 
   const restaurants = [
     {
@@ -49,6 +51,7 @@ const RestaurantList = () => {
   return (
     <View style={styles.container}>
         <View style={styles.restaurantlist}>
+        <Text>{location}</Text>
           {restaurants.map((restaurant) => (
             <View style={styles.restaurantContainer} key={restaurant.id}>
               <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
