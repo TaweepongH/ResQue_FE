@@ -5,17 +5,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import More from '../../screens/More';
 import MyInfo from '../../screens/MyInfo';
 import Search from '../../screens/Search';
+import Main from '../Main.js';
 
-
-
-// This is a placeholder for Main.js page. Should be deleted after merging Ari's task
-const Main = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home</Text>
-    </View>
-  );
-}
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +29,7 @@ const TabNavigator = () => {
         },
         headerTitleAlign: 'center',
       }}
-      
+
     >
       <Tab.Screen
         name="Home"
@@ -82,7 +73,7 @@ const TabNavigator = () => {
         }}
       />
     </Tab.Navigator>
-  ); 
+  );
 };
 
 export default TabNavigator;
