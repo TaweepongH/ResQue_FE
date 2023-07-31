@@ -11,7 +11,7 @@ let operationalDays = [];
 // this process is not as automated as it should be, I ended up having to make two seperate api calls to get all the necessary data for one partner document, i will try to make it more efficient in the future
 
 
-const RestaurantData = () => {
+const GenerateRestaurantData = () => {
 
     const [restaurantData, setRestaurantData] = useState([]);
 
@@ -168,5 +168,5 @@ const styles = StyleSheet.create({
 
   });
 
-export default RestaurantData;
+export default GenerateRestaurantData;
 
