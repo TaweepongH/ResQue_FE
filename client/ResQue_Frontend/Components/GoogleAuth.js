@@ -1,33 +1,54 @@
-import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import React from 'react';
-import { Button } from 'react-native';
+// import statusCodes along with GoogleSignin
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import {View, Button} from 'react-native';
+import { GoogleAuthProvider, signInWithCredential, getAuth } from 'firebase/auth'; // Make sure to import getAuth from 'firebase/auth'
+
+
 
 GoogleSignin.configure({
-  webClientId: '350964133055-4fagu3bb56rqru1hmndbgqtfc4cuo7vs.apps.googleusercontent.com',
-});
+    webClientId: '350964133055-3vbor7lg8rla3fm17ae14re1uo5rdj5e.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+    // iosClientId: '350964133055-jd9e7mlfdpfi4bkjtvhvhr7etb1aqppl.apps.googleusercontent.com', // [iOS] if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
+  });
 
-async function onGoogleButtonPress() {
-  // Check if your device supports Google Play
-  await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-  // Get the users ID token
-  const { idToken } = await GoogleSignin.signIn();
+const GoogleAuth = () => {
 
-  // Create a Google credential with the token
-  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+const signIn = async () => {
+    try {
+      
+      await GoogleSignin.hasPlayServices();
+      
+      const idToken = await GoogleSignin.signIn();
 
-  // Sign-in the user with the credential
-  return auth().signInWithCredential(googleCredential);
+      const auth = getAuth();
+      
+      const googleCredentials = GoogleAuthProvider.credential(idToken);
+      console.log("testing here");
+      
+      await signInWithCredential(auth, googleCredentials);
+
+      setState({ userInfo });
+    } catch (error) {
+        console.log("error from auth component: ", error);
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
+  };
+
+  return (
+    <View style={{ justifyContent: 'flex-start', marginTop: 50 }}>
+        <Button title="Google Sign In!" onPress={signIn} >
+        </Button>
+    </View>
+  )
+
 }
 
+export default GoogleAuth;
 
-function GoogleAuth() {
-    return (
-      <Button
-        title="Google Sign-In"
-        onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
-      />
-    );
-  }
-
-  export default GoogleAuth
