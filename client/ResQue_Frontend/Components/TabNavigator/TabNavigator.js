@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import More from '../../screens/More';
 import MyInfo from '../../screens/MyInfo';
 import Search from '../../screens/Search';
 import Main from '../Main.js';
+import TermsPolicies from '../../screens/more/TermsPolicies';
+// import Settings from '../../screens/Settings';
 
 
 const Tab = createBottomTabNavigator();
@@ -19,7 +20,7 @@ const TabNavigator = () => {
         tabBarActiveTintColor: '#CC313D',
         tabBarInactiveTintColor: '#1E1E1E',
         // Attention: You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar.  src: https://reactnavigation.org/docs/bottom-tab-navigator
-        tabBarStyle: { position: 'absolute', height: 80},
+        tabBarStyle: { position: 'absolute', height: 80 },
         tabBarLabelStyle: { marginBottom: 20, marginTop: -15 },
         headerStyle: {
           backgroundColor: '#F7C5CC',
@@ -33,7 +34,7 @@ const TabNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={Main}
+        component={TermsPolicies}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
@@ -72,6 +73,7 @@ const TabNavigator = () => {
           ),
         }}
       />
+
     </Tab.Navigator>
   );
 };

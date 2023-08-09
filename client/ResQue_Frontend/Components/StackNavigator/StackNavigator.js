@@ -5,6 +5,8 @@ import Login from '../Login';
 import LoginEmail from '../LoginEmail';
 import Register from '../Register';
 import ResetPwd from '../../screens/ResetPwd';
+import TermsPolicies from '../../screens/more/TermsPolicies';
+import Settings from '../../screens/Settings'
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +16,7 @@ const StackNavigator = () => {
       screenOptions={{
         headerTitleStyle: {
           fontWeight: 'bold',
-        }, 
+        },
         headerTitleAlign: 'center',
       }}
     >
@@ -22,6 +24,8 @@ const StackNavigator = () => {
       <Stack.Screen name='LoginEmail' component={LoginEmail} />
       <Stack.Screen name='Register' component={Register} />
       <Stack.Screen name='ResetPwd' component={ResetPwd} />
+      {/* <Stack.Screen name='Settings' component={Settings} /> navigation error */}
+      {/* <Stack.Screen name='TermsPolicies' component={TermsPolicies} /> navigation error */}
     </Stack.Navigator>
   )
 }
