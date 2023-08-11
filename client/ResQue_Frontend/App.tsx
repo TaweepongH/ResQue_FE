@@ -20,11 +20,11 @@ function App(): JSX.Element {
 
 
       {/* TODO: Need to handle setIsLoggedIn based on authentication. Skip this for now.*/}
-      {user ? (<>
-        <TabNavigator />
-      </>) : (
-          <StackNavigator />
-        )}
+      {/* {user ? (<> */}
+      {/* <TabNavigator /> */}
+      {/* </>) : ( */}
+      <StackNavigator />
+      {/* )} */}
 
     </NavigationContainer>
 
