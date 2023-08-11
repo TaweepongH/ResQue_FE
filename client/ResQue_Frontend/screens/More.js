@@ -3,11 +3,22 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
+import { createStackNavigator } from '@react-navigation/stack';
+import Settings from '../screens/Settings';
+import TermsPolicies from '../screens/more/TermsPolicies';
 
-const MoreItem = ({ text, icon, onPress }) => {
+const Stack = createStackNavigator();
+
+const MoreItem = ({ text, icon, screen }) => {
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate(screen);
+  };
+
   return (
     <View style={styles.btn_more}>
-      <TouchableOpacity style={styles.row} onPress={onPress}>
+      <TouchableOpacity style={styles.row} onPress={handlePress}>
         <IconMat name={icon} size={30} />
         <Text style={styles.txt_more}>{text}</Text>
         <IconAnt name="right" size={30} style={styles.arrow} />
@@ -16,21 +27,24 @@ const MoreItem = ({ text, icon, onPress }) => {
   );
 };
 
-const More = () => {
-  const navigation = useNavigation();
-  const handleTermsPolicies = () => {
-    navigation.navigate('TermsPolicies'); // error
-  };
-  const handleSettings = () => {
-    navigation.navigate('Settings'); // error
-  };
+const MoreStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="More" component={More} options={{ headerShown: false }} />
+      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="TermsPolicies" component={TermsPolicies} />
+      {/* Add other screens as needed */}
+    </Stack.Navigator>
+  );
+};
 
+const More = () => {
   return (
     <View style={styles.container}>
-      <MoreItem icon="warning" text="Notice" />
-      <MoreItem icon="settings" text="Settings" onPress={handleSettings} />
-      <MoreItem icon="insert-comment" text="Feedback" />
-      <MoreItem icon="policy" text="Terms and Policies" onPress={handleTermsPolicies} />
+      <MoreItem icon="warning" text="Notice" screen="Notice" />
+      <MoreItem icon="settings" text="Settings" screen="Settings" />
+      <MoreItem icon="insert-comment" text="Feedback" screen="Feedback" />
+      <MoreItem icon="policy" text="Terms and Policies" screen="TermsPolicies" />
     </View>
   );
 };
@@ -62,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default More;
+export default MoreStack;
