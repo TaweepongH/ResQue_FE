@@ -8,13 +8,11 @@ import EditProfile from '../myinfo/EditProfile';
 const Stack = createStackNavigator();
 const InfoItem = ({ text, icon, screen }) => {
   const navigation = useNavigation();
-
   const handlePress = () => {
     navigation.navigate(screen);
   };
 
   return (
-
     <TouchableOpacity style={styles.infoItem} onPress={handlePress}>
       <IconMat name={icon} size={30} />
       <Text style={styles.txt_more}>{text}</Text>
