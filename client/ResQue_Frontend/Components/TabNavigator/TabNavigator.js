@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import More from '../../screens/More';
-import MyInfo from '../../screens/MyInfo';
+import MyInfo from '../../screens/myinfo/MyInfo';
 import Search from '../../screens/Search';
 import Main from '../Main.js';
 import TermsPolicies from '../../screens/more/TermsPolicies';

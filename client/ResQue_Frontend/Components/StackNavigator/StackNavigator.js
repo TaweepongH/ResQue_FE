@@ -7,6 +7,7 @@ import Register from '../Register';
 import ResetPwd from '../../screens/ResetPwd';
 import TermsPolicies from '../../screens/more/TermsPolicies';
 import Settings from '../../screens/Settings'
+import EditProfile from '../../screens/myinfo/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,8 +25,10 @@ const StackNavigator = () => {
       <Stack.Screen name='LoginEmail' component={LoginEmail} />
       <Stack.Screen name='Register' component={Register} />
       <Stack.Screen name='ResetPwd' component={ResetPwd} />
-      {/* <Stack.Screen name='Settings' component={Settings} /> navigation error */}
-      {/* <Stack.Screen name='TermsPolicies' component={TermsPolicies} /> navigation error */}
+      <Stack.Screen name='Settings' component={Settings} />
+      <Stack.Screen name='TermsPolicies' component={TermsPolicies} />
+      <Stack.Screen name='EditProfile' component={EditProfile} />
+
     </Stack.Navigator>
   )
 }

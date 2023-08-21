@@ -11,7 +11,7 @@ const LoginEmail = () => {
   const navigation = useNavigation();
 
   const handleSignUp = () => {
-     navigation.navigate('Register');
+    navigation.navigate('Register');
   };
 
   // chat gpt suggested i "memoize" these handlers with the useCallback hook because they're likely to receive the same input often. ie. when a user signs in multiple times
@@ -22,32 +22,33 @@ const LoginEmail = () => {
   const handlePasswordChange = useCallback((text) => {
     setPassword(text);
   }, []);
-                                           
-   const handleForgotPwd = (text) => {
-     navigation.navigate('ResetPwd');
+
+  const handleForgotPwd = (text) => {
+    navigation.navigate('ResetPwd');
   };
 
   //for optimization, chat gpt suggested I assign this function to the useCallback hook to prevent it from being called upon each render
   const handleLogin = useCallback(() => {
-    
+
     console.log('User Email:', email);
     console.log('User Password:', password);
 
     fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/login`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json; charset=utf-8',
-    },
-    body: JSON.stringify({
-      email: email,
-      password: password
-    }),
-  }).then((response) => response.text())
-    .then((data) => {
-      console.log("data: ", data); // Success message from the server
-      Alert.alert(data);
-    }).catch((error) => {
-      console.error('Error:', error);
-    });
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      }),
+    }).then((response) => response.text())
+      .then((data) => {
+        console.log("data: ", data); // Success message from the server
+        Alert.alert(data);
+      }).catch((error) => {
+        console.error('Error:', error);
+      });
 
   }, [email, password]);
 
@@ -65,9 +66,10 @@ const LoginEmail = () => {
           style={styles.input_info}
           placeholder="Enter your password"
           value={password}
+          secureTextEntry={true}
           onChangeText={handlePasswordChange}
-          // in the future we can include the secureTextEntry property to hide the password when it's being typed in
-          // secureTextEntry
+        // in the future we can include the secureTextEntry property to hide the password when it's being typed in
+        // secureTextEntry
         />
       </View>
 
@@ -103,7 +105,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   input_info: {
-    backgroundColor:'white',
+    backgroundColor: 'white',
     borderColor: 'gray',
     borderRadius: 5,
     padding: 10,
