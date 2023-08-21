@@ -2,18 +2,38 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+import EditProfile from '../myinfo/EditProfile';
+const Stack = createStackNavigator();
+const InfoItem = ({ text, icon, screen }) => {
+  const navigation = useNavigation();
 
-const InfoItem = ({ text, icon }) => {
+  const handlePress = () => {
+    navigation.navigate(screen);
+  };
+
   return (
-    <TouchableOpacity style={styles.infoItem}>
+
+    <TouchableOpacity style={styles.infoItem} onPress={handlePress}>
       <IconMat name={icon} size={30} />
-      <Text style={styles.infoText}>{text}</Text>
+      <Text style={styles.txt_more}>{text}</Text>
       <IconAnt name="right" size={30} style={styles.arrow} />
     </TouchableOpacity>
+
   );
 };
 
-const MyInfo = ({ userName }) => {
+const MyinfoStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="MyInfo" component={MyInfo} options={{ headerShown: false }} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+    </Stack.Navigator>
+  );
+};
+
+const MyInfo = () => {
   return (
     <View style={styles.container}>
       <View style={styles.user}>
@@ -21,15 +41,16 @@ const MyInfo = ({ userName }) => {
         <Text style={styles.userName}>Jane Doe</Text>
       </View>
       <View style={styles.infoContainer}>
-        <InfoItem icon="person-outline" text="Edit profile" />
-        <InfoItem icon="history" text="Queue History" />
-        <InfoItem icon="logout" text="Log out" />
+        <InfoItem icon="person-outline" text="Edit profile" screen="EditProfile" />
+        <InfoItem icon="history" text="Queue History" screen="QueueHistory" />
+        <InfoItem icon="logout" text="Log out" screen="Login" />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+
   container: {
     marginTop: 20,
   },
@@ -48,7 +69,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#FEEEEF',
-    width: '90%',
+    width: '80%',
     height: 50,
     marginBottom: 20,
     paddingHorizontal: 20,
@@ -56,10 +77,13 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 18,
   },
+  txt_more: {
+    fontSize: 18,
+  },
   arrow: {
     marginLeft: 10,
   },
 });
 
-export default MyInfo;
+export default MyinfoStack;
 

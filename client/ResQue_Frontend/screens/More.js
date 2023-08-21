@@ -33,7 +33,6 @@ const MoreStack = () => {
       <Stack.Screen name="More" component={More} options={{ headerShown: false }} />
       <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen name="TermsPolicies" component={TermsPolicies} />
-      {/* Add other screens as needed */}
     </Stack.Navigator>
   );
 };
