@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../../../../../../../Downloads/gpxgenerator_path.gpx">
+   </FileRef>
+   <FileRef
+      location = "group:../../../../../../../Downloads/new.gpx">
+   </FileRef>
+   <FileRef
       location = "group:ResQue_Frontend.xcodeproj">
    </FileRef>
    <FileRef

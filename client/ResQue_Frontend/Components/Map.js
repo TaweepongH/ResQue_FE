@@ -1,6 +1,6 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, PermissionsAndroid, Platform } from 'react-native';
+import { View, PermissionsAndroid, Platform, Text } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 
@@ -60,8 +60,9 @@ const Map = () => {
   
     return (
       <View style={{ flex: 1 }}>
+        {/* <Text>deviceLocation</Text> */}
         <MapView
-          style={{ flex: 1 }}
+          style={{ width: '100%', height: 400 }} 
           region={deviceLocation}
           showsUserLocation={true}
         />

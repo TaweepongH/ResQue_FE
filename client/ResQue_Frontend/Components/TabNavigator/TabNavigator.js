@@ -34,7 +34,7 @@ const TabNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={TermsPolicies}
+        component={Main}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
