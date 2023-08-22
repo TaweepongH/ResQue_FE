@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 
-const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijl2Tk1TNFF1WWRBaFRnbWZJNm1yIiwicm9sZSI6InBhcnRuZXIiLCJpYXQiOjE2OTI2NTg4NjgsImV4cCI6MTY5MjY2MjQ2OH0.E7STxca_FUvuJ5arjIbCcW_oS3CoQ4gXXNpEf420rFw'
+const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkF2MGE3ZlBTWjVpcE9aNE9jMGQzIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2OTI2NzQwMjIsImV4cCI6MTY5MjY3NzYyMn0.jH_sfFp-S2khkiRPik2e2JT_ktmt4EF20ZOasD0wQ4c'
 
 const EditProfile = () => {
 
@@ -26,7 +26,7 @@ const EditProfile = () => {
         })
     }
 
-    useState( () => {
+    useEffect( () => {
         retrieveCurrentUserData();
     }, []);
 
