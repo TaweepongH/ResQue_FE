@@ -8,6 +8,7 @@ const EditProfile = () => {
 
     const [bearerToken, setBearerToken] = useState();
     const [userData, setUserData] = useState({});
+    const [editedData, setEditedData] = useState('');
 
     const obtainBearerToken = () => {
         fetch('https://app-57vwexmexq-uc.a.run.app/api/users/login', {
@@ -18,7 +19,7 @@ const EditProfile = () => {
             // Use the 'body' property to send data as JSON
             body: JSON.stringify({
                 "email": "hello@hii.com",
-                "password": "99999999"
+                "password": "999999999"
             })
         })
         .then((response) => response.text())
@@ -59,14 +60,55 @@ const EditProfile = () => {
         }
     }
 
+    const editUserData = () => {
+        fetch('https://app-57vwexmexq-uc.a.run.app/api/users/current', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                Authorization: `Bearer ${bearerToken}`,
+            }, 
+            // Use the 'body' property to send data as JSON
+            body: JSON.stringify({
+                "email": editedData.email,
+                "password": "99999999"
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    console.log("there is data from the edit user data API! it is: ", data);
+                    setUserData(data);
+                } else {
+                    console.log("there is no data from edit user data API...");
+                }
+            })
+            .catch((error) => {
+                console.log("Error, the error from the edit user data API is: ", error);
+            })
+
+        })
+    }
+
     useEffect( () => {
         obtainBearerToken();
-        
     }, []);
 
     useEffect( () => {
         retrieveCurrentUserData()
     }, [bearerToken]);
+
+    // Update the editedData state when the input changes
+    const handleInputChange = (value, field) => {
+        setEditedData((prevData) => ({
+            ...prevData,
+            [field]: value,
+        }));
+        console.log("new User data: ", editedData);
+    };
+
+    // Call editUserData when the edit button is pressed
+    const handleEditButtonPress = () => {
+        editUserData();
+    };
 
     return (
         <View style={styles.container}>
@@ -76,11 +118,31 @@ const EditProfile = () => {
             </View>
             
             <View style={styles.infoContainer}>
-                <ProfileInput label= {userData.firstName} /> 
-                <ProfileInput label= {userData.phone} />
-                <ProfileInput label= {userData.email} />
+                <Text>First Name</Text>
+                <ProfileInput 
+                    label= {userData.firstName} 
+                    onChangeText={(text) => handleInputChange(text, 'firstName')}
+                />
+                <Text>Last Name</Text>
+                <ProfileInput 
+                    label= {userData.lastName} 
+                    onChangeText={(text) => handleInputChange(text, 'lastName')}
+                /> 
+                <Text>Phone Number</Text>
+                <ProfileInput 
+                    label= {userData.phone} 
+                    onChangeText={(text) => handleInputChange(text, 'lastName')}
+                />
+                <Text>Email</Text>
+                <ProfileInput 
+                    label= {userData.email} 
+                    onChangeText={(text) => handleInputChange(text, 'lastName')}
+                />
             </View>
-            <EditButton />
+            <TouchableOpacity style={styles.editButton} onPress={handleEditButtonPress}>
+                <Text style={styles.editText}>Edit</Text>
+            </TouchableOpacity>
+            {/* <EditButton onPress={handleEditButtonPress} /> */}
         </View>
     );
 };
@@ -89,11 +151,11 @@ const ProfileInput = ({ label }) => (
     <TextInput style={styles.input} placeholder={label} />
 );
 
-const EditButton = () => (
-    <TouchableOpacity style={styles.editButton}>
-        <Text style={styles.editText}>Edit</Text>
-    </TouchableOpacity>
-);
+// const EditButton = () => (
+//     <TouchableOpacity style={styles.editButton} onPress={onPress}>
+//         <Text style={styles.editText}>Edit</Text>
+//     </TouchableOpacity>
+// );
 
 const styles = StyleSheet.create({
     container: {
