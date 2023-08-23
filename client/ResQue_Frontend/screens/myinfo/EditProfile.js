@@ -1,44 +1,84 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 
-const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkF2MGE3ZlBTWjVpcE9aNE9jMGQzIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2OTI2NzQwMjIsImV4cCI6MTY5MjY3NzYyMn0.jH_sfFp-S2khkiRPik2e2JT_ktmt4EF20ZOasD0wQ4c'
+
 
 const EditProfile = () => {
 
-    const retrieveCurrentUserData = () => {
-        fetch('https://app-57vwexmexq-uc.a.run.app/api/users/current', {
-            method: 'GET', 
+    const [bearerToken, setBearerToken] = useState();
+    const [userData, setUserData] = useState({});
 
+    const obtainBearerToken = () => {
+        fetch('https://app-57vwexmexq-uc.a.run.app/api/users/login', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
-                Authorization: `Bearer ${bearerToken}`
-            }
+            }, 
+            // Use the 'body' property to send data as JSON
+            body: JSON.stringify({
+                "email": "hello@hii.com",
+                "password": "99999999"
+            })
         })
         .then((response) => response.text())
         .then((data) => {
             if (data) {
-                console.log("there is data! it is: ", data);
+                console.log("there is data from the login API! it is: ", data);
+                setBearerToken(JSON.parse(data).accessToken);
+            } else {
+                console.log("there is no data from the login API...");
             }
         })
         .catch((error) => {
-            console.log("error is: ", error);
+            console.log("error from the login API is: ", error);
         })
     }
 
+    const retrieveCurrentUserData = () => {
+        if (bearerToken) {
+            fetch('https://app-57vwexmexq-uc.a.run.app/api/users/current', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    Authorization: `Bearer ${bearerToken}`,
+                },
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    console.log("there is data from the current user API! it is: ", data);
+                    setUserData(data);
+                } else {
+                    console.log("there is no data from the current user API...");
+                }
+            })
+            .catch((error) => {
+                console.log("error from the current user API fetch is: ", error);
+            });
+        }
+    }
+
     useEffect( () => {
-        retrieveCurrentUserData();
+        obtainBearerToken();
+        
     }, []);
+
+    useEffect( () => {
+        retrieveCurrentUserData()
+    }, [bearerToken]);
 
     return (
         <View style={styles.container}>
+
             <View style={styles.user}>
                 <IconMat name="circle" size={90} color="#CC313D" />
             </View>
+            
             <View style={styles.infoContainer}>
-                <ProfileInput label="Name" />
-                <ProfileInput label="Phone Number" />
-                <ProfileInput label="Email" />
+                <ProfileInput label= {userData.firstName} /> 
+                <ProfileInput label= {userData.phone} />
+                <ProfileInput label= {userData.email} />
             </View>
             <EditButton />
         </View>
