@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 
-
+// to do. obtain the bearer token and user password in another file, either the login or register or both. set them as global variables and send them here. will probably do this with react Context
 
 const EditProfile = () => {
 
     const [bearerToken, setBearerToken] = useState();
-    const [userData, setUserData] = useState({});
-    const [editedData, setEditedData] = useState('');
+    // const [userData, setUserData] = useState({});
+    const [editedData, setEditedData] = useState({
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+    });
 
     const obtainBearerToken = () => {
         fetch('https://app-57vwexmexq-uc.a.run.app/api/users/login', {
@@ -49,7 +54,6 @@ const EditProfile = () => {
             .then((data) => {
                 if (data) {
                     console.log("there is data from the current user API! it is: ", data);
-                    setUserData(data);
                 } else {
                     console.log("there is no data from the current user API...");
                 }
@@ -68,23 +72,26 @@ const EditProfile = () => {
                 Authorization: `Bearer ${bearerToken}`,
             }, 
             // Use the 'body' property to send data as JSON
+            // need email and password to update user data
             body: JSON.stringify({
-                "email": editedData.email,
-                "password": "99999999"
+                "firstName": editedData.firstName,
+                "lastName": editedData.lastName,
+                "phone": editedData.phone,
+                "email": editedData.email, 
+                "password": "999999999"
             })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data) {
-                    console.log("there is data from the edit user data API! it is: ", data);
-                    setUserData(data);
-                } else {
-                    console.log("there is no data from edit user data API...");
-                }
-            })
-            .catch((error) => {
-                console.log("Error, the error from the edit user data API is: ", error);
-            })
-
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data) {
+                console.log("there is data from the edit user data API! it is: ", data);
+                console.log("edited user data: ", editedData);
+            } else {
+                console.log("there is no data from edit user data API...");
+            }
+        })
+        .catch((error) => {
+            console.log("Error, the error from the edit user data API is: ", error);
         })
     }
 
@@ -98,11 +105,14 @@ const EditProfile = () => {
 
     // Update the editedData state when the input changes
     const handleInputChange = (value, field) => {
-        setEditedData((prevData) => ({
-            ...prevData,
-            [field]: value,
-        }));
-        console.log("new User data: ", editedData);
+        setEditedData((prevData) => {
+            const updatedData = { ...prevData, [field]: value };
+            
+            return updatedData; // Return the updated state
+        });
+
+        console.log("value: ", value);
+        
     };
 
     // Call editUserData when the edit button is pressed
@@ -120,23 +130,23 @@ const EditProfile = () => {
             <View style={styles.infoContainer}>
                 <Text>First Name</Text>
                 <ProfileInput 
-                    label= {userData.firstName} 
+                    // label= "name" 
                     onChangeText={(text) => handleInputChange(text, 'firstName')}
                 />
                 <Text>Last Name</Text>
                 <ProfileInput 
-                    label= {userData.lastName} 
+                    // label= {userData.lastName} 
                     onChangeText={(text) => handleInputChange(text, 'lastName')}
                 /> 
                 <Text>Phone Number</Text>
                 <ProfileInput 
-                    label= {userData.phone} 
-                    onChangeText={(text) => handleInputChange(text, 'lastName')}
+                    // label= {userData.phone} 
+                    onChangeText={(text) => handleInputChange(text, 'phone')}
                 />
                 <Text>Email</Text>
                 <ProfileInput 
-                    label= {userData.email} 
-                    onChangeText={(text) => handleInputChange(text, 'lastName')}
+                    // label= {userData.email} 
+                    onChangeText={(text) => handleInputChange(text, 'email')}
                 />
             </View>
             <TouchableOpacity style={styles.editButton} onPress={handleEditButtonPress}>
@@ -147,15 +157,14 @@ const EditProfile = () => {
     );
 };
 
-const ProfileInput = ({ label }) => (
-    <TextInput style={styles.input} placeholder={label} />
+const ProfileInput = ({ label, onChangeText }) => (
+    <TextInput
+    style={styles.input}
+    placeholder={label}
+    value={label} // Set the value to the label
+    onChangeText={onChangeText}
+/>
 );
-
-// const EditButton = () => (
-//     <TouchableOpacity style={styles.editButton} onPress={onPress}>
-//         <Text style={styles.editText}>Edit</Text>
-//     </TouchableOpacity>
-// );
 
 const styles = StyleSheet.create({
     container: {
