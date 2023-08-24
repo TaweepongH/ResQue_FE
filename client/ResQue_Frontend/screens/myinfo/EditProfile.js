@@ -7,7 +7,6 @@ import IconMat from 'react-native-vector-icons/MaterialIcons';
 const EditProfile = () => {
 
     const [bearerToken, setBearerToken] = useState();
-    // const [userData, setUserData] = useState({});
     const [editedData, setEditedData] = useState({
         firstName: '',
         lastName: '',
@@ -41,29 +40,6 @@ const EditProfile = () => {
         })
     }
 
-    const retrieveCurrentUserData = () => {
-        if (bearerToken) {
-            fetch('https://app-57vwexmexq-uc.a.run.app/api/users/current', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8',
-                    Authorization: `Bearer ${bearerToken}`,
-                },
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data) {
-                    console.log("there is data from the current user API! it is: ", data);
-                } else {
-                    console.log("there is no data from the current user API...");
-                }
-            })
-            .catch((error) => {
-                console.log("error from the current user API fetch is: ", error);
-            });
-        }
-    }
-
     const editUserData = () => {
         fetch('https://app-57vwexmexq-uc.a.run.app/api/users/current', {
             method: 'PATCH',
@@ -71,8 +47,7 @@ const EditProfile = () => {
                 'Content-Type': 'application/json; charset=utf-8',
                 Authorization: `Bearer ${bearerToken}`,
             }, 
-            // Use the 'body' property to send data as JSON
-            // need email and password to update user data
+            // email and password are required to update user data
             body: JSON.stringify({
                 "firstName": editedData.firstName,
                 "lastName": editedData.lastName,
@@ -98,10 +73,6 @@ const EditProfile = () => {
     useEffect( () => {
         obtainBearerToken();
     }, []);
-
-    useEffect( () => {
-        retrieveCurrentUserData()
-    }, [bearerToken]);
 
     // Update the editedData state when the input changes
     const handleInputChange = (value, field) => {
