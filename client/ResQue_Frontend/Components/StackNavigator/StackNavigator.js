@@ -8,6 +8,7 @@ import ResetPwd from '../../screens/ResetPwd';
 import TermsPolicies from '../../screens/more/TermsPolicies';
 import Settings from '../../screens/Settings'
 import EditProfile from '../../screens/myinfo/EditProfile';
+import GoogleAuth from '../GoogleAuth';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ const StackNavigator = () => {
     >
       <Stack.Screen name='Login' component={Login} />
       <Stack.Screen name='LoginEmail' component={LoginEmail} />
+      <Stack.Screen name='GoogleAuth' component={GoogleAuth} />
       <Stack.Screen name='Register' component={Register} />
       <Stack.Screen name='ResetPwd' component={ResetPwd} />
       <Stack.Screen name='Settings' component={Settings} />

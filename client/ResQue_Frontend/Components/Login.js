@@ -14,12 +14,16 @@ const Login = () => {
     navigation.navigate('LoginEmail');
   };
 
+  const handleGoogleAuth = () => {
+    navigation.navigate('GoogleAuth')
+  }
+
 
   return (
     <View style={styles.container}>
       <Image source={logo} style={styles.logo} />
       <CustomButton icon="facebook-square" title="Log in with FaceBook" onPress={() => console.log("Facebook btn pressed")} />
-      <CustomButton icon="google" title="Log in with Google" onPress={() => console.log("Google btn pressed")} />
+      <CustomButton icon="google" title="Log in with Google" onPress={handleGoogleAuth} />
       <CustomButton icon="mail" title="Log in with E-mail" onPress={handleLoginEmail} />
 
       <View style={styles.signupContainer}>
