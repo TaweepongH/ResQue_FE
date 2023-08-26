@@ -5,14 +5,29 @@
  * @format
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './Components/TabNavigator/TabNavigator'
 import StackNavigator from './Components/StackNavigator/StackNavigator';
+import {useAuth} from '/Users/reidgibson-bingham/Documents/projects/groupProjects/ResQue_FE/client/ResQue_Frontend/contexts/AuthContext.js'
+
 
 function App(): JSX.Element {
   // TODO: change this when implementing authentication. This is just for easy testing
-  const [user, setUser] = useState(true);
+  const { bearerToken, password} = useAuth();
+  const [user, setUser] = useState(false);
+
+  const isAuthenticated = () => {
+    if (password !== '') {
+      setUser(true);
+    } else {
+      setUser(false);
+    }
+  }
+
+  useEffect(() => {
+    isAuthenticated();
+  }, [password]); 
 
   return (
 
