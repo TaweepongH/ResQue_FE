@@ -18,7 +18,7 @@ function App(): JSX.Element {
   const [user, setUser] = useState(false);
 
   const isAuthenticated = () => {
-    if (password !== '') {
+    if (bearerToken !== '') {
       setUser(true);
     } else {
       setUser(false);
@@ -27,7 +27,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     isAuthenticated();
-  }, [password]); 
+  }, [bearerToken]); 
 
   return (
 
