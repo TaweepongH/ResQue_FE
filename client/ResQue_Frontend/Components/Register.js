@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   View,
@@ -8,6 +8,8 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
+
+import { useNavigation } from '@react-navigation/native';
 
 const InputField = ({ label, placeholder, onChangeText, secureTextEntry }) => (
   <>
@@ -30,6 +32,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState({ firstName: '', lastName: '' });
 
+  const navigation = useNavigation();
 
   const handleEmailChange = (text) => {
     setEmail(text);
@@ -74,16 +77,22 @@ const Register = () => {
       }).then((response) => response.text())
         .then((data) => {
 
-          console.log("data: ", data);
+          console.log("registration data: ", data);
 
-          if (data.substring(2, 9) === 'message') {
-            // if the email entered is already registered
-            Alert.alert(data.substring(12, data.length - 2));
+          // if the email entered is already registered
+          if (JSON.parse(data).message) {
+            
+            Alert.alert(JSON.parse(data).message);
+
           }
 
-          if (data.substring(2, 4) === 'id') {
-            // upon successful registration
-            Alert.alert("Success! Thank you.");
+          // if the data returns an object with an ID key, the user has successfully registered
+          if (JSON.parse(data).id) {
+
+            Alert.alert("Success! Thank you. Redirecting you to the Login page");
+            // navigate to the login component only after successfully registering
+            navigation.navigate('LoginEmail');
+
           }
 
         }).catch((error) => {
@@ -92,7 +101,6 @@ const Register = () => {
     }
 
   }
-
 
   return (
     <View style={styles.container}>
