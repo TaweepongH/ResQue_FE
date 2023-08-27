@@ -77,18 +77,22 @@ const Register = () => {
       }).then((response) => response.text())
         .then((data) => {
 
-          console.log("data: ", data);
+          console.log("registration data: ", data);
 
+          // if the email entered is already registered
           if (JSON.parse(data).message) {
-            // if the email entered is already registered
+            
             Alert.alert(JSON.parse(data).message);
+
           }
 
-          if (data.substring(2, 4) === 'id') {
-            // upon successful registration
+          // if the data returns an object with an ID key, the user has successfully registered
+          if (JSON.parse(data).id) {
+
             Alert.alert("Success! Thank you. Redirecting you to the Login page");
             // navigate to the login component only after successfully registering
             navigation.navigate('LoginEmail');
+
           }
 
         }).catch((error) => {
