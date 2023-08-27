@@ -7,7 +7,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 const LoginEmail = () => {
   
-  const { bearerToken, setBearerTokenContext, setPasswordContext } = useAuth();
+  const { setEmailContext, setBearerTokenContext, setPasswordContext } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -63,6 +63,7 @@ const LoginEmail = () => {
     });
 
     setPasswordContext(password);
+    setEmailContext(email);
 
   }, [email, password]);
 
