@@ -48,10 +48,16 @@ const LoginEmail = () => {
     .then((data) => {
 
       console.log("data: ", data); // Success message from the server
-      Alert.alert(data);
+  
       // this is where we will define the bearerToken for the rest of our app to use
-      setBearerTokenContext(JSON.parse(data).accessToken)
-
+      // if there is an accessToken key in the data message, then we will set the bearerTokenContext to it
+      if (JSON.parse(data).accessToken) {
+        setBearerTokenContext(JSON.parse(data).accessToken)
+      } else {
+        //error messages etc.
+        Alert.alert(JSON.parse(data).title, JSON.parse(data).message);
+      }
+      
     }).catch((error) => {
       console.error('Error:', error);
     });

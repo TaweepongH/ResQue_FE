@@ -13,7 +13,7 @@ import {useAuth} from '/Users/reidgibson-bingham/Documents/projects/groupProject
 
 
 function App(): JSX.Element {
-  // TODO: change this when implementing authentication. This is just for easy testing
+  
   const { bearerToken, password} = useAuth();
   const [user, setUser] = useState(false);
 
