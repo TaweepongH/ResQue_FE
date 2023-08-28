@@ -5,6 +5,8 @@ import IconMat from 'react-native-vector-icons/MaterialIcons';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import EditProfile from '../myinfo/EditProfile';
+import { useAuth } from '/Users/reidgibson-bingham/Documents/projects/groupProjects/ResQue_FE/client/ResQue_Frontend/contexts/AuthContext.js';
+
 const Stack = createStackNavigator();
 const InfoItem = ({ text, icon, screen }) => {
   const navigation = useNavigation();
@@ -33,34 +35,9 @@ const MyinfoStack = () => {
 
 const MyInfo = () => {
 
-  const [bearerToken, setBearerToken] = useState();
-  const [userData, setUserData] = useState({});
+  const { bearerToken } = useAuth();
 
-  const obtainBearerToken = () => {
-    fetch('https://app-57vwexmexq-uc.a.run.app/api/users/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-        }, 
-        // Use the 'body' property to send data as JSON
-        body: JSON.stringify({
-            "email": "hello@hii.com",
-            "password": "999999999"
-        })
-    })
-    .then((response) => response.text())
-    .then((data) => {
-        if (data) {
-            console.log("there is data from the login API! it is: ", data);
-            setBearerToken(JSON.parse(data).accessToken);
-        } else {
-            console.log("there is no data from the login API...");
-        }
-    })
-    .catch((error) => {
-        console.log("error from the login API is: ", error);
-    })
-  }
+  const [userData, setUserData] = useState({});
 
   const retrieveCurrentUserData = () => {
 
@@ -88,12 +65,8 @@ const MyInfo = () => {
   }
 
   useEffect( () => {
-    obtainBearerToken();
-  }, []);
-
-  useEffect( () => {
       retrieveCurrentUserData()
-  }, [bearerToken]);
+  }, []);
 
 
   return (

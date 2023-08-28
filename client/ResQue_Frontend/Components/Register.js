@@ -71,8 +71,8 @@ const Register = () => {
           email: `${email}`,
           password: `${password}`,
           firstName: `${name.firstName}`,
-          lastName: `${name.lastName}`
-
+          lastName: `${name.lastName}`, 
+          active: true
         }),
       }).then((response) => response.text())
         .then((data) => {
