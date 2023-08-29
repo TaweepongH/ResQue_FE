@@ -4,7 +4,7 @@ import { GoogleSignin, statusCodes, GoogleSigninButton } from '@react-native-goo
 import {View, Button, Text} from 'react-native';
 import { GoogleAuthProvider, signInWithCredential, getAuth } from 'firebase/auth'; // Make sure to import getAuth from 'firebase/auth'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import firebaseApp from '/Users/reidgibson-bingham/Documents/projects/groupProjects/ResQue_FE/client/ResQue_Frontend/config/firebaseConfig.js';
+import firebaseApp from '../config/firebaseConfig.js';
 import { useAnimatedGestureHandler } from 'react-native-reanimated';
 
 

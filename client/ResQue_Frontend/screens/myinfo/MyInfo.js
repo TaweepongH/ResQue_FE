@@ -5,7 +5,7 @@ import IconMat from 'react-native-vector-icons/MaterialIcons';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import EditProfile from '../myinfo/EditProfile';
-import { useAuth } from '/Users/reidgibson-bingham/Documents/projects/groupProjects/ResQue_FE/client/ResQue_Frontend/contexts/AuthContext.js';
+import { useAuth } from '../../contexts/AuthContext.js';
 
 const Stack = createStackNavigator();
 const InfoItem = ({ text, icon, screen }) => {
