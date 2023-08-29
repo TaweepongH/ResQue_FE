@@ -20,7 +20,7 @@ const InputField = ({ label, placeholder, onChangeText, secureTextEntry }) => (
       style={styles.input_info}
       label={label}
       placeholder={placeholder}
-      secureTextEntry={secureTextEntry}
+      // secureTextEntry={secureTextEntry}
       onChangeText={onChangeText}
     />
   </>
