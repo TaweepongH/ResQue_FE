@@ -1,7 +1,7 @@
 // import statusCodes along with GoogleSignin
 import { useState } from 'react';
 import { GoogleSignin, statusCodes, GoogleSigninButton } from '@react-native-google-signin/google-signin';
-import {View, Button, Text} from 'react-native';
+import {View, Button, Text, Alert} from 'react-native';
 import { GoogleAuthProvider, signInWithCredential, getAuth } from 'firebase/auth'; // Make sure to import getAuth from 'firebase/auth'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firebaseApp from '../config/firebaseConfig.js';
@@ -33,6 +33,8 @@ const GoogleAuth = () => {
 
 
     const handleLogin = (userData) => {
+
+        console.log("this is the userData: ", userData);
 
         fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/login`, {
       method: 'POST',
@@ -82,8 +84,8 @@ const GoogleAuth = () => {
         body: JSON.stringify({
           email: `${userData.email}`,
           password: `${password}`,
-          firstName: `${userData.firstName}`,
-          lastName: `${userData.lastName}`, 
+          firstName: `${userData.givenName}`,
+          lastName: `${userData.familyName}`, 
           active: true
         }),
       }).then((response) => response.text())
@@ -137,6 +139,9 @@ const GoogleAuth = () => {
         setIsAuthenticated(true);
 
         console.log("user data: ", user);
+
+        // now we begin the registration and login process using our db
+        handleRegistration(user)
 
         } catch (error) {
             console.log("error from auth component: ", error);
