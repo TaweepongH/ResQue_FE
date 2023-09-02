@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -8,10 +8,16 @@ import EditProfile from '../myinfo/EditProfile';
 import { useAuth } from '../../contexts/AuthContext.js';
 
 const Stack = createStackNavigator();
-const InfoItem = ({ text, icon, screen }) => {
+const InfoItem = ({ text, icon, screen, onPress }) => {
   const navigation = useNavigation();
   const handlePress = () => {
-    navigation.navigate(screen);
+
+    if (onPress) {
+      onPress();
+    } else {
+      navigation.navigate(screen);
+    }
+    
   };
 
   return (
@@ -35,7 +41,7 @@ const MyinfoStack = () => {
 
 const MyInfo = () => {
 
-  const { bearerToken } = useAuth();
+  const { bearerToken, setBearerTokenContext } = useAuth();
 
   const [userData, setUserData] = useState({});
 
@@ -68,6 +74,29 @@ const MyInfo = () => {
       retrieveCurrentUserData()
   }, []);
 
+  const handleLogout = () => {
+
+    Alert.alert(
+      'Confirm Logout',
+      'Are you sure you want to log out?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Logout',
+          onPress: () => {
+            // The bearerToken will be set to a blank string, changing the user state to false in the app.tsx file. When the user state is false the Login Page is shown
+            setBearerTokenContext('');
+          },
+          style: 'destructive',
+        },
+      ],
+      { cancelable: false }
+    );
+  }
+
 
   return (
     <View style={styles.container}>
@@ -78,7 +107,7 @@ const MyInfo = () => {
       <View style={styles.infoContainer}>
         <InfoItem icon="person-outline" text="Edit profile" screen="EditProfile" />
         <InfoItem icon="history" text="Queue History" screen="QueueHistory" />
-        <InfoItem icon="logout" text="Log out" screen="Login" />
+        <InfoItem icon="logout" text="Log out" screen="Login" onPress={() => handleLogout()} />
       </View>
     </View>
   );
