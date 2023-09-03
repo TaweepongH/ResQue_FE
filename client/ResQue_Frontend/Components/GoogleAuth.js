@@ -10,10 +10,6 @@ import { useAuth } from '../contexts/AuthContext';
 
 // after authenticating with google, we have to register the user if they aren't already registered then log them in, so we will use two api calls after authentication
 
-// Retrieve the user's Google credentials (ID token) after a successful sign-in.
-// Use Firebase Authentication (or another authentication service) to sign in or create a user account using the Google credentials.
-// If the user is successfully authenticated, you can grant them access to your app.
-
 // first we auto call the googleSignIn function, then inside of that function we call the handleRegistration function which will conditionally call the handleLogin function
 
 
