@@ -11,7 +11,7 @@ const SearchBar = () => {
           <TextInput 
             value={content}
             onChangeText={setContent}
-            placeholder='Search by business name, cuisine or location'
+            placeholder='Search Restaurants' 
             style={styles.input}
             multiline
           />
