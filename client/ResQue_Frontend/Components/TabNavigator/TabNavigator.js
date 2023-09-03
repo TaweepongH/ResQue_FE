@@ -9,9 +9,11 @@ import TermsPolicies from '../../screens/more/TermsPolicies';
 // import Settings from '../../screens/Settings';
 
 
+
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const size = 40;
 
   return (
     <Tab.Navigator
@@ -21,7 +23,7 @@ const TabNavigator = () => {
         tabBarInactiveTintColor: '#1E1E1E',
         // Attention: You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar.  src: https://reactnavigation.org/docs/bottom-tab-navigator
         tabBarStyle: { position: 'absolute', height: 80 },
-        tabBarLabelStyle: { marginBottom: 20, marginTop: -15 },
+        tabBarLabelStyle: { marginTop: -5, fontSize: 12 },
         headerStyle: {
           backgroundColor: '#F7C5CC',
         },
@@ -38,7 +40,7 @@ const TabNavigator = () => {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <MaterialCommunityIcons name="home" color={color} size={30} />
           ),
           headerShown: false,
         }}
@@ -49,7 +51,7 @@ const TabNavigator = () => {
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="magnify" color={color} size={size} />
+            <MaterialCommunityIcons name="magnify" color={color} size={30} />
           ),
         }}
       />
@@ -59,7 +61,7 @@ const TabNavigator = () => {
         options={{
           tabBarLabel: 'My Info',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account-outline" color={color} size={size} />
+            <MaterialCommunityIcons name="account-outline" color={color} size={30} />
           ),
         }}
       />
@@ -69,7 +71,7 @@ const TabNavigator = () => {
         options={{
           tabBarLabel: 'More',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="dots-horizontal" color={color} size={size} />
+            <MaterialCommunityIcons name="dots-horizontal" color={color} size={30} />
           ),
         }}
       />
