@@ -15,19 +15,19 @@ import {useAuth} from './contexts/AuthContext.js'
 function App(): JSX.Element {
   
   const { bearerToken, password} = useAuth();
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true); //TODO: Need to be false before commit
 
-  const isAuthenticated = () => {
-    if (bearerToken !== '') {
-      setUser(true);
-    } else {
-      setUser(false);
-    }
-  }
+  // const isAuthenticated = () => {
+  //   if (bearerToken !== '') {
+  //     setUser(true);
+  //   } else {
+  //     setUser(false);
+  //   }
+  // }
 
-  useEffect(() => {
-    isAuthenticated();
-  }, [bearerToken]); 
+  // useEffect(() => {
+  //   isAuthenticated();
+  // }, [bearerToken]); 
 
   return (
 
