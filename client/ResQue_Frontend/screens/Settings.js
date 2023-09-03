@@ -1,14 +1,22 @@
-import { View, Text , TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text , TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 
-const SettingItem = ({ text,icon }) => {
+const SettingItem = ({ text,icon, isRedirecting }) => {
+
   return (
     <View style={styles.btn_more}>
-      <TouchableOpacity style={styles.row}>
+      <TouchableOpacity 
+        style={styles.row} 
+        onPress={() => {
+          isRedirecting ? Linking.openURL('app-settings:') : null
+        }}
+      >
         <IconMat name={icon} size={30}/>
         <Text style={styles.txt_more}>{text}</Text>
-        <IconAnt name="right" size={30} style={styles.arrow} />
+        { isRedirecting ? 
+          <IconAnt name="right" size={30} style={styles.arrow} /> 
+          : <Text></Text> }
       </TouchableOpacity>
     </View>
   );
@@ -17,9 +25,9 @@ const SettingItem = ({ text,icon }) => {
 const Settings = () => {
   return (
     <View style={styles.container}>
-      <SettingItem icon="location-pin" text="Location Services" />
-      <SettingItem icon="notifications-active" text="Notifications" />
-      <SettingItem icon="info-outline" text="Version 1.1" />
+      <SettingItem icon="location-pin" text="Location Services" isRedirecting={true}/>
+      <SettingItem icon="notifications-active" text="Notifications" isRedirecting={true} />
+      <SettingItem icon="info-outline" text="Version 1.1" isRedirecting={false}/>
     </View>
   );
 };
