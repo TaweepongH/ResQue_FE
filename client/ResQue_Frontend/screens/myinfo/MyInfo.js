@@ -81,7 +81,10 @@ const MyInfo = () => {
   return (
     <View style={styles.container}>
       <View style={styles.user}>
-        <IconMat name="circle" size={90} color="#CC313D" />
+        <View style={styles.userProfile}>
+          {/* TODO: change the initial to uppercase */}
+          <Text style={styles.profileText}>{userData.firstName[0]}{userData.lastName[0]}</Text> 
+        </View>
         <Text style={styles.userName}>{userData.firstName} {userData.lastName}</Text>
       </View>
       <View style={styles.infoContainer}>
@@ -103,8 +106,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
+  userProfile: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 90,
+    aspectRatio: 1,
+    backgroundColor: "#CC313D",
+    borderRadius: 45,
+    marginBottom: 10,
+  },
+  profileText: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    color: "#FEEEEF",
+  },
   userName: {
-    fontSize: 18,
+    fontSize: 24,
   },
   infoContainer: {
     flex: 1,
