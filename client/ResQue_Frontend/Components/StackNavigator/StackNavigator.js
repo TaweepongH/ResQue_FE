@@ -10,6 +10,7 @@ import Settings from '../../screens/Settings'
 import EditProfile from '../../screens/myinfo/EditProfile';
 import GoogleAuth from '../GoogleAuth';
 import Feedback from '../Feedback';
+import RestaurantInfo from '../RestaurantInfo';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ const StackNavigator = () => {
       <Stack.Screen name='Feedback' component={Feedback} />
       <Stack.Screen name='TermsPolicies' component={TermsPolicies} />
       <Stack.Screen name='EditProfile' component={EditProfile} />
+      <Stack.Screen name='RestaurantInfo' component={RestaurantInfo} />
 
     </Stack.Navigator>
   )
