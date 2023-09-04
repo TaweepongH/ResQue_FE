@@ -15,7 +15,7 @@ import {useAuth} from './contexts/AuthContext.js'
 function App(): JSX.Element {
   
   const { bearerToken, password} = useAuth();
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(false); 
 
   const isAuthenticated = () => {
     if (bearerToken !== '') {

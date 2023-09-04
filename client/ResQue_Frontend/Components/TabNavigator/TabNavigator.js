@@ -8,6 +8,7 @@ import Main from '../Main.js';
 import TermsPolicies from '../../screens/more/TermsPolicies';
 // import Settings from '../../screens/Settings';
 
+import SearchBar from '../SearchBar';
 
 
 const Tab = createBottomTabNavigator();
@@ -22,13 +23,15 @@ const TabNavigator = () => {
         tabBarActiveTintColor: '#CC313D',
         tabBarInactiveTintColor: '#1E1E1E',
         // Attention: You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar.  src: https://reactnavigation.org/docs/bottom-tab-navigator
-        tabBarStyle: { position: 'absolute', height: 80 },
-        tabBarLabelStyle: { marginTop: -5, fontSize: 12 },
+        tabBarStyle: { position: 'absolute', height: 80, borderTopWidth: 1, },
+        tabBarLabelStyle: { marginTop: -5 },
         headerStyle: {
           backgroundColor: '#F7C5CC',
+          height: 110,
         },
         headerTitleStyle: {
           fontWeight: 'bold',
+          fontSize: 24
         },
         headerTitleAlign: 'center',
       }}
@@ -53,6 +56,8 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="magnify" color={color} size={30} />
           ),
+          headerTitle: (props) => <SearchBar {...props} />,
+          headerStyle: {backgroundColor: '#F7C5CC', height: 120}
         }}
       />
       <Tab.Screen
