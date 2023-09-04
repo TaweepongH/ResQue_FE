@@ -80,9 +80,10 @@ const Register = () => {
           console.log("registration data: ", data);
 
           // if the email entered is already registered
-          if (JSON.parse(data).message) {
+          if (JSON.parse(data).message === "User is already registered!") {
             
-            Alert.alert(JSON.parse(data).message);
+            console.log("testing... ");
+            // Alert.alert(JSON.parse(data).message);
 
           }
 

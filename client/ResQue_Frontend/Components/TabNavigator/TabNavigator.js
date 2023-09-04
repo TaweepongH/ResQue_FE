@@ -10,9 +10,11 @@ import TermsPolicies from '../../screens/more/TermsPolicies';
 
 import SearchBar from '../SearchBar';
 
+
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const size = 40;
 
   return (
     <Tab.Navigator
@@ -41,7 +43,7 @@ const TabNavigator = () => {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <MaterialCommunityIcons name="home" color={color} size={30} />
           ),
           headerShown: false,
         }}
@@ -52,7 +54,7 @@ const TabNavigator = () => {
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="magnify" color={color} size={size} />
+            <MaterialCommunityIcons name="magnify" color={color} size={30} />
           ),
           headerTitle: (props) => <SearchBar {...props} />,
           headerStyle: {backgroundColor: '#F7C5CC', height: 120}
@@ -64,7 +66,7 @@ const TabNavigator = () => {
         options={{
           tabBarLabel: 'My Info',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account-outline" color={color} size={size} />
+            <MaterialCommunityIcons name="account-outline" color={color} size={30} />
           ),
         }}
       />
@@ -74,7 +76,7 @@ const TabNavigator = () => {
         options={{
           tabBarLabel: 'More',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="dots-horizontal" color={color} size={size} />
+            <MaterialCommunityIcons name="dots-horizontal" color={color} size={30} />
           ),
         }}
       />
