@@ -1,62 +1,22 @@
-import { View, Text , TouchableOpacity, StyleSheet, Linking } from 'react-native';
-import IconAnt from 'react-native-vector-icons/AntDesign';
-import IconMat from 'react-native-vector-icons/MaterialIcons';
-
-const SettingItem = ({ text,icon, isRedirecting }) => {
-
-  return (
-    <View style={styles.btn_more}>
-      <TouchableOpacity 
-        style={styles.row} 
-        onPress={() => {
-          isRedirecting ? Linking.openURL('app-settings:') : null
-        }}
-      >
-        <IconMat name={icon} size={30}/>
-        <Text style={styles.txt_more}>{text}</Text>
-        { isRedirecting ? 
-          <IconAnt name="right" size={30} style={styles.arrow} /> 
-          : <Text></Text> }
-      </TouchableOpacity>
-    </View>
-  );
-};
+import { View, StyleSheet } from 'react-native';
+import ListItem from '../Components/ListItem';
 
 const Settings = () => {
   return (
     <View style={styles.container}>
-      <SettingItem icon="location-pin" text="Location Services" isRedirecting={true}/>
-      <SettingItem icon="notifications-active" text="Notifications" isRedirecting={true} />
-      <SettingItem icon="info-outline" text="Version 1.1" isRedirecting={false}/>
+      <ListItem text="Location Services" icon="location-pin" screen="iosSettings" />
+      <ListItem text="Notifications" icon="notifications-active" screen="iosSettings" />
+      <ListItem text="Version 1.1" icon="info-outline" screen="version" />
     </View>
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
+    flex: 1,
+    backgroundColor: 'white',
+    paddingTop: 24,
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  btn_more: {
-    justifyContent: 'center',
-    backgroundColor: '#FEEEEF',
-    width: '90%',
-    height: 50,
-    marginBottom: 20,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-  },
-  txt_more: {
-    fontSize: 18,
-  },
-  arrow: {
-    marginLeft: 10,
   },
 });
 
