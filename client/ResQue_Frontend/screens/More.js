@@ -6,6 +6,7 @@ import IconMat from 'react-native-vector-icons/MaterialIcons';
 import { createStackNavigator } from '@react-navigation/stack';
 import Settings from '../screens/Settings';
 import TermsPolicies from '../screens/more/TermsPolicies';
+import Feedback from '../Components/Feedback';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,7 @@ const MoreStack = () => {
     <Stack.Navigator>
       <Stack.Screen name="More" component={More} options={{ headerShown: false }} />
       <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Feedback" component={Feedback} />
       <Stack.Screen name="TermsPolicies" component={TermsPolicies} />
     </Stack.Navigator>
   );
