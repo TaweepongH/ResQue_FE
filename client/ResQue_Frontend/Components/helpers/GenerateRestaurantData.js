@@ -33,7 +33,7 @@ const GenerateRestaurantData = () => {
             // making sure the days array is empty before calling getHoursOfOperation, because that function requires an empty array to accuratlely record the days
             operationalDays = [];
 
-            let num = 0
+            let num = 0;
 
             addData(data['businesses'][num]);
 

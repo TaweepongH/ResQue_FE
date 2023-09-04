@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 
 const QueueRegistration = () => {
   const [name, setName] = useState('');
@@ -39,6 +40,13 @@ const QueueRegistration = () => {
     console.log('Request:', request);
   };
 
+  const navigation = useNavigation();
+
+  const handleRestaurantDetail = () => {
+    // When the "arrow-right" icon is pressed, it navigates to the 'restaurant info' page.
+    navigation.navigate('RestaurantInfo');
+  };
+
   // test data
   const restaurant = {
     id: 1,
@@ -47,11 +55,6 @@ const QueueRegistration = () => {
     distance: '200',
     waitlist: 3,
     thumbnailImage: 'https://cdn.pixabay.com/photo/2017/01/22/19/12/pizza-2000602_1280.jpg',
-  };
-
-  const handleRestaurantDetail = () => {
-    // When this button is pressed, it will navigate to the Restaurant Info Page.
-    console.log('Go to restaurant detail page');
   };
 
   return (

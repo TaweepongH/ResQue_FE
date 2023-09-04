@@ -23,6 +23,7 @@ const MoreStack = () => {
         }}
       />
       <Stack.Screen name="Settings" component={Settings}/>
+
       <Stack.Screen name="Feedback" component={Feedback} />
       <Stack.Screen name="TermsPolicies" component={TermsPolicies} />
     </Stack.Navigator>
