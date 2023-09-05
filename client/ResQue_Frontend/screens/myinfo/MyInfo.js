@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
-import IconMat from 'react-native-vector-icons/MaterialIcons';
 import { createStackNavigator } from '@react-navigation/stack';
 import EditProfile from '../myinfo/EditProfile';
 import { useAuth } from '../../contexts/AuthContext.js';
@@ -82,8 +81,10 @@ const MyInfo = () => {
     <View style={styles.container}>
       <View style={styles.user}>
         <View style={styles.userProfile}>
-          {/* TODO: change the initial to uppercase */}
-          <Text style={styles.profileText}>{userData.firstName[0]}{userData.lastName[0]}</Text> 
+          <Text style={styles.profileText}>
+            {userData.firstName ? userData.firstName[0].toUpperCase() : ''}
+            {userData.lastName? userData.lastName[0].toUpperCase()  : ''}
+          </Text> 
         </View>
         <Text style={styles.userName}>{userData.firstName} {userData.lastName}</Text>
       </View>
