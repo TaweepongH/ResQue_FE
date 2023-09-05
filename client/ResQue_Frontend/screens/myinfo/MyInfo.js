@@ -21,7 +21,7 @@ const MyinfoStack = () => {
   );
 };
 
-export const getHeaderTitle = (route) => {
+export const getMyInfoTabHeaderTitle = (route) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'My Info';
   switch (routeName) {
     case 'MyInfo':

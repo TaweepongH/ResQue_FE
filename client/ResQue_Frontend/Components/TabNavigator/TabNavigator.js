@@ -1,8 +1,8 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import More from '../../screens/More';
-import MyInfo, { getHeaderTitle } from '../../screens/myinfo/MyInfo';
+import More, { getMoreTabHeaderTitle }from '../../screens/More';
+import MyInfo, { getMyInfoTabHeaderTitle } from '../../screens/myinfo/MyInfo';
 import Search from '../../screens/Search';
 import Main from '../Main.js';
 import SearchBar from '../SearchBar';
@@ -59,23 +59,24 @@ const TabNavigator = () => {
         name="My Info"
         component={MyInfo}
         options={({ route }) => ({
-            headerTitle: getHeaderTitle(route),
+            headerTitle: getMyInfoTabHeaderTitle(route),
             tabBarLabel: 'My Info',
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="account-outline" color={color} size={30} />
             ),
-          })}
+        })}
 
       />
       <Tab.Screen
         name="More"
         component={More}
-        options={{
-          tabBarLabel: 'More',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="dots-horizontal" color={color} size={30} />
-          ),
-        }}
+        options={({ route }) => ({
+            headerTitle: getMoreTabHeaderTitle(route),
+            tabBarLabel: 'More',
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="dots-horizontal" color={color} size={30} />
+            ),
+        })}
       />
 
     </Tab.Navigator>

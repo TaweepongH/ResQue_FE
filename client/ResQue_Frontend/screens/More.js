@@ -5,8 +5,23 @@ import Settings from '../screens/Settings';
 import TermsPolicies from '../screens/more/TermsPolicies';
 import Feedback from '../Components/Feedback';
 import ListItem from '../Components/ListItem';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
+
+export const getMoreTabHeaderTitle = (route) => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'More';
+  switch (routeName) {
+    case 'MoreTab':
+      return 'More';
+    case 'Settings':
+      return 'Settings';
+    case 'Feedback':
+      return 'Rate your Experience';
+    case 'TermsPolicies':
+      return 'Terms and Policies'
+  }
+};
 
 const MoreStack = () => {
   return (
@@ -15,6 +30,7 @@ const MoreStack = () => {
         headerShown: false,
       }}
     >
+      <Stack.Screen name="MoreTab" component={More}/>
       <Stack.Screen name="Settings" component={Settings}/>
       <Stack.Screen name="Feedback" component={Feedback} />
       <Stack.Screen name="TermsPolicies" component={TermsPolicies} />
