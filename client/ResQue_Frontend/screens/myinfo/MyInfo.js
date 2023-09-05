@@ -27,7 +27,7 @@ export const getMyInfoTabHeaderTitle = (route) => {
     case 'MyInfo':
       return 'My Info';
     case 'EditProfile':
-      return 'Edit profile';
+      return 'Edit Profile';
   }
 };
 

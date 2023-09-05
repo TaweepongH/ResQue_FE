@@ -6,10 +6,14 @@ import MyInfo, { getMyInfoTabHeaderTitle } from '../../screens/myinfo/MyInfo';
 import Search from '../../screens/Search';
 import Main from '../Main.js';
 import SearchBar from '../SearchBar';
+import IconAnt from 'react-native-vector-icons/AntDesign';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const navigation = useNavigation();
 
   return (
     <Tab.Navigator
@@ -18,7 +22,7 @@ const TabNavigator = () => {
         tabBarActiveTintColor: '#CC313D',
         tabBarInactiveTintColor: '#1E1E1E',
         // Attention: You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar.  src: https://reactnavigation.org/docs/bottom-tab-navigator
-        tabBarStyle: { position: 'absolute', height: 80, borderTopWidth: 1, },
+        tabBarStyle: { position: 'absolute', height: '10%', borderTopWidth: 1, },
         tabBarLabelStyle: { marginTop: -5 },
         headerStyle: {
           backgroundColor: '#F7C5CC',
@@ -60,6 +64,15 @@ const TabNavigator = () => {
         component={MyInfo}
         options={({ route }) => ({
             headerTitle: getMyInfoTabHeaderTitle(route),
+            headerLeft: () => {
+              if (getMyInfoTabHeaderTitle(route) == 'Edit Profile'){
+                return (
+                  <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <IconAnt name="left" size={30} style={{marginLeft: 10}}/>
+                  </TouchableOpacity>
+                )
+              }
+            },
             tabBarLabel: 'My Info',
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="account-outline" color={color} size={30} />
@@ -72,6 +85,15 @@ const TabNavigator = () => {
         component={More}
         options={({ route }) => ({
             headerTitle: getMoreTabHeaderTitle(route),
+            headerLeft: () => {
+              if (getMoreTabHeaderTitle(route) != 'More'){
+                return (
+                  <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <IconAnt name="left" size={30} style={{marginLeft: 10}}/>
+                  </TouchableOpacity>
+                )
+              }
+            },
             tabBarLabel: 'More',
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="dots-horizontal" color={color} size={30} />
