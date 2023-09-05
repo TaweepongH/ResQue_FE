@@ -83,7 +83,7 @@ const MyInfo = () => {
       <View style={styles.user}>
         <View style={styles.userProfile}>
           {/* TODO: change the initial to uppercase */}
-          <Text style={styles.profileText}>{userData.firstName[0]}{userData.lastName[0]}</Text> 
+          <Text style={styles.profileText}>{userData.firstName}{userData.lastName}</Text> 
         </View>
         <Text style={styles.userName}>{userData.firstName} {userData.lastName}</Text>
       </View>
