@@ -2,19 +2,14 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import More from '../../screens/More';
-import MyInfo from '../../screens/myinfo/MyInfo';
+import MyInfo, { getHeaderTitle } from '../../screens/myinfo/MyInfo';
 import Search from '../../screens/Search';
 import Main from '../Main.js';
-import TermsPolicies from '../../screens/more/TermsPolicies';
-// import Settings from '../../screens/Settings';
-
 import SearchBar from '../SearchBar';
-
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
-  const size = 40;
 
   return (
     <Tab.Navigator
@@ -42,7 +37,7 @@ const TabNavigator = () => {
         component={Main}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={30} />
           ),
           headerShown: false,
@@ -53,7 +48,7 @@ const TabNavigator = () => {
         component={Search}
         options={{
           tabBarLabel: 'Search',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="magnify" color={color} size={30} />
           ),
           headerTitle: (props) => <SearchBar {...props} />,
@@ -63,19 +58,21 @@ const TabNavigator = () => {
       <Tab.Screen
         name="My Info"
         component={MyInfo}
-        options={{
-          tabBarLabel: 'My Info',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account-outline" color={color} size={30} />
-          ),
-        }}
+        options={({ route }) => ({
+            headerTitle: getHeaderTitle(route),
+            tabBarLabel: 'My Info',
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="account-outline" color={color} size={30} />
+            ),
+          })}
+
       />
       <Tab.Screen
         name="More"
         component={More}
         options={{
           tabBarLabel: 'More',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="dots-horizontal" color={color} size={30} />
           ),
         }}
