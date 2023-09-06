@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import EditProfile from '../myinfo/EditProfile';
 import { useAuth } from '../../contexts/AuthContext.js';
 import ListItem from '../../Components/ListItem';
-import { NavigationContainer } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 

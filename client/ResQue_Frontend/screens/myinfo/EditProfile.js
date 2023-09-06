@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import IconMat from 'react-native-vector-icons/MaterialIcons';
 // import { NavigationContainer } from '@react-navigation/native';
 // to do. obtain the bearer token and user password in another file, either the login or register or both. set them as global variables and send them here. will probably do this with react Context
 
@@ -24,8 +23,8 @@ const EditProfile = ({ navigation, route }) => {
             }, 
             // Use the 'body' property to send data as JSON
             body: JSON.stringify({
-                "email": "haha@gmail.com",
-                "password": "hehe"
+                "email": "",
+                "password": ""
             })
         })
         .then((response) => response.text())
