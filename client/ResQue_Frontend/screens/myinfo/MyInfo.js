@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import EditProfile from '../myinfo/EditProfile';
 import { useAuth } from '../../contexts/AuthContext.js';
 import ListItem from '../../Components/ListItem';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 
@@ -14,12 +15,21 @@ const MyinfoStack = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="MyInfo" component={MyInfo} options={{ headerShown: false }} />
+      <Stack.Screen name="MyInfo" component={MyInfo} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
     </Stack.Navigator>
   );
 };
 
+export const getMyInfoTabHeaderTitle = (route) => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'My Info';
+  switch (routeName) {
+    case 'MyInfo':
+      return 'My Info';
+    case 'EditProfile':
+      return 'Edit Profile';
+  }
+};
 
 const MyInfo = ({ navigation: { navigate } }) => {
 
@@ -137,4 +147,3 @@ const styles = StyleSheet.create({
 });
 
 export default MyinfoStack;
-
