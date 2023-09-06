@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
-
+// import { NavigationContainer } from '@react-navigation/native';
 // to do. obtain the bearer token and user password in another file, either the login or register or both. set them as global variables and send them here. will probably do this with react Context
 
-const EditProfile = () => {
+const EditProfile = ({ navigation, route }) => {
 
     const [bearerToken, setBearerToken] = useState();
     const [editedData, setEditedData] = useState({
@@ -14,6 +14,8 @@ const EditProfile = () => {
         email: '',
     });
 
+    console.log(route);
+
     const obtainBearerToken = () => {
         fetch('https://app-57vwexmexq-uc.a.run.app/api/users/login', {
             method: 'POST',
@@ -22,8 +24,8 @@ const EditProfile = () => {
             }, 
             // Use the 'body' property to send data as JSON
             body: JSON.stringify({
-                "email": "hello@hii.com",
-                "password": "999999999"
+                "email": "haha@gmail.com",
+                "password": "hehe"
             })
         })
         .then((response) => response.text())
@@ -93,33 +95,35 @@ const EditProfile = () => {
 
     return (
         <View style={styles.container}>
-
-            <View style={styles.user}>
-                <IconMat name="circle" size={90} color="#CC313D" />
+            <View styles={styles.userInputContainer} >
+                        
             </View>
-            
-            <View style={styles.infoContainer}>
-                <Text>First Name</Text>
-                <ProfileInput 
-                    // label= "name" 
-                    onChangeText={(text) => handleInputChange(text, 'firstName')}
-                />
-                <Text>Last Name</Text>
-                <ProfileInput 
-                    // label= {userData.lastName} 
-                    onChangeText={(text) => handleInputChange(text, 'lastName')}
-                /> 
-                <Text>Phone Number</Text>
-                <ProfileInput 
-                    // label= {userData.phone} 
-                    onChangeText={(text) => handleInputChange(text, 'phone')}
-                />
-                <Text>Email</Text>
-                <ProfileInput 
-                    // label= {userData.email} 
-                    onChangeText={(text) => handleInputChange(text, 'email')}
-                />
+            <View style={styles.userProfile}>
+                <Text style={styles.profileText}>
+                    {route.params.firstName[0].toUpperCase()}
+                    {route.params.lastName[0].toUpperCase()}
+                </Text>     
             </View>
+            <ProfileInput 
+                label="First Name"
+                placeholderText={route.params.firstName}
+                onChangeText={(text) => handleInputChange(text, 'firstName')}
+            />
+            <ProfileInput 
+                label="Last Name"
+                placeholderText={route.params.lastName}
+                onChangeText={(text) => handleInputChange(text, 'lastName')}
+            />
+            <ProfileInput 
+                label="Phone Number"
+                placeholderText=""
+                onChangeText={(text) => handleInputChange(text, 'phone')}
+            />
+            <ProfileInput 
+                label="Email"
+                placeholderText={route.params.email}
+                onChangeText={(text) => handleInputChange(text, 'email')}
+            />
             <TouchableOpacity style={styles.editButton} onPress={handleEditButtonPress}>
                 <Text style={styles.editText}>Edit</Text>
             </TouchableOpacity>
@@ -128,13 +132,14 @@ const EditProfile = () => {
     );
 };
 
-const ProfileInput = ({ label, onChangeText }) => (
-    <TextInput
-    style={styles.input}
-    placeholder={label}
-    value={label} // Set the value to the label
-    onChangeText={onChangeText}
-/>
+const ProfileInput = ({ label, placeholderText}) => (
+    <View style={styles.infoContainer}>
+        <Text style={styles.infoLabel}>{label}</Text>
+        <TextInput 
+            placeholder= {placeholderText}
+            style={styles.infoInput}
+        />
+    </View> 
 );
 
 const styles = StyleSheet.create({
@@ -145,18 +150,45 @@ const styles = StyleSheet.create({
         padding: 20,
         position: 'relative',
     },
+    userProfile: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 90,
+        aspectRatio: 1,
+        backgroundColor: "#CC313D",
+        borderRadius: 45,
+        marginTop: 20,
+        marginBottom: 30,
+    },
+    profileText: {
+        fontSize: 48,
+        fontWeight: 'bold',
+        color: "#FEEEEF",
+    },
     user: {
         marginBottom: 20,
         marginTop: 40,
     },
     infoContainer: {
-        width: '95%',
-    },
-    input: {
         backgroundColor: 'white',
-        borderRadius: 3,
-        marginBottom: 15,
-        padding: 15,
+        width: '95%', 
+        height: 55,
+        paddingHorizontal: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 20,
+        borderRadius: 5,
+    },
+    infoLabel: {
+        width: '50%',
+        fontSize: 18,
+        color: '#343434'
+    },
+    infoInput: {
+        width: '50%',
+        fontSize: 18, 
+        textAlign: 'right',
     },
     editButton: {
         backgroundColor: '#CC313D',

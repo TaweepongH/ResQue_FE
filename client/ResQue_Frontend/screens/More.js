@@ -15,6 +15,7 @@ const MoreStack = () => {
         headerShown: false,
       }}
     >
+      <Stack.Screen name="MoreTab" component={More}/>
       <Stack.Screen name="Settings" component={Settings}/>
 
       <Stack.Screen name="Feedback" component={Feedback} />
