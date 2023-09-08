@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import EditProfile from '../myinfo/EditProfile';
+import { useFocusEffect, useRoute, useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../contexts/AuthContext.js';
 import ListItem from '../../Components/ListItem';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+
 
 const Stack = createStackNavigator();
 
@@ -50,7 +52,10 @@ const MyInfo = ({ navigation: { navigate } }) => {
           .then((data) => {
               if (data) {
                   console.log("there is data from the current user API! it is: ", data);
-                  setUserData(data);
+                  
+                    setUserData(data);
+                  
+                  
               } else {
                   console.log("there is no data from the current user API...");
               }
@@ -61,9 +66,23 @@ const MyInfo = ({ navigation: { navigate } }) => {
       }
   }
 
-  useEffect( () => {
-      retrieveCurrentUserData()
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      
+      // right now there are issues retreiving the current user data when navigating from the eidtProfile.js component
+      // so this Hook ensures that the function is called at least 3 times when the data is needed
+        let iterationCount = 0;
+        const intervalId = setInterval(() => {
+          retrieveCurrentUserData();
+          iterationCount++;
+  
+          if (iterationCount >= 3) {
+            clearInterval(intervalId);
+          }
+        }, 250);
+
+    }, [])
+  );
 
   const handleLogout = () => {
 

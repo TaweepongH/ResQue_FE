@@ -4,6 +4,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     
+    // User Authentication contexts
     const [bearerToken, setBearerToken] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -20,15 +21,26 @@ export const AuthProvider = ({ children }) => {
         setEmail(value);
     }
 
+    // Location contexts
+    const [latLong, setLatLong] = useState({});
+
+    const setLatLongContext = (lat, long) => {
+        setLatLong({latitude: lat, longitude: long});
+    }
+
     return (
         <AuthContext.Provider
             value={{
+                // user auth
                 bearerToken,
                 password,
                 email,
                 setBearerTokenContext,
                 setPasswordContext,
-                setEmailContext
+                setEmailContext, 
+                // location
+                latLong, 
+                setLatLongContext
             }}
         >
 

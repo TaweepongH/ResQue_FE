@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
-// import { NavigationContainer } from '@react-navigation/native';
-// to do. obtain the bearer token and user password in another file, either the login or register or both. set them as global variables and send them here. will probably do this with react Context
+import { useNavigation } from '@react-navigation/native';
+import IconMat from 'react-native-vector-icons/MaterialIcons';
+import { useAuth } from '../../contexts/AuthContext.js';
+
 
 const EditProfile = ({ navigation, route }) => {
 
-    const [bearerToken, setBearerToken] = useState();
+    const { bearerToken, password, setBearerTokenContext } = useAuth();
     const [editedData, setEditedData] = useState({
         firstName: '',
         lastName: '',
@@ -13,33 +15,7 @@ const EditProfile = ({ navigation, route }) => {
         email: '',
     });
 
-    console.log(route);
-
-    const obtainBearerToken = () => {
-        fetch('https://app-57vwexmexq-uc.a.run.app/api/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-            }, 
-            // Use the 'body' property to send data as JSON
-            body: JSON.stringify({
-                "email": "",
-                "password": ""
-            })
-        })
-        .then((response) => response.text())
-        .then((data) => {
-            if (data) {
-                console.log("there is data from the login API! it is: ", data);
-                setBearerToken(JSON.parse(data).accessToken);
-            } else {
-                console.log("there is no data from the login API...");
-            }
-        })
-        .catch((error) => {
-            console.log("error from the login API is: ", error);
-        })
-    }
+    const navigation = useNavigation();
 
     const editUserData = () => {
         fetch('https://app-57vwexmexq-uc.a.run.app/api/users/current', {
@@ -54,7 +30,7 @@ const EditProfile = ({ navigation, route }) => {
                 "lastName": editedData.lastName,
                 "phone": editedData.phone,
                 "email": editedData.email, 
-                "password": "999999999"
+                "password": password
             })
         })
         .then((response) => response.json())
@@ -71,10 +47,6 @@ const EditProfile = ({ navigation, route }) => {
         })
     }
 
-    useEffect( () => {
-        obtainBearerToken();
-    }, []);
-
     // Update the editedData state when the input changes
     const handleInputChange = (value, field) => {
         setEditedData((prevData) => {
@@ -87,9 +59,10 @@ const EditProfile = ({ navigation, route }) => {
         
     };
 
-    // Call editUserData when the edit button is pressed
+    // to do: create an alert asking if the user is sure they want to edit their data
     const handleEditButtonPress = () => {
         editUserData();
+        navigation.navigate('MyInfo');
     };
 
     return (

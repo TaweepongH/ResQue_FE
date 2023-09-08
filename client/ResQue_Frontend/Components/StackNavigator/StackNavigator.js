@@ -11,13 +11,14 @@ import EditProfile from '../../screens/myinfo/EditProfile';
 import GoogleAuth from '../GoogleAuth';
 import Feedback from '../Feedback';
 import RestaurantInfo from '../RestaurantInfo';
+import MyInfo from '../../screens/myinfo/MyInfo';
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
   return (
     <Stack.Navigator
-      screenOptions={{
+      screenOptions={{  
         headerTitleStyle: {
           fontWeight: 'bold',
         },
@@ -34,6 +35,7 @@ const StackNavigator = () => {
       <Stack.Screen name='TermsPolicies' component={TermsPolicies} />
       <Stack.Screen name='EditProfile' component={EditProfile} />
       <Stack.Screen name='RestaurantInfo' component={RestaurantInfo} />
+      <Stack.Screen name='MyInfo' component={MyInfo} />
 
     </Stack.Navigator>
   )
