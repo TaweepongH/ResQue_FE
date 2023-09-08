@@ -31,7 +31,7 @@ export const getMyInfoTabHeaderTitle = (route) => {
   }
 };
 
-const MyInfo = () => {
+const MyInfo = ({ navigation: { navigate } }) => {
 
   const { bearerToken, setBearerTokenContext } = useAuth();
 
@@ -94,13 +94,18 @@ const MyInfo = () => {
         <View style={styles.userProfile}>
           <Text style={styles.profileText}>
             {userData.firstName ? userData.firstName[0].toUpperCase() : ''}
-            {userData.lastName? userData.lastName[0].toUpperCase()  : ''}
+            {userData.lastName ? userData.lastName[0].toUpperCase()  : ''}
           </Text> 
         </View>
         <Text style={styles.userName}>{userData.firstName} {userData.lastName}</Text>
       </View>
       <View style={styles.infoContainer}>
-        <ListItem icon="person-outline" text="Edit profile" screen="EditProfile" />
+        <ListItem 
+          icon="person-outline" 
+          text="Edit profile" 
+          screen="EditProfile" 
+          onPress={() => navigate("EditProfile", userData ) }
+        />
         <ListItem icon="history" text="Queue History" screen="QueueHistory" />
         <ListItem icon="logout" text="Log out" screen="Login" onPress={() => handleLogout()} />
       </View>
