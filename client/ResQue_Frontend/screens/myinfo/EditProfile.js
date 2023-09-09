@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import { useAuth } from '../../contexts/AuthContext.js';
@@ -57,7 +57,25 @@ const EditProfile = ({ navigation, route }) => {
     // to do: create an alert asking if the user is sure they want to edit their data
     const handleEditButtonPress = () => {
         editUserData();
-        navigation.navigate('MyInfo');
+        Alert.alert(
+            'Confirm Changes',
+            'Are you sure you want to edit your information?',
+            [
+              {
+                text: 'Cancel',
+                style: 'cancel',
+              },
+              {
+                text: 'Confirm',
+                onPress: () => {
+                  // The bearerToken will be set to a blank string, changing the user state to false in the app.tsx file. When the user state is false the Login Page is shown
+                  navigation.navigate('MyInfo');
+                },
+                style: 'destructive',
+              },
+            ],
+            { cancelable: false }
+        );
     };
 
     useEffect(() => {
@@ -71,34 +89,44 @@ const EditProfile = ({ navigation, route }) => {
             </View>
             <View style={styles.userProfile}>
                 <Text style={styles.profileText}>
-                    {route.params.firstName[0].toUpperCase()}
-                    {route.params.lastName[0].toUpperCase()}
+                    {route.params.firstName ? route.params.firstName[0].toUpperCase() : " "}
+                    {route.params.lastName ? route.params.lastName[0].toUpperCase() : " "}
                 </Text>     
             </View>
-            <TextInput
-                // label="First Name"
-                placeholder={route.params.firstName} 
-                style={styles.infoInput} 
-                onChangeText={(text) => handleInputChange(text, 'firstName')}
-            />
-            <TextInput
-                // label="Last Name"
-                placeholderText="test"
-                style={styles.infoInput} 
-                onChangeText={(text) => handleInputChange(text, 'lastName')}
-            />
-            <TextInput 
-                // label="Phone Number"
-                placeholderText="{route.params.firstName}"
-                style={styles.infoInput} 
-                onChangeText={(text) => handleInputChange(text, 'phone')}
-            />
-            <TextInput 
-                // label="Email"
-                placeholderText="{route.params.email}"
-                style={styles.infoInput} 
-                onChangeText={(text) => handleInputChange(text, 'email')}
-            />
+
+            <View style={styles.infoContainer}>
+                <Text style={styles.infoLabel}>First Name</Text>
+                    <TextInput
+                        // label="First Name"
+                        placeholder={route.params.firstName} 
+                        style={styles.infoInput} 
+                        onChangeText={(text) => handleInputChange(text, 'firstName')}
+                    />
+            </View>
+            <View style={styles.infoContainer}>
+                <Text style={styles.infoLabel}>Last Name</Text>
+                    <TextInput
+                        placeholder={route.params.lastName}
+                        style={styles.infoInput} 
+                        onChangeText={(text) => handleInputChange(text, 'lastName')}
+                    />
+            </View>
+            <View style={styles.infoContainer}>
+                <Text style={styles.infoLabel}>Phone Number</Text>
+                    <TextInput 
+                        placeholder={route.params.phone}
+                        style={styles.infoInput} 
+                        onChangeText={(text) => handleInputChange(text, 'phone')}
+                    />
+            </View>
+            <View style={styles.infoContainer}>
+                <Text style={styles.infoLabel}>Email</Text>
+                    <TextInput 
+                        placeholder={route.params.email}
+                        style={styles.infoInput} 
+                        onChangeText={(text) => handleInputChange(text, 'email')}
+                    />
+            </View>
             <TouchableOpacity style={styles.editButton} onPress={handleEditButtonPress}>
                 <Text style={styles.editText}>Edit</Text>
             </TouchableOpacity>
@@ -161,10 +189,11 @@ const styles = StyleSheet.create({
         color: '#343434'
     },
     infoInput: {
+        marginTop: 20,
         width: '50%',
         fontSize: 18, 
         textAlign: 'right',
-        marginBottom: 20,
+        marginBottom: 10,
     },
     editButton: {
         backgroundColor: '#CC313D',

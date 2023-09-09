@@ -68,18 +68,21 @@ const MyInfo = ({ navigation: { navigate } }) => {
 
   useFocusEffect(
     useCallback(() => {
+
+
+      retrieveCurrentUserData();
       
-      // right now there are issues retreiving the current user data when navigating from the eidtProfile.js component
-      // so this Hook ensures that the function is called at least 3 times when the data is needed
-        let iterationCount = 0;
-        const intervalId = setInterval(() => {
-          retrieveCurrentUserData();
-          iterationCount++;
+      // right now there are issues retreiving the current user data when navigating from the editProfile.js component
+      // if the data isn't retrieved, set the iteration count to 0 and get the data multiple times at 250 ms intervals
+        // let iterationCount = 1;
+        // const intervalId = setInterval(() => {
+        //   retrieveCurrentUserData();
+        //   iterationCount++;
   
-          if (iterationCount >= 3) {
-            clearInterval(intervalId);
-          }
-        }, 250);
+        //   if (iterationCount >= 3) {
+        //     clearInterval(intervalId);
+        //   }
+        // }, 250);
 
     }, [])
   );
