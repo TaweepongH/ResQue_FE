@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import renderButtons from './renderButtons';
+import RestaurantList2 from './RestaurantList2';
 import Map from './Map';
 
 const Main = () => {
   const [showMap, setShowMap] = useState(true);
+    const [restaurants, setRestaurants] = useState([]);
 
   const location = [
     { id: 1, name: 'All' },
@@ -16,58 +18,6 @@ const Main = () => {
     { id: 7, name: 'Surrey' },
     { id: 8, name: 'Coquitlam' },
     { id: 9, name: 'More>' },
-  ];
-
-  const nearbyRestaurants = [
-    {
-      id: 1,
-      name: 'Restaurant A',
-      address: '123 Main St',
-      distance: '200',
-      waitlist: 3,
-      thumbnailImage: 'https://example.com/restaurant-a-thumbnail.jpg',
-    },
-    {
-      id: 2,
-      name: 'Restaurant B',
-      address: '456 Elm St',
-      distance: '500',
-      waitlist: 5,
-      thumbnailImage: 'https://example.com/restaurant-b-thumbnail.jpg',
-    },
-    {
-      id: 3,
-      name: 'Restaurant C',
-      address: '789 Oak St',
-      distance: '1000',
-      waitlist: 2,
-      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
-    },
-    {
-      id: 4,
-      name: 'Restaurant D',
-      address: '789 Oak St',
-      distance: '1000',
-      waitlist: 2,
-      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
-    },
-    {
-      id: 5,
-      name: 'Restaurant E',
-      address: '789 Oak St',
-      distance: '1000',
-      waitlist: 2,
-      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
-    },
-    {
-      id: 6,
-      name: 'Restaurant F',
-      address: '789 Oak St',
-      distance: '1000',
-      waitlist: 2,
-      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
-    },
-
   ];
 
   const handleAllowButtonPress = () => {
@@ -95,27 +45,9 @@ const Main = () => {
             </View>
           </View>
         ) : (
-
-          <Map></Map>
-          // <View style={styles.nearbyRestaurants}>
-          //   <Text style={styles.sectionTitle}>Explore restaurants near me</Text>
-          //   {nearbyRestaurants.map((restaurant) => (
-          //     <View style={styles.restaurantContainer} key={restaurant.id}>
-          //       <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
-          //       <View>
-          //         <Text style={styles.restaurantName}>{restaurant.name}</Text>
-          //         <Text style={styles.restaurantInfo}>{restaurant.address}</Text>
-          //         <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
-          //       </View>
-          //       <View style={styles.waitlistContainer}>
-          //         <View style={styles.waitlistBadge}>
-          //           <Text style={styles.waitlistText}>{restaurant.waitlist}</Text>
-          //         </View>
-          //       </View>
-          //     </View>
-          //   ))}
-          // </View>
-        )}
+          {/* <Map></Map> */}
+        ,<RestaurantList2/>
+        )} 
       </View>
     </ScrollView>
   );

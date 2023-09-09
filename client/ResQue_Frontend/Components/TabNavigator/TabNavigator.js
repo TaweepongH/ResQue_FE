@@ -9,6 +9,8 @@ import SearchBar from '../SearchBar';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import FetchPartnerData from '../helpers/FetchPartnerData';
+import RestaurantList2 from '../RestaurantList2';
 
 const Tab = createBottomTabNavigator();
 
