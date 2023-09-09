@@ -49,12 +49,9 @@ const EditProfile = ({ navigation, route }) => {
     const handleInputChange = (value, field) => {
         setEditedData((prevData) => {
             const updatedData = { ...prevData, [field]: value };
-            
+            console.log("value:", value); // Log the value here
             return updatedData; // Return the updated state
         });
-
-        console.log("value: ", value);
-        
     };
 
     // to do: create an alert asking if the user is sure they want to edit their data
@@ -62,6 +59,10 @@ const EditProfile = ({ navigation, route }) => {
         editUserData();
         navigation.navigate('MyInfo');
     };
+
+    useEffect(() => {
+        console.log("route data: ", route.params);
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -74,24 +75,28 @@ const EditProfile = ({ navigation, route }) => {
                     {route.params.lastName[0].toUpperCase()}
                 </Text>     
             </View>
-            <ProfileInput 
-                label="First Name"
-                placeholderText={route.params.firstName}
+            <TextInput
+                // label="First Name"
+                placeholder={route.params.firstName} 
+                style={styles.infoInput} 
                 onChangeText={(text) => handleInputChange(text, 'firstName')}
             />
-            <ProfileInput 
-                label="Last Name"
-                placeholderText={route.params.lastName}
+            <TextInput
+                // label="Last Name"
+                placeholderText="test"
+                style={styles.infoInput} 
                 onChangeText={(text) => handleInputChange(text, 'lastName')}
             />
-            <ProfileInput 
-                label="Phone Number"
-                placeholderText=""
+            <TextInput 
+                // label="Phone Number"
+                placeholderText="{route.params.firstName}"
+                style={styles.infoInput} 
                 onChangeText={(text) => handleInputChange(text, 'phone')}
             />
-            <ProfileInput 
-                label="Email"
-                placeholderText={route.params.email}
+            <TextInput 
+                // label="Email"
+                placeholderText="{route.params.email}"
+                style={styles.infoInput} 
                 onChangeText={(text) => handleInputChange(text, 'email')}
             />
             <TouchableOpacity style={styles.editButton} onPress={handleEditButtonPress}>
@@ -102,15 +107,15 @@ const EditProfile = ({ navigation, route }) => {
     );
 };
 
-const ProfileInput = ({ label, placeholderText}) => (
-    <View style={styles.infoContainer}>
-        <Text style={styles.infoLabel}>{label}</Text>
-        <TextInput 
-            placeholder= {placeholderText}
-            style={styles.infoInput}
-        />
-    </View> 
-);
+// const ProfileInput = ({ label, placeholderText}) => (
+//     <View style={styles.infoContainer}>
+//         <Text style={styles.infoLabel}>{label}</Text>
+//         <TextInput 
+//             placeholder= {placeholderText}
+//             style={styles.infoInput}
+//         />
+//     </View> 
+// );
 
 const styles = StyleSheet.create({
     container: {
@@ -159,6 +164,7 @@ const styles = StyleSheet.create({
         width: '50%',
         fontSize: 18, 
         textAlign: 'right',
+        marginBottom: 20,
     },
     editButton: {
         backgroundColor: '#CC313D',
