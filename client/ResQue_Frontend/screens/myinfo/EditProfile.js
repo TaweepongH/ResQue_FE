@@ -68,8 +68,9 @@ const EditProfile = ({ navigation, route }) => {
               {
                 text: 'Confirm',
                 onPress: () => {
-                  // The bearerToken will be set to a blank string, changing the user state to false in the app.tsx file. When the user state is false the Login Page is shown
+
                   navigation.navigate('MyInfo');
+                  
                 },
                 style: 'destructive',
               },
