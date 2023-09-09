@@ -15,8 +15,6 @@ const EditProfile = ({ navigation, route }) => {
         email: '',
     });
 
-    const navigation = useNavigation();
-
     const editUserData = () => {
         fetch('https://app-57vwexmexq-uc.a.run.app/api/users/current', {
             method: 'PATCH',
