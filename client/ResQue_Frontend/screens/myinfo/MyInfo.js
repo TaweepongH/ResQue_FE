@@ -39,51 +39,45 @@ const MyInfo = ({ navigation: { navigate } }) => {
 
   const [userData, setUserData] = useState({});
 
-  const retrieveCurrentUserData = () => {
-      if (bearerToken) {
-          fetch('https://app-57vwexmexq-uc.a.run.app/api/users/current', {
-              method: 'GET',
-              headers: {
-                  'Content-Type': 'application/json; charset=utf-8',
-                  Authorization: `Bearer ${bearerToken}`,
-              },
-          })
-          .then((response) => response.json())
-          .then((data) => {
-              if (data) {
-                  console.log("there is data from the current user API! it is: ", data);
-                  
-                    setUserData(data);
-                  
-                  
-              } else {
-                  console.log("there is no data from the current user API...");
-              }
-          })
-          .catch((error) => {
-              console.log("error from the current user API fetch is: ", error);
-          });
+  const retrieveCurrentUserData = async () => {
+    if (bearerToken) {
+      try {
+        const response = await fetch('https://app-57vwexmexq-uc.a.run.app/api/users/current', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            Authorization: `Bearer ${bearerToken}`,
+          },
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          if (data) {
+            console.log("there is data from the current user API! it is: ", data);
+            setUserData(data);
+          } else {
+            console.log("there is no data from the current user API...");
+          }
+        } else {
+          console.log("HTTP error from the current user API:", response.status);
+        }
+      } catch (error) {
+        console.error("Error from the current user API fetch:", error);
       }
+    }
   }
 
   useFocusEffect(
     useCallback(() => {
+      const fetchData = async () => {
+        try {
+          await retrieveCurrentUserData();
+        } catch (error) {
+          console.log("error calling the fetch current Data function.")
+        }
+      };
 
-
-      retrieveCurrentUserData();
-      
-      // right now there are issues retreiving the current user data when navigating from the editProfile.js component
-      // if the data isn't retrieved, set the iteration count to 0 and get the data multiple times at 250 ms intervals
-        // let iterationCount = 1;
-        // const intervalId = setInterval(() => {
-        //   retrieveCurrentUserData();
-        //   iterationCount++;
-  
-        //   if (iterationCount >= 3) {
-        //     clearInterval(intervalId);
-        //   }
-        // }, 250);
-
+      fetchData();
     }, [])
   );
 

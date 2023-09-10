@@ -57,6 +57,7 @@ const EditProfile = ({ navigation, route }) => {
     // to do: create an alert asking if the user is sure they want to edit their data
     const handleEditButtonPress = () => {
         editUserData();
+        
         Alert.alert(
             'Confirm Changes',
             'Are you sure you want to edit your information?',
@@ -70,13 +71,14 @@ const EditProfile = ({ navigation, route }) => {
                 onPress: () => {
 
                   navigation.navigate('MyInfo');
-                  
+
                 },
                 style: 'destructive',
               },
             ],
             { cancelable: false }
         );
+        
     };
 
     useEffect(() => {
