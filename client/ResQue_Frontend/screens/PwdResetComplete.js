@@ -1,14 +1,22 @@
 import { View, Text, TouchableOpacity , StyleSheet } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
 
 const PwdResetComplete = () => {
+
+  const navigation = useNavigation()
+
+  const handleReturn = () => {
+    navigation.navigate('Login');
+  }
+
   return (
     <View style={styles.container}>
     <View style={styles.items}>
         <IconAnt name="checkcircleo" size={50} color="#CC313D"/>
         <Text style={styles.txt_complete}>Reset Complete!</Text>
     </View>
-       <TouchableOpacity style={styles.button}>
+       <TouchableOpacity style={styles.button} onPress={handleReturn}>
         <Text style={styles.text}>Return to Login</Text>
       </TouchableOpacity>
     </View>

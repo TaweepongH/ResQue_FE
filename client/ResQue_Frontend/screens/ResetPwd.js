@@ -23,9 +23,17 @@ const ResetPwd = () => {
     .then((data) => {
 
       console.log("data: ", data); 
-      setEmailContext(email);
-      Alert.alert(data);
-      navigation.navigate('OtpVerify');
+
+      if (JSON.parse(data).message === "Password reset email sent") {
+
+        setEmailContext(email);
+        Alert.alert("Account Found ", `An email has been sent to ${email}`);
+        navigation.navigate('OtpVerify');
+
+      } else {
+        Alert.alert(JSON.parse(data).message);
+      }
+      
       
     }).catch((error) => {
       console.error('Error:', error);

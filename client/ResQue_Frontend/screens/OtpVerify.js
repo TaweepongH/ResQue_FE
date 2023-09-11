@@ -3,14 +3,17 @@
 import { useState, useRef } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, TextInput, Alert } from 'react-native';
 import { useAuth } from '../contexts/AuthContext'
+import { useNavigation } from '@react-navigation/native'; 
 
 const OtpVerify = () => {
 
   // the user's email is needed for the verification api call
-  const { email } = useAuth();
+  const { email, setConfirmationCodeContext } = useAuth();
 
   const [otp, setOTP] = useState(['', '', '', '', '']); // Initialize an array to store OTP values
   const inputRefs = useRef([]);
+
+  const navigation = useNavigation()
   
   // Function to handle OTP input changes
   const handleOTPChange = (text, index) => {
@@ -38,21 +41,60 @@ const OtpVerify = () => {
       email: email,
       confirmationCode: enteredOTP
     }),
-  }).then((response) => response.text())
+  }).then((response) => 
+    
+      response.text()
+  
+    )
     .then((data) => {
 
-      console.log("data: ", data); 
-      Alert.alert(data);
-      // navigation.navigate('OtpVerify');
+      console.log("data: ", data);
+      
+      if (JSON.parse(data).message === "Confirmation code is valid") {
+
+        setConfirmationCodeContext(enteredOTP)
+        Alert.alert("Success! ", JSON.parse(data).message);
+        navigation.navigate('CreateNewPwd');
+
+      } else {
+        Alert.alert("error: ", JSON.parse(data).message);
+      }
       
     }).catch((error) => {
       console.error('Error:', error);
     });
 
   };
+
+  const OTPResend = () => {
+    fetch(`https://app-57vwexmexq-uc.a.run.app/api/password/forgotpassword`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify({
+      email: email,
+    }),
+  }).then((response) => response.text())
+    .then((data) => {
+
+      console.log("data: ", data); 
+
+      if (JSON.parse(data).message === "Password reset email sent") {
+
+        Alert.alert("Code Resent to: ", `${email}`);
+
+      } else {
+        Alert.alert(JSON.parse(data).message);
+      }
+      
+      
+    }).catch((error) => {
+      console.error('Error:', error);
+    });
+  }
   
   const handleResend = () => {
-    // Implement your resend OTP logic here
+    OTPResend();
   };
 
   return (
