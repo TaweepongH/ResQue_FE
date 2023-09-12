@@ -26,7 +26,7 @@ const LoginEmail = () => {
     setPassword(text);
   }, []);
                                            
-   const handleForgotPwd = (text) => {
+   const handleForgotPwd = () => {
      navigation.navigate('ResetPwd');
   };
 
