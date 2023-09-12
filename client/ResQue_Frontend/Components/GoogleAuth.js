@@ -1,5 +1,5 @@
 // import statusCodes along with GoogleSignin
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { GoogleSignin, statusCodes, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 import {View, Button, Text, Alert} from 'react-native';
 import { GoogleAuthProvider, signInWithCredential, getAuth } from 'firebase/auth'; // Make sure to import getAuth from 'firebase/auth'
@@ -22,7 +22,7 @@ const GoogleAuth = () => {
 
     const { setEmailContext, setBearerTokenContext, setPasswordContext } = useAuth();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [userData, setUserData] = useState('');
+    // const [userData, setUserData] = useState('');
     // the password will just have to be a random string, because Google will not provide us with a user's password
     const password = "GooglePassword";
     // const password = Array.from({ length: 24 }, () => Math.random().toString(36)[2]).join('');
@@ -150,14 +150,13 @@ const GoogleAuth = () => {
         }
     };
 
+    useEffect(() => {
+        signIn();
+    }, []);
+
   return (
-    <View style={{ justifyContent: 'flex-start', marginTop: 50 }}>
-        {isAuthenticated ? (
-            <Text>You've successfully authenticated yourself via Google!</Text>
-        ) : (
-            <GoogleSigninButton title="Google Sign In!" onPress={signIn} />  
-        )}
-        
+    <View>
+
     </View>
   )
 
