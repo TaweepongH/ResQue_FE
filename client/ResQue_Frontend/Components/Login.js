@@ -19,18 +19,12 @@ const Login = () => {
     navigation.navigate('GoogleAuth')
   }
 
-  const handleForgotPwrd = () => {
-    navigation.navigate('ResetPwd');
-  }
-
-
   return (
     <View style={styles.container}>
       <Image source={logo} style={styles.logo} />
       <CustomButton icon="facebook-square" title="Log in with FaceBook" onPress={() => console.log("Facebook btn pressed")} />
       <CustomButton icon="google" title="Log in with Google" onPress={handleGoogleAuth} />
       <CustomButton icon="mail" title="Log in with E-mail" onPress={handleLoginEmail} />
-      <CustomButton icon="mail" title="forgot Pwrd?" onPress={handleForgotPwrd} />
 
       <View style={styles.signupContainer}>
         <Text style={styles.noAccountText}>Don't have an account? </Text>
