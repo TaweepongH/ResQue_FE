@@ -6,50 +6,55 @@ import Map from './Map';
 
 const Main = () => {
   const [showMap, setShowMap] = useState(true);
-    const [restaurants, setRestaurants] = useState([]);
-
+ const [selectedArea, setSelectedArea] = useState(null);
+  const [buttonClicked, setButtonClicked] = useState(false); 
   const location = [
-    { id: 1, name: 'All' },
+    { id: 1, name: 'Vancouver' },
     { id: 2, name: 'Downtown' },
     { id: 3, name: 'Burnaby' },
     { id: 4, name: 'Richmond' },
     { id: 5, name: 'North Vancouver' },
     { id: 6, name: 'New Westminster' },
     { id: 7, name: 'Surrey' },
-    { id: 8, name: 'Coquitlam' },
-    { id: 9, name: 'More>' },
+    { id: 8, name: 'White Rock' },
+    { id: 9, name: 'More >' },
   ];
-
-  const handleAllowButtonPress = () => {
-    setShowMap(false);
+ const handleButtonClick = (areaName) => {
+    setSelectedArea(areaName); // Set the selected area
+    setButtonClicked(true); // Set buttonClicked to true to display RestaurantList2
+    setShowMap(false); // Hide the map when the button is clicked
   };
-
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.locations}>
-          <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
-          <Text style={styles.title}>Vancouver</Text>
-          {renderButtons(location)}
-        </View>
-        {showMap ? (
-          <View style={styles.mapContainer}>
-            <View>
-              {/* FIXME: React Native icon insertion area. */}
-              <Text style={styles.mapText}>
-                Please allow location access to discover the best restaurants near me!
-              </Text>
-              <TouchableOpacity style={styles.allowButton} onPress={handleAllowButtonPress}>
-                <Text style={styles.buttonText}>Allow</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        ) : (
-          {/* <Map></Map> */}
-        ,<RestaurantList2/>
-        )} 
+     <ScrollView>
+    <View style={styles.container}>
+      <View style={styles.locations}>
+        <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
+        <Text style={styles.title}>{selectedArea}</Text>
+        {renderButtons(location, handleButtonClick)} 
       </View>
-    </ScrollView>
+      {showMap ? (
+        <View style={styles.mapContainer}>
+          <View>
+            <Text style={styles.mapText}>
+              Please allow location access to discover the best restaurants near me!
+            </Text>
+            <TouchableOpacity style={styles.allowButton} onPress={() => setShowMap(true)}>
+              {/* Use setShowMap to hide the map */}
+              <Text style={styles.buttonText}>Allow</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : (
+        <View>
+          {/* If showMap is false, display Map */}
+          <Map />
+        </View>
+      )}
+      {/* Display RestaurantList2 */}
+      <RestaurantList2 names={selectedArea}/>
+
+    </View>
+  </ScrollView>
   );
 };
 
