@@ -28,6 +28,13 @@ export const AuthProvider = ({ children }) => {
         setLatLong({latitude: lat, longitude: long});
     }
 
+    // pwrd reset contexts
+    const [confirmationCode, setConfirmationCode] = useState('');
+
+    const setConfirmationCodeContext = (value) => {
+        setConfirmationCode(value);
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -40,7 +47,10 @@ export const AuthProvider = ({ children }) => {
                 setEmailContext, 
                 // location
                 latLong, 
-                setLatLongContext
+                setLatLongContext,
+                // pwrd reset
+                confirmationCode,
+                setConfirmationCodeContext
             }}
         >
 

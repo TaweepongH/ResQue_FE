@@ -15,13 +15,13 @@ import {useAuth} from './contexts/AuthContext.js'
 function App(): JSX.Element {
   
   const { bearerToken, password} = useAuth();
-  const [user, setUser] = useState(false); 
+  const [loggedIn, setIsLoggedIn] = useState(false); 
 
   const isAuthenticated = () => {
     if (bearerToken !== '') {
-      setUser(true);
+      setIsLoggedIn(true);
     } else {
-      setUser(false);
+      setIsLoggedIn(false);
     }
   }
 
@@ -33,9 +33,8 @@ function App(): JSX.Element {
 
     <NavigationContainer>
 
-
       {/* TODO: Need to handle setIsLoggedIn based on authentication. Skip this for now.*/}
-      {user ? (<>
+      {loggedIn ? (<>
         <TabNavigator />
       </>) : (
           <StackNavigator />

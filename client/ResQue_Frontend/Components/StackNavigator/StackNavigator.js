@@ -5,6 +5,9 @@ import Login from '../Login';
 import LoginEmail from '../LoginEmail';
 import Register from '../Register';
 import ResetPwd from '../../screens/ResetPwd';
+import OtpVerify from '../../screens/OtpVerify';
+import CreateNewPwd from '../../screens/CreateNewPwd';
+import PwdResetComplete from '../../screens/PwdResetComplete';
 import TermsPolicies from '../../screens/more/TermsPolicies';
 import Settings from '../../screens/Settings'
 import EditProfile from '../../screens/myinfo/EditProfile';
@@ -30,6 +33,9 @@ const StackNavigator = () => {
       <Stack.Screen name='GoogleAuth' component={GoogleAuth} />
       <Stack.Screen name='Register' component={Register} />
       <Stack.Screen name='ResetPwd' component={ResetPwd} />
+      <Stack.Screen name='OtpVerify' component={OtpVerify} />
+      <Stack.Screen name='CreateNewPwd' component={CreateNewPwd} />
+      <Stack.Screen name='PwdResetComplete' component={PwdResetComplete} />
       <Stack.Screen name='Settings' component={Settings} />
       <Stack.Screen name='Feedback' component={Feedback} />
       <Stack.Screen name='TermsPolicies' component={TermsPolicies} />
