@@ -24,10 +24,10 @@ const EditProfile = ({ navigation, route }) => {
             }, 
             // email and password are required to update user data
             body: JSON.stringify({
-                "firstName": editedData.firstName,
-                "lastName": editedData.lastName,
-                "phone": editedData.phone,
-                "email": editedData.email, 
+                "firstName": editedData.firstName ? editedData.firstName : route.params.firstName,
+                "lastName": editedData.lastName ? editedData.lastName : route.params.lastName,
+                "phone": editedData.phone ? editedData.phone : route.params.phone,
+                "email": editedData.email ? editedData.email : route.params.email, 
                 "password": password
             })
         })
@@ -130,6 +130,7 @@ const ProfileInput = ({ label, placeholderText, onChangeText}) => (
     <View style={styles.infoContainer}>
         <Text style={styles.infoLabel}>{label}</Text>
         <TextInput 
+            defaultValue={placeholderText}
             placeholder= {placeholderText}
             style={styles.infoInput}
             onChangeText={onChangeText}
