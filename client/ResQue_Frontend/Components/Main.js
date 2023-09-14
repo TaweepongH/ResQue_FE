@@ -25,13 +25,16 @@ const Main = () => {
     setShowMap(false); // Hide the map when the button is clicked
   };
   return (
-     <ScrollView>
+    <>
+
     <View style={styles.container}>
       <View style={styles.locations}>
         <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
         <Text style={styles.title}>{selectedArea}</Text>
         {renderButtons(location, handleButtonClick)} 
       </View>
+         </View>
+      <ScrollView>
       {showMap ? (
         <View style={styles.mapContainer}>
           <View>
@@ -53,8 +56,10 @@ const Main = () => {
       {/* Display RestaurantList2 */}
       <RestaurantList2 names={selectedArea}/>
 
-    </View>
+ 
   </ScrollView>
+    </>
+     
   );
 };
 
