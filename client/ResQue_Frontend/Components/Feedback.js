@@ -21,9 +21,10 @@ const Feedback = () => {
 
   const handleBackToHome = () => {
     setSubmitted(false);
-    navigation.navigate('Home');
     setFeedback('');
     setRating(0);
+    navigation.pop();
+    navigation.navigate('Home');
   };
 
   return (
