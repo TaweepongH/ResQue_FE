@@ -1,65 +1,53 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView, Alert } from 'react-native';
 import renderButtons from './renderButtons';
-import RestaurantList2 from './RestaurantList2';
+import RestaurantList from './RestaurantList';
 import Map from './Map';
 
 const Main = () => {
+
   const [showMap, setShowMap] = useState(true);
- const [selectedArea, setSelectedArea] = useState(null);
+  const [showScreen, setShowScreen] = useState(false);
+  const [selectedArea, setSelectedArea] = useState(null);
   const [buttonClicked, setButtonClicked] = useState(false); 
+
   const location = [
-    { id: 1, name: 'Vancouver' },
-    { id: 2, name: 'Downtown' },
+    { id: 1, name: 'All' },
+    { id: 2, name: 'Vancouver' },
     { id: 3, name: 'Burnaby' },
     { id: 4, name: 'Richmond' },
     { id: 5, name: 'North Vancouver' },
     { id: 6, name: 'New Westminster' },
     { id: 7, name: 'Surrey' },
     { id: 8, name: 'White Rock' },
-    { id: 9, name: 'More >' },
+    { id: 9, name: 'Delta' },
   ];
  const handleButtonClick = (areaName) => {
+    
+    setShowScreen(true);
     setSelectedArea(areaName); // Set the selected area
     setButtonClicked(true); // Set buttonClicked to true to display RestaurantList2
     setShowMap(false); // Hide the map when the button is clicked
   };
+
+  useEffect(() => {
+    setShowScreen(false);
+    console.log("showScreen is: ", showScreen);
+  }, []);
   return (
     <>
-
     <View style={styles.container}>
       <View style={styles.locations}>
         <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
         <Text style={styles.title}>{selectedArea}</Text>
-        {renderButtons(location, handleButtonClick)} 
+        {renderButtons(location,handleButtonClick)}
       </View>
+       <Text style={styles.explore}>Explore restaurants near me</Text>
          </View>
       <ScrollView>
-      {showMap ? (
-        <View style={styles.mapContainer}>
-          <View>
-            <Text style={styles.mapText}>
-              Please allow location access to discover the best restaurants near me!
-            </Text>
-            <TouchableOpacity style={styles.allowButton} onPress={() => setShowMap(true)}>
-              {/* Use setShowMap to hide the map */}
-              <Text style={styles.buttonText}>Allow</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      ) : (
-        <View>
-          {/* If showMap is false, display Map */}
-          <Map />
-        </View>
-      )}
-      {/* Display RestaurantList2 */}
-      <RestaurantList2 names={selectedArea}/>
-
- 
+      <RestaurantList names={selectedArea} />  
   </ScrollView>
-    </>
-     
+    </>   
   );
 };
 
@@ -77,6 +65,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  explore: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop:12,
+    marginBottom:10,
   },
   subtitle: {
     fontSize: 17,

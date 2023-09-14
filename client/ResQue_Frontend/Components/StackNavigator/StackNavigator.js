@@ -12,7 +12,7 @@ import GoogleAuth from '../GoogleAuth';
 import Feedback from '../Feedback';
 import RestaurantInfo from '../RestaurantInfo';
 import MyInfo from '../../screens/myinfo/MyInfo';
-import RestaurantList2 from '../RestaurantList2';
+import RestaurantList2 from '../RestaurantList';
 import Main from '../Main';
 
 const Stack = createNativeStackNavigator();

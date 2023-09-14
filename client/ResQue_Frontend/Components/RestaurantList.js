@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { useAuth } from '../contexts/AuthContext.js';
 import { useRoute } from '@react-navigation/native';
 
-const RestaurantList2 = () => {
+const RestaurantList = () => {
   const { bearerToken } = useAuth();
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,34 +18,40 @@ const RestaurantList2 = () => {
     fetchRestaurantData(names);
   }, [names]); // Add 'names' as a dependency
 
-  const fetchRestaurantData = async (selectedArea) => {
-    if (!selectedArea) {
-      return; // Don't fetch data if no area is selected
-    }
+ const fetchRestaurantData = async (selectedArea) => {
+  if (!selectedArea) {
+    return; // Don't fetch data if no area is selected
+  }
 
-    try {
-      const response = await fetch(
-        `https://app-57vwexmexq-uc.a.run.app/api/partners/area/${selectedArea}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-            Authorization: `Bearer ${bearerToken}`,
-          },
-        }
-      );
+  let url;
 
-      if (response.ok) {
-        const data = await response.json();
-        setRestaurants(data);
-        setLoading(false);
-      } else {
-        console.log('Failed to fetch restaurant data');
-      }
-    } catch (error) {
-      console.log('Error:', error);
+  if (selectedArea === 'All') {
+    url = 'https://app-57vwexmexq-uc.a.run.app/api/partners/all';
+  } else {
+    url = `https://app-57vwexmexq-uc.a.run.app/api/partners/area/${selectedArea}`;
+  }
+
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setRestaurants(data);
+      setLoading(false);
+    } else {
+      console.log('Failed to fetch restaurant data');
     }
-  };
+  } catch (error) {
+    console.log('Error:', error);
+  }
+};
+
 
   return (
     <ScrollView>
@@ -82,7 +88,7 @@ const RestaurantList2 = () => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
-    marginTop: 50,
+    marginTop: 20,
   },
   selectedAreaText: {
     fontSize: 20,
@@ -121,5 +127,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RestaurantList2;
+export default RestaurantList;
 
