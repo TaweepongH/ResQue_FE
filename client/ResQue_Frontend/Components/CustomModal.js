@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Modal, ActivityIndicator, StyleSheet, Text } from 'react-native';
 
 // this is our loading/spinning animation
 
 const CustomModal = ({ visible, message }) => {
+
   return (
     <Modal
       animationType="fade"

@@ -21,7 +21,6 @@ const GoogleAuth = () => {
 
 
     const { setEmailContext, setBearerTokenContext, setPasswordContext } = useAuth();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     // const [userData, setUserData] = useState('');
     // the password will just have to be a random string, because Google will not provide us with a user's password
     const password = "GooglePassword";
@@ -131,8 +130,6 @@ const GoogleAuth = () => {
         const googleCredentials = GoogleAuthProvider.credential(idToken);
         
         await signInWithCredential(auth, googleCredentials);
-
-        setIsAuthenticated(true);
 
         console.log("user data: ", user);
 
