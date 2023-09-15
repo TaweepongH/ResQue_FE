@@ -10,7 +10,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 const Stack = createStackNavigator();
 
 export const getMoreTabHeaderTitle = (route) => {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'More';
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'MoreTab';
   switch (routeName) {
     case 'MoreTab':
       return 'More';
