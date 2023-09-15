@@ -4,8 +4,12 @@ import { useNavigation } from '@react-navigation/native';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import { useAuth } from '../../contexts/AuthContext.js';
 
+import CustomModal from '../../Components/CustomModal.js';
+
 
 const EditProfile = ({ navigation, route }) => {
+
+    const [modalVisible, setModalVisible] = useState(false);
 
     const { bearerToken, password, setBearerTokenContext } = useAuth();
     const [editedData, setEditedData] = useState({
@@ -16,7 +20,9 @@ const EditProfile = ({ navigation, route }) => {
     });
 
     const editUserData = () => {
+
         fetch('https://app-57vwexmexq-uc.a.run.app/api/users/current', {
+          
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
@@ -43,6 +49,7 @@ const EditProfile = ({ navigation, route }) => {
         .catch((error) => {
             console.log("Error, the error from the edit user data API is: ", error);
         })
+
     }
 
     // Update the editedData state when the input changes
@@ -54,9 +61,7 @@ const EditProfile = ({ navigation, route }) => {
         });
     };
 
-    // to do: create an alert asking if the user is sure they want to edit their data
-    const handleEditButtonPress = () => {
-        editUserData();
+    const handleEditButtonPress = async () => {
         
         Alert.alert(
             'Confirm Changes',
@@ -68,9 +73,25 @@ const EditProfile = ({ navigation, route }) => {
               },
               {
                 text: 'Confirm',
-                onPress: () => {
+                onPress: async () => {
 
-                  navigation.navigate('MyInfo');
+                    try {
+                
+                        // we need to edit the userData well in advance of navigating to the myInfo screen, so we will show a loading screen in that time
+                        editUserData();
+
+                        //make the loading spinner visible now
+                        setModalVisible(true);
+
+                        setTimeout(() => {    
+                            navigation.navigate('MyInfo');
+                            setModalVisible(false);
+                        }, 2000);
+                        
+                    } catch (error) {
+                        Alert.alert(error);
+                        console.error('Error editing user data:', error);
+                    }
 
                 },
                 style: 'destructive',
@@ -81,14 +102,11 @@ const EditProfile = ({ navigation, route }) => {
         
     };
 
-    useEffect(() => {
-        console.log("route data: ", route.params);
-    }, []);
-
     return (
+        
         <View style={styles.container}>
             <View styles={styles.userInputContainer} >
-                        
+            <CustomModal visible={modalVisible} message="loading..." />
             </View>
             <View style={styles.userProfile}>
                 <Text style={styles.profileText}>

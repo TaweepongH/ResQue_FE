@@ -30,42 +30,45 @@ const LoginEmail = () => {
      navigation.navigate('ResetPwd');
   };
 
-  //for optimization, chat gpt suggested I assign this function to the useCallback hook to prevent it from being called upon each render
-  const handleLogin = useCallback(() => {
+  const handleLogin = async () => {
     
     console.log('User Email:', email);
     console.log('User Password:', password);
 
-    fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/login`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json; charset=utf-8',
-    },
-    body: JSON.stringify({
-      email: email,
-      password: password
-    }),
-  }).then((response) => response.text())
-    .then((data) => {
+    try {
+
+      const response = await fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/login`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+        }),
+      })
+
+      const data = await response.json();
 
       console.log("data: ", data); // Success message from the server
   
       // this is where we will define the bearerToken for the rest of our app to use
       // if there is an accessToken key in the data message, then we will set the bearerTokenContext to it
-      if (JSON.parse(data).accessToken) {
-        setBearerTokenContext(JSON.parse(data).accessToken)
+      if (response.ok && data.accessToken) {
+        setBearerTokenContext(data.accessToken)
+        setPasswordContext(password);
+        setEmailContext(email);
       } else {
         //error messages etc.
-        Alert.alert(JSON.parse(data).title, JSON.parse(data).message);
+        Alert.alert(data.title, data.message);
       }
       
-    }).catch((error) => {
-      console.error('Error:', error);
-    });
-
-    setPasswordContext(password);
-    setEmailContext(email);
-
-  }, [email, password]);
+    } catch (error) {
+      // this is a client side error so i'm not even sure if it should be included
+      console.error("Error:", error);
+      Alert.alert("Error", "An error occurred while resetting the password.");
+    }
+  
+  };
 
   return (
     <View style={styles.container}>
