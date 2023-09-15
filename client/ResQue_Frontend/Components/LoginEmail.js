@@ -81,7 +81,7 @@ const LoginEmail = () => {
         />
 
         <TextInput
-          style={styles.input_info}
+          style={styles.input_info}                       
           placeholder="Enter your password"
           value={password}
           onChangeText={handlePasswordChange}

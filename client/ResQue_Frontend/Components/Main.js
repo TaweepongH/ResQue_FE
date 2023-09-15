@@ -1,123 +1,53 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView, Alert } from 'react-native';
 import renderButtons from './renderButtons';
+import RestaurantList from './RestaurantList';
 import Map from './Map';
 
 const Main = () => {
+
   const [showMap, setShowMap] = useState(true);
+  const [showScreen, setShowScreen] = useState(false);
+  const [selectedArea, setSelectedArea] = useState(null);
+  const [buttonClicked, setButtonClicked] = useState(false); 
 
   const location = [
     { id: 1, name: 'All' },
-    { id: 2, name: 'Downtown' },
+    { id: 2, name: 'Vancouver' },
     { id: 3, name: 'Burnaby' },
     { id: 4, name: 'Richmond' },
     { id: 5, name: 'North Vancouver' },
     { id: 6, name: 'New Westminster' },
     { id: 7, name: 'Surrey' },
-    { id: 8, name: 'Coquitlam' },
-    { id: 9, name: 'More>' },
+    { id: 8, name: 'White Rock' },
+    { id: 9, name: 'Delta' },
   ];
-
-  const nearbyRestaurants = [
-    {
-      id: 1,
-      name: 'Restaurant A',
-      address: '123 Main St',
-      distance: '200',
-      waitlist: 3,
-      thumbnailImage: 'https://example.com/restaurant-a-thumbnail.jpg',
-    },
-    {
-      id: 2,
-      name: 'Restaurant B',
-      address: '456 Elm St',
-      distance: '500',
-      waitlist: 5,
-      thumbnailImage: 'https://example.com/restaurant-b-thumbnail.jpg',
-    },
-    {
-      id: 3,
-      name: 'Restaurant C',
-      address: '789 Oak St',
-      distance: '1000',
-      waitlist: 2,
-      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
-    },
-    {
-      id: 4,
-      name: 'Restaurant D',
-      address: '789 Oak St',
-      distance: '1000',
-      waitlist: 2,
-      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
-    },
-    {
-      id: 5,
-      name: 'Restaurant E',
-      address: '789 Oak St',
-      distance: '1000',
-      waitlist: 2,
-      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
-    },
-    {
-      id: 6,
-      name: 'Restaurant F',
-      address: '789 Oak St',
-      distance: '1000',
-      waitlist: 2,
-      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
-    },
-
-  ];
-
-  const handleAllowButtonPress = () => {
-    setShowMap(false);
+ const handleButtonClick = (areaName) => {
+    
+    setShowScreen(true);
+    setSelectedArea(areaName); // Set the selected area
+    setButtonClicked(true); // Set buttonClicked to true to display RestaurantList2
+    setShowMap(false); // Hide the map when the button is clicked
   };
 
+  useEffect(() => {
+    setShowScreen(false);
+    console.log("showScreen is: ", showScreen);
+  }, []);
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.locations}>
-          <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
-          <Text style={styles.title}>Vancouver</Text>
-          {renderButtons(location)}
-        </View>
-        {showMap ? (
-          <View style={styles.mapContainer}>
-            <View>
-              {/* FIXME: React Native icon insertion area. */}
-              <Text style={styles.mapText}>
-                Please allow location access to discover the best restaurants near me!
-              </Text>
-              <TouchableOpacity style={styles.allowButton} onPress={handleAllowButtonPress}>
-                <Text style={styles.buttonText}>Allow</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        ) : (
-
-          <Map></Map>
-          // <View style={styles.nearbyRestaurants}>
-          //   <Text style={styles.sectionTitle}>Explore restaurants near me</Text>
-          //   {nearbyRestaurants.map((restaurant) => (
-          //     <View style={styles.restaurantContainer} key={restaurant.id}>
-          //       <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
-          //       <View>
-          //         <Text style={styles.restaurantName}>{restaurant.name}</Text>
-          //         <Text style={styles.restaurantInfo}>{restaurant.address}</Text>
-          //         <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
-          //       </View>
-          //       <View style={styles.waitlistContainer}>
-          //         <View style={styles.waitlistBadge}>
-          //           <Text style={styles.waitlistText}>{restaurant.waitlist}</Text>
-          //         </View>
-          //       </View>
-          //     </View>
-          //   ))}
-          // </View>
-        )}
+    <>
+    <View style={styles.container}>
+      <View style={styles.locations}>
+        <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
+        <Text style={styles.title}>{selectedArea}</Text>
+        {renderButtons(location,handleButtonClick)}
       </View>
-    </ScrollView>
+       <Text style={styles.explore}>Explore restaurants near me</Text>
+         </View>
+      <ScrollView>
+      <RestaurantList names={selectedArea} />  
+  </ScrollView>
+    </>   
   );
 };
 
@@ -135,6 +65,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  explore: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop:12,
+    marginBottom:10,
   },
   subtitle: {
     fontSize: 17,

@@ -6,7 +6,7 @@ const renderButtons = (data, handleAllButtonPress) => {
   const rows = [];
   const columns = 3;
   const totalButtons = data.length;
-
+  
   let startIndex = 0;
   let endIndex = columns + 1;
 
@@ -20,7 +20,7 @@ const renderButtons = (data, handleAllButtonPress) => {
       if (item) {
         rowButtons.push(
           <View style={styles.column} key={item.id}>
-            {renderButton(item.name, () => handleAllButtonPress(item.name))}
+            {renderButton(item.name, () => handleAllButtonPress())}
           </View>
         );
       } else {

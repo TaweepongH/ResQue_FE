@@ -1,123 +1,131 @@
-import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import { useAuth } from '../contexts/AuthContext.js';
+import { useRoute } from '@react-navigation/native';
 
-const RestaurantList = ({route}) => {
+const RestaurantList = () => {
+  const { bearerToken } = useAuth();
+  const [restaurants, setRestaurants] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const route = useRoute(); // Use useRoute() hook to access the route object
 
-  // const { location } = route.params;
+  // Check if route.params and route.params.names are defined
+  const names = route.params?.names;
 
-  const restaurants = [
-    {
-      id: 1,
-      name: 'Restaurant A',
-      address: '123 Main St',
-      distance: '200',
-      waitlist: 3,
-      thumbnailImage: 'https://example.com/restaurant-a-thumbnail.jpg',
-    },
-    {
-      id: 2,
-      name: 'Restaurant B',
-      address: '456 Elm St',
-      distance: '500',
-      waitlist: 5,
-      thumbnailImage: 'https://example.com/restaurant-b-thumbnail.jpg',
-    },
-    {
-      id: 3,
-      name: 'Restaurant C',
-      address: '789 Oak St',
-      distance: '1000',
-      waitlist: 2,
-      thumbnailImage: 'https://example.com/restaurant-c-thumbnail.jpg',
-    },
-    {
-      id: 4,
-      name: 'Restaurant D',
-      address: '567 Maple St',
-      distance: '800',
-      waitlist: 7,
-      thumbnailImage: 'https://example.com/restaurant-d-thumbnail.jpg',
-    },
-    {
-      id: 5,
-      name: 'Restaurant E',
-      address: '321 Pine St',
-      distance: '350',
-      waitlist: 4,
-      thumbnailImage: 'https://example.com/restaurant-e-thumbnail.jpg',
-    },
-  ];
+  useEffect(() => {
+    console.log("RestaurantList2 / selectedArea is ", names);
+    // Fetch restaurant data when the component mounts and when 'names' changes
+    fetchRestaurantData(names);
+  }, [names]); // Add 'names' as a dependency
+
+ const fetchRestaurantData = async (selectedArea) => {
+  if (!selectedArea) {
+    return; // Don't fetch data if no area is selected
+  }
+
+  let url;
+
+  if (selectedArea === 'All') {
+    url = 'https://app-57vwexmexq-uc.a.run.app/api/partners/all';
+  } else {
+    url = `https://app-57vwexmexq-uc.a.run.app/api/partners/area/${selectedArea}`;
+  }
+
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setRestaurants(data);
+      setLoading(false);
+    } else {
+      console.log('Failed to fetch restaurant data');
+    }
+  } catch (error) {
+    console.log('Error:', error);
+  }
+};
+
 
   return (
-    <View style={styles.container}>
-        <View style={styles.restaurantlist}>
-        <Text>{location}</Text>
-          {restaurants.map((restaurant) => (
-            <View style={styles.restaurantContainer} key={restaurant.id}>
-              <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
-              <View>
-                <Text style={styles.restaurantName}>{restaurant.name}</Text>
-                <Text style={styles.restaurantInfo}>{restaurant.address}</Text>
-                <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
+    <ScrollView>
+      <View style={styles.container}>
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <Text>Loading... {names}</Text>
+          </View>
+        ) : (
+          // Render restaurant data
+          restaurants.map((restaurant) => (
+            <View key={restaurant.id} style={styles.restaurantItem}>
+              <Image
+                source={{ uri: restaurant.images[0] }}
+                style={{ width: 100, height: 100, borderRadius: 10 }}
+              />
+              <View style={styles.textContainer}>
+                <Text style={styles.textCompanyName}>{restaurant.companyName}</Text>
+                <Text>
+                  {restaurant.address[0]}, {restaurant.address[1]}
+                </Text>
               </View>
-              <View style={styles.waitlistContainer}>
-                <View style={styles.waitlistBadge}>
-                  <Text style={styles.waitlistText}>{restaurant.waitlist}</Text>
-                </View>
+              <View style={styles.waitList}>
+                <Text style={styles.waitListText}></Text>
               </View>
             </View>
-          ))}
-        </View>
-    </View>
+          ))
+        )}
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
-    marginTop: 50,
-  },
-  restaurantlist: {
     marginTop: 20,
   },
-  sectionTitle: {
+  selectedAreaText: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  restaurantContainer: {
+  textCompanyName: {
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  restaurantItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 10,
   },
-  thumbnailImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginRight: 10,
+  textContainer: {
+    marginLeft: 10,
+    flex: 1,
   },
-  restaurantName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  restaurantInfo: {
-    fontSize: 12,
-    color: '#777',
-  },
-  waitlistContainer: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: '#CC313D',
-    justifyContent: 'center',
+  waitList: {
     alignItems: 'center',
-    marginLeft: 120,
+    justifyContent: 'center',
+    width: 40,
+    height: 40,
+    backgroundColor: '#CC313D',
+    borderRadius: 20,
   },
-  waitlistText: {
-    fontSize: 12,
+  waitListText: {
     color: 'white',
-    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  loadingContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
   },
 });
 
 export default RestaurantList;
+

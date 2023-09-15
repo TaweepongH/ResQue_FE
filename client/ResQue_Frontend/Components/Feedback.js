@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Octicons from 'react-native-vector-icons/Octicons';
+import { useNavigation } from '@react-navigation/native';
 
 const Feedback = () => {
   const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const navigation = useNavigation();
 
   const handleStarClick = (starCount) => {
     setRating(starCount);
@@ -19,6 +21,10 @@ const Feedback = () => {
 
   const handleBackToHome = () => {
     setSubmitted(false);
+    setFeedback('');
+    setRating(0);
+    navigation.pop();
+    navigation.navigate('Home');
   };
 
   return (

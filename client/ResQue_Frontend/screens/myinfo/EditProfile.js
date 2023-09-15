@@ -22,34 +22,34 @@ const EditProfile = ({ navigation, route }) => {
     const editUserData = () => {
 
         fetch('https://app-57vwexmexq-uc.a.run.app/api/users/current', {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8',
-                        Authorization: `Bearer ${bearerToken}`,
-                    }, 
-                // email and password are required to update user data
-                body: JSON.stringify({
-                    "firstName": editedData.firstName,
-                    "lastName": editedData.lastName,
-                    "phone": editedData.phone,
-                    "email": editedData.email, 
-                    "password": password
-                })
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data) {
-                        console.log("there is data from the edit user data API! it is: ", data);
-                        console.log("edited user data: ", editedData);
-                    } else {
-                        console.log("there is no data from edit user data API...");
-                    }
-                })
-                .catch((error) => {
-                    console.log("Error, the error from the edit user data API is: ", error);
-                })
-    
-        
+          
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                Authorization: `Bearer ${bearerToken}`,
+            }, 
+            // email and password are required to update user data
+            body: JSON.stringify({
+                "firstName": editedData.firstName ? editedData.firstName : route.params.firstName,
+                "lastName": editedData.lastName ? editedData.lastName : route.params.lastName,
+                "phone": editedData.phone ? editedData.phone : route.params.phone,
+                "email": editedData.email ? editedData.email : route.params.email, 
+                "password": password
+            })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data) {
+                console.log("there is data from the edit user data API! it is: ", data);
+                console.log("edited user data: ", editedData);
+            } else {
+                console.log("there is no data from edit user data API...");
+            }
+        })
+        .catch((error) => {
+            console.log("Error, the error from the edit user data API is: ", error);
+        })
+
     }
 
     // Update the editedData state when the input changes
@@ -115,39 +115,27 @@ const EditProfile = ({ navigation, route }) => {
                 </Text>     
             </View>
 
-            <View style={styles.infoContainer}>
-                <Text style={styles.infoLabel}>First Name</Text>
-                    <TextInput
-                        // label="First Name"
-                        placeholder={route.params.firstName} 
-                        style={styles.infoInput} 
-                        onChangeText={(text) => handleInputChange(text, 'firstName')}
-                    />
-            </View>
-            <View style={styles.infoContainer}>
-                <Text style={styles.infoLabel}>Last Name</Text>
-                    <TextInput
-                        placeholder={route.params.lastName}
-                        style={styles.infoInput} 
-                        onChangeText={(text) => handleInputChange(text, 'lastName')}
-                    />
-            </View>
-            <View style={styles.infoContainer}>
-                <Text style={styles.infoLabel}>Phone Number</Text>
-                    <TextInput 
-                        placeholder={route.params.phone}
-                        style={styles.infoInput} 
-                        onChangeText={(text) => handleInputChange(text, 'phone')}
-                    />
-            </View>
-            <View style={styles.infoContainer}>
-                <Text style={styles.infoLabel}>Email</Text>
-                    <TextInput 
-                        placeholder={route.params.email}
-                        style={styles.infoInput} 
-                        onChangeText={(text) => handleInputChange(text, 'email')}
-                    />
-            </View>
+            <ProfileInput 
+                label="First Name" 
+                placeholderText={route.params.firstName} 
+                onChangeText={(text) => handleInputChange(text, 'firstName')}
+            />
+            <ProfileInput 
+                label="Last Name" 
+                placeholderText={route.params.lastName} 
+                onChangeText={(text) => handleInputChange(text, 'lastName')}
+            />
+            <ProfileInput 
+                label="Phone Number" 
+                placeholderText={route.params.phone} 
+                onChangeText={(text) => handleInputChange(text, 'phone')}
+            />
+            <ProfileInput 
+                label="Email" 
+                placeholderText={route.params.email} 
+                onChangeText={(text) => handleInputChange(text, 'email')}
+            />
+            
             <TouchableOpacity style={styles.editButton} onPress={handleEditButtonPress}>
                 <Text style={styles.editText}>Edit</Text>
             </TouchableOpacity>
@@ -156,15 +144,17 @@ const EditProfile = ({ navigation, route }) => {
     );
 };
 
-// const ProfileInput = ({ label, placeholderText}) => (
-//     <View style={styles.infoContainer}>
-//         <Text style={styles.infoLabel}>{label}</Text>
-//         <TextInput 
-//             placeholder= {placeholderText}
-//             style={styles.infoInput}
-//         />
-//     </View> 
-// );
+const ProfileInput = ({ label, placeholderText, onChangeText}) => (
+    <View style={styles.infoContainer}>
+        <Text style={styles.infoLabel}>{label}</Text>
+        <TextInput 
+            defaultValue={placeholderText}
+            placeholder= {placeholderText}
+            style={styles.infoInput}
+            onChangeText={onChangeText}
+        />
+    </View> 
+);
 
 const styles = StyleSheet.create({
     container: {
@@ -210,7 +200,7 @@ const styles = StyleSheet.create({
         color: '#343434'
     },
     infoInput: {
-        marginTop: 20,
+        marginTop: 8,
         width: '50%',
         fontSize: 18, 
         textAlign: 'right',

@@ -10,6 +10,7 @@ import IconAnt from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
@@ -86,7 +87,7 @@ const TabNavigator = () => {
         options={({ route }) => ({
             headerTitle: getMoreTabHeaderTitle(route),
             headerLeft: () => {
-              if (getMoreTabHeaderTitle(route) != 'More'){
+              if (getMoreTabHeaderTitle(route) != 'More' && getMoreTabHeaderTitle(route) != 'MoreTab' ){
                 return (
                   <TouchableOpacity onPress={() => navigation.goBack()}>
                     <IconAnt name="left" size={30} style={{marginLeft: 10}}/>

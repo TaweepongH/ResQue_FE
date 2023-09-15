@@ -15,6 +15,8 @@ import GoogleAuth from '../GoogleAuth';
 import Feedback from '../Feedback';
 import RestaurantInfo from '../RestaurantInfo';
 import MyInfo from '../../screens/myinfo/MyInfo';
+import RestaurantList2 from '../RestaurantList';
+import Main from '../Main';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,7 +44,6 @@ const StackNavigator = () => {
       <Stack.Screen name='EditProfile' component={EditProfile} />
       <Stack.Screen name='RestaurantInfo' component={RestaurantInfo} />
       <Stack.Screen name='MyInfo' component={MyInfo} />
-
     </Stack.Navigator>
   )
 }
