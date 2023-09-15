@@ -12,45 +12,40 @@ const CreateNewPwd = () => {
 
   const navigation = useNavigation();
 
-  const handlePwrdReset = () => {
-
+  const handlePwrdReset = async () => {
     if (pwd === pwdConfirm) {
-        console.log("email :", email);
-        console.log("confirmationCode :", confirmationCode);
+      try {
+        // Perform additional password validation checks here if needed.
 
-        fetch(`https://app-57vwexmexq-uc.a.run.app/api/password/resetpassword`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json; charset=utf-8',
-        },
-        body: JSON.stringify({
-        email: email,
-        confirmationCode: confirmationCode,
-        password: pwd
-        }),
-        }).then((response) => response.text())
-        .then((data) => {
-
-        console.log("data: ", data); 
-
-        if (JSON.parse(data).message === "Password reset successful") {
-
-            Alert.alert("Success! ", JSON.parse(data).message);
-            navigation.navigate('PwdResetComplete');
-
-        } else {
-            Alert.alert("Error: ", JSON.parse(data).message);
-        }
-        
-        }).catch((error) => {
-        console.error('Error:', error);
+        const response = await fetch(`https://app-57vwexmexq-uc.a.run.app/api/password/resetpassword`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+          },
+          body: JSON.stringify({
+            email: email,
+            confirmationCode: confirmationCode,
+            password: pwd,
+          }),
         });
 
-    } else {
-        Alert.alert("Passwords do not match");
-    }
-    
-  }
+        const data = await response.json();
 
+        if (response.ok) {
+          Alert.alert("Success!", data.message);
+          navigation.navigate('PwdResetComplete');
+        } else {
+          Alert.alert("Error", data.message || "Password reset failed.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        Alert.alert("Error", "An error occurred while resetting the password.");
+      }
+    } else {
+      Alert.alert("Passwords do not match");
+    }
+  };
+        
   const setPwdValue = (value) => {
     console.log("value: ", value);
     setPwd(value);

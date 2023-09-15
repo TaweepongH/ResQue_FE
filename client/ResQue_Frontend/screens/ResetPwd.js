@@ -11,34 +11,35 @@ const ResetPwd = () => {
 
   const navigation = useNavigation();
 
-  const handlePwrdReset = () => {
-    fetch(`https://app-57vwexmexq-uc.a.run.app/api/password/forgotpassword`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json; charset=utf-8',
-    },
-    body: JSON.stringify({
-      email: email,
-    }),
-  }).then((response) => response.text())
-    .then((data) => {
-
-      console.log("data: ", data); 
-
-      if (JSON.parse(data).message === "Password reset email sent") {
-
+  const handlePwrdReset = async () => {
+    try {
+      const response = await fetch(`https://app-57vwexmexq-uc.a.run.app/api/password/forgotpassword`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log("data: ", data);
         setEmailContext(email);
-        Alert.alert("Account Found ", `An email has been sent to ${email}`);
+        Alert.alert("Account Found", `An email has been sent to ${email}`);
         navigation.navigate('OtpVerify');
-
       } else {
-        Alert.alert(JSON.parse(data).message);
+        // Handle non-OK responses here, e.g., show an appropriate error message
+        const errorData = await response.json(); // Parse error response as JSON
+        console.error("Error response:", errorData);
+        Alert.alert("Error", `An error occurred: ${errorData.message}`);
       }
-      
-      
-    }).catch((error) => {
-      console.error('Error:', error);
-    });
-  }
+    } catch (error) {
+      console.error("Error:", error);
+      Alert.alert("Error", "An error occurred while resetting the password.");
+    }
+  };
 
   const setEmailValue = (value) => {
     console.log("value: ", value);

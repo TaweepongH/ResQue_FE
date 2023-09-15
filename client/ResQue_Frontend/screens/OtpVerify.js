@@ -29,69 +29,65 @@ const OtpVerify = () => {
   };
 
   // Function to handle OTP submission (you can customize this)
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const enteredOTP = otp.join('');
     console.log('Entered OTP:', enteredOTP);
-
-    fetch(`https://app-57vwexmexq-uc.a.run.app/api/password/verifycode`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json; charset=utf-8',
-    },
-    body: JSON.stringify({
-      email: email,
-      confirmationCode: enteredOTP
-    }),
-  }).then((response) => 
-    
-      response.text()
   
-    )
-    .then((data) => {
-
-      console.log("data: ", data);
-      
-      if (JSON.parse(data).message === "Confirmation code is valid") {
-
-        setConfirmationCodeContext(enteredOTP)
+    try {
+      const response = await fetch(`https://app-57vwexmexq-uc.a.run.app/api/password/verifycode`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+        body: JSON.stringify({
+          email: email,
+          confirmationCode: enteredOTP
+        }),
+      });
+  
+      if (response.ok) {
+        const data = await response.text();
+        console.log("data: ", data);
+        
+        setConfirmationCodeContext(enteredOTP);
         Alert.alert("Success! ", JSON.parse(data).message);
         navigation.navigate('CreateNewPwd');
-
       } else {
-        Alert.alert("error: ", JSON.parse(data).message);
+        const data = await response.text();
+        console.error("Error response data:", data);
+        Alert.alert("Error", JSON.parse(data).message);
       }
-      
-    }).catch((error) => {
-      console.error('Error:', error);
-    });
-
+    } catch (error) {
+      console.error("Error:", error);
+      Alert.alert("Error", "An error occurred while resetting the password.");
+    }
   };
 
-  const OTPResend = () => {
-    fetch(`https://app-57vwexmexq-uc.a.run.app/api/password/forgotpassword`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json; charset=utf-8',
-    },
-    body: JSON.stringify({
-      email: email,
-    }),
-  }).then((response) => response.text())
-    .then((data) => {
-
-      console.log("data: ", data); 
-
-      if (JSON.parse(data).message === "Password reset email sent") {
-
+  const OTPResend = async () => {
+    try {
+      const response = await fetch(`https://app-57vwexmexq-uc.a.run.app/api/password/forgotpassword`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      });
+  
+      const data = await response.text();
+      console.log("data: ", data);
+  
+      if (response.ok) {
         Alert.alert("Code Resent to: ", `${email}`);
-
       } else {
-        Alert.alert(JSON.parse(data).message);
+        Alert.alert("Error", JSON.parse(data).message);
       }
-      
-      
-    }).catch((error) => {
+    } catch (error) {
       console.error('Error:', error);
-    });
-  }
+      Alert.alert("Error", "An error occurred while resending the code.");
+    }
+  };
   
   const handleResend = () => {
     OTPResend();
