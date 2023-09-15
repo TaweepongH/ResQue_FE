@@ -58,7 +58,7 @@ const CreateNewPwd = () => {
   return (
     <View style={styles.container}>
     <View style={styles.items}>
-    <Text style={styles.inputEmail_txt}>Password</Text>
+    <Text style={styles.inputEmail_txt}>Enter a new password</Text>
     <TextInput 
           style={styles.infoInput}placeholder='Please enter 8 - 16 characters'
           onChangeText={setPwdValue}
