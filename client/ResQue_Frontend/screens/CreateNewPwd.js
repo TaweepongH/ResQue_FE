@@ -14,9 +14,8 @@ const CreateNewPwd = () => {
 
   const handlePwrdReset = async () => {
     if (pwd === pwdConfirm) {
+        
       try {
-        // Perform additional password validation checks here if needed.
-
         const response = await fetch(`https://app-57vwexmexq-uc.a.run.app/api/password/resetpassword`, {
           method: 'POST',
           headers: {
