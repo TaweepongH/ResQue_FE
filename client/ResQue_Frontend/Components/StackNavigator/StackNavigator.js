@@ -49,7 +49,7 @@ const StackNavigator = () => {
         name='LoginEmail' 
         component={LoginEmail} 
         options={{
-          headerTitle: 'Log in',
+          headerTitle: 'Login',
         }}
         />
       <Stack.Screen 

@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import firebaseApp from '../config/firebaseConfig.js';
 import { useAnimatedGestureHandler } from 'react-native-reanimated';
 import { useAuth } from '../contexts/AuthContext';
+import { useNavigation } from '@react-navigation/native';
 
 // after authenticating with google, we have to register the user if they aren't already registered then log them in, so we will use two api calls after authentication
 
@@ -19,6 +20,7 @@ GoogleSignin.configure({
 
 const GoogleAuth = () => {
 
+    const navigation = useNavigation();
 
     const { setEmailContext, setBearerTokenContext, setPasswordContext } = useAuth();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -45,7 +47,7 @@ const GoogleAuth = () => {
     .then((data) => {
 
         console.log("data: ", data); // Success message from the server
-    
+        
         // this is where we will define the bearerToken for the rest of our app to use
         // if there is an accessToken key in the data message, then we will set the bearerTokenContext to it
         if (JSON.parse(data).accessToken) {
@@ -53,6 +55,7 @@ const GoogleAuth = () => {
         } else {
             //error messages etc.
             Alert.alert(JSON.parse(data).title, JSON.parse(data).message);
+            navigation.navigate('Login');
         }
         
         }).catch((error) => {
@@ -141,6 +144,7 @@ const GoogleAuth = () => {
 
         } catch (error) {
             console.log("error from auth component: ", error);
+            navigation.navigate('Login');
         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
             // user cancelled the login flow
         } else if (error.code === statusCodes.IN_PROGRESS) {
