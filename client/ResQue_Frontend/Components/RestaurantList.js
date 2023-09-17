@@ -10,7 +10,7 @@ const RestaurantList = () => {
   const [loading, setLoading] = useState(false);
   const route = useRoute(); // Use useRoute() hook to access the route object
 
-  // Check if route.params.names are defined, if not then the inital location is set to vancouver
+  // Check if route.params.names are defined, if not then the inital location is set to Vancouver
   // initially the route.params?.names is undefined, becuase this component is loaded before main.js where it is asking props from
   const names = route.params?.names || 'Vancouver';
 
@@ -22,7 +22,9 @@ const RestaurantList = () => {
   }, [names]); // Add 'names' as a dependency
 
  const fetchRestaurantData = async (selectedArea) => {
+
   setLoading(true);
+
   if (!selectedArea) {
     return; // Don't fetch data if no area is selected
   }
@@ -66,7 +68,7 @@ const RestaurantList = () => {
           
           <View style={styles.loadingContainer}>
             
-            <CustomModal visible={loading} message="Loading Restaurants..." />
+            <CustomModal visible={loading} message={`fetching data...`} />
             
           </View>
           
