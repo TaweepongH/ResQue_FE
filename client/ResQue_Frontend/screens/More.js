@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Settings from '../screens/Settings';
+import Notice from '../screens/more/Notice';
 import TermsPolicies from '../screens/more/TermsPolicies';
 import Feedback from '../Components/Feedback';
 import ListItem from '../Components/ListItem';
@@ -14,6 +15,8 @@ export const getMoreTabHeaderTitle = (route) => {
   switch (routeName) {
     case 'MoreTab':
       return 'More';
+    case 'Notice':
+      return 'Notice';  
     case 'Settings':
       return 'Settings';
     case 'Feedback':
@@ -31,6 +34,7 @@ const MoreStack = () => {
       }}
     >
       <Stack.Screen name="MoreTab" component={More}/>
+      <Stack.Screen name="Notice" component={Notice}/>
       <Stack.Screen name="Settings" component={Settings}/>
       <Stack.Screen name="Feedback" component={Feedback} />
       <Stack.Screen name="TermsPolicies" component={TermsPolicies} />
