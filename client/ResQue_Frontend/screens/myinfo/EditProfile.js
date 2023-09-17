@@ -152,6 +152,7 @@ const ProfileInput = ({ label, placeholderText, onChangeText}) => (
             placeholder= {placeholderText}
             style={styles.infoInput}
             onChangeText={onChangeText}
+            autoCapitalize="none"
         />
     </View> 
 );
