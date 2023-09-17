@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext.js';
 
 const renderButton = (name) => {
+
   const navigation = useNavigation();
   const { bearerToken, password, setBearerTokenContext } = useAuth();
 

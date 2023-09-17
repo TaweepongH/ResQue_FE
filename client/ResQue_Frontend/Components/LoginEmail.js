@@ -3,6 +3,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
+import CustomModal from './CustomModal.js';
 
 
 const LoginEmail = () => {
@@ -54,18 +55,21 @@ const LoginEmail = () => {
       // this is where we will define the bearerToken for the rest of our app to use
       // if there is an accessToken key in the data message, then we will set the bearerTokenContext to it
       if (response.ok && data.accessToken) {
+    
         setBearerTokenContext(data.accessToken)
         setPasswordContext(password);
         setEmailContext(email);
+        
       } else {
         //error messages etc.
+        
         Alert.alert(data.title, data.message);
       }
       
     } catch (error) {
-      // this is a client side error so i'm not even sure if it should be included
+  
       console.error("Error:", error);
-      Alert.alert("Error", "An error occurred while resetting the password.");
+  
     }
   
   };
@@ -78,6 +82,7 @@ const LoginEmail = () => {
           placeholder="Enter your email"
           value={email}
           onChangeText={handleEmailChange}
+          autoCapitalize="none"
         />
 
         <TextInput
@@ -85,6 +90,7 @@ const LoginEmail = () => {
           placeholder="Enter your password"
           value={password}
           onChangeText={handlePasswordChange}
+          autoCapitalize="none"
           // in the future we can include the secureTextEntry property to hide the password when it's being typed in
           // secureTextEntry
         />
@@ -104,6 +110,7 @@ const LoginEmail = () => {
         <TouchableOpacity>
           <Text style={styles.signupText} onPress={handleSignUp}>Sign up</Text>
         </TouchableOpacity>
+        
       </View>
     </View>
   );

@@ -2,31 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { useAuth } from '../contexts/AuthContext.js';
 import { useRoute } from '@react-navigation/native';
+import CustomModal from './CustomModal.js';
 
 const RestaurantList = () => {
   const { bearerToken } = useAuth();
   const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const route = useRoute(); // Use useRoute() hook to access the route object
 
-  // Check if route.params and route.params.names are defined
-  const names = route.params?.names;
+  // Check if route.params.names are defined, if not then the inital location is set to Vancouver
+  // initially the route.params?.names is undefined, becuase this component is loaded before main.js where it is asking props from
+  const names = route.params?.names || 'Vancouver';
 
   useEffect(() => {
+    
     console.log("RestaurantList2 / selectedArea is ", names);
     // Fetch restaurant data when the component mounts and when 'names' changes
     fetchRestaurantData(names);
   }, [names]); // Add 'names' as a dependency
 
  const fetchRestaurantData = async (selectedArea) => {
+
+  setLoading(true);
+
   if (!selectedArea) {
     return; // Don't fetch data if no area is selected
   }
 
   let url;
 
+  
+
   if (selectedArea === 'All') {
-    url = 'https://app-57vwexmexq-uc.a.run.app/api/partners/all';
+    url =  'https://app-57vwexmexq-uc.a.run.app/api/partners/all';
   } else {
     url = `https://app-57vwexmexq-uc.a.run.app/api/partners/area/${selectedArea}`;
   }
@@ -57,9 +65,13 @@ const RestaurantList = () => {
     <ScrollView>
       <View style={styles.container}>
         {loading ? (
+          
           <View style={styles.loadingContainer}>
-            <Text>Loading... {names}</Text>
+            
+            <CustomModal visible={loading} message={`fetching data...`} />
+            
           </View>
+          
         ) : (
           // Render restaurant data
           restaurants.map((restaurant) => (
@@ -81,6 +93,7 @@ const RestaurantList = () => {
           ))
         )}
       </View>
+      
     </ScrollView>
   );
 };

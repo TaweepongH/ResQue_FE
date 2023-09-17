@@ -5,6 +5,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     
     // User Authentication contexts
+    // the password context may have to be removed becuase storing password data on the client side can be dangerous
     const [bearerToken, setBearerToken] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -50,7 +51,7 @@ export const AuthProvider = ({ children }) => {
                 setLatLongContext,
                 // pwrd reset
                 confirmationCode,
-                setConfirmationCodeContext
+                setConfirmationCodeContext, 
             }}
         >
 

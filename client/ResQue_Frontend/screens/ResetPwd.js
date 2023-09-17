@@ -53,6 +53,7 @@ const ResetPwd = () => {
         <TextInput 
           style={styles.infoInput}placeholder='helloitsme@example.com'
           onChangeText={setEmailValue}
+          autoCapitalize="none"
         />
        <TouchableOpacity style={styles.button} onPress={handlePwrdReset}>
         <Text style={styles.text}>Send One-Time Password</Text>

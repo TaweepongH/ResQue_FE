@@ -106,7 +106,7 @@ const EditProfile = ({ navigation, route }) => {
         
         <View style={styles.container}>
             <View styles={styles.userInputContainer} >
-            <CustomModal visible={modalVisible} message="loading..." />
+            <CustomModal visible={modalVisible} message="Editing Info..." />
             </View>
             <View style={styles.userProfile}>
                 <Text style={styles.profileText}>
@@ -152,6 +152,7 @@ const ProfileInput = ({ label, placeholderText, onChangeText}) => (
             placeholder= {placeholderText}
             style={styles.infoInput}
             onChangeText={onChangeText}
+            autoCapitalize="none"
         />
     </View> 
 );
