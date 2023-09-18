@@ -1,56 +1,76 @@
-import { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import React, { useState, useEffect, Fragment } from 'react';
+import { View, Text, TextInput, StyleSheet, Image, ScrollView } from 'react-native';
 import { useAuth } from '../contexts/AuthContext.js';
+import Icon from 'react-native-vector-icons/Feather';
 import CustomModal from '../Components/CustomModal.js';
+import RestaurantList from '../Components/RestaurantList.js';
 
 const Search = () => {
+  const { partners } = useAuth();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
-  // const { bearerToken } = useAuth();
+  useEffect(() => {
+    console.log("initial partner data: ", partners);
+  }, []);
 
-  // const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    console.log("Search Results : ", searchResults);
+  }, [searchResults]);
 
-  // const fetchAllPartners = async () => {
+  const handleFilter = (text) => {
+    const filteredResults = partners.filter((restaurant) =>
+      restaurant.companyName.toUpperCase().includes(text.toUpperCase())
+    );
 
-  //   setLoading(true);
-  //   try {
-  //     const response = await fetch('https://app-57vwexmexq-uc.a.run.app/api/partners/all', {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json; charset=utf-8',
-  //         Authorization: `Bearer ${bearerToken}`,
-  //       },
-  //     });
+    setSearchTerm(text);
+    setSearchResults(filteredResults);
+  };
 
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       console.log("all the partner data: ", data);
-  //       setLoading(false);
-        
-  //     } else {
-  //       console.log("api fetch error: ", response);
-  //     }
-
-  //   } catch (error) {
-  //     console.log("Error: ", error);
-  //   }
-
-  // }
-
-  // useEffect(() => {
-  //   fetchAllPartners();
-  // }, [])
-  
   return (
-    <View style={styles.container}>
-        {/* <CustomModal visible={loading} message={`fetching data...`} /> */}
-    </View>
+    <>
+      <View style={styles.searchBar}>
+        <Icon name="search" size={20} color="#797979" style={styles.icon} />
+        <TextInput
+          value={searchTerm}
+          onChangeText={(newText) => handleFilter(newText)}
+          placeholder="Search Restaurants"
+          style={styles.input}
+        />
+      </View>
+
+      <ScrollView>
+        <RestaurantList names={searchResults} />
+      </ScrollView>
+    </>
   );
-}
+};
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  searchBar: {
+    width: '100%',
+    height: 40,
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor:'white',
+    borderWidth: 0.3,
+    borderRadius: 5,
+    borderColor: '#DADADA',
+    paddingHorizontal: 10,
+  },
+  icon: {
+    paddingRight: 10,
+  },
+  input: {
+    width: '90%',
+    fontSize: 16,
   },
 });
 

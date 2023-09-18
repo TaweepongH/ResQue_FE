@@ -6,65 +6,44 @@ import { useAuth } from '../contexts/AuthContext.js';
 import CustomModal from './CustomModal.js';
 
 
-// first off, fetch all the data to perform a client side search, maybe we can do a server side search later
 
 
 const SearchBar = () => {
 
-  
-
-  const [content, setContent ] = useState('');
-
-  const { bearerToken } = useAuth();
-
-  const [loading, setLoading] = useState(false);
-
-  const fetchAllPartners = async () => {
-
-    setLoading(true);
-    try {
-      const response = await fetch('https://app-57vwexmexq-uc.a.run.app/api/partners/all', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-          Authorization: `Bearer ${bearerToken}`,
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("all the partner data: ", data);
-        setLoading(false);
-        
-      } else {
-        console.log("api fetch error: ", response);
-      }
-
-    } catch (error) {
-      console.log("Error: ", error);
-    }
-
-  }
+  const { partners } = useAuth();
 
   useEffect(() => {
-    fetchAllPartners();
+    console.log("initial partner data: ", partners);
   }, [])
 
-  
-  
+
+  const handleFilter = (searchTerm) => {
+
+    setPartnerDataContext(
+      partners.filter((restaurant) => {
+        restaurant.companyName.toUpperCase().includes(searchTerm.toUpperCase())
+      })
+    )
+
+    console.log("partners: ", partners);
+
+  }
+ 
   return (
         <View style={styles.searchBar}>
           <Icon name="search" size={20} color="#797979" style={styles.icon} />
           
             <TextInput 
-              value={content}
-              onChangeText={setContent}
+              value={''}
+              onChangeText={(newText) => {
+                console.log(newText); // newText contains the updated text
+                handleFilter(newText) // Optionally, you can update your state with the new text
+              }}
               placeholder='Search Restaurants' 
               style={styles.input}
               multiline
             />
 
-          <CustomModal visible={loading} message={`fetching data...`} />
         </View>
   );
 }

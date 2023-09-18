@@ -36,6 +36,14 @@ export const AuthProvider = ({ children }) => {
         setConfirmationCode(value);
     }
 
+    // restaurants for Search function
+
+    const [partners, setPartners] = useState([]);
+
+    const setPartnerDataContext = (value) => {
+        setPartners(value);
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -52,6 +60,9 @@ export const AuthProvider = ({ children }) => {
                 // pwrd reset
                 confirmationCode,
                 setConfirmationCodeContext, 
+                // restaurants/search
+                partners, 
+                setPartnerDataContext,
             }}
         >
 

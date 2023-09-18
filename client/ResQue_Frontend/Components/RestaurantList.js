@@ -5,7 +5,7 @@ import { useRoute } from '@react-navigation/native';
 import CustomModal from './CustomModal.js';
 
 const RestaurantList = () => {
-  const { bearerToken } = useAuth();
+  const { bearerToken, setPartnerDataContext } = useAuth();
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
   const route = useRoute(); // Use useRoute() hook to access the route object
@@ -19,6 +19,7 @@ const RestaurantList = () => {
     console.log("RestaurantList2 / selectedArea is ", names);
     // Fetch restaurant data when the component mounts and when 'names' changes
     fetchRestaurantData(names);
+    setPartnerDataContext(restaurants)
   }, [names]); // Add 'names' as a dependency
 
  const fetchRestaurantData = async (selectedArea) => {
@@ -53,7 +54,7 @@ const RestaurantList = () => {
       setRestaurants(data);
       setLoading(false);
     } else {
-      console.log('Failed to fetch restaurant data');
+      console.log('Failed to fetch restaurant data, ', response);
     }
   } catch (error) {
     console.log('Error:', error);
@@ -68,7 +69,7 @@ const RestaurantList = () => {
           
           <View style={styles.loadingContainer}>
             
-            <CustomModal visible={loading} message={`fetching data...`} />
+            <CustomModal visible={loading} message={`fetching data...`} marginTop={250} />
             
           </View>
           
