@@ -1,22 +1,25 @@
-import { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet , TouchableOpacity } from 'react-native';
+import { View, Text,StyleSheet , TouchableOpacity } from 'react-native';
 
-const CurrentQueue = () => {
+const CurrentQueue = ({queueNumber,address,partyNumber,image,navigation}) => {
+
+    const pressDetail=()=>{
+      navigation.navigate('More',{screen:'QueueConfirm'});
+    }
   return (
  <View style={styles.container}> 
     <View>
-     <Text style={styles.title}>Currently in <Text style={styles.titleNumber}>3rd</Text> in line!</Text>
+     <Text style={styles.title}>Currently in <Text style={styles.titleNumber}>3rd{queueNumber}</Text> in line!</Text>
      <View style={styles.resInfo}>
-        <Text style={styles.resInfoTxt}>Address</Text>
-        <Text style={styles.resInfoTxt}>Party of number</Text>
+        <Text style={styles.resInfoTxt}>Address{address}</Text>
+        <Text style={styles.resInfoTxt}>Party of number{partyNumber}</Text>
      </View>
 
      <TouchableOpacity style={styles.btnDetail}>
-        <Text style={styles.fontDetail}>View Detail</Text>
+        <Text style={styles.fontDetail} onPress={pressDetail}>View Detail</Text>
      </TouchableOpacity>
     </View>
     <View>     
-     <Text>Picture of Restaurant</Text>
+     <Text>image{image}</Text>
     </View>
  </View>
   );
@@ -24,9 +27,8 @@ const CurrentQueue = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    justifyContent: 'center', // Vertically center its children
-    alignItems: 'center', // Horizontally center its children
+    justifyContent: 'center', 
+    alignItems: 'center', 
     backgroundColor: '#FEEEEF',
     borderRadius: 10,
     paddingHorizontal: 10,

@@ -8,15 +8,10 @@ import ResetPwd from '../../screens/ResetPwd';
 import OtpVerify from '../../screens/OtpVerify';
 import CreateNewPwd from '../../screens/CreateNewPwd';
 import PwdResetComplete from '../../screens/PwdResetComplete';
-import TermsPolicies from '../../screens/more/TermsPolicies';
-import Settings from '../../screens/Settings'
 import EditProfile from '../../screens/myinfo/EditProfile';
 import GoogleAuth from '../GoogleAuth';
-import Feedback from '../Feedback';
 import RestaurantInfo from '../RestaurantInfo';
-import MyInfo from '../../screens/myinfo/MyInfo';
-import RestaurantList2 from '../RestaurantList';
-import Main from '../Main';
+import QueueConfirm from '../../screens/QueueConfirm';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,12 +33,9 @@ const StackNavigator = () => {
       <Stack.Screen name='OtpVerify' component={OtpVerify} />
       <Stack.Screen name='CreateNewPwd' component={CreateNewPwd} />
       <Stack.Screen name='PwdResetComplete' component={PwdResetComplete} />
-      <Stack.Screen name='Settings' component={Settings} />
-      <Stack.Screen name='Feedback' component={Feedback} />
-      <Stack.Screen name='TermsPolicies' component={TermsPolicies} />
       <Stack.Screen name='EditProfile' component={EditProfile} />
       <Stack.Screen name='RestaurantInfo' component={RestaurantInfo} />
-      <Stack.Screen name='MyInfo' component={MyInfo} />
+      <Stack.Screen name='QueueConfirm' component={QueueConfirm} />
     </Stack.Navigator>
   )
 }
