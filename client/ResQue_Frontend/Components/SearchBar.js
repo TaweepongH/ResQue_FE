@@ -4,67 +4,54 @@ import Icon from 'react-native-vector-icons/Feather';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useAuth } from '../contexts/AuthContext.js';
 import CustomModal from './CustomModal.js';
-
-
-// first off, fetch all the data to perform a client side search, maybe we can do a server side search later
-
+import { useNavigation } from '@react-navigation/native';
 
 const SearchBar = () => {
 
-  
+  const { setQueryContext } = useAuth();
 
-  const [content, setContent ] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const { bearerToken } = useAuth();
+  const navigation = useNavigation();
 
-  const [loading, setLoading] = useState(false);
+  const handleSearch = (text) => {
+    console.log("search terms in SearchBar: ", text);
+    setQueryContext(text);
+    setSearchQuery(text);
+    // navigation.navigate('Search', { searchQuery });
+  };
 
-  const fetchAllPartners = async () => {
+  // const { partners } = useAuth();
 
-    setLoading(true);
-    try {
-      const response = await fetch('https://app-57vwexmexq-uc.a.run.app/api/partners/all', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-          Authorization: `Bearer ${bearerToken}`,
-        },
-      });
+  // useEffect(() => {
+  //   console.log("initial partner data: ", partners);
+  // }, [])
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("all the partner data: ", data);
-        setLoading(false);
-        
-      } else {
-        console.log("api fetch error: ", response);
-      }
 
-    } catch (error) {
-      console.log("Error: ", error);
-    }
+  // const handleFilter = (searchTerm) => {
 
-  }
+  //   setPartnerDataContext(
+  //     partners.filter((restaurant) => {
+  //       restaurant.companyName.toUpperCase().includes(searchTerm.toUpperCase())
+  //     })
+  //   )
 
-  useEffect(() => {
-    fetchAllPartners();
-  }, [])
+  //   console.log("partners: ", partners);
 
-  
-  
+  // }
+ 
   return (
         <View style={styles.searchBar}>
           <Icon name="search" size={20} color="#797979" style={styles.icon} />
           
             <TextInput 
-              value={content}
-              onChangeText={setContent}
+              value={searchQuery}
+              onChangeText={handleSearch}
               placeholder='Search Restaurants' 
               style={styles.input}
               multiline
             />
 
-          <CustomModal visible={loading} message={`fetching data...`} />
         </View>
   );
 }

@@ -3,7 +3,7 @@ import { View, Modal, ActivityIndicator, StyleSheet, Text } from 'react-native';
 
 // this is our loading/spinning animation
 
-const CustomModal = ({ visible, message }) => {
+const CustomModal = ({ visible, message, marginTop }) => {
 
   return (
     <Modal
@@ -13,7 +13,7 @@ const CustomModal = ({ visible, message }) => {
       onRequestClose={() => {}} 
     >
       <View style={styles.modalContainer}>
-        <View style={styles.modalContent}>
+      <View style={[styles.modalContent, { marginTop: marginTop }]}>
           <ActivityIndicator size="large" color="#CC313D" />
           <Text style={styles.loadingText}>{message}</Text>
         </View>

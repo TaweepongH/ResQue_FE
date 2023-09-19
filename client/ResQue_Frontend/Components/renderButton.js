@@ -29,7 +29,7 @@ const renderButton = (name) => {
           console.log("There is no data from the API...");
         }
       } else {
-        console.log("Failed to fetch data from the API.");
+        console.log("Failed to fetch data from the API.", response.status);
       }
     } catch (error) {
       console.log("Error: ", error);

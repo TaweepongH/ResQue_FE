@@ -19,6 +19,7 @@ const RestaurantList = () => {
     console.log("RestaurantList2 / selectedArea is ", names);
     // Fetch restaurant data when the component mounts and when 'names' changes
     fetchRestaurantData(names);
+
   }, [names]); // Add 'names' as a dependency
 
  const fetchRestaurantData = async (selectedArea) => {
@@ -53,7 +54,7 @@ const RestaurantList = () => {
       setRestaurants(data);
       setLoading(false);
     } else {
-      console.log('Failed to fetch restaurant data');
+      console.log('Failed to fetch restaurant data, ', response);
     }
   } catch (error) {
     console.log('Error:', error);
@@ -68,7 +69,7 @@ const RestaurantList = () => {
           
           <View style={styles.loadingContainer}>
             
-            <CustomModal visible={loading} message={`fetching data...`} />
+            <CustomModal visible={loading} message={`fetching data...`} marginTop={250} />
             
           </View>
           

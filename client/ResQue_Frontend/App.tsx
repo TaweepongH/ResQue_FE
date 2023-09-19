@@ -38,7 +38,8 @@ function App(): JSX.Element {
         <TabNavigator />
       </>) : (
           <StackNavigator />
-        )}
+        )} 
+
     </NavigationContainer>
 
   );

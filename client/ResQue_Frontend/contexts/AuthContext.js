@@ -36,6 +36,14 @@ export const AuthProvider = ({ children }) => {
         setConfirmationCode(value);
     }
 
+    // queries for Search function
+
+    const [query, setQuery] = useState([]);
+
+    const setQueryContext = (value) => {
+        setQuery(value);
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -52,6 +60,9 @@ export const AuthProvider = ({ children }) => {
                 // pwrd reset
                 confirmationCode,
                 setConfirmationCodeContext, 
+                // restaurants/search
+                query,
+                setQueryContext
             }}
         >
 
