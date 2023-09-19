@@ -70,8 +70,9 @@ const TermsPolicies = () => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 50,
+        paddingTop: 20,
         paddingHorizontal: 20,
+        backgroundColor:'white',
     },
     header: {
         fontSize: 24,
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
     },
     subSection: {
         marginLeft: 10,
+        marginBottom:10,
     },
 });
 
