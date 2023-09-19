@@ -9,6 +9,8 @@ import SearchBar from '../SearchBar';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import CurrentQueue from '../../screens/CurrentQueue';
+import QueueConfirm from '../../screens/QueueConfirm';
 
 
 const Tab = createBottomTabNavigator();
@@ -18,7 +20,6 @@ const TabNavigator = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: '#CC313D',
         tabBarInactiveTintColor: '#1E1E1E',
