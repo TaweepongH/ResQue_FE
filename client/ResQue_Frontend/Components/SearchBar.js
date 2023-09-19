@@ -4,41 +4,49 @@ import Icon from 'react-native-vector-icons/Feather';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useAuth } from '../contexts/AuthContext.js';
 import CustomModal from './CustomModal.js';
-
-
-
+import { useNavigation } from '@react-navigation/native';
 
 const SearchBar = () => {
 
-  const { partners } = useAuth();
+  const { setQueryContext } = useAuth();
 
-  useEffect(() => {
-    console.log("initial partner data: ", partners);
-  }, [])
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const navigation = useNavigation();
+
+  const handleSearch = (text) => {
+    console.log("search terms in SearchBar: ", text);
+    setQueryContext(text);
+    setSearchQuery(text);
+    // navigation.navigate('Search', { searchQuery });
+  };
+
+  // const { partners } = useAuth();
+
+  // useEffect(() => {
+  //   console.log("initial partner data: ", partners);
+  // }, [])
 
 
-  const handleFilter = (searchTerm) => {
+  // const handleFilter = (searchTerm) => {
 
-    setPartnerDataContext(
-      partners.filter((restaurant) => {
-        restaurant.companyName.toUpperCase().includes(searchTerm.toUpperCase())
-      })
-    )
+  //   setPartnerDataContext(
+  //     partners.filter((restaurant) => {
+  //       restaurant.companyName.toUpperCase().includes(searchTerm.toUpperCase())
+  //     })
+  //   )
 
-    console.log("partners: ", partners);
+  //   console.log("partners: ", partners);
 
-  }
+  // }
  
   return (
         <View style={styles.searchBar}>
           <Icon name="search" size={20} color="#797979" style={styles.icon} />
           
             <TextInput 
-              value={''}
-              onChangeText={(newText) => {
-                console.log(newText); // newText contains the updated text
-                handleFilter(newText) // Optionally, you can update your state with the new text
-              }}
+              value={searchQuery}
+              onChangeText={handleSearch}
               placeholder='Search Restaurants' 
               style={styles.input}
               multiline

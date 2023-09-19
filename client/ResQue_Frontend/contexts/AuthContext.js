@@ -36,12 +36,12 @@ export const AuthProvider = ({ children }) => {
         setConfirmationCode(value);
     }
 
-    // restaurants for Search function
+    // queries for Search function
 
-    const [partners, setPartners] = useState([]);
+    const [query, setQuery] = useState([]);
 
-    const setPartnerDataContext = (value) => {
-        setPartners(value);
+    const setQueryContext = (value) => {
+        setQuery(value);
     }
 
     return (
@@ -61,8 +61,8 @@ export const AuthProvider = ({ children }) => {
                 confirmationCode,
                 setConfirmationCodeContext, 
                 // restaurants/search
-                partners, 
-                setPartnerDataContext,
+                query,
+                setQueryContext
             }}
         >
 

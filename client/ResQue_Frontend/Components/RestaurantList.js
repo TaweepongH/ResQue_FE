@@ -5,7 +5,7 @@ import { useRoute } from '@react-navigation/native';
 import CustomModal from './CustomModal.js';
 
 const RestaurantList = () => {
-  const { bearerToken, setPartnerDataContext } = useAuth();
+  const { bearerToken } = useAuth();
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
   const route = useRoute(); // Use useRoute() hook to access the route object
@@ -19,7 +19,7 @@ const RestaurantList = () => {
     console.log("RestaurantList2 / selectedArea is ", names);
     // Fetch restaurant data when the component mounts and when 'names' changes
     fetchRestaurantData(names);
-    setPartnerDataContext(restaurants)
+
   }, [names]); // Add 'names' as a dependency
 
  const fetchRestaurantData = async (selectedArea) => {
