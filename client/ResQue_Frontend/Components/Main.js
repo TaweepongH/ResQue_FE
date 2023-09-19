@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView, Alert } from 'react-native';
 import renderButtons from './renderButtons';
 import RestaurantList from './RestaurantList';
-import Map from './Map';
 
 const Main = () => {
 
