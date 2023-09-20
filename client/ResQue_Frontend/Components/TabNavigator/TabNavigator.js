@@ -9,8 +9,6 @@ import SearchBar from '../SearchBar';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import CurrentQueue from '../../screens/CurrentQueue';
-import QueueConfirm from '../../screens/QueueConfirm';
 
 
 const Tab = createBottomTabNavigator();

@@ -6,6 +6,7 @@ import { useFocusEffect, useRoute, useNavigation } from '@react-navigation/nativ
 import { useAuth } from '../../contexts/AuthContext.js';
 import ListItem from '../../Components/ListItem';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import QueueConfirm from '../QueueConfirm';
 
 
 const Stack = createStackNavigator();
@@ -19,6 +20,7 @@ const MyinfoStack = () => {
     >
       <Stack.Screen name="MyInfo" component={MyInfo} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="QueueConfirm" component={QueueConfirm} />
     </Stack.Navigator>
   );
 };
