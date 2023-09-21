@@ -12,6 +12,7 @@ import EditProfile from '../../screens/myinfo/EditProfile';
 import GoogleAuth from '../GoogleAuth';
 import RestaurantInfo from '../RestaurantInfo';
 import QueueConfirm from '../../screens/QueueConfirm';
+import QueueRegistration from '../QueueRegistration';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ const StackNavigator = () => {
       <Stack.Screen name='EditProfile' component={EditProfile} />
       <Stack.Screen name='RestaurantInfo' component={RestaurantInfo} />
       <Stack.Screen name='QueueConfirm' component={QueueConfirm} />
+      <Stack.Screen name='QueueRegistration' component={QueueRegistration} />
     </Stack.Navigator>
   )
 }

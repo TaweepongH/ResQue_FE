@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useAuth } from '../contexts/AuthContext.js';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import CustomModal from './CustomModal.js';
 
 const RestaurantList = () => {
+
   const { bearerToken } = useAuth();
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const navigation = useNavigation();
   const route = useRoute(); // Use useRoute() hook to access the route object
 
   // Check if route.params.names are defined, if not then the inital location is set to Vancouver
@@ -61,6 +64,9 @@ const RestaurantList = () => {
   }
 };
 
+  const handleQuePress = () => {
+    navigation.navigate('Register')
+  }
 
   return (
     <ScrollView>
@@ -87,9 +93,9 @@ const RestaurantList = () => {
                   {restaurant.address[0]}, {restaurant.address[1]}
                 </Text>
               </View>
-              <View style={styles.waitList}>
-                <Text style={styles.waitListText}></Text>
-              </View>
+              <TouchableOpacity onPress={handleQuePress} style={styles.waitList}>
+                <Text style={styles.waitListText}>Que!</Text>
+              </TouchableOpacity>
             </View>
           ))
         )}
