@@ -12,34 +12,12 @@ const SearchBar = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  const navigation = useNavigation();
-
   const handleSearch = (text) => {
     console.log("search terms in SearchBar: ", text);
     setQueryContext(text);
     setSearchQuery(text);
-    // navigation.navigate('Search', { searchQuery });
   };
 
-  // const { partners } = useAuth();
-
-  // useEffect(() => {
-  //   console.log("initial partner data: ", partners);
-  // }, [])
-
-
-  // const handleFilter = (searchTerm) => {
-
-  //   setPartnerDataContext(
-  //     partners.filter((restaurant) => {
-  //       restaurant.companyName.toUpperCase().includes(searchTerm.toUpperCase())
-  //     })
-  //   )
-
-  //   console.log("partners: ", partners);
-
-  // }
- 
   return (
         <View style={styles.searchBar}>
           <Icon name="search" size={20} color="#797979" style={styles.icon} />
