@@ -8,15 +8,10 @@ const QueueConfirm = () => {
         <Text style={styles.currentQueue}>
           Currently <Text style={styles.queueNumber}>7</Text>th in queue!
         </Text>
-        <View style={styles.queueInfo}>
-          <QueueInfoItem label="Restaurant Name" answer="answer" />
-          <QueueInfoItem label="Party size" answer="answer" />
-          <QueueInfoItem label="Estimated wait time" answer="answer" />
-          <View>
-            <Text style={styles.queueInfoTxt}>Request</Text>
-            <Text>This is an answer for the request</Text>
-          </View>
-        </View>
+        <QueueInfoItem label="Restaurant Name" answer="answer" />
+        <QueueInfoItem label="Party size" answer="answer" />
+        <QueueInfoItem label="Estimated wait time" answer="answer" />
+        <QueueInfoItem label="Request" answer="This is an answer for the request" />
       </View>
       <View style={styles.buttons}>
         <QueueButton text="Cancel Queue" style={styles.btnCancel} />
@@ -48,12 +43,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 30,
   },
   container: {
     padding: 20,
     width: '85%',
-    height: '40%',
-    marginTop: 30,
+    height: '50%',
     backgroundColor: '#FEEEEF',
     borderRadius: 5,
     borderColor: '#D3D3D3',
@@ -62,12 +57,10 @@ const styles = StyleSheet.create({
   currentQueue: {
     fontWeight: 'bold',
     fontSize: 22,
+    paddingBottom:10,
   },
   queueNumber: {
     color: '#CC313D',
-  },
-  queueInfo: {
-    marginTop: 30,
   },
   queueInfoItem: {
     flexDirection: 'row',
@@ -87,8 +80,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '80%',
-    marginBottom:100,
+    width: '85%',
+    marginBottom: 100,
   },
   button: {
     padding: 15,

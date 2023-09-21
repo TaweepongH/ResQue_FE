@@ -35,7 +35,6 @@ const StackNavigator = () => {
       <Stack.Screen name='PwdResetComplete' component={PwdResetComplete} />
       <Stack.Screen name='EditProfile' component={EditProfile} />
       <Stack.Screen name='RestaurantInfo' component={RestaurantInfo} />
-      <Stack.Screen name='QueueConfirm' component={QueueConfirm} />
     </Stack.Navigator>
   )
 }

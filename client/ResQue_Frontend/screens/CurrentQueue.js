@@ -1,10 +1,11 @@
 import { View, Text,StyleSheet , TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const CurrentQueue = ({queueNumber,address,partyNumber,image,navigation}) => {
+const CurrentQueue = ({queueNumber,address,partyNumber,image}) => {
+    const navigation = useNavigation();
     const pressDetail=()=>{
         // navigate to 'QueueConfirm' page.
-        
-        console.log("pressed pressDetail");
+        navigation.navigate('QueueConfirm');
     }
     return (
     <View style={styles.container}> 
