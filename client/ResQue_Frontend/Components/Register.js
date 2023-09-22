@@ -22,6 +22,7 @@ const InputField = ({ label, placeholder, onChangeText, secureTextEntry }) => (
       placeholder={placeholder}
       // secureTextEntry={secureTextEntry}
       onChangeText={onChangeText}
+      autoCapitalize="none"
     />
   </>
 );

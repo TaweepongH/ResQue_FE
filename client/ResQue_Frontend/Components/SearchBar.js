@@ -1,20 +1,57 @@
-import { useState } from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
+import { View, TextInput, StyleSheet, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useAuth } from '../contexts/AuthContext.js';
+import CustomModal from './CustomModal.js';
+import { useNavigation } from '@react-navigation/native';
 
 const SearchBar = () => {
-  const [content, setContent ] = useState('');
-  
+
+  const { setQueryContext } = useAuth();
+
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const navigation = useNavigation();
+
+  const handleSearch = (text) => {
+    console.log("search terms in SearchBar: ", text);
+    setQueryContext(text);
+    setSearchQuery(text);
+    // navigation.navigate('Search', { searchQuery });
+  };
+
+  // const { partners } = useAuth();
+
+  // useEffect(() => {
+  //   console.log("initial partner data: ", partners);
+  // }, [])
+
+
+  // const handleFilter = (searchTerm) => {
+
+  //   setPartnerDataContext(
+  //     partners.filter((restaurant) => {
+  //       restaurant.companyName.toUpperCase().includes(searchTerm.toUpperCase())
+  //     })
+  //   )
+
+  //   console.log("partners: ", partners);
+
+  // }
+ 
   return (
         <View style={styles.searchBar}>
           <Icon name="search" size={20} color="#797979" style={styles.icon} />
-          <TextInput 
-            value={content}
-            onChangeText={setContent}
-            placeholder='Search Restaurants' 
-            style={styles.input}
-            multiline
-          />
+          
+            <TextInput 
+              value={searchQuery}
+              onChangeText={handleSearch}
+              placeholder='Search Restaurants' 
+              style={styles.input}
+              multiline
+            />
+
         </View>
   );
 }

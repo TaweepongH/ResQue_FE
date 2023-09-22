@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext.js';
 
 const renderButton = (name) => {
+
   const navigation = useNavigation();
   const { bearerToken, password, setBearerTokenContext } = useAuth();
 
@@ -27,7 +29,7 @@ const renderButton = (name) => {
           console.log("There is no data from the API...");
         }
       } else {
-        console.log("Failed to fetch data from the API.");
+        console.log("Failed to fetch data from the API.", response.status);
       }
     } catch (error) {
       console.log("Error: ", error);

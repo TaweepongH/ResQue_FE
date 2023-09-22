@@ -62,6 +62,7 @@ const CreateNewPwd = () => {
     <TextInput 
           style={styles.infoInput}placeholder='Please enter 8 - 16 characters'
           onChangeText={setPwdValue}
+          autoCapitalize="none"
     />
     </View>
     <View style={styles.items}>
@@ -69,6 +70,7 @@ const CreateNewPwd = () => {
     <TextInput 
           style={styles.infoInput}placeholder='Please enter 8 - 16 characters'
           onChangeText={setPwdConfirmValue}
+          autoCapitalize="none"
     />
     </View>
     <TouchableOpacity style={styles.button} onPress={handlePwrdReset}>

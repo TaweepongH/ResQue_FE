@@ -5,6 +5,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     
     // User Authentication contexts
+    // the password context may have to be removed becuase storing password data on the client side can be dangerous
     const [bearerToken, setBearerToken] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -35,6 +36,14 @@ export const AuthProvider = ({ children }) => {
         setConfirmationCode(value);
     }
 
+    // queries for Search function
+
+    const [query, setQuery] = useState([]);
+
+    const setQueryContext = (value) => {
+        setQuery(value);
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -50,7 +59,10 @@ export const AuthProvider = ({ children }) => {
                 setLatLongContext,
                 // pwrd reset
                 confirmationCode,
-                setConfirmationCodeContext
+                setConfirmationCodeContext, 
+                // restaurants/search
+                query,
+                setQueryContext
             }}
         >
 

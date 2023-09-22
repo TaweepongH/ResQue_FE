@@ -2,14 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView, Alert } from 'react-native';
 import renderButtons from './renderButtons';
 import RestaurantList from './RestaurantList';
-import Map from './Map';
 
 const Main = () => {
 
-  const [showMap, setShowMap] = useState(true);
-  const [showScreen, setShowScreen] = useState(false);
-  const [selectedArea, setSelectedArea] = useState(null);
-  const [buttonClicked, setButtonClicked] = useState(false); 
+  const [selectedArea, setSelectedArea] = useState('');  
 
   const location = [
     { id: 1, name: 'All' },
@@ -22,31 +18,20 @@ const Main = () => {
     { id: 8, name: 'White Rock' },
     { id: 9, name: 'Delta' },
   ];
- const handleButtonClick = (areaName) => {
-    
-    setShowScreen(true);
-    setSelectedArea(areaName); // Set the selected area
-    setButtonClicked(true); // Set buttonClicked to true to display RestaurantList2
-    setShowMap(false); // Hide the map when the button is clicked
-  };
 
-  useEffect(() => {
-    setShowScreen(false);
-    console.log("showScreen is: ", showScreen);
-  }, []);
   return (
     <>
-    <View style={styles.container}>
-      <View style={styles.locations}>
-        <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
-        <Text style={styles.title}>{selectedArea}</Text>
-        {renderButtons(location,handleButtonClick)}
-      </View>
+      <View style={styles.container}>
+        <View style={styles.locations}>
+          <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
+          <Text style={styles.title}>{selectedArea}</Text>
+          {renderButtons(location)}
+        </View>
        <Text style={styles.explore}>Explore restaurants near me</Text>
-         </View>
+      </View>
       <ScrollView>
-      <RestaurantList names={selectedArea} />  
-  </ScrollView>
+        <RestaurantList names={selectedArea} />  
+      </ScrollView>
     </>   
   );
 };
