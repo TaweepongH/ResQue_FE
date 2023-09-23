@@ -11,11 +11,12 @@ import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CurrentQueue from '../../screens/CurrentQueue';
 import QueueConfirm from '../../screens/QueueConfirm';
-
+import QueueRegistration from '../QueueRegistration';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+
   const navigation = useNavigation();
 
   return (
@@ -101,6 +102,16 @@ const TabNavigator = () => {
               <MaterialCommunityIcons name="dots-horizontal" color={color} size={30} />
             ),
         })}
+      />
+
+      <Tab.Screen 
+        name="QueueRegistration"
+        component={QueueRegistration}
+        options={{
+          tabBarButton: () => null, // Hide the tab icon
+          tabBarLabel: () => null,  // Hide the screen label
+        }}
+      
       />
 
     </Tab.Navigator>

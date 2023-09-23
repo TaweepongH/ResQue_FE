@@ -19,8 +19,10 @@ const Main = () => {
     { id: 9, name: 'Delta' },
   ];
 
+
   return (
     <>
+    
       <View style={styles.container}>
         <View style={styles.locations}>
           <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
@@ -32,6 +34,7 @@ const Main = () => {
       <ScrollView>
         <RestaurantList names={selectedArea} />  
       </ScrollView>
+      
     </>   
   );
 };

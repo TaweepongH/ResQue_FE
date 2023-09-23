@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../contexts/AuthContext';
+import CustomModal from './CustomModal.js';
 
 const QueueRegistration = () => {
+
+  const { rstrntData, bearerToken } = useAuth();
+
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [adultCount, setAdultCount] = useState(0);
   const [childCount, setChildCount] = useState(0);
   const [request, setRequest] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleDecreaseAdult = () => {
     if (adultCount > 0) {
@@ -38,6 +44,9 @@ const QueueRegistration = () => {
     console.log('Adult Count:', adultCount);
     console.log('Child Count:', childCount);
     console.log('Request:', request);
+
+    createQue(bearerToken, rstrntData.id);
+
   };
 
   const navigation = useNavigation();
@@ -47,14 +56,59 @@ const QueueRegistration = () => {
     navigation.navigate('RestaurantInfo');
   };
 
+  const createQue = async (authToken, restuarantID) => {
+
+    setLoading(true);
+
+    const url = 'https://app-57vwexmexq-uc.a.run.app/api/queues/user/createqueue';
+
+    try {
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          Authorization: `Bearer ${authToken}`,
+        }, 
+        body: {
+          "partnerId": `${restuarantID}`
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        console.log("response msg from backend: ", data);
+
+        // then we've got to navigate to the next page. 
+
+      } else {
+        console.log("response is not ok: ", response);
+      }
+
+    
+    } catch (error) {
+      console.log("error: ", error);
+    }
+
+
+
+
+  }
+
+
+  useEffect(() => {
+    console.log("partner data: ", rstrntData);
+  }, [])
+
   // test data
   const restaurant = {
-    id: 1,
-    name: 'Tacofino Taco Bar (Gastown)',
-    address: '123 Main St',
+    id: rstrntData.id,
+    name: rstrntData.name,
+    address: rstrntData.address,
     distance: '200',
     waitlist: 3,
-    thumbnailImage: 'https://cdn.pixabay.com/photo/2017/01/22/19/12/pizza-2000602_1280.jpg',
+    thumbnailImage: rstrntData.thumbnailImage
   };
 
   return (

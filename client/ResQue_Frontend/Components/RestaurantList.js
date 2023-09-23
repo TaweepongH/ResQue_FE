@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useAuth } from '../contexts/AuthContext.js';
+// import { usePartnerContext } from '../contexts/PartnerContext.js';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import CustomModal from './CustomModal.js';
 
 const RestaurantList = () => {
 
-  const { bearerToken } = useAuth();
+  // const { setPartnerDataContext, partnerData } = usePartnerContext();
+  const { bearerToken, setRstrntDataContext, rstrntData, setLatLongContext, latLong } = useAuth();
+
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -54,7 +57,9 @@ const RestaurantList = () => {
 
     if (response.ok) {
       const data = await response.json();
+
       setRestaurants(data);
+      
       setLoading(false);
     } else {
       console.log('Failed to fetch restaurant data, ', response);
@@ -64,9 +69,29 @@ const RestaurantList = () => {
   }
 };
 
-  const handleQuePress = () => {
-    navigation.navigate('Register')
+  const handleQuePress = (restaurantData) => {
+
+
+    console.log("restaurant data: ", restaurantData);
+
+    setRstrntDataContext({
+      id: restaurantData.id,
+      name: restaurantData.companyName,
+      address: restaurantData.address[0],
+      thumbnailImage: restaurantData.images[0]
+    });
+
+    console.log("sdflkjs;ldfjksldf: ", rstrntData)
+
+    // setPartnerDataContext()
+    // for now we have to navigate using the tabNavigator, because when a user is logged in the tabNavigator is returned in the app.tsx file
+    navigation.navigate('QueueRegistration')
+
   }
+
+  // useEffect(() => {
+  //   console.log("partner data changed: ", partnerData);
+  // }, [handleQuePress]);
 
   return (
     <ScrollView>
@@ -82,21 +107,28 @@ const RestaurantList = () => {
         ) : (
           // Render restaurant data
           restaurants.map((restaurant) => (
-            <View key={restaurant.id} style={styles.restaurantItem}>
-              <Image
-                source={{ uri: restaurant.images[0] }}
-                style={{ width: 100, height: 100, borderRadius: 10 }}
-              />
-              <View style={styles.textContainer}>
-                <Text style={styles.textCompanyName}>{restaurant.companyName}</Text>
-                <Text>
-                  {restaurant.address[0]}, {restaurant.address[1]}
-                </Text>
+            <TouchableOpacity key={restaurant.id} onPress={ () => {
+                handleQuePress(restaurant);
+              }}
+            >
+              <View style={styles.restaurantItem}>
+                
+                <Image
+                  source={{ uri: restaurant.images[0] }}
+                  style={{ width: 100, height: 100, borderRadius: 10 }}
+                />
+                <View style={styles.textContainer}>
+                  <Text style={styles.textCompanyName}>{restaurant.companyName}</Text>
+                  <Text>
+                    {restaurant.address[0]}, {restaurant.address[1]}
+                  </Text>
+                </View>
+                <View style={styles.waitList}>
+                  <Text style={styles.waitListText}></Text>
+                </View>
+                
               </View>
-              <TouchableOpacity onPress={handleQuePress} style={styles.waitList}>
-                <Text style={styles.waitListText}>Que!</Text>
-              </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
           ))
         )}
       </View>
