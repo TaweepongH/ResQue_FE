@@ -81,8 +81,6 @@ const RestaurantList = () => {
       thumbnailImage: restaurantData.images[0]
     });
 
-    console.log("sdflkjs;ldfjksldf: ", rstrntData)
-
     // setPartnerDataContext()
     // for now we have to navigate using the tabNavigator, because when a user is logged in the tabNavigator is returned in the app.tsx file
     navigation.navigate('QueueRegistration')

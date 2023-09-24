@@ -45,7 +45,7 @@ const QueueRegistration = () => {
     console.log('Child Count:', childCount);
     console.log('Request:', request);
 
-    createQue(bearerToken, rstrntData.id);
+    createQue();
 
   };
 
@@ -56,9 +56,9 @@ const QueueRegistration = () => {
     navigation.navigate('RestaurantInfo');
   };
 
-  const createQue = async (authToken, restuarantID) => {
+  const createQue = async () => {
 
-    setLoading(true);
+    // setLoading(true);
 
     const url = 'https://app-57vwexmexq-uc.a.run.app/api/queues/user/createqueue';
 
@@ -68,38 +68,38 @@ const QueueRegistration = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${bearerToken}`,
         }, 
-        body: {
-          "partnerId": `${restuarantID}`
-        }
+        body: JSON.stringify({
+          partnerId: rstrntData.id
+        })
       });
 
       if (response.ok) {
+
         const data = await response.json();
+
+        // setLoading(false);
 
         console.log("response msg from backend: ", data);
 
         // then we've got to navigate to the next page. 
 
       } else {
-        console.log("response is not ok: ", response);
+
+        console.error("API request failed:", response.status, response.statusText);
+
+        // setLoading(false);
+
+  // You can display an error message to the user here
       }
 
-    
     } catch (error) {
-      console.log("error: ", error);
+      console.error("Network error:", error);
+  // Handle network-related errors
     }
 
-
-
-
   }
-
-
-  useEffect(() => {
-    console.log("partner data: ", rstrntData);
-  }, [])
 
   // test data
   const restaurant = {
@@ -145,6 +145,9 @@ const QueueRegistration = () => {
           value={phoneNumber}
           onChangeText={setPhoneNumber}
         />
+
+        <CustomModal visible={loading} message={"Queing up"}></CustomModal>
+
         <Text style={styles.titles}>Please select the number of visitors</Text>
         <View style={styles.counterContainer}>
           <Text style={styles.counterLabel}>Adult</Text>
