@@ -99,17 +99,17 @@ const OtpVerify = () => {
       <View style={styles.contentContainer}>
       
         {otp.map((value, index) => (
-        <TextInput
-          key={index}
-          style={styles.otpInput}
-          onChangeText={(text) => handleOTPChange(text, index)}
-          value={value}
-          maxLength={1}
-          keyboardType="numeric"
-          ref={(input) => {
-            inputRefs.current[index] = input;
-          }}
-        />
+          <TextInput
+            key={index}
+            style={styles.otpInput}
+            onChangeText={(text) => handleOTPChange(text, index)}
+            value={value}
+            maxLength={1}
+            keyboardType="numeric"
+            ref={(input) => {
+              inputRefs.current[index] = input;
+            }}
+          />
         ))}
       </View>
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
@@ -147,18 +147,22 @@ const styles = StyleSheet.create({
   },
   otpInput: {
     width: '10%',
-    height: 40,
+    aspectRatio: 1,
     marginLeft: 20,
     borderWidth: 1, // Border width
     borderRadius: 5,
     borderColor:'grey',
-  },
-  inputFieldStyle: {
-    width: 30,
-    height: 30,
     backgroundColor: 'white',
-    borderColor:'grey',
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '500'
   },
+  // inputFieldStyle: {
+  //   width: 30,
+  //   height: 30,
+  //   backgroundColor: 'white',
+  //   borderColor:'grey',
+  // },
   button: {
     backgroundColor: '#CC313D',
     justifyContent: 'center',
