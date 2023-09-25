@@ -12,13 +12,16 @@ const PwdResetComplete = () => {
 
   return (
     <View style={styles.container}>
-    <View style={styles.items}>
-        <IconAnt name="checkcircleo" size={50} color="#CC313D"/>
-        <Text style={styles.txt_complete}>Reset Complete!</Text>
-    </View>
-       <TouchableOpacity style={styles.button} onPress={handleReturn}>
-        <Text style={styles.text}>Return to Login</Text>
-      </TouchableOpacity>
+      <View style={styles.items}>
+          <View style={styles.textContainer}>
+            <IconAnt name="checkcircleo" size={50} color="#CC313D"/>
+            <Text style={styles.txt_complete}>Reset Complete!</Text>
+          </View>
+      
+          <TouchableOpacity style={styles.button} onPress={handleReturn}>
+            <Text style={styles.text}>Return to Login</Text>
+          </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -27,11 +30,15 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor:'#FEEEEF',
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  items:{
-    width:'80%',
+  items: {
+    width: '80%',
+    alignItems: 'center'
+  },
+  textContainer:{
+    width:'100%',
     alignItems:'center',
-    marginTop:100,
     marginBottom:30,
   },
   txt_complete:{
@@ -44,7 +51,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius:3,
     width:'90%',
-    height:35,
+    paddingVertical: 8
   },
   text:{
     fontWeight:'bold',
