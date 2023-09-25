@@ -51,6 +51,12 @@ export const AuthProvider = ({ children }) => {
         setRstrntData(value);
     }
 
+    const [queData, setQueData] = useState({});
+
+    const setQueDataContext = (value) => {
+        setQueData(value);
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -72,7 +78,9 @@ export const AuthProvider = ({ children }) => {
                 setQueryContext,
                 // partnerData
                 rstrntData,
-                setRstrntDataContext
+                setRstrntDataContext,
+                queData,
+                setQueDataContext
 
             }}
         >

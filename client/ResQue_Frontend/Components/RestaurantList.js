@@ -78,7 +78,11 @@ const RestaurantList = () => {
       id: restaurantData.id,
       name: restaurantData.companyName,
       address: restaurantData.address[0],
-      thumbnailImage: restaurantData.images[0]
+      thumbnailImage: restaurantData.images[0],
+      type: restaurantData.genre,
+      businessHours: restaurantData.operationTime,
+      phoneNumber: restaurantData.phone,
+      website: restaurantData.email
     });
 
     // setPartnerDataContext()

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
@@ -8,7 +8,9 @@ import CustomModal from './CustomModal.js';
 
 const QueueRegistration = () => {
 
-  const { rstrntData, bearerToken } = useAuth();
+  const { rstrntData, bearerToken, setQueDataContext } = useAuth();
+
+  const navigation = useNavigation();
 
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -16,6 +18,7 @@ const QueueRegistration = () => {
   const [childCount, setChildCount] = useState(0);
   const [request, setRequest] = useState('');
   const [loading, setLoading] = useState(false);
+  const [partySize, setPartySize] = useState(0);
 
   const handleDecreaseAdult = () => {
     if (adultCount > 0) {
@@ -37,6 +40,10 @@ const QueueRegistration = () => {
     setChildCount(childCount + 1);
   };
 
+  useEffect(() => {
+    setPartySize(childCount + adultCount);
+  }, [handleDecreaseAdult, handleDecreaseChild, handleIncreaseAdult, handleIncreaseChild])
+
   const handleSubmit = () => {
     console.log('Form submitted!');
     console.log('Name:', name);
@@ -49,16 +56,9 @@ const QueueRegistration = () => {
 
   };
 
-  const navigation = useNavigation();
-
-  const handleRestaurantDetail = () => {
-    // When the "arrow-right" icon is pressed, it navigates to the 'restaurant info' page.
-    navigation.navigate('RestaurantInfo');
-  };
-
   const createQue = async () => {
 
-    // setLoading(true);
+    setLoading(true);
 
     const url = 'https://app-57vwexmexq-uc.a.run.app/api/queues/user/createqueue';
 
@@ -79,29 +79,42 @@ const QueueRegistration = () => {
 
         const data = await response.json();
 
-        // setLoading(false);
+        setLoading(false);
 
         console.log("response msg from backend: ", data);
+
+        setQueDataContext({ ...data, partySize });
+
+        navigation.navigate('QueueConfirm')
 
         // then we've got to navigate to the next page. 
 
       } else {
 
-        console.error("API request failed:", response.status, response.statusText);
+        console.error("API request failed:", response.status, response);
 
-        // setLoading(false);
+        if (response.status === 400) {
+          Alert.alert("You are already in line. Please check your que history.")
+        }
 
-  // You can display an error message to the user here
+        setLoading(false);
+
       }
 
     } catch (error) {
       console.error("Network error:", error);
   // Handle network-related errors
+      Alert.alert("Network error:", error);
     }
 
   }
 
-  // test data
+
+  const handleRestaurantDetail = () => {
+    // When the "arrow-right" icon is pressed, it navigates to the 'restaurant info' page.
+    navigation.navigate('RestaurantInfo');
+  };
+  
   const restaurant = {
     id: rstrntData.id,
     name: rstrntData.name,
@@ -146,7 +159,7 @@ const QueueRegistration = () => {
           onChangeText={setPhoneNumber}
         />
 
-        <CustomModal visible={loading} message={"Queing up"}></CustomModal>
+        <CustomModal visible={loading} message={"Queing you up"}></CustomModal>
 
         <Text style={styles.titles}>Please select the number of visitors</Text>
         <View style={styles.counterContainer}>

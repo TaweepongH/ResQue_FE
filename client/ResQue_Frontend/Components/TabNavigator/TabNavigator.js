@@ -9,9 +9,12 @@ import SearchBar from '../SearchBar';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+// non tab paths
 import CurrentQueue from '../../screens/CurrentQueue';
 import QueueConfirm from '../../screens/QueueConfirm';
 import QueueRegistration from '../QueueRegistration';
+import RestaurantInfo from '../RestaurantInfo';
 
 const Tab = createBottomTabNavigator();
 
@@ -113,6 +116,26 @@ const TabNavigator = () => {
         }}
       
       />
+
+      <Tab.Screen 
+        name="QueueConfirm"
+        component={QueueConfirm}
+        options={{
+          tabBarButton: () => null, // Hide the tab icon
+          tabBarLabel: () => null,  // Hide the screen label
+        }}
+      
+      />
+
+      <Tab.Screen
+        name="RestaurantInfo"
+        component={RestaurantInfo}
+        options={{
+          tabBarButton: () => null, // Hide the tab icon
+          tabBarLabel: () => null,  // Hide the screen label
+        }}
+      />
+
 
     </Tab.Navigator>
   );
