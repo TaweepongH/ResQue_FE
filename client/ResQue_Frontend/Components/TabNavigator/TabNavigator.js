@@ -10,6 +10,7 @@ import IconAnt from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+
 // non tab paths
 import CurrentQueue from '../../screens/CurrentQueue';
 import QueueConfirm from '../../screens/QueueConfirm';
@@ -92,7 +93,7 @@ const TabNavigator = () => {
         options={({ route }) => ({
             headerTitle: getMoreTabHeaderTitle(route),
             headerLeft: () => {
-              if (getMoreTabHeaderTitle(route) != 'More' && getMoreTabHeaderTitle(route) != 'MoreTab' ){
+              if (getMoreTabHeaderTitle(route) != 'More' ){
                 return (
                   <TouchableOpacity onPress={() => navigation.goBack()}>
                     <IconAnt name="left" size={30} style={{marginLeft: 10}}/>

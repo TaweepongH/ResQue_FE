@@ -149,12 +149,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 30,
   },
   container: {
     padding: 20,
     width: '85%',
-    height: '40%',
-    marginTop: 30,
+    height: '50%',
     backgroundColor: '#FEEEEF',
     borderRadius: 5,
     borderColor: '#D3D3D3',
@@ -163,12 +163,10 @@ const styles = StyleSheet.create({
   currentQueue: {
     fontWeight: 'bold',
     fontSize: 22,
+    paddingBottom:10,
   },
   queueNumber: {
     color: '#CC313D',
-  },
-  queueInfo: {
-    marginTop: 30,
   },
   queueInfoItem: {
     flexDirection: 'row',
@@ -188,8 +186,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '80%',
-    marginBottom:100,
+    width: '85%',
+    marginBottom: 100,
   },
   button: {
     padding: 15,
