@@ -44,6 +44,19 @@ export const AuthProvider = ({ children }) => {
         setQuery(value);
     }
 
+    // partner contexts
+    const [rstrntData, setRstrntData] = useState({});
+
+    const setRstrntDataContext = (value) => {
+        setRstrntData(value);
+    }
+
+    const [queData, setQueData] = useState({});
+
+    const setQueDataContext = (value) => {
+        setQueData(value);
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -62,7 +75,13 @@ export const AuthProvider = ({ children }) => {
                 setConfirmationCodeContext, 
                 // restaurants/search
                 query,
-                setQueryContext
+                setQueryContext,
+                // partnerData
+                rstrntData,
+                setRstrntDataContext,
+                queData,
+                setQueDataContext
+
             }}
         >
 

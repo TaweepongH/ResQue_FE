@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../contexts/AuthContext';
+import CustomModal from './CustomModal.js';
 
 const QueueRegistration = () => {
+
+  const { rstrntData, bearerToken, setQueDataContext } = useAuth();
+
+  const navigation = useNavigation();
+
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [adultCount, setAdultCount] = useState(0);
   const [childCount, setChildCount] = useState(0);
   const [request, setRequest] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [partySize, setPartySize] = useState(0);
 
   const handleDecreaseAdult = () => {
     if (adultCount > 0) {
@@ -31,6 +40,10 @@ const QueueRegistration = () => {
     setChildCount(childCount + 1);
   };
 
+  useEffect(() => {
+    setPartySize(childCount + adultCount);
+  }, [handleDecreaseAdult, handleDecreaseChild, handleIncreaseAdult, handleIncreaseChild])
+
   const handleSubmit = () => {
     console.log('Form submitted!');
     console.log('Name:', name);
@@ -38,23 +51,77 @@ const QueueRegistration = () => {
     console.log('Adult Count:', adultCount);
     console.log('Child Count:', childCount);
     console.log('Request:', request);
+
+    createQue();
+
   };
 
-  const navigation = useNavigation();
+  const createQue = async () => {
+
+    setLoading(true);
+
+    const url = 'https://app-57vwexmexq-uc.a.run.app/api/queues/user/createqueue';
+
+    try {
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          Authorization: `Bearer ${bearerToken}`,
+        }, 
+        body: JSON.stringify({
+          partnerId: rstrntData.id
+        })
+      });
+
+      if (response.ok) {
+
+        const data = await response.json();
+
+        setLoading(false);
+
+        console.log("response msg from backend: ", data);
+
+        setQueDataContext({ ...data, partySize });
+
+        navigation.navigate('QueueConfirm')
+
+        // then we've got to navigate to the next page. 
+
+      } else {
+
+        console.error("API request failed:", response.status, response);
+
+        if (response.status === 400) {
+          Alert.alert("You are already in line. Please check your que history.")
+        }
+
+        setLoading(false);
+
+      }
+
+    } catch (error) {
+      console.error("Network error:", error);
+  // Handle network-related errors
+      Alert.alert("Network error:", error);
+    }
+
+  }
+
 
   const handleRestaurantDetail = () => {
     // When the "arrow-right" icon is pressed, it navigates to the 'restaurant info' page.
     navigation.navigate('RestaurantInfo');
   };
-
-  // test data
+  
   const restaurant = {
-    id: 1,
-    name: 'Tacofino Taco Bar (Gastown)',
-    address: '123 Main St',
+    id: rstrntData.id,
+    name: rstrntData.name,
+    address: rstrntData.address,
     distance: '200',
     waitlist: 3,
-    thumbnailImage: 'https://cdn.pixabay.com/photo/2017/01/22/19/12/pizza-2000602_1280.jpg',
+    thumbnailImage: rstrntData.thumbnailImage
   };
 
   return (
@@ -91,6 +158,9 @@ const QueueRegistration = () => {
           value={phoneNumber}
           onChangeText={setPhoneNumber}
         />
+
+        <CustomModal visible={loading} message={"Queing you up"}></CustomModal>
+
         <Text style={styles.titles}>Please select the number of visitors</Text>
         <View style={styles.counterContainer}>
           <Text style={styles.counterLabel}>Adult</Text>

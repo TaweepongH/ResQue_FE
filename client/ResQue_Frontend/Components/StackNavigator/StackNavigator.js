@@ -94,6 +94,8 @@ const StackNavigator = () => {
       <Stack.Screen name='TermsPolicies' component={TermsPolicies} />
       <Stack.Screen name='EditProfile' component={EditProfile} />
       <Stack.Screen name='RestaurantInfo' component={RestaurantInfo} />
+      <Stack.Screen name='QueueConfirm' component={QueueConfirm} />
+
     </Stack.Navigator>
   )
 }

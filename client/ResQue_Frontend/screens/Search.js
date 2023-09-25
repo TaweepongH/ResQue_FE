@@ -7,18 +7,7 @@ import RestaurantList from '../Components/RestaurantList.js';
 
 import { useRoute } from '@react-navigation/native';
 
-// for now i've just mixed the searchbar into the search page to allow for slightly easier filtering
-
 const Search = () => {
-
-  
-  // params from searchBar were innacurate when using useNavigation()
-  // const route = useRoute();
-  // const searchQuery = route.params || {};
-
-  // useEffect(() => {
-  //   console.log("search terms in Search: ", searchQuery);
-  // }, [searchQuery])
 
   // use context seems to log data more accurately than useNavigation();
   const {bearerToken, query} = useAuth();
@@ -69,13 +58,7 @@ const Search = () => {
     fetchData();
   }, [])
 
-  useEffect(() => {
-    console.log("Search Results : ", searchResults);
-  }, [searchResults]);
-
   const handleFilter = (text) => {
-
-    console.log("search term: ", text); // Log the current text
 
     setSearchTerm(text);
 

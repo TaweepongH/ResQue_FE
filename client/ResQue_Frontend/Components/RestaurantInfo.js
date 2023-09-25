@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, TouchableHighlight, StyleSheet, ScrollView, Linking } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useAuth} from '../contexts/AuthContext.js'
 
 const RestaurantInfo = ({ route }) => {
+
+  const {rstrntData } = useAuth();
+
+  useEffect(() => {
+    console.log("r data", rstrntData);
+  })
+
   const restaurant = {
-    id: 1,
-    name: 'Tacofino Taco Bar (Gastown)',
-    address: '15 W Cordova St, Vancouver, BC V6B 1C8',
-    type: 'Mexican',
-    businessHours: '11:00 AM - 9:00 PM',
-    phoneNumber: '(604) 899 - 7907',
-    website: 'http://tacofino.com',
-    thumbnailImage: 'https://cdn.pixabay.com/photo/2017/01/22/19/12/pizza-2000602_1280.jpg',
+    id: rstrntData.id,
+    name: rstrntData.name,
+    address: rstrntData.address,
+    type: rstrntData.type,
+    businessHours: rstrntData.businessHours,
+    phoneNumber: rstrntData.phoneNumber,
+    website: rstrntData.website,
+    thumbnailImage: rstrntData.thumbnailImage,
   };
 
   const handleJoinQueue = () => {
