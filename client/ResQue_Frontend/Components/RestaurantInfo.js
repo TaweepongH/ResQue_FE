@@ -19,7 +19,7 @@ const RestaurantInfo = ({ route }) => {
     name: rstrntData.name,
     address: rstrntData.address,
     type: rstrntData.type,
-    businessHours: rstrntData.businessHours,
+    businessHours: `${rstrntData.businessHours[0][0]} - ${rstrntData.businessHours[0][1]}`,
     phoneNumber: rstrntData.phoneNumber,
     website: rstrntData.website,
     thumbnailImage: rstrntData.thumbnailImage,

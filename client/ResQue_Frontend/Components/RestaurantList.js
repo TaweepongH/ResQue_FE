@@ -74,26 +74,32 @@ const RestaurantList = () => {
 
     console.log("restaurant data: ", restaurantData);
 
+    const parseBusinessHours = (array) => {
+
+      const parsedArray = [];
+
+      array.forEach((business) => {
+        parsedArray.push([business.start, business.end]);
+      })
+
+      return parsedArray
+
+    }
+
     setRstrntDataContext({
       id: restaurantData.id,
       name: restaurantData.companyName,
       address: restaurantData.address[0],
       thumbnailImage: restaurantData.images[0],
       type: restaurantData.genre,
-      businessHours: restaurantData.operationTime,
+      businessHours: parseBusinessHours(restaurantData.operationTime),
       phoneNumber: restaurantData.phone,
       website: restaurantData.email
     });
 
-    // setPartnerDataContext()
-    // for now we have to navigate using the tabNavigator, because when a user is logged in the tabNavigator is returned in the app.tsx file
     navigation.navigate('QueueRegistration')
 
   }
-
-  // useEffect(() => {
-  //   console.log("partner data changed: ", partnerData);
-  // }, [handleQuePress]);
 
   return (
     <ScrollView>
@@ -182,4 +188,3 @@ const styles = StyleSheet.create({
 });
 
 export default RestaurantList;
-
