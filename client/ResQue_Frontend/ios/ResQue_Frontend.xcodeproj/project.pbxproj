@@ -493,6 +493,7 @@
 				DEVELOPMENT_TEAM = 9SZG3XXALY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ResQue_Frontend/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -520,6 +521,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9SZG3XXALY;
 				INFOPLIST_FILE = ResQue_Frontend/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
