@@ -94,7 +94,7 @@ const QueueRegistration = () => {
         console.error("API request failed:", response.status, response);
 
         if (response.status === 400) {
-          Alert.alert("You are already in line. Please check your que history.")
+          Alert.alert("You are already in line. Please check your que history in the MyInfo tab.")
         }
 
         setLoading(false);

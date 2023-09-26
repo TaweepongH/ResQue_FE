@@ -20,8 +20,6 @@ const Search = () => {
 
   const fetchData = async () => { 
 
-    setSearchResults('');
-
     const url = 'https://app-57vwexmexq-uc.a.run.app/api/partners/all';
 
     setLoading(true);
@@ -47,16 +45,6 @@ const Search = () => {
       console.log('Error:', error);
     }
   }
-
-  useEffect(() => {
-    // get our data set
-    fetchData();
-  }, [])
-
-  useEffect(() => {
-    console.log("query value: ", query);
-    handleFilter(query);
-  }, [query]);
 
   const handleFilter = (text) => {
 
@@ -101,7 +89,19 @@ const Search = () => {
   }
 
   useEffect(() => {
-    if (searchResults.length > 0 || query) {
+    // get our data set
+    fetchData();
+  }, [])
+
+  useEffect(() => {
+    console.log("query value: ", query);
+    handleFilter(query);
+  }, [query]);
+
+  useEffect(() => {
+
+    // we have to check for both the searchResults and the query state because even if there is a query and no searchresults we shouldn't be displaying the dataset, that should only be displayed when nothing is in the input 
+    if (searchResults.length > 0 || query.length > 0) {
       setTyped(true);
     } else {
       setTyped(false);
