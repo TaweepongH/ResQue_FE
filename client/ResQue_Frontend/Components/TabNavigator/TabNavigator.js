@@ -17,6 +17,7 @@ import QueueConfirm from '../../screens/QueueConfirm';
 import QueueRegistration from '../QueueRegistration';
 import RestaurantInfo from '../RestaurantInfo';
 
+
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
@@ -72,7 +73,7 @@ const TabNavigator = () => {
         options={({ route }) => ({
             headerTitle: getMyInfoTabHeaderTitle(route),
             headerLeft: () => {
-              if (getMyInfoTabHeaderTitle(route) == 'Edit Profile'){
+              if (getMyInfoTabHeaderTitle(route) == 'Edit Profile' || getMyInfoTabHeaderTitle(route) == 'Queue History' ){
                 return (
                   <TouchableOpacity onPress={() => navigation.goBack()}>
                     <IconAnt name="left" size={30} style={{marginLeft: 10}}/>
