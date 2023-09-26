@@ -50,6 +50,7 @@ const StackNavigator = () => {
         component={Login} 
         options={{
           headerShown: false,
+          animation: 'fade'
         }}
         />
       <Stack.Screen 

@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import logo from '../assets/images/newLogo.png';
 import CustomButton from './CustomButton';
-import GoogleAuth from './GoogleAuth';
 
 const Login = () => {
   const navigation = useNavigation();
