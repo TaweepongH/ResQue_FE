@@ -12,6 +12,9 @@ import EditProfile from '../../screens/myinfo/EditProfile';
 import GoogleAuth from '../GoogleAuth';
 import RestaurantInfo from '../RestaurantInfo';
 import QueueConfirm from '../../screens/QueueConfirm';
+import Settings from '../../screens/Settings';
+import Feedback from '../Feedback';
+import TermsPolicies from '../../screens/more/TermsPolicies';
 
 const Stack = createNativeStackNavigator();
 
