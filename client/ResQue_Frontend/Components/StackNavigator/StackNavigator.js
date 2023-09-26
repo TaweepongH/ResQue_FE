@@ -15,12 +15,14 @@ import QueueConfirm from '../../screens/QueueConfirm';
 import Settings from '../../screens/Settings';
 import Feedback from '../Feedback';
 import TermsPolicies from '../../screens/more/TermsPolicies';
+import Splash from '../../screens/Splash';
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
   return (
     <Stack.Navigator
+      initialRouteName="Splash"
       screenOptions={{  
         headerStyle: {
           backgroundColor: 'white',
@@ -36,6 +38,13 @@ const StackNavigator = () => {
         headerBackTitleStyle: {fontSize: 0} 
       }}
     >
+      <Stack.Screen 
+        name='Splash' 
+        component={Splash}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen 
         name='Login' 
         component={Login} 
