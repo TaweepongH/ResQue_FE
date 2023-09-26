@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
+import QueueHistoryList from '../../Components/QueueHistoryList';
 
 const QueueHistory = () => {
 
@@ -9,14 +10,15 @@ const QueueHistory = () => {
   }
     return (
         <View style={styles.container}>
-          <View style={styles.user}>
-            <View style={styles.userProfile}>
-              <Text style={styles.profileText}>
-                {userData.firstName ? userData.firstName[0].toUpperCase() : ''}
-                {userData.lastName ? userData.lastName[0].toUpperCase()  : ''}
-              </Text> 
-            </View>
-            <Text style={styles.userName}>{userData.firstName} {userData.lastName}</Text>
+          
+          <View style={styles.infoContainer}>
+            <QueueHistoryList 
+              icon="history" 
+              text="Edit profile" 
+              screen="EditProfile" 
+            />
+            <QueueHistoryList icon="history" text="Queue History" screen="QueueHistory" />
+            <QueueHistoryList icon="history" text="Log out" screen="Login" />
           </View>
           
         </View>
