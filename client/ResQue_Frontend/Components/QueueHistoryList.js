@@ -20,29 +20,44 @@ const QueueHistoryList = ({ text, icon, screen, onPress }) => {
     };
 
     return (
-        <View style={styles.button}>
-          
-            <IconMat name={icon} size={35} color="#343434" style={styles.icon} />
-            <Text style={styles.buttonText}>{text}</Text>
 
-            {/* {!(screen == "version") ?
-            <IconAnt name="right" size={30} style={styles.arrow} />
-            : <View style={{width:30}}></View>}
-           */}
-        </View>
+      <View>
+        <View style={styles.row}>
+                    <View style={styles.iconContainer}>
+                        <IconMat name={icon} size={35} color="#343434" style={styles.icon} />
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.buttonText}>{text}</Text>
+                    </View>
+                </View>
+        
+      </View>
       );
 }
 
 const styles = StyleSheet.create({
-    button: {
-      justifyContent: 'center',
-      backgroundColor: '#FEEEEF',
-      width: '90%',
-      height: 55,
-      marginBottom: 20,
-      borderWidth: 0.5,
+    container: {
+      // justifyContent: 'flex-start',
+      // alignItems: 'flex-start',
+      
+      // width: '25%',
+      // height: 55,
+      
+      // borderWidth: 0.5,
+      // borderRadius: 5,
+      // borderColor: "#D9D9D9",
+    },
+    textContainer: {
+      justifyContent: 'flex-end',
+      alignItems: 'center'
+    },
+    iconContainer: {
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
       borderRadius: 5,
       borderColor: "#D9D9D9",
+      marginBottom: 0,
+      backgroundColor: 'white',
     },
     row: {
       flexDirection: 'row',
