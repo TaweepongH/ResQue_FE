@@ -57,6 +57,13 @@ export const AuthProvider = ({ children }) => {
         setQueData(value);
     }
 
+    // timeStamp
+    const [timeStamp, setTimeStamp] = useState('');
+
+    const setTimeStampContext = (value) => {
+        setTimeStamp(value);
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -80,7 +87,10 @@ export const AuthProvider = ({ children }) => {
                 rstrntData,
                 setRstrntDataContext,
                 queData,
-                setQueDataContext
+                setQueDataContext,
+                //timeStamp
+                timeStamp,
+                setTimeStampContext,
 
             }}
         >

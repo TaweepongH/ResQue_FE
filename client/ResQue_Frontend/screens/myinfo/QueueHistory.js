@@ -5,7 +5,7 @@ import { useAuth } from '../../contexts/AuthContext.js'
 
 const QueueHistory = () => {
 
-  const { bearerToken } = useAuth();
+  const { bearerToken, timeStamp } = useAuth();
 
   const [userQueueData, setUserQueueData] = useState([]);
 
@@ -51,11 +51,6 @@ const QueueHistory = () => {
 
   }
 
-  const userData = {
-    firstName: 'John',
-    lastName: 'Deer',
-  }
-
   useEffect(() => {
     fetchQueData();
     console.log("datatatatata", userQueueData)
@@ -75,6 +70,7 @@ const QueueHistory = () => {
               
               <Text style={{ fontSize: 16 }}>
                 {queueData.partnerName}
+                {timeStamp}
               </Text>
               
             }
