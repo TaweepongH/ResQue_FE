@@ -14,7 +14,7 @@ const QueueHistory = () => {
     const url = 'https://app-57vwexmexq-uc.a.run.app/api/queues/user/currentqueue';
 
     try {
-      
+
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -28,6 +28,7 @@ const QueueHistory = () => {
 
         const data = await response.json();
 
+        console.log("response status code: ", response.status);
         console.log("response from the current queue api", data);
 
         setUserQueueData(data);
