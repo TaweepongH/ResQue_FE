@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useAuth } from '../contexts/AuthContext.js';
-// import { usePartnerContext } from '../contexts/PartnerContext.js';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import CustomModal from './CustomModal.js';
 
 const RestaurantList = () => {
 
-  // const { setPartnerDataContext, partnerData } = usePartnerContext();
-  const { bearerToken, setRstrntDataContext, rstrntData, setLatLongContext, latLong } = useAuth();
+  const { bearerToken, setRstrntDataContext } = useAuth();
 
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -16,74 +14,59 @@ const RestaurantList = () => {
   const navigation = useNavigation();
   const route = useRoute(); // Use useRoute() hook to access the route object
 
-  // Check if route.params.names are defined, if not then the inital location is set to Vancouver
-  // initially the route.params?.names is undefined, becuase this component is loaded before main.js where it is asking props from
   const names = route.params?.names || 'Vancouver';
 
   useEffect(() => {
-    
-    console.log("RestaurantList2 / selectedArea is ", names);
-    // Fetch restaurant data when the component mounts and when 'names' changes
     fetchRestaurantData(names);
+  }, [names]); 
 
-  }, [names]); // Add 'names' as a dependency
+  const fetchRestaurantData = async (selectedArea) => {
 
- const fetchRestaurantData = async (selectedArea) => {
+    setLoading(true);
 
-  setLoading(true);
-
-  if (!selectedArea) {
-    return; // Don't fetch data if no area is selected
-  }
-
-  let url;
-
-  
-
-  if (selectedArea === 'All') {
-    url =  'https://app-57vwexmexq-uc.a.run.app/api/partners/all';
-  } else {
-    url = `https://app-57vwexmexq-uc.a.run.app/api/partners/area/${selectedArea}`;
-  }
-
-  try {
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        Authorization: `Bearer ${bearerToken}`,
-      },
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-
-      setRestaurants(data);
-      
-      setLoading(false);
-    } else {
-      console.log('Failed to fetch restaurant data, ', response);
+    if (!selectedArea) {
+      return; // Don't fetch data if no area is selected
     }
-  } catch (error) {
-    console.log('Error:', error);
-  }
-};
+
+    let url;
+
+    if (selectedArea === 'All') {
+      url =  'https://app-57vwexmexq-uc.a.run.app/api/partners/all';
+    } else {
+      url = `https://app-57vwexmexq-uc.a.run.app/api/partners/area/${selectedArea}`;
+    }
+
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          Authorization: `Bearer ${bearerToken}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setRestaurants(data);
+        setLoading(false); 
+      } else {
+        console.log('Failed to fetch restaurant data, ', response);
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
 
   const handleQuePress = (restaurantData) => {
-
 
     console.log("restaurant data: ", restaurantData);
 
     const parseBusinessHours = (array) => {
-
       const parsedArray = [];
-
       array.forEach((business) => {
         parsedArray.push([business.start, business.end]);
       })
-
       return parsedArray
-
     }
 
     setRstrntDataContext({
@@ -132,7 +115,7 @@ const RestaurantList = () => {
                   </Text>
                 </View>
                 <View style={styles.waitList}>
-                  <Text style={styles.waitListText}></Text>
+                  <Text style={styles.waitListText}>{restaurant.queueCount}</Text>
                 </View>
                 
               </View>

@@ -1,30 +1,24 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { View, Text, TextInput, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { useAuth } from '../contexts/AuthContext.js';
 import Icon from 'react-native-vector-icons/Feather';
 import CustomModal from '../Components/CustomModal.js';
-import RestaurantList from '../Components/RestaurantList.js';
 
-import { useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const Search = () => {
 
   // use context seems to log data more accurately than useNavigation();
-  const {bearerToken, query} = useAuth();
+  const {bearerToken, query, setRstrntDataContext} = useAuth();
 
-  useEffect(() => {
-    console.log("query value: ", query);
-    handleFilter(query);
-  }, [query]);
+  const navigation = useNavigation();
 
   const [dataSet, setDataSet] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [typed, setTyped] = useState(false);
 
   const fetchData = async () => { 
-
-    setSearchResults('');
 
     const url = 'https://app-57vwexmexq-uc.a.run.app/api/partners/all';
 
@@ -52,15 +46,7 @@ const Search = () => {
     }
   }
 
-
-  useEffect(() => {
-    // get our data set
-    fetchData();
-  }, [])
-
   const handleFilter = (text) => {
-
-    setSearchTerm(text);
 
     const filteredResults = dataSet.filter((restaurant) =>
       restaurant.companyName.toUpperCase().includes(text.toUpperCase())
@@ -70,6 +56,58 @@ const Search = () => {
 
   };
 
+  const handleQuePress = (restaurantData) => {
+
+
+    console.log("restaurant data: ", restaurantData);
+
+    const parseBusinessHours = (array) => {
+
+      const parsedArray = [];
+
+      array.forEach((business) => {
+        parsedArray.push([business.start, business.end]);
+      })
+
+      return parsedArray
+
+    }
+
+    setRstrntDataContext({
+      id: restaurantData.id,
+      name: restaurantData.companyName,
+      address: restaurantData.address[0],
+      thumbnailImage: restaurantData.images[0],
+      type: restaurantData.genre,
+      businessHours: parseBusinessHours(restaurantData.operationTime),
+      phoneNumber: restaurantData.phone,
+      website: restaurantData.email
+    });
+
+    navigation.navigate('QueueRegistration')
+
+  }
+
+  useEffect(() => {
+    // get our data set
+    fetchData();
+  }, [])
+
+  useEffect(() => {
+    console.log("query value: ", query);
+    handleFilter(query);
+  }, [query]);
+
+  useEffect(() => {
+
+    // we have to check for both the searchResults and the query state because even if there is a query and no searchresults we shouldn't be displaying the dataset, that should only be displayed when nothing is in the input 
+    if (searchResults.length > 0 || query.length > 0) {
+      setTyped(true);
+    } else {
+      setTyped(false);
+    }
+  }, [searchResults, query])
+
   return (
     <>
 
@@ -77,8 +115,34 @@ const Search = () => {
       
         <CustomModal visible={loading} message={`fetching data...`} marginTop={0} />
       
-        { searchResults ? 
+        { typed ? 
             searchResults.map((restaurant) => (
+              <TouchableOpacity key={restaurant.id} onPress={ () => {
+                handleQuePress(restaurant);
+              }}
+              >
+                <View style={styles.restaurantItem}>
+                  <Image
+                    source={{ uri: restaurant.images[0] }}
+                    style={{ width: 100, height: 100, borderRadius: 10 }}
+                  />
+                  <View style={styles.textContainer}>
+                    <Text style={styles.textCompanyName}>{restaurant.companyName}</Text>
+                    <Text>
+                      {restaurant.address[0]}, {restaurant.address[1]}
+                    </Text>
+                  </View>
+                  <View style={styles.waitList}>
+                    <Text style={styles.waitListText}>{restaurant.queueCount}</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            ))
+          : dataSet.map((restaurant) => (
+            <TouchableOpacity key={restaurant.id} onPress={ () => {
+              handleQuePress(restaurant);
+            }}
+            >
               <View key={restaurant.id} style={styles.restaurantItem}>
                 <Image
                   source={{ uri: restaurant.images[0] }}
@@ -91,26 +155,10 @@ const Search = () => {
                   </Text>
                 </View>
                 <View style={styles.waitList}>
-                  <Text style={styles.waitListText}></Text>
+                  <Text style={styles.waitListText}>{restaurant.queueCount}</Text>
                 </View>
               </View>
-            ))
-          : dataSet.map((restaurant) => (
-            <View key={restaurant.id} style={styles.restaurantItem}>
-              <Image
-                source={{ uri: restaurant.images[0] }}
-                style={{ width: 100, height: 100, borderRadius: 10 }}
-              />
-              <View style={styles.textContainer}>
-                <Text style={styles.textCompanyName}>{restaurant.companyName}</Text>
-                <Text>
-                  {restaurant.address[0]}, {restaurant.address[1]}
-                </Text>
-              </View>
-              <View style={styles.waitList}>
-                <Text style={styles.waitListText}></Text>
-              </View>
-            </View>
+            </TouchableOpacity>
           ))
         }
       </ScrollView>
