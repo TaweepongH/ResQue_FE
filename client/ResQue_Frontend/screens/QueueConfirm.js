@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const QueueConfirm = () => {
 
-  const {queData, bearerToken, rstrntData, setTimeStampContext} = useAuth();
+  const {queData, bearerToken, rstrntData} = useAuth();
 
   const [loading, setLoading] = useState(false);
 
@@ -99,9 +99,7 @@ const QueueConfirm = () => {
   }
 
   const handleConfirm = () => {
-    const time = new Date()
-    setTimeStampContext(JSON.stringify(time));
-    console.log("time confirmed: ", time);
+    
     console.log("confirm");
     navigation.navigate('RestaurantInfo')
   }

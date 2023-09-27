@@ -5,7 +5,7 @@ import { useAuth } from '../../contexts/AuthContext.js'
 
 const QueueHistory = () => {
 
-  const { bearerToken, timeStamp } = useAuth();
+  const { bearerToken } = useAuth();
 
   const [userQueueData, setUserQueueData] = useState([]);
 
@@ -51,9 +51,56 @@ const QueueHistory = () => {
 
   }
 
+  const convertToMonth = (string) => {
+
+    const parsedNum = parseInt(string) - 1;
+
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 
+    'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+    if (parsedNum >= 0 && parsedNum <= 11) {
+      return months[parsedNum]
+    } else {
+      return 'invalid month'
+    }
+
+  }
+
+  const convertTo12Hr = (string) => {
+
+    const strToArray = string.split('');
+
+    const temp1 = strToArray[0];
+    const temp2 = strToArray[1];
+
+    const anteMeridiem = 'AM';
+    const postMeridiem = 'PM';
+
+    const hour = [temp1, temp2].join('');
+    const parsedHour = parseInt(hour);
+
+    const remainingTime = (array) => {
+      const minAndSec = [];
+      for (let i = 2; i < array.length; i++) {
+        minAndSec.push(array[i]);
+      }
+
+      return minAndSec.join('');
+
+    }
+
+    if (parsedHour < 12) {
+      return parsedHour.toString() + remainingTime(strToArray) + " " + anteMeridiem;
+    } else {
+      return (parsedHour - 12).toString() + remainingTime(strToArray) + " " + postMeridiem;
+    }
+
+  }
+
   useEffect(() => {
+
     fetchQueData();
-    console.log("datatatatata", userQueueData)
+
   }, [])
 
     return (
@@ -69,8 +116,11 @@ const QueueHistory = () => {
             text={
               
               <Text style={{ fontSize: 16 }}>
-                {queueData.partnerName}
-                {timeStamp}
+                {queueData.partnerName} { }
+                <Text style={{ fontSize: 12}}>
+                   {convertToMonth(new Date(queueData.updatedAt._seconds * 1000).toISOString().slice(5 , 7)) } {new Date(queueData.updatedAt._seconds * 1000).toISOString().slice(8 , 10)} {convertTo12Hr(new Date(queueData.updatedAt._seconds * 1000).toISOString().slice(11 , 16))}
+                </Text>
+                
               </Text>
               
             }
