@@ -6,7 +6,7 @@ import { useFocusEffect, useRoute, useNavigation } from '@react-navigation/nativ
 import { useAuth } from '../../contexts/AuthContext.js';
 import ListItem from '../../Components/ListItem';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import QueueConfirm from '../QueueConfirm';
+import QueueHistory from './QueueHistory';
 
 
 const Stack = createStackNavigator();
@@ -20,7 +20,7 @@ const MyinfoStack = () => {
     >
       <Stack.Screen name="MyInfo" component={MyInfo} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
-      <Stack.Screen name="QueueConfirm" component={QueueConfirm} />
+      <Stack.Screen name="QueueHistory" component={QueueHistory} />
     </Stack.Navigator>
   );
 };
@@ -32,6 +32,8 @@ export const getMyInfoTabHeaderTitle = (route) => {
       return 'My Info';
     case 'EditProfile':
       return 'Edit Profile';
+    case 'QueueHistory':
+      return 'Queue History';
   }
 };
 

@@ -99,6 +99,7 @@ const QueueConfirm = () => {
   }
 
   const handleConfirm = () => {
+    
     console.log("confirm");
     navigation.navigate('RestaurantInfo')
   }
