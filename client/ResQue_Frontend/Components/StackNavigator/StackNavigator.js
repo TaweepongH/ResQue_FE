@@ -16,6 +16,7 @@ import Settings from '../../screens/Settings';
 import Feedback from '../Feedback';
 import TermsPolicies from '../../screens/more/TermsPolicies';
 import Splash from '../../screens/Splash';
+import { theme } from '../../styles/theme';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,15 +26,14 @@ const StackNavigator = () => {
       initialRouteName="Splash"
       screenOptions={{  
         headerStyle: {
-          backgroundColor: 'white',
-          height: 110, 
-        },
+          backgroundColor: theme.color.white,
+        }, 
         headerTitleStyle: {
-          fontWeight: 'bold',
-          fontSize: 24,
+          fontFamily: theme.font.primary,
+          fontWeight: '500',
+          fontSize: theme.fontsize.xxl,
         },
-        headerTintColor: 'black',
-        headerTitleAlign: 'center',
+        headerTintColor: theme.color.black,
         // headerBackTitleVisible: false, // not working
         headerBackTitleStyle: {fontSize: 0} 
       }}
