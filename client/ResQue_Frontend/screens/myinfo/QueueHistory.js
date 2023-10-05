@@ -4,6 +4,8 @@ import QueueHistoryList from '../../Components/QueueHistoryList';
 import { useAuth } from '../../contexts/AuthContext.js'
 import CustomModal from '../../Components/CustomModal';
 
+// use the moment.js library
+
 const QueueHistory = () => {
 
   const { bearerToken } = useAuth();
@@ -77,17 +79,19 @@ const QueueHistory = () => {
 
   }
 
+  //
+
   const convertTo12Hr = (string) => {
 
     const strToArray = string.split('');
 
-    const temp1 = strToArray[0];
-    const temp2 = strToArray[1];
+    const hrDigit1 = strToArray[0];
+    const hrDigit2 = strToArray[1];
 
     const anteMeridiem = 'AM';
     const postMeridiem = 'PM';
 
-    const hour = [temp1, temp2].join('');
+    const hour = [hrDigit1, hrDigit2].join('');
     const parsedHour = parseInt(hour);
 
     const remainingTime = (array) => {

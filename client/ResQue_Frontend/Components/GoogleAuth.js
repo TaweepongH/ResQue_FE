@@ -25,13 +25,10 @@ const GoogleAuth = () => {
     const { setEmailContext, setBearerTokenContext, setPasswordContext } = useAuth();
     // const [userData, setUserData] = useState('');
     // the password will just have to be a random string, because Google will not provide us with a user's password
-    const password = "GooglePassword";
-    // const password = Array.from({ length: 24 }, () => Math.random().toString(36)[2]).join('');
-
 
     const handleLogin = (userData) => {
 
-        console.log("this is the userData: ", userData);
+        console.log(`this is the relevant userData: ${userData.email} ${userData.token}`);
 
         fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/login`, {
       method: 'POST',
@@ -39,7 +36,7 @@ const GoogleAuth = () => {
     },
     body: JSON.stringify({
       email: userData.email,
-      password: password
+      socialMediaToken: userData.id
     }),
     })
     .then((response) => response.text())
@@ -69,8 +66,6 @@ const GoogleAuth = () => {
     const handleRegistration  = (userData) => {
 
         console.log('User Email:', userData.email);
-        console.log('User Password:', password);
-
         console.log('user first name: ', userData.givenName);
         console.log('user last name: ', userData.familyName);
 
@@ -81,10 +76,11 @@ const GoogleAuth = () => {
         },
         body: JSON.stringify({
           email: `${userData.email}`,
-          password: `${password}`,
           firstName: `${userData.givenName}`,
           lastName: `${userData.familyName}`, 
-          active: true
+          active: true,
+          socialMediaToken: `${userData.id}`
+
         }),
       }).then((response) => response.text())
         .then((data) => {
@@ -96,7 +92,6 @@ const GoogleAuth = () => {
 
             // handle login functionality here
             handleLogin(userData)
-            
 
           } else {
             // otherwise we should register them then log them in
