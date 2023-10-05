@@ -43,7 +43,6 @@ const GoogleAuth = () => {
     .then((data) => {
 
         console.log("data: ", data); // Success message from the server
-        
         // this is where we will define the bearerToken for the rest of our app to use
         // if there is an accessToken key in the data message, then we will set the bearerTokenContext to it
         if (JSON.parse(data).accessToken) {
