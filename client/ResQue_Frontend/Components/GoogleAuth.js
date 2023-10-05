@@ -31,30 +31,30 @@ const GoogleAuth = () => {
         console.log(`this is the relevant userData: ${userData.email} ${userData.token}`);
 
         fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/login`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json; charset=utf-8',
-    },
-    body: JSON.stringify({
-      email: userData.email,
-      socialMediaToken: userData.id
-    }),
-    })
-    .then((response) => response.text())
-    .then((data) => {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=utf-8',
+            },
+            body: JSON.stringify({
+            email: userData.email,
+            socialMediaToken: userData.id
+            }),
+        })
+        .then((response) => response.text())
+        .then((data) => {
 
-        console.log("data: ", data); // Success message from the server
-        // this is where we will define the bearerToken for the rest of our app to use
-        // if there is an accessToken key in the data message, then we will set the bearerTokenContext to it
-        if (JSON.parse(data).accessToken) {
-            setBearerTokenContext(JSON.parse(data).accessToken)
-        } else {
-            //error messages etc.
-            Alert.alert(JSON.parse(data).title, JSON.parse(data).message);
-            navigation.navigate('Login');
-        }
-        
+            console.log("data: ", data); // Success message from the server
+                // this is where we will define the bearerToken for the rest of our app to use
+                // if there is an accessToken key in the data message, then we will set the bearerTokenContext to it
+            if (JSON.parse(data).accessToken) {
+                setBearerTokenContext(JSON.parse(data).accessToken)
+            } else {
+                    //error messages etc.
+                Alert.alert(JSON.parse(data).title, JSON.parse(data).message);
+                navigation.navigate('Login');
+            }
+                
         }).catch((error) => {
-        console.error('Error:', error);
+            console.error('Error:', error);
         });
 
         setPasswordContext(password);
