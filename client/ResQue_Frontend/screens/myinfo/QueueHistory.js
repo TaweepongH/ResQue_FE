@@ -1,15 +1,20 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import QueueHistoryList from '../../Components/QueueHistoryList';
 import { useAuth } from '../../contexts/AuthContext.js'
+import CustomModal from '../../Components/CustomModal';
 
 const QueueHistory = () => {
 
   const { bearerToken } = useAuth();
 
   const [userQueueData, setUserQueueData] = useState([]);
+  const [hasQueues, setHasQueues] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchQueData = async () => {
+
+    setLoading(true);
 
     const url = 'https://app-57vwexmexq-uc.a.run.app/api/queues/user/currentqueue';
 
@@ -25,6 +30,10 @@ const QueueHistory = () => {
       });
 
       if (response.ok) {
+
+        setLoading(false);
+
+        setHasQueues(true);
 
         const data = await response.json();
 
@@ -42,6 +51,8 @@ const QueueHistory = () => {
         } else {
           console.log("error, response status: ", response.status);
         }
+
+        setLoading(false);
 
       }
 
@@ -97,6 +108,45 @@ const QueueHistory = () => {
 
   }
 
+  const cancelQue = async (restaurantID) => {
+
+    const url = "https://app-57vwexmexq-uc.a.run.app/api/queues/user/cancelqueue"
+
+    try {
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          Authorization: `Bearer ${bearerToken}`,
+        },
+        body: JSON.stringify({
+          partnerId: `${restaurantID}`,
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("response from backend: ", data);
+      } else {
+        console.log("error: ", response.status, response);
+      }
+    } catch (error) {
+      console.error("Network error: ", error);
+    }
+
+
+  }
+
+  const handleLeave = (restaurantID) => {
+
+    console.log("Leave pressed");
+
+    cancelQue(restaurantID);
+
+    setUserQueueData(prevData => prevData.filter(item => item.partnerId !== restaurantID));
+
+  }
+
   useEffect(() => {
 
     fetchQueData();
@@ -104,31 +154,47 @@ const QueueHistory = () => {
   }, [])
 
     return (
-        <View style={styles.container}>
-          
-          
-          {userQueueData.map((queueData) => {
 
-            // return <Text>{queueData.partnerName}</Text>
-          return   <QueueHistoryList 
-            key={Math.random() * 1000}
-            icon="cloud" 
-            text={
-              
-              <Text style={{ fontSize: 16 }}>
-                {queueData.partnerName} { }
-                <Text style={{ fontSize: 12}}>
-                   {convertToMonth(new Date(queueData.updatedAt._seconds * 1000).toISOString().slice(5 , 7)) } {new Date(queueData.updatedAt._seconds * 1000).toISOString().slice(8 , 10)} {convertTo12Hr(new Date(queueData.updatedAt._seconds * 1000).toISOString().slice(11 , 16))}
-                </Text>
-                
-              </Text>
-              
-            }
-          />
-          })}
-          
-          
-        </View>
+      
+        <View style={styles.container}>
+
+          <CustomModal visible={loading}></CustomModal>
+
+          { hasQueues ?
+            
+            userQueueData.map((queueData) => {
+               
+              return <View key={Math.random() * 1000} style={styles.queueItemContainer}>
+
+                  <QueueHistoryList 
+                  key={Math.random() * 1000}
+                  icon="cloud" 
+                  text=
+                    {
+                    
+                      <Text style={{ fontSize: 16 }}>
+                        {queueData.partnerName} { }
+                        <Text style={{ fontSize: 12}}>
+                          {convertToMonth(new Date(queueData.updatedAt._seconds * 1000).toISOString().slice(5 , 7)) } {new Date(queueData.updatedAt._seconds * 1000).toISOString().slice(8 , 10)} {convertTo12Hr(new Date(queueData.updatedAt._seconds * 1000).toISOString().slice(11 , 16))}
+                        </Text>
+
+
+                      <TouchableOpacity onPress={ () => {handleLeave(queueData.partnerId)}}>
+                        <View style={styles.waitList}>
+                        <Text style={styles.waitListText}>Leave</Text>
+                        </View>
+                      </TouchableOpacity>
+                        
+                      </Text>
+                    }
+                />
+              </View>
+
+          }) : loading ? <></> :
+
+          <Text> You aren't queue'd up for anything! </Text>      
+        }
+        </View> 
       );
 };
     
@@ -162,6 +228,26 @@ const styles = StyleSheet.create({
       infoContainer: {
         flex: 1,
         alignItems: 'center',
+      },
+      waitList: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 60,
+        height: 40,
+        backgroundColor: '#CC313D',
+        borderRadius: 20,
+        
+      },
+      waitListText: {
+        color: 'white',
+        fontSize: 12,
+      },
+      queueItemContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 16, // Add padding to separate items
+        marginBottom: 16, // Add margin to separate items
       },
 });
     
