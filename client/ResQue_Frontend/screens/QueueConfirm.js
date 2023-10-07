@@ -10,9 +10,10 @@ const QueueConfirm = () => {
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
+  
 
   useEffect(() => {
-    console.log("que data: ", queData);
+    console.log("que data: checking !", queData);
   }, [])
 
   const suffixParse = (num) => {
@@ -115,10 +116,12 @@ const QueueConfirm = () => {
           <QueueInfoItem label="Restaurant Name" answer={`${queData.partner[0].companyName}`} />
           <QueueInfoItem label="Party size" answer={`${queData.partySize}`} />
           <QueueInfoItem label="Estimated wait time" answer={`${queData.queueNo * Math.floor(Math.random() * 5) + 5}`} />
-          <View>
+          <QueueInfoItem label="Request" answer={`${queData.request}`} />
+
+          {/* <View>
             <Text style={styles.queueInfoTxt}>Request</Text>
             <Text>This is an answer for the request</Text>
-          </View>
+          </View> */}
         </View>
       </View>
       <View style={styles.buttons}>
