@@ -102,6 +102,7 @@ const QueueConfirm = () => {
     
     console.log("confirm");
     navigation.navigate('RestaurantInfo')
+    
   }
 
   return (
