@@ -22,7 +22,7 @@ const GoogleAuth = () => {
 
     const navigation = useNavigation();
 
-    const { setEmailContext, setBearerTokenContext, setPasswordContext } = useAuth();
+    const { setEmailContext, setBearerTokenContext } = useAuth();
     // const [userData, setUserData] = useState('');
     // the password will just have to be a random string, because Google will not provide us with a user's password
 
@@ -57,7 +57,6 @@ const GoogleAuth = () => {
             console.error('Error:', error);
         });
 
-        setPasswordContext(password);
         setEmailContext(userData.email);
         
     }
