@@ -44,12 +44,6 @@ const QueueHistory = () => {
 
         setUserQueueData(data);
 
-        const dateObject = new Date(data[0].updatedAt._seconds * 1000)
-        const options = { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-        const formattedDate = dateObject.toLocaleDateString('en-US', options).replace('at', '')
-
-        console.log("YO: ", formattedDate);
-
       } else {
 
         if (response.status === 401) {
