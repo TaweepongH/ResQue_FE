@@ -66,9 +66,15 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Octicons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Nohemi-Bold.otf</string>
+		<string>Nohemi-Medium.otf</string>
+		<string>Nohemi-SemiBold.otf</string>
+		<string>Cygre-Bold.ttf</string>
+		<string>Cygre-Regular.ttf</string>
+		<string>Cygre-SemiBold.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string></string>
+	<string/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

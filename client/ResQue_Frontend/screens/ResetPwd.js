@@ -2,6 +2,8 @@ import { View, Text, TextInput,TouchableOpacity , StyleSheet, Alert } from 'reac
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'; 
 import { useAuth } from '../contexts/AuthContext'
+import { theme } from '../styles/theme';
+import CustomButton from '../Components/CustomButton';
 
 const ResetPwd = () => {
 
@@ -48,56 +50,44 @@ const ResetPwd = () => {
 
   return (
     <View style={styles.container}>
-    <View style={styles.items}>
-    <Text style={styles.inputEmail_txt}>Please enter your email</Text>
+      <View style={styles.items}>
+        <Text style={styles.inputEmail_txt}>Please enter your email</Text>
         <TextInput 
           style={styles.infoInput}placeholder='helloitsme@example.com'
           onChangeText={setEmailValue}
           autoCapitalize="none"
         />
-       <TouchableOpacity style={styles.button} onPress={handlePwrdReset}>
-        <Text style={styles.text}>Send One-Time Password</Text>
-      </TouchableOpacity>
-    </View>
+      </View>
+      <CustomButton title="Send One-Time Password" onPress={handlePwrdReset}/>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container:{
-    flex:1,
-    backgroundColor:'#FEEEEF',
+    flex: 1,
+    backgroundColor: theme.color.lightpink,
     alignItems: 'center',
   },
   items:{
-    width:'90%',
-    alignItems:'center',
-    marginTop:30,
-    marginBottom:30,
+    width: '80%',
+    marginTop: 20,
   },
   inputEmail_txt:{
-    width:'88%',
-  },
-  button: {
-    backgroundColor: '#CC313D',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius:3,
-    width:'90%',
-    marginTop:20,
-    height:35,
-  },
-  text:{
-    fontWeight:'bold',
-    color:'white',
-    textAlign:'center',
-    fontSize:18,
+    marginBottom: 5, 
+    fontSize: theme.fontsize.md, 
+    fontFamily: theme.font.secondary, 
   },
   infoInput: {
-    backgroundColor: 'white',
+    backgroundColor: theme.color.white,
+    borderColor: theme.color.gray,
     borderRadius: 5,
-    marginTop:10,
-    padding: 10,
-    width: '90%',
+    paddingHorizontal: 10,
+    paddingTop: 5,
+    paddingBottom: 10,
+    marginBottom: 12,
+    width: '100%',
+    fontFamily: theme.font.secondary,
+    fontSize: theme.fontsize.md,
   },
 });
 

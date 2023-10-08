@@ -1,41 +1,46 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
+import { theme } from '../styles/theme';
 
 const CustomButton = ({ title, onPress, style, icon }) => {
   return (
     <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
       <View style={styles.container}>
-        <IconAnt name={icon} size={30} style={styles.icon} />
+        {icon ? <IconAnt name={icon} size={22} style={styles.icon} /> : <></>}
         <Text style={styles.buttonText}>{title}</Text>
       </View>
     </TouchableOpacity>
   );
 };
 
+
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#CC313D',
-    borderRadius: 4,
-    marginTop: 10,
+    backgroundColor: theme.color.red,
+    borderRadius: 5,
+    marginTop: 16,
     width: '80%',
-    height: 40,
-    justifyContent: 'center',
+    paddingVertical: 3,
   },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20, 
+    paddingHorizontal: 10, 
   },
   buttonText: {
-    color: '#FEEEEF',
-    fontSize: 16,
-    fontWeight: 'bold',
+    width: '100%',
     textAlign: 'center',
+    fontFamily: theme.font.secondary,    
+    fontWeight: '500',
+    color: theme.color.lightpink ,
+    fontSize: theme.fontsize.lg,
+    paddingBottom: 5,
   },
   icon: {
     color:'white',
-    marginRight: 30, 
+    position: 'absolute',
+    left: 10,
   },
 });
 

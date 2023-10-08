@@ -1,0 +1,29 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Cygre-Bold.ttf",
+      "sha1": "3bc30e32afb289aa93eaaf8f4ce9d96f2992b2f6"
+    },
+    {
+      "path": "assets/fonts/Cygre-Regular.ttf",
+      "sha1": "6d2b1ea0cc1ed1c8bb621e64abf1090726d1b798"
+    },
+    {
+      "path": "assets/fonts/Cygre-SemiBold.ttf",
+      "sha1": "6d44771da2aa586d9086b69a92073b71a52f4ece"
+    },
+    {
+      "path": "assets/fonts/Nohemi-Bold.otf",
+      "sha1": "57f73c9ad4f6c25cd02f22df16cc46cea29c1032"
+    },
+    {
+      "path": "assets/fonts/Nohemi-Medium.otf",
+      "sha1": "c7e73b0190af427befd40532fff9f4eb0ee3a6d4"
+    },
+    {
+      "path": "assets/fonts/Nohemi-SemiBold.otf",
+      "sha1": "ccb5e3b0739ea1dc5b02a6bf9d3b71883c5e7c3b"
+    }
+  ]
+}
