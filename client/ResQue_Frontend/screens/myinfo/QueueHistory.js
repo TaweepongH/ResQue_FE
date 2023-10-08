@@ -44,6 +44,12 @@ const QueueHistory = () => {
 
         setUserQueueData(data);
 
+        const dateObject = new Date(data[0].updatedAt._seconds * 1000)
+        const options = { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+        const formattedDate = dateObject.toLocaleDateString('en-US', options).replace('at', '')
+
+        console.log("YO: ", formattedDate);
+
       } else {
 
         if (response.status === 401) {
@@ -64,51 +70,13 @@ const QueueHistory = () => {
 
   }
 
-  const convertToMonth = (string) => {
+  const parseTime = (seconds) => {
 
-    const parsedNum = parseInt(string) - 1;
+    const dateObject = new Date(seconds * 1000);
+    const options = { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    const formattedDate = dateObject.toLocaleDateString('en-US', options).replace('at', '');
 
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 
-    'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
-    if (parsedNum >= 0 && parsedNum <= 11) {
-      return months[parsedNum]
-    } else {
-      return 'invalid month'
-    }
-
-  }
-
-  //
-
-  const convertTo12Hr = (string) => {
-
-    const strToArray = string.split('');
-
-    const hrDigit1 = strToArray[0];
-    const hrDigit2 = strToArray[1];
-
-    const anteMeridiem = 'AM';
-    const postMeridiem = 'PM';
-
-    const hour = [hrDigit1, hrDigit2].join('');
-    const parsedHour = parseInt(hour);
-
-    const remainingTime = (array) => {
-      const minAndSec = [];
-      for (let i = 2; i < array.length; i++) {
-        minAndSec.push(array[i]);
-      }
-
-      return minAndSec.join('');
-
-    }
-
-    if (parsedHour < 12) {
-      return parsedHour.toString() + remainingTime(strToArray) + " " + anteMeridiem;
-    } else {
-      return (parsedHour - 12).toString() + remainingTime(strToArray) + " " + postMeridiem;
-    }
+    return formattedDate;
 
   }
 
@@ -179,7 +147,7 @@ const QueueHistory = () => {
                       <Text style={{ fontSize: 16 }}>
                         {queueData.partnerName} { }
                         <Text style={{ fontSize: 12}}>
-                          {convertToMonth(new Date(queueData.updatedAt._seconds * 1000).toISOString().slice(5 , 7)) } {new Date(queueData.updatedAt._seconds * 1000).toISOString().slice(8 , 10)} {convertTo12Hr(new Date(queueData.updatedAt._seconds * 1000).toISOString().slice(11 , 16))}
+                          {parseTime(queueData.updatedAt._seconds)}
                         </Text>
 
 
