@@ -1,7 +1,9 @@
 import { View, Text, TextInput,TouchableOpacity , StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'; 
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../contexts/AuthContext';
+import { theme } from '../styles/theme';
+import CustomButton from '../Components/CustomButton';
 
 const CreateNewPwd = () => {
 
@@ -57,43 +59,38 @@ const CreateNewPwd = () => {
 
   return (
     <View style={styles.container}>
-    <View style={styles.items}>
-    <Text style={styles.inputEmail_txt}>Enter a new password</Text>
-    <TextInput 
-          style={styles.infoInput}placeholder='Please enter 8 - 16 characters'
-          onChangeText={setPwdValue}
-          autoCapitalize="none"
-    />
-    </View>
-    <View style={styles.items}>
-    <Text style={styles.inputEmail_txt}>Confirm Password</Text>
-    <TextInput 
-          style={styles.infoInput}placeholder='Please enter 8 - 16 characters'
-          onChangeText={setPwdConfirmValue}
-          autoCapitalize="none"
-    />
-    </View>
-    <TouchableOpacity style={styles.button} onPress={handlePwrdReset}>
-        <Text style={styles.text}>Submit</Text>
-    </TouchableOpacity>
-    
+      <View style={styles.items}>
+        <Text style={styles.inputPw_txt}>Enter a new password</Text>
+        <TextInput 
+              style={styles.infoInput}placeholder='Please enter 8 - 16 characters'
+              onChangeText={setPwdValue}
+              autoCapitalize="none"
+        />
+        <Text style={styles.inputPw_txt}>Confirm Password</Text>
+        <TextInput 
+              style={styles.infoInput}placeholder='Please enter 8 - 16 characters'
+              onChangeText={setPwdConfirmValue}
+              autoCapitalize="none"
+        />
+      </View>
+      <CustomButton title="Submit" onPress={handlePwrdReset} />
     </View>
   );
 }
 const styles = StyleSheet.create({
   container:{
-    flex:1,
-    backgroundColor:'#FEEEEF',
+    flex: 1,
+    backgroundColor: theme.color.lightpink,
     alignItems: 'center',
   },
   items:{
-    width:'90%',
-    alignItems:'center',
-    marginTop:15,
-    marginBottom:10,
+    width: '80%',
+    marginTop: 20,
   },
-  inputEmail_txt:{
-    width:'88%',
+  inputPw_txt:{
+    marginBottom: 5, 
+    fontSize: theme.fontsize.md, 
+    fontFamily: theme.font.secondary, 
   },
   button: {
     backgroundColor: '#CC313D',
@@ -111,11 +108,16 @@ const styles = StyleSheet.create({
     fontSize:18,
   },
   infoInput: {
-    backgroundColor: 'white',
+    backgroundColor: theme.color.white,
+    borderColor: theme.color.gray,
     borderRadius: 5,
-    marginTop:10,
-    padding: 10,
-    width: '90%',
+    paddingHorizontal: 10,
+    paddingTop: 5,
+    paddingBottom: 10,
+    marginBottom: 12,
+    width: '100%',
+    fontFamily: theme.font.secondary,
+    fontSize: theme.fontsize.md,
   },
 });
 

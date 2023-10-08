@@ -8,19 +8,19 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
-
+import { theme } from '../styles/theme';
+import CustomButton from './CustomButton';
 import { useNavigation } from '@react-navigation/native';
 
-const InputField = ({ label, placeholder, onChangeText, secureTextEntry }) => (
+const InputField = ({ label, placeholder, onChangeText}) => (
   <>
-    <Text style={{ color: 'black', fontSize: 15, marginLeft: 40, marginBottom: 3 }}>
+    <Text style={{ fontSize: theme.fontsize.md, marginBottom: 5, fontFamily: theme.font.secondary, }}>
       {label}
     </Text>
     <TextInput
       style={styles.input_info}
       label={label}
       placeholder={placeholder}
-      // secureTextEntry={secureTextEntry}
       onChangeText={onChangeText}
       autoCapitalize="none"
     />
@@ -141,12 +141,8 @@ const Register = () => {
           onChangeText={(text) => handleNameChange('lastName', text)}
           secureTextEntry={false}
         ></InputField>
-
-        <TouchableOpacity style={styles.registerButton} onPress={handleRegistration}>
-          <Text style={styles.registerButtonText}>Register</Text>
-        </TouchableOpacity>
       </View>
-
+      <CustomButton title="Register" onPress={handleRegistration}/>
     </View>
   );
 };
@@ -154,50 +150,24 @@ const Register = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#FEEEEF',
-    paddingBottom: 190,
+    alignItems: 'center',
+    backgroundColor: theme.color.lightpink,
   },
   inputContainer: {
-    marginTop: 70
+    width: '80%',
+    marginTop: 20,
   },
   input_info: {
-    backgroundColor: 'white',
-    borderColor: 'gray',
+    backgroundColor: theme.color.white,
+    borderColor: theme.color.gray,
     borderRadius: 5,
-    padding: 10,
-    marginBottom: 20,
-    marginLeft: 40,
-    width: '80%',
-  },
-  infoInput: {
-    backgroundColor: 'white',
-    borderRadius: 5,
-    padding: 10,
-    width: '90%',
-  },
-  registerTitle: {
-    alignSelf: 'center',
-    marginBottom: 20,
-  },
-
-  labelText: {
-    marginBottom: 5,
-  },
-  registerButton: {
-    backgroundColor: '#CC313D',
-    borderRadius: 3,
-    width: '80%',
-    height: 35,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 15,
-    alignSelf: 'center',
-  },
-
-  registerButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    paddingHorizontal: 10,
+    paddingTop: 5,
+    paddingBottom: 10,
+    marginBottom: 12,
+    width: '100%',
+    fontFamily: theme.font.secondary,
+    fontSize: theme.fontsize.md,
   },
 });
 

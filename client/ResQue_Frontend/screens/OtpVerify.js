@@ -4,6 +4,8 @@ import { useState, useRef } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, TextInput, Alert } from 'react-native';
 import { useAuth } from '../contexts/AuthContext'
 import { useNavigation } from '@react-navigation/native'; 
+import { theme } from '../styles/theme';
+import CustomButton from '../Components/CustomButton';
 
 const OtpVerify = () => {
 
@@ -112,9 +114,7 @@ const OtpVerify = () => {
           />
         ))}
       </View>
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Verify</Text>
-        </TouchableOpacity>
+      <CustomButton title="Register" onPress={handleSubmit}/>
 
         <View style={styles.resendContainer}>
           <Text style={styles.noCodeText}>Didn't get the code? </Text>
@@ -130,66 +130,45 @@ const OtpVerify = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FEEEEF',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  contentContainer: {
     alignItems: 'center',
-    marginTop:20,
-    flexDirection: 'row',
-    borderColor: 'red',
-    justifyContent: 'space-around'
+    backgroundColor: theme.color.lightpink,
   },
   informText: {
-    fontSize: 16,
-    marginTop: 40,
+    marginVertical: 20,
+    fontSize: theme.fontsize.md, 
+    fontFamily: theme.font.secondary, 
+  },
+  contentContainer: {
+    width: '90%',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   otpInput: {
     width: '10%',
     aspectRatio: 1,
-    marginLeft: 20,
     borderWidth: 1, // Border width
     borderRadius: 5,
-    borderColor:'grey',
-    backgroundColor: 'white',
+    borderColor: theme.color.gray,
+    backgroundColor: theme.color.white,
     textAlign: 'center',
-    fontSize: 16,
-    fontWeight: '500'
-  },
-  // inputFieldStyle: {
-  //   width: 30,
-  //   height: 30,
-  //   backgroundColor: 'white',
-  //   borderColor:'grey',
-  // },
-  button: {
-    backgroundColor: '#CC313D',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 3,
-    width: '80%',
-    height: 40,
-    marginTop: 20,
-  },
-  buttonText: {
-    fontWeight: 'bold',
-    color: 'white',
-    fontSize: 18,
+    fontSize: theme.fontsize.md,
+    fontWeight: '500',
+    marginBottom: 5,
   },
   resendContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
     marginTop: 10,
   },
   noCodeText: {
-    color: 'grey',
+    color: theme.color.gray,
+    fontFamily: theme.font.secondary,
   },
   resendText: {
-    color: '#CC313D',
+    color: theme.color.red,
+    fontFamily: theme.font.secondary,
     textDecorationLine: 'underline',
-    fontWeight: 'bold',
     marginLeft: 5,
+    fontWeight:'500', 
   },
 });
 

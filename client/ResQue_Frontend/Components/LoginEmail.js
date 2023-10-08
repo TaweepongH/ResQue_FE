@@ -3,7 +3,8 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
-import CustomModal from './CustomModal.js';
+import { theme } from '../styles/theme';
+import CustomButton from './CustomButton';
 
 
 const LoginEmail = () => {
@@ -101,9 +102,7 @@ const LoginEmail = () => {
       </TouchableOpacity>
 
       {/* where the handleLogin function is called */}
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin} >
-        <Text style={styles.loginText}>Log in</Text>
-      </TouchableOpacity>
+      <CustomButton title="Log in" onPress={handleLogin}/>
 
       <View style={styles.signupContainer}>
         <Text style={styles.noAccountText}>Don't have an account?  </Text>
@@ -119,58 +118,49 @@ const LoginEmail = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FEEEEF',
+    backgroundColor: theme.color.lightpink,
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 290,
   },
   inputContainer: {
     width: '80%',
-    marginBottom: 10,
+    marginTop: 30,
   },
   input_info: {
-    backgroundColor:'white',
-    borderColor: 'gray',
+    backgroundColor: theme.color.white,
+    borderColor: theme.color.gray,
     borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
+    paddingHorizontal: 10,
+    paddingTop: 5,
+    paddingBottom: 10,
+    marginBottom: 12,
     width: '100%',
-  },
-  title: {
-    marginBottom: 20,
-  },
-  loginButton: {
-    backgroundColor: '#CC313D',
-    borderRadius: 3,
-    width: '80%',
-    height: 35,
-    alignItems: 'center',
-
+    fontFamily: theme.font.secondary,
+    fontSize: theme.fontsize.md,
   },
   forgotButton: {
     alignSelf: 'flex-end',
-    marginBottom: 20,
+    marginBottom: 10,
     marginRight: 40,
   },
   forgotText: {
-    color: '#CC313D',
+    fontFamily: theme.font.secondary,
+    color: theme.color.red,
+    fontSize: theme.fontsize.sm,
+    fontWeight: '500',
     textAlign: 'right',
-  },
-  loginText: {
-    marginTop: 8,
-    color: 'white',
-    fontWeight: 'bold',
   },
   signupContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 20,
+    marginTop: 10,
   },
   noAccountText: {
-    color: 'grey',
+    fontFamily: theme.font.secondary,
+    color: theme.color.gray,
   },
   signupText: {
-    color: '#CC313D',
+    fontFamily: theme.font.secondary,
+    color: theme.color.red,
+    fontWeight: '500',
     textDecorationLine: 'underline',
   },
 });
