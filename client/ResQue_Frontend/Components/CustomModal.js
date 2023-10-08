@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { View, Modal, ActivityIndicator, StyleSheet, Text } from 'react-native';
+import { theme } from '../styles/theme';
 
 // this is our loading/spinning animation
 
@@ -14,7 +15,7 @@ const CustomModal = ({ visible, message, marginTop }) => {
     >
       <View style={styles.modalContainer}>
       <View style={[styles.modalContent, { marginTop: marginTop }]}>
-          <ActivityIndicator size="large" color="#CC313D" />
+          <ActivityIndicator size="large" color={theme.color.red} />
           <Text style={styles.loadingText}>{message}</Text>
         </View>
       </View>
@@ -30,15 +31,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: theme.color.white,
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',
   },
   loadingText: {
     marginTop: 10,
-    fontSize: 16,
-    color: '#333',
+    fontSize: theme.fontsize.md,
+    color: theme.color.blackAlt,
+    fontFamily: theme.font.secondary,
   },
 });
 

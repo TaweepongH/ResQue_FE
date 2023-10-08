@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'rea
 import { useAuth } from '../contexts/AuthContext.js';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import CustomModal from './CustomModal.js';
+import { theme } from '../styles/theme';
 
 const RestaurantList = () => {
 
@@ -91,7 +92,7 @@ const RestaurantList = () => {
           
           <View style={styles.loadingContainer}>
             
-            <CustomModal visible={loading} message={`fetching data...`} marginTop={250} />
+            <CustomModal visible={loading} message={`Loading...`} marginTop={250} />
             
           </View>
           
@@ -106,11 +107,11 @@ const RestaurantList = () => {
                 
                 <Image
                   source={{ uri: restaurant.images[0] }}
-                  style={{ width: 100, height: 100, borderRadius: 10 }}
+                  style={{ width: 70, height: 70, borderRadius: 5 }}
                 />
                 <View style={styles.textContainer}>
                   <Text style={styles.textCompanyName}>{restaurant.companyName}</Text>
-                  <Text>
+                  <Text style={styles.textAddress}>
                     {restaurant.address[0]}, {restaurant.address[1]}
                   </Text>
                 </View>
@@ -123,30 +124,30 @@ const RestaurantList = () => {
           ))
         )}
       </View>
-      
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10,
-    marginTop: 20,
-  },
-  selectedAreaText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  textCompanyName: {
-    fontWeight: 'bold',
-    fontSize: 18,
+    marginTop: 10,
   },
   restaurantItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 16,
   },
+  textCompanyName: {
+    fontSize: theme.fontsize.xl,
+    fontFamily: theme.font.secondary,
+    color: theme.color.blackAlt,
+    lineHeight: theme.fontsize.xl,
+  },
+  textAddress: {
+    fontFamily: theme.font.secondary,
+    fontsize: theme.fontsize.lg,
+    color: theme.color.gray,
+  },  
   textContainer: {
     marginLeft: 10,
     flex: 1,
@@ -154,14 +155,15 @@ const styles = StyleSheet.create({
   waitList: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 40,
-    height: 40,
-    backgroundColor: '#CC313D',
+    width: 35,
+    height: 35,
+    backgroundColor: theme.color.red,
     borderRadius: 20,
   },
   waitListText: {
-    color: 'white',
-    fontSize: 16,
+    color: theme.color.lightpink,
+    fontSize: theme.fontsize.xl,
+    fontFamily: theme.font.primary,
   },
   loadingContainer: {
     alignItems: 'center',
