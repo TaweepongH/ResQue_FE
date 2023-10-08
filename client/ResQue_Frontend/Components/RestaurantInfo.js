@@ -75,9 +75,9 @@ const RestaurantInfo = ({ route }) => {
           </View>
         </View>
         <View style={styles.horizontalSeparator} />
-        <TouchableOpacity style={styles.joinQueueButton} onPress={handleJoinQueue}>
+        {/* <TouchableOpacity style={styles.joinQueueButton} onPress={handleJoinQueue}>
           <Text style={styles.joinQueueButtonText}>Join a Queue!</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </ScrollView>
     </View>
   );
