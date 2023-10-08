@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* ResQue_FrontendTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ResQue_FrontendTests.m */; };
+		04E3D6B32AD20CA2002EA173 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04E3D6B22AD20CA2002EA173 /* GoogleService-Info.plist */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		17C6F00B805145A0AD5C4375 /* Cygre-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8296EA8B81084EFE92499191 /* Cygre-SemiBold.ttf */; };
 		6168C88D2ABBC81600C8F3A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6168C88C2ABBC81600C8F3A0 /* GoogleService-Info.plist */; };
 		6A20860C8ACF480AAC381CBA /* Nohemi-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4AD4099FDAD7440093AD021E /* Nohemi-Medium.otf */; };
+
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8DA545E980F74419A864FDC4 /* Cygre-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F84933D7DAE4295885A6C48 /* Cygre-Bold.ttf */; };
 		A04C710334E8467C8CFAEE9C /* Nohemi-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 64492FDD2A744F2C89548733 /* Nohemi-Bold.otf */; };
@@ -37,6 +39,7 @@
 		00E356EE1AD99517003FC87E /* ResQue_FrontendTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResQue_FrontendTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ResQue_FrontendTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResQue_FrontendTests.m; sourceTree = "<group>"; };
+		04E3D6B22AD20CA2002EA173 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0789D6432AA1043ABDBEF7DF /* libPods-ResQue_Frontend.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ResQue_Frontend.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F84933D7DAE4295885A6C48 /* Cygre-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Cygre-Bold.ttf"; path = "../assets/fonts/Cygre-Bold.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* ResQue_Frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ResQue_Frontend.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,7 +51,6 @@
 		3B46FF28B693515111959C69 /* Pods-ResQue_Frontend-ResQue_FrontendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResQue_Frontend-ResQue_FrontendTests.debug.xcconfig"; path = "Target Support Files/Pods-ResQue_Frontend-ResQue_FrontendTests/Pods-ResQue_Frontend-ResQue_FrontendTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4AD4099FDAD7440093AD021E /* Nohemi-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nohemi-Medium.otf"; path = "../assets/fonts/Nohemi-Medium.otf"; sourceTree = "<group>"; };
 		4BC6D7E8B2180D6C654845AD /* libPods-ResQue_Frontend-ResQue_FrontendTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ResQue_Frontend-ResQue_FrontendTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6168C88C2ABBC81600C8F3A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6210DFCE8F554FBF31BC58C4 /* Pods-ResQue_Frontend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResQue_Frontend.debug.xcconfig"; path = "Target Support Files/Pods-ResQue_Frontend/Pods-ResQue_Frontend.debug.xcconfig"; sourceTree = "<group>"; };
 		64492FDD2A744F2C89548733 /* Nohemi-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nohemi-Bold.otf"; path = "../assets/fonts/Nohemi-Bold.otf"; sourceTree = "<group>"; };
 		7AE01FFF9859FFF01194BF85 /* Pods-ResQue_Frontend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResQue_Frontend.release.xcconfig"; path = "Target Support Files/Pods-ResQue_Frontend/Pods-ResQue_Frontend.release.xcconfig"; sourceTree = "<group>"; };
@@ -100,7 +102,7 @@
 		13B07FAE1A68108700A75B9A /* ResQue_Frontend */ = {
 			isa = PBXGroup;
 			children = (
-				6168C88C2ABBC81600C8F3A0 /* GoogleService-Info.plist */,
+				04E3D6B22AD20CA2002EA173 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -273,7 +275,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				04E3D6B32AD20CA2002EA173 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+
 				6168C88D2ABBC81600C8F3A0 /* GoogleService-Info.plist in Resources */,
 				A04C710334E8467C8CFAEE9C /* Nohemi-Bold.otf in Resources */,
 				6A20860C8ACF480AAC381CBA /* Nohemi-Medium.otf in Resources */,
@@ -281,6 +285,7 @@
 				8DA545E980F74419A864FDC4 /* Cygre-Bold.ttf in Resources */,
 				A7EABDE9946E44A78202C09B /* Cygre-Regular.ttf in Resources */,
 				17C6F00B805145A0AD5C4375 /* Cygre-SemiBold.ttf in Resources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

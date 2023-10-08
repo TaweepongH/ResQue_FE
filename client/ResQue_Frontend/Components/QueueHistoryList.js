@@ -1,59 +1,34 @@
-import { View, Text, TouchableOpacity, StyleSheet,Linking } from 'react-native';
-import IconAnt from 'react-native-vector-icons/AntDesign';
+import { View, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
-import { useNavigation } from '@react-navigation/native';
-
-const QueueHistoryList = ({ text, icon, screen, onPress }) => {
-    const navigation = useNavigation();
-
-    const handlePress = () => {
-        if(onPress){
-            onPress();
-        }
-        else if(screen == "iosSettings") {
-            Linking.openURL('app-settings:');
-        } else if(screen == "version"){
-            return null;
-        } else {
-            navigation.navigate(screen);
-        }
-    };
+const QueueHistoryList = ({ icon,text, button }) => {
 
     return (
-
       <View>
         <View style={styles.row}>
-                    <View style={styles.iconContainer}>
-                        <IconMat name={icon} size={35} color="#343434" style={styles.icon} />
-                    </View>
-                    <View style={styles.textContainer}>
-                        <Text style={styles.buttonText}>{text}</Text>
-                    </View>
-                </View>
-        
+            <View style={styles.iconContainer}>
+                <IconMat name={icon} size={35} color="#343434" style={styles.icon} />
+            </View>
+            <View style={styles.textContainer}>
+                <Text style={styles.buttonText}>{text}</Text>
+            </View>
+            <View>        
+            <TouchableOpacity>
+              <View style={styles.button}>{button}</View>
+            </TouchableOpacity>
+            </View>
+    
+        </View>
       </View>
       );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      // justifyContent: 'flex-start',
-      // alignItems: 'flex-start',
-      
-      // width: '25%',
-      // height: 55,
-      
-      // borderWidth: 0.5,
-      // borderRadius: 5,
-      // borderColor: "#D9D9D9",
-    },
     textContainer: {
-      justifyContent: 'flex-end',
-      alignItems: 'center'
+      flex:1,
     },
     iconContainer: {
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
+      justifyContent: 'flex-end',
       borderRadius: 5,
       borderColor: "#D9D9D9",
       marginBottom: 0,
@@ -61,21 +36,17 @@ const styles = StyleSheet.create({
     },
     row: {
       flexDirection: 'row',
-      alignItems: 'center',
       paddingHorizontal: 15,
+      backgroundColor:'white',
     },
     icon: {
         marginRight: 20,
     },
-    buttonText: {
-      fontSize: 20,
-      color: "#343434",
+    button:{
+      justifyContent:'flex-end',
     },
-    // arrow: {
-    //   color: "#343434",
-    //   marginLeft: 'auto',
-    // },
   });
 
 
-  export default QueueHistoryList;
+
+export default QueueHistoryList;
