@@ -23,7 +23,7 @@ const PwdResetComplete = () => {
 
   return (
     <View style={styles.container}>
-    <SvgXml xml={xml} style={styles.bgImage}/>
+      <SvgXml xml={xml} style={styles.bgImage}/>
       <View style={styles.items}>
           <IconAnt name="checkcircleo" size={50} color={theme.color.red}/>
           <Text style={styles.txt_complete}>Reset Complete!</Text>
