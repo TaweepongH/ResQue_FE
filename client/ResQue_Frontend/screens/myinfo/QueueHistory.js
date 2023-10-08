@@ -130,30 +130,32 @@ const QueueHistory = () => {
             
             userQueueData.map((queueData) => {
                
-              return <View key={Math.random() * 1000} style={styles.queueItemContainer}>
 
-                  <QueueHistoryList 
-                  key={Math.random() * 1000}
-                  icon="cloud" 
-                  text=
-                    {
-                    
-                      <Text style={{ fontSize: 16 }}>
-                        {queueData.partnerName} { }
-                        <Text style={{ fontSize: 12}}>
-                          {parseTime(queueData.updatedAt._seconds)}
-                        </Text>
+        return <View key={Math.random() * 1000} style={styles.queueItemContainer}>
+          <QueueHistoryList 
+              key={Math.random() * 1000}
+              icon="cloud" 
+              text={
+                <View style={{ flexDirection: 'row', alignItems: 'center',justifyContent:'space-between', }}>
+  <View style={styles.listContainer}>
+    <Text style={styles.queueData}>{queueData.partnerName}</Text>
+    <Text style={styles.queueTime}>
+      {parseTime(queueData.updatedAt._seconds)}
+    </Text>
+  </View>
+  <View> 
+  </View>
+</View>
+  }
+  button={        
+  <TouchableOpacity onPress={() => handleLeave(queueData.partnerId)}>
+      <View style={styles.waitList}>
+        <Text style={styles.waitListText}>Leave</Text>
+      </View>
+    </TouchableOpacity>}
+/>
 
 
-                      <TouchableOpacity onPress={ () => {handleLeave(queueData.partnerId)}}>
-                        <View style={styles.waitList}>
-                        <Text style={styles.waitListText}>Leave</Text>
-                        </View>
-                      </TouchableOpacity>
-                        
-                      </Text>
-                    }
-                />
               </View>
 
           }) : loading ? <></> :
@@ -166,6 +168,7 @@ const QueueHistory = () => {
     
 const styles = StyleSheet.create({
       container: {
+        width:'100%',
         flex: 1,
         backgroundColor: 'white',
         paddingTop: 24,
@@ -175,13 +178,20 @@ const styles = StyleSheet.create({
         marginBottom: 20,
       },
       userProfile: {
-        alignItems: 'center',
-        justifyContent: 'center',
         width: 90,
         aspectRatio: 1,
         backgroundColor: "#CC313D",
         borderRadius: 45,
         marginBottom: 10,
+      },
+      queueData:{
+        fontSize:15,
+        marginRight:10,
+
+      },
+      queueTime:{
+        fontSize: 12, 
+        marginLeft: 5
       },
       profileText: {
         fontSize: 48,
@@ -190,10 +200,6 @@ const styles = StyleSheet.create({
       },
       userName: {
         fontSize: 24,
-      },
-      infoContainer: {
-        flex: 1,
-        alignItems: 'center',
       },
       waitList: {
         alignItems: 'center',
@@ -209,13 +215,8 @@ const styles = StyleSheet.create({
         fontSize: 12,
       },
       queueItemContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 16, // Add padding to separate items
-        marginBottom: 16, // Add margin to separate items
+        marginBottom: 16, 
       },
 });
     
 export default QueueHistory;
-    

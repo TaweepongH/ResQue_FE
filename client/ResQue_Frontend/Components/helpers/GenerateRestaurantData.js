@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 const { Text, StyleSheet } = require("react-native");
 const apiKey = 'nEEEhLarJcEvFiV6K2h1Pp_M3fMYx5whC4xkYbXuYrmpmMxsLXH0O1sCdlZ9B30B83v2GBU08y3XRwSMSqHXzFgCLZLs52Pe4_VfersINvhg9X9F7NM4hDTrnYysZHYx';                
 const searchTerm = 'restaurants'; // Or any other search term
-const location = 'White Rock'; 
+const location = 'Delta Vancouver'; 
+const maxRestarauntsPerArea = 19;
 let operationalDays = [];
 
-
 // this component is used to retreive and send data from yelp to our database
-
-// this process is not as automated as it should be, I ended up having to make two seperate api calls to get all the necessary data for one partner document, i will try to make it more efficient in the future
-
+// the yelp api has a maximum of 500 calls per day
 
 const GenerateRestaurantData = () => {
 
@@ -19,9 +17,9 @@ const GenerateRestaurantData = () => {
         setRestaurantData(prevData => [...prevData, newData]);
     };
 
-    useEffect(() => {
-        setRestaurantData([]);
-        fetch(`https://api.yelp.com/v3/businesses/search?term=${searchTerm}&location=${location}`, {
+    const fetchYelpData = (count) => {
+
+      fetch(`https://api.yelp.com/v3/businesses/search?term=${searchTerm}&location=${location}`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${apiKey}`,
@@ -33,11 +31,9 @@ const GenerateRestaurantData = () => {
             // making sure the days array is empty before calling getHoursOfOperation, because that function requires an empty array to accuratlely record the days
             operationalDays = [];
 
-            let num = 0;
+            addData(data['businesses'][count]);
 
-            addData(data['businesses'][num]);
-
-            getHoursOfOperation(data['businesses'][num])
+            getHoursOfOperation(data['businesses'][count])
     
             makePostRequests(restaurantData)
         
@@ -46,11 +42,30 @@ const GenerateRestaurantData = () => {
             // Handle error
             console.error(error);
           });
-      }, []);
+
+    }
+
+    useEffect(() => {
+      let count = 0;
+
+      setRestaurantData([]);
+        
+      const intervalID = setInterval(() => {
+        fetchYelpData(count);
+        count++;
+        if (count >= maxRestarauntsPerArea) {
+          clearInterval(intervalID);
+          console.log(`set all data for ${location}`)
+        }
+      }, 1000);
+      
+      return () => {
+        clearInterval(intervalID);
+      };
+
+    }, []);
 
       const getHoursOfOperation = (restaurant) => {
-
-        // businesses.forEach(restaurant => {
 
                 fetch(`https://api.yelp.com/v3/businesses/${restaurant.id}`, {
                     method: 'GET',
@@ -143,7 +158,6 @@ const GenerateRestaurantData = () => {
                   console.error('post request error: ', error);
                 });
             });
-
         
       };
     
