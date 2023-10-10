@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { theme } from '../styles/theme';
 import CustomButton from './CustomButton';
 import { useNavigation } from '@react-navigation/native';
 
-const InputField = ({ label, placeholder, onChangeText}) => (
+const InputField = ({ label, placeholder, onChangeText }) => (
   <>
-    <Text style={{ fontSize: theme.fontsize.md, marginBottom: 5, fontFamily: theme.font.secondary, }}>
-      {label}
-    </Text>
+    <Text style={{ fontSize: theme.fontsize.md, marginBottom: 5, fontFamily: theme.font.secondary }}>{label}</Text>
     <TextInput
       style={styles.input_info}
       label={label}
@@ -52,7 +43,6 @@ const Register = () => {
   };
 
   const handleRegistration = () => {
-
     console.log('User Email:', email);
     console.log('User Password:', password);
 
@@ -72,37 +62,32 @@ const Register = () => {
           email: `${email}`,
           password: `${password}`,
           firstName: `${name.firstName}`,
-          lastName: `${name.lastName}`, 
-          active: true
+          lastName: `${name.lastName}`,
+          active: true,
         }),
-      }).then((response) => response.text())
+      })
+        .then((response) => response.text())
         .then((data) => {
-
-          console.log("registration data: ", data);
+          console.log('registration data: ', data);
 
           // if the email entered is already registered
-          if (JSON.parse(data).message === "User is already registered!") {
-            
-            console.log("testing... ");
+          if (JSON.parse(data).message === 'User is already registered!') {
+            console.log('testing... ');
             // Alert.alert(JSON.parse(data).message);
-
           }
 
           // if the data returns an object with an ID key, the user has successfully registered
           if (JSON.parse(data).id) {
-
-            Alert.alert("Success! Thank you. Redirecting you to the Login page");
+            Alert.alert('Success! Thank you. Redirecting you to the Login page');
             // navigate to the login component only after successfully registering
             navigation.navigate('LoginEmail');
-
           }
-
-        }).catch((error) => {
+        })
+        .catch((error) => {
           console.error('Error:', error);
         });
     }
-
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -142,7 +127,7 @@ const Register = () => {
           secureTextEntry={false}
         ></InputField>
       </View>
-      <CustomButton title="Register" onPress={handleRegistration}/>
+      <CustomButton title="Register" onPress={handleRegistration} />
     </View>
   );
 };

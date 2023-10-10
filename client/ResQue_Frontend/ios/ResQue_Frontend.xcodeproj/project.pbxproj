@@ -13,9 +13,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		17C6F00B805145A0AD5C4375 /* Cygre-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8296EA8B81084EFE92499191 /* Cygre-SemiBold.ttf */; };
-		6168C88D2ABBC81600C8F3A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6168C88C2ABBC81600C8F3A0 /* GoogleService-Info.plist */; };
+		6168C88D2ABBC81600C8F3A0 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		6A20860C8ACF480AAC381CBA /* Nohemi-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4AD4099FDAD7440093AD021E /* Nohemi-Medium.otf */; };
-
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8DA545E980F74419A864FDC4 /* Cygre-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F84933D7DAE4295885A6C48 /* Cygre-Bold.ttf */; };
 		A04C710334E8467C8CFAEE9C /* Nohemi-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 64492FDD2A744F2C89548733 /* Nohemi-Bold.otf */; };
@@ -277,15 +276,13 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				04E3D6B32AD20CA2002EA173 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-
-				6168C88D2ABBC81600C8F3A0 /* GoogleService-Info.plist in Resources */,
+				6168C88D2ABBC81600C8F3A0 /* BuildFile in Resources */,
 				A04C710334E8467C8CFAEE9C /* Nohemi-Bold.otf in Resources */,
 				6A20860C8ACF480AAC381CBA /* Nohemi-Medium.otf in Resources */,
 				AAF927E30FE044A9876743F6 /* Nohemi-SemiBold.otf in Resources */,
 				8DA545E980F74419A864FDC4 /* Cygre-Bold.ttf in Resources */,
 				A7EABDE9946E44A78202C09B /* Cygre-Regular.ttf in Resources */,
 				17C6F00B805145A0AD5C4375 /* Cygre-SemiBold.ttf in Resources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

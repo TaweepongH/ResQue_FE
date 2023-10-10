@@ -1,12 +1,11 @@
-import { View, Text, TextInput,TouchableOpacity , StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native'; 
+import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext';
 import { theme } from '../styles/theme';
 import CustomButton from '../Components/CustomButton';
 
 const CreateNewPwd = () => {
-
   const { email, confirmationCode } = useAuth();
 
   const [pwd, setPwd] = useState('');
@@ -16,7 +15,6 @@ const CreateNewPwd = () => {
 
   const handlePwrdReset = async () => {
     if (pwd === pwdConfirm) {
-        
       try {
         const response = await fetch(`https://app-57vwexmexq-uc.a.run.app/api/password/resetpassword`, {
           method: 'POST',
@@ -33,79 +31,81 @@ const CreateNewPwd = () => {
         const data = await response.json();
 
         if (response.ok) {
-          Alert.alert("Success!", data.message);
+          Alert.alert('Success!', data.message);
           navigation.navigate('PwdResetComplete');
         } else {
-          Alert.alert("Error", data.message || "Password reset failed.");
+          Alert.alert('Error', data.message || 'Password reset failed.');
         }
       } catch (error) {
-        console.error("Error:", error);
-        Alert.alert("Error", "An error occurred while resetting the password.");
+        console.error('Error:', error);
+        Alert.alert('Error', 'An error occurred while resetting the password.');
       }
     } else {
-      Alert.alert("Passwords do not match");
+      Alert.alert('Passwords do not match');
     }
   };
-        
+
   const setPwdValue = (value) => {
-    console.log("value: ", value);
+    console.log('value: ', value);
     setPwd(value);
-  }
+  };
 
   const setPwdConfirmValue = (value) => {
-    console.log("value: ", value);
+    console.log('value: ', value);
     setPwdConfirm(value);
-  }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.items}>
         <Text style={styles.inputPw_txt}>Enter a new password</Text>
-        <TextInput 
-              style={styles.infoInput}placeholder='Please enter 8 - 16 characters'
-              onChangeText={setPwdValue}
-              autoCapitalize="none"
+        <TextInput
+          style={styles.infoInput}
+          placeholder="Please enter 8 - 16 characters"
+          onChangeText={setPwdValue}
+          autoCapitalize="none"
         />
         <Text style={styles.inputPw_txt}>Confirm Password</Text>
-        <TextInput 
-              style={styles.infoInput}placeholder='Please enter 8 - 16 characters'
-              onChangeText={setPwdConfirmValue}
-              autoCapitalize="none"
+        <TextInput
+          style={styles.infoInput}
+          placeholder="Please enter 8 - 16 characters"
+          onChangeText={setPwdConfirmValue}
+          autoCapitalize="none"
         />
       </View>
       <CustomButton title="Submit" onPress={handlePwrdReset} />
     </View>
   );
-}
+};
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     backgroundColor: theme.color.lightpink,
     alignItems: 'center',
   },
-  items:{
+  items: {
     width: '80%',
     marginTop: 20,
   },
-  inputPw_txt:{
-    marginBottom: 5, 
-    fontSize: theme.fontsize.md, 
-    fontFamily: theme.font.secondary, 
+  inputPw_txt: {
+    marginBottom: 5,
+    fontSize: theme.fontsize.md,
+    fontFamily: theme.font.secondary,
   },
   button: {
     backgroundColor: '#CC313D',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius:3,
-    width:'90%',
-    marginTop:20,
-    height:35,
+    borderRadius: 3,
+    width: '90%',
+    marginTop: 20,
+    height: 35,
   },
-  text:{
-    fontWeight:'bold',
-    color:'white',
-    textAlign:'center',
-    fontSize:18,
+  text: {
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 18,
   },
   infoInput: {
     backgroundColor: theme.color.white,
@@ -121,7 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
 export default CreateNewPwd;
-

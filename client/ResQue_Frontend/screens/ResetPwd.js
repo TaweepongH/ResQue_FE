@@ -1,12 +1,11 @@
-import { View, Text, TextInput,TouchableOpacity , StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native'; 
-import { useAuth } from '../contexts/AuthContext'
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../contexts/AuthContext';
 import { theme } from '../styles/theme';
 import CustomButton from '../Components/CustomButton';
 
 const ResetPwd = () => {
-
   const { setEmailContext } = useAuth();
 
   const [email, setEmail] = useState('');
@@ -24,58 +23,59 @@ const ResetPwd = () => {
           email: email,
         }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
-        console.log("data: ", data);
+        console.log('data: ', data);
         setEmailContext(email);
-        Alert.alert("Account Found", `An email has been sent to ${email}`);
+        Alert.alert('Account Found', `An email has been sent to ${email}`);
         navigation.navigate('OtpVerify');
       } else {
         // Handle non-OK responses here, e.g., show an appropriate error message
         const errorData = await response.json(); // Parse error response as JSON
-        console.error("Error response:", errorData);
-        Alert.alert("Error", `An error occurred: ${errorData.message}`);
+        console.error('Error response:', errorData);
+        Alert.alert('Error', `An error occurred: ${errorData.message}`);
       }
     } catch (error) {
-      console.error("Error:", error);
-      Alert.alert("Error", "An error occurred while resetting the password.");
+      console.error('Error:', error);
+      Alert.alert('Error', 'An error occurred while resetting the password.');
     }
   };
 
   const setEmailValue = (value) => {
-    console.log("value: ", value);
+    console.log('value: ', value);
     setEmail(value);
-  }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.items}>
         <Text style={styles.inputEmail_txt}>Please enter your email</Text>
-        <TextInput 
-          style={styles.infoInput}placeholder='helloitsme@example.com'
+        <TextInput
+          style={styles.infoInput}
+          placeholder="helloitsme@example.com"
           onChangeText={setEmailValue}
           autoCapitalize="none"
         />
       </View>
-      <CustomButton title="Send One-Time Password" onPress={handlePwrdReset}/>
+      <CustomButton title="Send One-Time Password" onPress={handlePwrdReset} />
     </View>
   );
-}
+};
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     backgroundColor: theme.color.lightpink,
     alignItems: 'center',
   },
-  items:{
+  items: {
     width: '80%',
     marginTop: 20,
   },
-  inputEmail_txt:{
-    marginBottom: 5, 
-    fontSize: theme.fontsize.md, 
-    fontFamily: theme.font.secondary, 
+  inputEmail_txt: {
+    marginBottom: 5,
+    fontSize: theme.fontsize.md,
+    fontFamily: theme.font.secondary,
   },
   infoInput: {
     backgroundColor: theme.color.white,
@@ -91,7 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
 export default ResetPwd;
-

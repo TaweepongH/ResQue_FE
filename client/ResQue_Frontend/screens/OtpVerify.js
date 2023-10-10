@@ -2,21 +2,20 @@
 // the above import wasn't able to log or store data, I had to use basic textInputs instead
 import { useState, useRef } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, TextInput, Alert } from 'react-native';
-import { useAuth } from '../contexts/AuthContext'
-import { useNavigation } from '@react-navigation/native'; 
+import { useAuth } from '../contexts/AuthContext';
+import { useNavigation } from '@react-navigation/native';
 import { theme } from '../styles/theme';
 import CustomButton from '../Components/CustomButton';
 
 const OtpVerify = () => {
-
   // the user's email is needed for the verification api call
   const { email, setConfirmationCodeContext } = useAuth();
 
   const [otp, setOTP] = useState(['', '', '', '', '']); // Initialize an array to store OTP values
   const inputRefs = useRef([]);
 
-  const navigation = useNavigation()
-  
+  const navigation = useNavigation();
+
   // Function to handle OTP input changes
   const handleOTPChange = (text, index) => {
     if (text.length <= 1) {
@@ -34,7 +33,7 @@ const OtpVerify = () => {
   const handleSubmit = async () => {
     const enteredOTP = otp.join('');
     console.log('Entered OTP:', enteredOTP);
-  
+
     try {
       const response = await fetch(`https://app-57vwexmexq-uc.a.run.app/api/password/verifycode`, {
         method: 'POST',
@@ -43,25 +42,25 @@ const OtpVerify = () => {
         },
         body: JSON.stringify({
           email: email,
-          confirmationCode: enteredOTP
+          confirmationCode: enteredOTP,
         }),
       });
-  
+
       if (response.ok) {
         const data = await response.text();
-        console.log("data: ", data);
-        
+        console.log('data: ', data);
+
         setConfirmationCodeContext(enteredOTP);
-        Alert.alert("Success! ", JSON.parse(data).message);
+        Alert.alert('Success! ', JSON.parse(data).message);
         navigation.navigate('CreateNewPwd');
       } else {
         const data = await response.text();
-        console.error("Error response data:", data);
-        Alert.alert("Error", JSON.parse(data).message);
+        console.error('Error response data:', data);
+        Alert.alert('Error', JSON.parse(data).message);
       }
     } catch (error) {
-      console.error("Error:", error);
-      Alert.alert("Error", "An error occurred while resetting the password.");
+      console.error('Error:', error);
+      Alert.alert('Error', 'An error occurred while resetting the password.');
     }
   };
 
@@ -76,21 +75,21 @@ const OtpVerify = () => {
           email: email,
         }),
       });
-  
+
       const data = await response.text();
-      console.log("data: ", data);
-  
+      console.log('data: ', data);
+
       if (response.ok) {
-        Alert.alert("Code Resent to: ", `${email}`);
+        Alert.alert('Code Resent to: ', `${email}`);
       } else {
-        Alert.alert("Error", JSON.parse(data).message);
+        Alert.alert('Error', JSON.parse(data).message);
       }
     } catch (error) {
       console.error('Error:', error);
-      Alert.alert("Error", "An error occurred while resending the code.");
+      Alert.alert('Error', 'An error occurred while resending the code.');
     }
   };
-  
+
   const handleResend = () => {
     OTPResend();
   };
@@ -99,7 +98,6 @@ const OtpVerify = () => {
     <View style={styles.container}>
       <Text style={styles.informText}>Please enter the 5-digit code sent to your email</Text>
       <View style={styles.contentContainer}>
-      
         {otp.map((value, index) => (
           <TextInput
             key={index}
@@ -114,15 +112,14 @@ const OtpVerify = () => {
           />
         ))}
       </View>
-      <CustomButton title="Register" onPress={handleSubmit}/>
+      <CustomButton title="Register" onPress={handleSubmit} />
 
-        <View style={styles.resendContainer}>
-          <Text style={styles.noCodeText}>Didn't get the code? </Text>
-          <TouchableOpacity onPress={handleResend}>
-            <Text style={styles.resendText}>Resend OTP</Text>
-          </TouchableOpacity>
-        </View>
-      
+      <View style={styles.resendContainer}>
+        <Text style={styles.noCodeText}>Didn't get the code? </Text>
+        <TouchableOpacity onPress={handleResend}>
+          <Text style={styles.resendText}>Resend OTP</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -135,13 +132,13 @@ const styles = StyleSheet.create({
   },
   informText: {
     marginVertical: 20,
-    fontSize: theme.fontsize.md, 
-    fontFamily: theme.font.secondary, 
+    fontSize: theme.fontsize.md,
+    fontFamily: theme.font.secondary,
   },
   contentContainer: {
     width: '90%',
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   otpInput: {
     width: '10%',
@@ -168,9 +165,8 @@ const styles = StyleSheet.create({
     fontFamily: theme.font.secondary,
     textDecorationLine: 'underline',
     marginLeft: 5,
-    fontWeight:'500', 
+    fontWeight: '500',
   },
 });
 
 export default OtpVerify;
-

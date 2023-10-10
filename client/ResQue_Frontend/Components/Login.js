@@ -6,7 +6,7 @@ import CustomButton from './CustomButton';
 import { SvgXml } from 'react-native-svg';
 import { theme } from '../styles/theme';
 
-//Logo svg 
+//Logo svg
 const xml = `
 <svg xmlns="http://www.w3.org/2000/svg" width="294" height="66" viewBox="0 0 294 66" fill="none">
   <path d="M14.8884 64.9585H0V0H28.8285C42.5266 0 50.3541 7.32095 50.3541 19.3167C50.3541 29.7248 44.1002 36.5386 34.3562 36.8914C39.0365 37.2442 42.6679 40.596 45.2299 46.8364L30.4935 51.2696L28.5461 46.8584C26.4278 41.7867 25.0358 40.5518 21.2431 40.5518H14.8884V64.9585ZM14.8884 27.9828H27.1945C32.4599 27.9828 35.4456 25.2264 35.4456 20.3752C35.4456 15.568 32.5204 12.944 27.1743 12.944H14.8884V27.9828Z" fill="#343434"/>
@@ -26,7 +26,6 @@ const xml = `
 </svg>
 `;
 
-
 const Login = () => {
   const navigation = useNavigation();
 
@@ -38,13 +37,13 @@ const Login = () => {
   };
 
   const handleGoogleAuth = () => {
-    navigation.navigate('GoogleAuth')
-  }
+    navigation.navigate('GoogleAuth');
+  };
 
   return (
     <View style={styles.container}>
       {/* Logo */}
-      <SvgXml xml={xml} style={styles.logo}/>
+      <SvgXml xml={xml} style={styles.logo} />
 
       {/* Login Buttons */}
       <View style={styles.btnContianer}>
@@ -96,4 +95,3 @@ const styles = StyleSheet.create({
 });
 
 export default Login;
-

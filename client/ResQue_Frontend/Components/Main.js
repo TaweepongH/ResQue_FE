@@ -4,8 +4,7 @@ import renderButtons from './renderButtons';
 import RestaurantList from './RestaurantList';
 
 const Main = () => {
-
-  const [selectedArea, setSelectedArea] = useState('');  
+  const [selectedArea, setSelectedArea] = useState('');
 
   const location = [
     { id: 1, name: 'All' },
@@ -19,23 +18,20 @@ const Main = () => {
     { id: 9, name: 'Delta' },
   ];
 
-
   return (
     <>
-    
       <View style={styles.container}>
         <View style={styles.locations}>
           <Text style={styles.subtitle}>Join waitlist for the best restaurants in</Text>
           <Text style={styles.title}>{selectedArea}</Text>
           {renderButtons(location)}
         </View>
-       <Text style={styles.explore}>Explore restaurants near me</Text>
+        <Text style={styles.explore}>Explore restaurants near me</Text>
       </View>
       <ScrollView>
-        <RestaurantList names={selectedArea} />  
+        <RestaurantList names={selectedArea} />
       </ScrollView>
-      
-    </>   
+    </>
   );
 };
 
@@ -57,8 +53,8 @@ const styles = StyleSheet.create({
   explore: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginTop:12,
-    marginBottom:10,
+    marginTop: 12,
+    marginBottom: 10,
   },
   subtitle: {
     fontSize: 17,

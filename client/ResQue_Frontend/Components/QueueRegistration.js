@@ -7,7 +7,6 @@ import { useAuth } from '../contexts/AuthContext';
 import CustomModal from './CustomModal.js';
 
 const QueueRegistration = () => {
-
   const { rstrntData, bearerToken, setQueDataContext } = useAuth();
 
   const navigation = useNavigation();
@@ -19,7 +18,6 @@ const QueueRegistration = () => {
   const [request, setRequest] = useState('');
   const [loading, setLoading] = useState(false);
   const [partySize, setPartySize] = useState(0);
-
 
   const handleDecreaseAdult = () => {
     if (adultCount > 0) {
@@ -44,7 +42,7 @@ const QueueRegistration = () => {
   useEffect(() => {
     setPartySize(childCount + adultCount);
     setRequest(request);
-  }, [handleDecreaseAdult, handleDecreaseChild, handleIncreaseAdult, handleIncreaseChild])
+  }, [handleDecreaseAdult, handleDecreaseChild, handleIncreaseAdult, handleIncreaseChild]);
 
   const handleSubmit = () => {
     console.log('Form submitted!');
@@ -55,79 +53,69 @@ const QueueRegistration = () => {
     console.log('Request:', request);
 
     createQue();
-
   };
 
   const createQue = async () => {
-
     setLoading(true);
 
     const url = 'https://app-57vwexmexq-uc.a.run.app/api/queues/user/createqueue';
 
     try {
-
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
           Authorization: `Bearer ${bearerToken}`,
-        }, 
+        },
         body: JSON.stringify({
-          partnerId: rstrntData.id
-        })
+          partnerId: rstrntData.id,
+        }),
       });
 
       if (response.ok) {
-
         const data = await response.json();
 
         setLoading(false);
 
-        console.log("response msg from backend: ", data);
-      const updatedDataContext = {
-      ...data,
-      partySize,
-      request,
-    };
-    
-    setQueDataContext(updatedDataContext);
-        navigation.navigate('QueueConfirm')
+        console.log('response msg from backend: ', data);
+        const updatedDataContext = {
+          ...data,
+          partySize,
+          request,
+        };
 
-        // then we've got to navigate to the next page. 
+        setQueDataContext(updatedDataContext);
+        navigation.navigate('QueueConfirm');
 
+        // then we've got to navigate to the next page.
       } else {
-
-        console.error("API request failed:", response.status, response);
+        console.error('API request failed:', response.status, response);
 
         if (response.status === 400) {
-          Alert.alert("You are already in line. Please check your que history in the MyInfo tab.")
+          Alert.alert('You are already in line. Please check your que history in the MyInfo tab.');
         }
 
         setLoading(false);
-
       }
-
     } catch (error) {
-      console.error("Network error:", error);
-  // Handle network-related errors
-      Alert.alert("Network error:", error);
+      console.error('Network error:', error);
+      // Handle network-related errors
+      Alert.alert('Network error:', error);
     }
-
-  }
-
+  };
 
   const handleRestaurantDetail = () => {
     // When the "arrow-right" icon is pressed, it navigates to the 'restaurant info' page.
     navigation.navigate('RestaurantInfo');
   };
-  
+
   const restaurant = {
     id: rstrntData.id,
     name: rstrntData.name,
     address: rstrntData.address,
     distance: '200',
     waitlist: 3,
-    thumbnailImage: rstrntData.thumbnailImage
+    thumbnailImage: rstrntData.thumbnailImage,
   };
 
   return (
@@ -139,7 +127,7 @@ const QueueRegistration = () => {
             <View style={styles.restaurantInfoHeader}>
               <Text style={styles.restaurantName}>{restaurant.name}</Text>
               <TouchableOpacity style={styles.detailButton} onPress={handleRestaurantDetail}>
-                <SimpleLineIcons name="arrow-right" size={20} style={{ marginTop: 10 }}/>
+                <SimpleLineIcons name="arrow-right" size={20} style={{ marginTop: 10 }} />
               </TouchableOpacity>
             </View>
             <View style={styles.restaurantInfoRow}>
@@ -151,12 +139,7 @@ const QueueRegistration = () => {
         </View>
         <View style={styles.separator} />
         <Text style={styles.titles}>Name</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your name"
-          value={name}
-          onChangeText={setName}
-        />
+        <TextInput style={styles.input} placeholder="Enter your name" value={name} onChangeText={setName} />
         <Text style={styles.titles}>Phone Number</Text>
         <TextInput
           style={styles.input}
@@ -165,7 +148,7 @@ const QueueRegistration = () => {
           onChangeText={setPhoneNumber}
         />
 
-        <CustomModal visible={loading} message={"Queing you up"}></CustomModal>
+        <CustomModal visible={loading} message={'Queing you up'}></CustomModal>
 
         <Text style={styles.titles}>Please select the number of visitors</Text>
         <View style={styles.counterContainer}>
@@ -283,7 +266,7 @@ const styles = StyleSheet.create({
     marginBottom: 100,
   },
   submitButtonText: {
-    color: "white",
+    color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
   },

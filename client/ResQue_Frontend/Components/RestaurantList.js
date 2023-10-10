@@ -5,7 +5,6 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 import CustomModal from './CustomModal.js';
 
 const RestaurantList = () => {
-
   const { bearerToken, setRstrntDataContext } = useAuth();
 
   const [restaurants, setRestaurants] = useState([]);
@@ -18,10 +17,9 @@ const RestaurantList = () => {
 
   useEffect(() => {
     fetchRestaurantData(names);
-  }, [names]); 
+  }, [names]);
 
   const fetchRestaurantData = async (selectedArea) => {
-
     setLoading(true);
 
     if (!selectedArea) {
@@ -31,7 +29,7 @@ const RestaurantList = () => {
     let url;
 
     if (selectedArea === 'All') {
-      url =  'https://app-57vwexmexq-uc.a.run.app/api/partners/all';
+      url = 'https://app-57vwexmexq-uc.a.run.app/api/partners/all';
     } else {
       url = `https://app-57vwexmexq-uc.a.run.app/api/partners/area/${selectedArea}`;
     }
@@ -48,7 +46,7 @@ const RestaurantList = () => {
       if (response.ok) {
         const data = await response.json();
         setRestaurants(data);
-        setLoading(false); 
+        setLoading(false);
       } else {
         console.log('Failed to fetch restaurant data, ', response);
       }
@@ -58,16 +56,15 @@ const RestaurantList = () => {
   };
 
   const handleQuePress = (restaurantData) => {
-
-    console.log("restaurant data: ", restaurantData);
+    console.log('restaurant data: ', restaurantData);
 
     const parseBusinessHours = (array) => {
       const parsedArray = [];
       array.forEach((business) => {
         parsedArray.push([business.start, business.end]);
-      })
-      return parsedArray
-    }
+      });
+      return parsedArray;
+    };
 
     setRstrntDataContext({
       id: restaurantData.id,
@@ -77,37 +74,30 @@ const RestaurantList = () => {
       type: restaurantData.genre,
       businessHours: parseBusinessHours(restaurantData.operationTime),
       phoneNumber: restaurantData.phone,
-      website: restaurantData.email
+      website: restaurantData.email,
     });
 
-    navigation.navigate('QueueRegistration')
-
-  }
+    navigation.navigate('QueueRegistration');
+  };
 
   return (
     <ScrollView>
       <View style={styles.container}>
         {loading ? (
-          
           <View style={styles.loadingContainer}>
-            
             <CustomModal visible={loading} message={`fetching data...`} marginTop={250} />
-            
           </View>
-          
         ) : (
           // Render restaurant data
           restaurants.map((restaurant) => (
-            <TouchableOpacity key={restaurant.id} onPress={ () => {
+            <TouchableOpacity
+              key={restaurant.id}
+              onPress={() => {
                 handleQuePress(restaurant);
               }}
             >
               <View style={styles.restaurantItem}>
-                
-                <Image
-                  source={{ uri: restaurant.images[0] }}
-                  style={{ width: 100, height: 100, borderRadius: 10 }}
-                />
+                <Image source={{ uri: restaurant.images[0] }} style={{ width: 100, height: 100, borderRadius: 10 }} />
                 <View style={styles.textContainer}>
                   <Text style={styles.textCompanyName}>{restaurant.companyName}</Text>
                   <Text>
@@ -117,13 +107,11 @@ const RestaurantList = () => {
                 <View style={styles.waitList}>
                   <Text style={styles.waitListText}>{restaurant.queueCount}</Text>
                 </View>
-                
               </View>
             </TouchableOpacity>
           ))
         )}
       </View>
-      
     </ScrollView>
   );
 };

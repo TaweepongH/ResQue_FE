@@ -4,14 +4,13 @@ import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext.js';
 
 const renderButton = (name) => {
-
   const navigation = useNavigation();
   const { bearerToken, password, setBearerTokenContext } = useAuth();
 
   const handleButtonPress = async () => {
     try {
-       console.log("renderButton/ selected Area is ",name);
-        navigation.navigate('Home', { screen:'RestaurantList2', names: name});
+      console.log('renderButton/ selected Area is ', name);
+      navigation.navigate('Home', { screen: 'RestaurantList2', names: name });
       // Fetch data for the selected area using the 'name'
       const response = await fetch(`https://app-57vwexmexq-uc.a.run.app/api/partners/area/${name}`, {
         method: 'GET',
@@ -26,13 +25,13 @@ const renderButton = (name) => {
         if (data) {
           console.log(data[0].companyName);
         } else {
-          console.log("There is no data from the API...");
+          console.log('There is no data from the API...');
         }
       } else {
-        console.log("Failed to fetch data from the API.", response.status);
+        console.log('Failed to fetch data from the API.', response.status);
       }
     } catch (error) {
-      console.log("Error: ", error);
+      console.log('Error: ', error);
     }
   };
 
@@ -61,4 +60,3 @@ const styles = StyleSheet.create({
 });
 
 export default renderButton;
-

@@ -4,15 +4,14 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useAuth} from '../contexts/AuthContext.js'
+import { useAuth } from '../contexts/AuthContext.js';
 
 const RestaurantInfo = ({ route }) => {
-
-  const {rstrntData } = useAuth();
+  const { rstrntData } = useAuth();
 
   useEffect(() => {
-    console.log("r data", rstrntData);
-  })
+    console.log('r data', rstrntData);
+  });
 
   const restaurant = {
     id: rstrntData.id,
@@ -40,7 +39,7 @@ const RestaurantInfo = ({ route }) => {
       <ScrollView style={styles.contentContainer}>
         <Text style={styles.restaurantName}>{restaurant.name}</Text>
         <View style={styles.infoContainer}>
-          <EvilIcons name="location" size={20} color="#797979" style={{ marginBottom: 10 }}/>
+          <EvilIcons name="location" size={20} color="#797979" style={{ marginBottom: 10 }} />
           <Text style={styles.addressInfo}>{restaurant.address}</Text>
         </View>
         <View style={styles.separator} />
@@ -66,7 +65,7 @@ const RestaurantInfo = ({ route }) => {
           </View>
         </View>
         <View style={styles.infoContainer}>
-          <MaterialCommunityIcons name="web" size={15} style={{ marginTop: -17 }}/>
+          <MaterialCommunityIcons name="web" size={15} style={{ marginTop: -17 }} />
           <View style={styles.infoTextContainer}>
             <Text style={styles.infoTitle}>Website</Text>
             <TouchableHighlight underlayColor="transparent" onPress={handleOpenWebsite}>
