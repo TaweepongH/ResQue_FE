@@ -107,7 +107,7 @@ const RestaurantList = () => {
                 
                 <Image
                   source={{ uri: restaurant.images[0] }}
-                  style={{ width: 70, height: 70, borderRadius: 5 }}
+                  style={{ width: 65, height: 65, borderRadius: 5 }}
                 />
                 <View style={styles.textContainer}>
                   <Text style={styles.textCompanyName}>{restaurant.companyName}</Text>
@@ -130,12 +130,13 @@ const RestaurantList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
   },
   restaurantItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.color.lightgray,
   },
   textCompanyName: {
     fontSize: theme.fontsize.xl,
