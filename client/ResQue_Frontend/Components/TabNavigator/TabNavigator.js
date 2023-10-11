@@ -32,7 +32,11 @@ const TabNavigator = () => {
         tabBarInactiveTintColor: theme.color.blackAlt,
         // Attention: You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar.  src: https://reactnavigation.org/docs/bottom-tab-navigator
         tabBarStyle: { position: 'absolute', height: '10%', borderTopWidth: 1, },
-        tabBarLabelStyle: { marginTop: -5 },
+        tabBarLabelStyle: { 
+          marginTop: -5 ,
+          fontFamily: theme.font.primary,
+          fontSize: theme.fontsize.xs,
+        },
         headerStyle: {
           backgroundColor: theme.color.pink,
           height: 110,
@@ -138,7 +142,15 @@ const TabNavigator = () => {
         options={{
           tabBarButton: () => null, // Hide the tab icon
           tabBarLabel: () => null,  // Hide the screen label
-          headerShown: false,
+          headerTransparent: true,
+          headerTitle:"",
+          headerRight: () => {
+            return (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <IconAnt name="close" size={30} style={{marginRight: 15, marginTop: -30,}}/>
+                </TouchableOpacity>
+            )
+          }
         }}
       />
 

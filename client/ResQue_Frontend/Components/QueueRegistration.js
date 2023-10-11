@@ -122,6 +122,7 @@ const QueueRegistration = () => {
     address: rstrntData.address,
     waitlist: 3,
     thumbnailImage: rstrntData.thumbnailImage,
+    type: rstrntData.type,
   };
 
   return (
@@ -135,6 +136,7 @@ const QueueRegistration = () => {
               <View style={styles.textContainer}>
                 <Text style={styles.textCompanyName}>{restaurant.name}</Text>
                 <Text style={styles.textAddress}>
+                  {restaurant.type} &#183;{' '}
                   {restaurant.address}
                 </Text>
               </View>

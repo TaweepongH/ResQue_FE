@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, TouchableHighlight, StyleSheet, ScrollView, Linking } from 'react-native';
+import { View, Text, Image, TouchableOpacity, TouchableHighlight, StyleSheet, ScrollView, Linking, Dimensions } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useAuth} from '../contexts/AuthContext.js'
+import { theme } from '../styles/theme.js';
+theme;
+import { useNavigation } from '@react-navigation/native';
 
 const RestaurantInfo = ({ route }) => {
 
   const {rstrntData } = useAuth();
+  const navigation = useNavigation();
 
   useEffect(() => {
     console.log("r data", rstrntData);
@@ -27,7 +31,7 @@ const RestaurantInfo = ({ route }) => {
 
   const handleJoinQueue = () => {
     console.log('Join a Queue button pressed');
-    // TODO: Implement the logic for joining the queue.
+    navigation.navigate('QueueRegistration')
   };
 
   const handleOpenWebsite = () => {
@@ -37,36 +41,38 @@ const RestaurantInfo = ({ route }) => {
   return (
     <View style={styles.container}>
       <Image source={{ uri: restaurant.thumbnailImage }} style={styles.restaurantImage} />
-      <ScrollView style={styles.contentContainer}>
-        <Text style={styles.restaurantName}>{restaurant.name}</Text>
-        <View style={styles.infoContainer}>
-          <EvilIcons name="location" size={20} color="#797979" style={{ marginBottom: 10 }}/>
-          <Text style={styles.addressInfo}>{restaurant.address}</Text>
+      <View style={styles.contentContainer}>
+        <View style={styles.header}>
+          <Text style={styles.restaurantName}>{restaurant.name}</Text>
+          <View style={styles.addressContainer}>
+            <EvilIcons name="location" size={20} color={theme.color.gray} style={{ marginBottom: 10 }}/>
+            <Text style={styles.addressInfo}>{restaurant.address}</Text>
+          </View>
         </View>
         <View style={styles.separator} />
         <View style={styles.infoContainer}>
-          <FontAwesome name="cutlery" size={15} />
+          <FontAwesome name="cutlery" size={20} style={styles.icons}/>
           <View style={styles.infoTextContainer}>
             <Text style={styles.infoTitle}>Cuisine</Text>
             <Text style={styles.infoText}>{restaurant.type}</Text>
           </View>
         </View>
         <View style={styles.infoContainer}>
-          <MaterialCommunityIcons name="clock-time-four-outline" size={15} />
+          <MaterialCommunityIcons name="clock-time-four-outline" size={20} style={styles.icons}/>
           <View style={styles.infoTextContainer}>
             <Text style={styles.infoTitle}>Business Hours</Text>
             <Text style={styles.infoText}>{restaurant.businessHours}</Text>
           </View>
         </View>
         <View style={styles.infoContainer}>
-          <Ionicons name="call" size={15} />
+          <Ionicons name="call" size={20}style={styles.icons} />
           <View style={styles.infoTextContainer}>
             <Text style={styles.infoTitle}>Call</Text>
             <Text style={styles.infoText}>{restaurant.phoneNumber}</Text>
           </View>
         </View>
         <View style={styles.infoContainer}>
-          <MaterialCommunityIcons name="web" size={15} style={{ marginTop: -17 }}/>
+          <MaterialCommunityIcons name="web" size={20} style={styles.icons}/>
           <View style={styles.infoTextContainer}>
             <Text style={styles.infoTitle}>Website</Text>
             <TouchableHighlight underlayColor="transparent" onPress={handleOpenWebsite}>
@@ -74,11 +80,12 @@ const RestaurantInfo = ({ route }) => {
             </TouchableHighlight>
           </View>
         </View>
-        <View style={styles.horizontalSeparator} />
-        <TouchableOpacity style={styles.joinQueueButton} onPress={handleJoinQueue}>
-          <Text style={styles.joinQueueButtonText}>Join a Queue!</Text>
-        </TouchableOpacity>
-      </ScrollView>
+        <View style={styles.btnContainer}>
+          <TouchableOpacity style={styles.joinQueueButton} onPress={handleJoinQueue}>
+            <Text style={styles.joinQueueButtonText}>Join a Queue!</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
@@ -94,71 +101,88 @@ const styles = StyleSheet.create({
     top: 0,
   },
   contentContainer: {
-    flex: 2,
-    padding: 20,
-    marginTop: '50%',
-    backgroundColor: 'white',
+    flex: 1,
+    padding: 12,
+    marginTop: '60%',
+    backgroundColor: theme.color.white,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
   },
+  header: {
+    paddingHorizontal: 8,
+  },
   restaurantName: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
+    fontFamily: theme.font.primary,
+    fontSize: theme.fontsize.xxl,
+    marginVertical: 10,
   },
   addressInfo: {
-    fontSize: 13,
-    color: '#797979',
+    fontFamily: theme.font.secondary,
+    fontSize: theme.fontsize.sm,
+    lineHeight: theme.fontsize.md,
+    color: theme.color.gray,
     marginBottom: 10,
   },
+  icons: {
+    color:theme.color.blackAlt,
+    marginTop: -2,
+  },
   infoTitle: {
-    fontSize: 18,
+    fontFamily: theme.font.secondary,
+    lineHeight: theme.fontsize.xl,
+    fontSize: theme.fontsize.lg,
     fontWeight: 'bold',
+    color: theme.color.blackAlt,
     marginBottom: 5,
   },
   infoText: {
-    fontSize: 15,
+    fontFamily: theme.font.secondary,
+    lineHeight: theme.fontsize.lg,
+    fontSize: theme.fontsize.md,
+    color:theme.color.blackAlt,
   },
   separator: {
-    width: 450,
-    borderBottomWidth: 6,
-    borderBottomColor: '#D9D9D9',
-    marginStart: -30,
+    borderBottomWidth: 5,
+    borderBottomColor: theme.color.lightgray,
+    position: 'relative', 
+    width: Dimensions.get('window').width,
+    left: -12,
+    marginVertical:5,
   },
   websiteLink: {
-    fontSize: 16,
     textDecorationLine: 'underline',
-    marginBottom: 15,
+    fontSize: theme.fontsize.md,
+    color:theme.color.blackAlt,
+  },
+  btnContainer: {
+    alignItems: 'center',
   },
   joinQueueButton: {
-    backgroundColor: '#CC313D',
-    padding: 10,
+    backgroundColor: theme.color.red,
+    padding: 12,
     alignItems: 'center',
     borderRadius: 10,
-    marginTop: 30,
-    marginBottom: 110,
+    width: '100%',
+    position: 'absolute', 
+    bottom: -70,
   },
   joinQueueButtonText: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
+    color: theme.color.white,
+    fontSize: theme.fontsize.xl,
+    fontFamily: theme.font.primary,
   },
-  horizontalSeparator: {
-    position: 'absolute',
-    borderBottomWidth: 6,
-    borderBottomColor: '#D9D9D9',
-    width: '100%',
-    bottom: -3,
+  addressContainer: {
+    flexDirection: 'row',
   },
   infoContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginBottom: 5,
+    marginTop: 16,
+    paddingLeft: 8,
   },
   infoTextContainer: {
     marginLeft: 5,
-    marginTop: 20,
   },
 });
 

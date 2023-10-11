@@ -13,6 +13,7 @@ export const theme = {
     font: {
         primary: 'Nohemi',
         secondary: 'Cygre',
+        //TODO: add semi bold 
     },
     fontsize: {
         xs: 12,
