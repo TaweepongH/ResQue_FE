@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import renderButtons from './renderButtons';
 import RestaurantList from './RestaurantList';
 import { theme } from '../styles/theme';
@@ -30,7 +30,7 @@ const Main = () => {
           <Text style={styles.title}>Vancouver</Text>
           {renderButtons(location)}
         </View>
-        <View style={styles.line}/>
+        <View style={styles.separator}/>
        <Text style={styles.explore}>Explore restaurants near me</Text>
         <RestaurantList names={selectedArea} />  
       </ScrollView>
@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontFamily: theme.font.primary,
   },
-  line: {
+  separator: {
     borderBottomColor: theme.color.lightgray,
     borderBottomWidth: 5,
     width: Dimensions.get('window').width, 
     position: 'relative', 
-    left: -10, 
+    left: -12, 
     marginBottom: 10,
   },
   explore: {
@@ -72,27 +72,27 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontFamily: theme.font.primary,
   },
-  mapContainer: {
-    paddingHorizontal: 20,
-    paddingVertical: 70,
-    marginVertical: 20,
-  },
-  allowButton: {
-    height: 35,
-    width: 100,
-    backgroundColor: '#CC313D',
-    borderColor: '#797979',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    alignSelf: 'center',
-    marginTop: 25,
-  },
-  buttonText: {
-    fontSize: 13,
-    fontWeight: 'bold',
-    color: 'white',
-  },
+  // mapContainer: {
+  //   paddingHorizontal: 20,
+  //   paddingVertical: 70,
+  //   marginVertical: 20,
+  // },
+  // allowButton: {
+  //   height: 35,
+  //   width: 100,
+  //   backgroundColor: '#CC313D',
+  //   borderColor: '#797979',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   borderRadius: 10,
+  //   alignSelf: 'center',
+  //   marginTop: 25,
+  // },
+  // buttonText: {
+  //   fontSize: 13,
+  //   fontWeight: 'bold',
+  //   color: 'white',
+  // },
   // mapText: {
   //   fontSize: 16,
   //   marginTop: 40,

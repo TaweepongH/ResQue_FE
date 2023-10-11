@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView, Alert, Dimensions } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext';
 import CustomModal from './CustomModal.js';
+import { theme } from '../styles/theme';
 
 const QueueRegistration = () => {
 
@@ -119,30 +120,27 @@ const QueueRegistration = () => {
     id: rstrntData.id,
     name: rstrntData.name,
     address: rstrntData.address,
-    distance: '200',
     waitlist: 3,
-    thumbnailImage: rstrntData.thumbnailImage
+    thumbnailImage: rstrntData.thumbnailImage,
   };
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <View style={styles.restaurantContainer} key={restaurant.id}>
-          <Image source={{ uri: restaurant.thumbnailImage }} style={styles.thumbnailImage} />
-          <View style={styles.restaurantInfoContainer}>
-            <View style={styles.restaurantInfoHeader}>
-              <Text style={styles.restaurantName}>{restaurant.name}</Text>
-              <TouchableOpacity style={styles.detailButton} onPress={handleRestaurantDetail}>
-                <SimpleLineIcons name="arrow-right" size={20} style={{ marginTop: 10 }}/>
-              </TouchableOpacity>
+        <TouchableOpacity key={restaurant.id} onPress={handleRestaurantDetail}>
+            <View style={styles.restaurantItem}>
+              <Image
+                source={{ uri: restaurant.thumbnailImage }}
+                style={{ width: 65, height: 65, borderRadius: 5 }}
+              />
+              <View style={styles.textContainer}>
+                <Text style={styles.textCompanyName}>{restaurant.name}</Text>
+                <Text style={styles.textAddress}>
+                  {restaurant.address}
+                </Text>
+              </View>
+              <SimpleLineIcons name="arrow-right" size={20}/>
             </View>
-            <View style={styles.restaurantInfoRow}>
-              <FontAwesome name="location-arrow" size={11} style={{ marginRight: 5 }} />
-              <Text style={styles.restaurantInfo}>{restaurant.distance}m from me</Text>
-            </View>
-            <Text style={styles.restaurantInfo}>{restaurant.address}</Text>
-          </View>
-        </View>
+        </TouchableOpacity>
         <View style={styles.separator} />
         <Text style={styles.titles}>Name</Text>
         <TextInput
@@ -151,7 +149,7 @@ const QueueRegistration = () => {
           value={name}
           onChangeText={setName}
         />
-        <Text style={styles.titles}>Phone Number</Text>
+        <Text style={styles.titles}>Phone number</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter your phone number"
@@ -197,7 +195,6 @@ const QueueRegistration = () => {
         <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
           <Text style={styles.submitButtonText}>Apply</Text>
         </TouchableOpacity>
-      </ScrollView>
     </View>
   );
 };
@@ -205,38 +202,63 @@ const QueueRegistration = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
-    paddingTop: 50,
-  },
-  scrollViewContent: {
-    flexGrow: 1,
+    width: '100%',
+    paddingHorizontal: 12,
+    backgroundColor: theme.color.white,
   },
   separator: {
-    width: 400,
-    borderBottomWidth: 6,
-    borderBottomColor: '#D9D9D9',
-    marginStart: -30,
+    borderBottomWidth: 5,
+    borderBottomColor: theme.color.lightgray,
+    position: 'relative', 
+    width: Dimensions.get('window').width,
+    left: -12,
+  },
+  restaurantItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+  textCompanyName: {
+    fontSize: theme.fontsize.xl,
+    fontFamily: theme.font.secondary,
+    color: theme.color.blackAlt,
+    lineHeight: theme.fontsize.xl,
+  },
+  textAddress: {
+    fontFamily: theme.font.secondary,
+    fontsize: theme.fontsize.lg,
+    color: theme.color.gray,
+  },  
+  textContainer: {
+    marginLeft: 10,
+    flex: 1,
   },
   titles: {
-    fontWeight: 'bold',
-    marginTop: 15,
-    marginBottom: 10,
+    fontFamily: theme.font.secondary,
+    marginTop: 12,
+    fontSize: theme.fontsize.md,
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: theme.color.gray,
     borderWidth: 1,
-    marginBottom: 10,
     paddingHorizontal: 10,
     borderRadius: 5,
+    marginVertical: 8,
+    fontFamily: theme.font.secondary,
+    lineHeight: theme.fontsize.lg,
   },
   counterContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     margin: 10,
+    paddingTop: 10,
   },
   counterLabel: {
     flex: 1,
+    fontFamily: theme.font.secondary,
+    lineHeight: theme.fontsize.lg,
+    fontSize: theme.fontsize.md,
   },
   counterButton: {
     width: 30,
@@ -248,7 +270,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   counterButtonText: {
-    fontSize: 20,
+    fontSize: theme.fontsize.lg,
   },
   counterValueContainer: {
     width: 30,
@@ -256,61 +278,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   counterValue: {
-    fontSize: 20,
+    fontSize: theme.fontsize.xl,
     textAlign: 'center',
   },
   requestInput: {
     height: 80,
-    borderColor: 'gray',
+    borderColor: theme.color.gray,
     borderWidth: 1,
     borderRadius: 5,
-    marginBottom: 10,
+    marginVertical: 10,
     paddingHorizontal: 10,
     textAlignVertical: 'top',
+    fontFamily: theme.font.secondary,
+    lineHeight: theme.fontsize.lg,
   },
   submitButton: {
-    backgroundColor: '#CC313D',
-    padding: 10,
+    backgroundColor: theme.color.red,
+    padding: 12,
     alignItems: 'center',
     borderRadius: 10,
     marginTop: 30,
-    marginBottom: 100,
   },
   submitButtonText: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  restaurantContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingBottom: 15,
-  },
-  thumbnailImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 5,
-    marginRight: 10,
-  },
-  restaurantInfoContainer: {
-    flex: 1,
-  },
-  restaurantInfoHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  restaurantName: {
-    marginBottom: 5,
-  },
-  restaurantInfo: {
-    fontSize: 12,
-    color: '#777',
-  },
-  restaurantInfoRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 5,
+    color: theme.color.white,
+    fontSize: theme.fontsize.xl,
+    fontFamily: theme.font.primary,
   },
 });
 
