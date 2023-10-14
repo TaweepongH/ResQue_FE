@@ -86,6 +86,7 @@ const RestaurantInfo = ({ route }) => {
           </TouchableOpacity>
         </View>
       </View>
+
     </View>
   );
 };

@@ -5,6 +5,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'reac
 import { useAuth } from '../contexts/AuthContext';
 import { theme } from '../styles/theme';
 import CustomButton from './CustomButton';
+import LoginAPI from './helpers/LoginAPI';
 
 
 const LoginEmail = () => {
@@ -34,44 +35,7 @@ const LoginEmail = () => {
 
   const handleLogin = async () => {
     
-    console.log('User Email:', email);
-    console.log('User Password:', password);
-
-    try {
-
-      const response = await fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/login`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password
-        }),
-      })
-
-      const data = await response.json();
-
-      console.log("data: ", data); // Success message from the server
-  
-      // this is where we will define the bearerToken for the rest of our app to use
-      // if there is an accessToken key in the data message, then we will set the bearerTokenContext to it
-      if (response.ok && data.accessToken) {
-    
-        setBearerTokenContext(data.accessToken)
-        setPasswordContext(password);
-        setEmailContext(email);
-        
-      } else {
-        //error messages etc.
-        
-        Alert.alert(data.title, data.message);
-      }
-      
-    } catch (error) {
-  
-      console.error("Error:", error);
-  
-    }
+    LoginAPI(email, password, setBearerTokenContext, setEmailContext);
   
   };
 

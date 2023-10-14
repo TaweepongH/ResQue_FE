@@ -21,6 +21,7 @@ const QueueRegistration = () => {
   const [loading, setLoading] = useState(false);
   const [partySize, setPartySize] = useState(0);
 
+
   const handleDecreaseAdult = () => {
     if (adultCount > 0) {
       setAdultCount(adultCount - 1);
@@ -43,6 +44,7 @@ const QueueRegistration = () => {
 
   useEffect(() => {
     setPartySize(childCount + adultCount);
+    setRequest(request);
   }, [handleDecreaseAdult, handleDecreaseChild, handleIncreaseAdult, handleIncreaseChild])
 
   const handleSubmit = () => {
@@ -83,9 +85,13 @@ const QueueRegistration = () => {
         setLoading(false);
 
         console.log("response msg from backend: ", data);
-
-        setQueDataContext({ ...data, partySize });
-
+      const updatedDataContext = {
+      ...data,
+      partySize,
+      request,
+    };
+    
+    setQueDataContext(updatedDataContext);
         navigation.navigate('QueueConfirm')
 
         // then we've got to navigate to the next page. 

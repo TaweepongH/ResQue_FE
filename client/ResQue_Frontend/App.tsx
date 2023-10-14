@@ -11,7 +11,6 @@ import TabNavigator from './Components/TabNavigator/TabNavigator'
 import StackNavigator from './Components/StackNavigator/StackNavigator';
 import {useAuth} from './contexts/AuthContext.js'
 
-
 function App(): JSX.Element {
   
   const { bearerToken, password} = useAuth();
