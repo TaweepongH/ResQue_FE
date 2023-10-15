@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import {useAuth } from '../contexts/AuthContext.js'
 import { useNavigation } from '@react-navigation/native';
+import { theme } from '../styles/theme.js';
+theme
 
 const QueueConfirm = () => {
 
@@ -102,8 +104,8 @@ const QueueConfirm = () => {
   const handleConfirm = () => {
     
     console.log("confirm");
-    navigation.navigate('RestaurantInfo')
-    
+    navigation.navigate('Home');
+
   }
 
   return (
@@ -120,8 +122,9 @@ const QueueConfirm = () => {
 
           {/* <View>
             <Text style={styles.queueInfoTxt}>Request</Text>
-            <Text>This is an answer for the request</Text>
-          </View> */}
+            <Text style={{color: theme.color.blackAlt, fontSize: theme.fontsize.md, paddingTop: 10,}}>This is an answer for the request</Text>
+          </View>
+
         </View>
       </View>
       <View style={styles.buttons}>
@@ -154,24 +157,27 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 30,
+    paddingTop: 30,
+    backgroundColor: theme.color.white,
   },
   container: {
     padding: 20,
     width: '85%',
-    height: '50%',
-    backgroundColor: '#FEEEEF',
+    height: '60%',
+    backgroundColor: theme.color.lightpink,
     borderRadius: 5,
-    borderColor: '#D3D3D3',
+    borderColor: theme.color.lightgray,
     borderWidth: 1,
   },
   currentQueue: {
+    fontFamily: theme.font.secondary,
+    lineHeight: 26,
     fontWeight: 'bold',
-    fontSize: 22,
-    paddingBottom:10,
+    fontSize: theme.fontsize.xxl,
+    paddingBottom: 20,
   },
   queueNumber: {
-    color: '#CC313D',
+    color: theme.color.red,
   },
   queueInfoItem: {
     flexDirection: 'row',
@@ -179,33 +185,37 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   queueInfoTxt: {
-    color: 'grey',
+    color: theme.color.gray,
     marginRight: 10,
+    fontSize: theme.fontsize.md,
+    fontFamily: theme.font.secondary,
   },
   queueInfoAns: {
-    color: 'black',
+    color: theme.color.blackAlt,
     flex: 1,
     textAlign: 'right',
+    fontSize: theme.fontsize.md,
+    fontFamily: theme.font.secondary,
   },
   buttons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '85%',
+    width: '90%',
     marginBottom: 100,
+    position: 'absolute',
+    bottom: '0.5%',
   },
   button: {
-    padding: 15,
-    backgroundColor: '#CC313D',
-    borderRadius: 5,
-    width: 150,
-    height: 50,
+    padding: 12,
+    backgroundColor: theme.color.red,
+    borderRadius: 10,
+    width: '48%',
   },
   buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 17,
+    color: theme.color.white,
+    fontSize: theme.fontsize.xl,
     textAlign: 'center',
+    fontFamily: theme.font.primary,
   },
   btnCancel: {
     // Additional style for Cancel button

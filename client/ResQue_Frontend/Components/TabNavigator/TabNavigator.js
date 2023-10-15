@@ -9,6 +9,7 @@ import SearchBar from '../SearchBar';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { theme } from '../../styles/theme';
 
 
 // non tab paths
@@ -27,18 +28,22 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: '#CC313D',
-        tabBarInactiveTintColor: '#1E1E1E',
+        tabBarActiveTintColor: theme.color.red,
+        tabBarInactiveTintColor: theme.color.blackAlt,
         // Attention: You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar.  src: https://reactnavigation.org/docs/bottom-tab-navigator
         tabBarStyle: { position: 'absolute', height: '10%', borderTopWidth: 1, },
-        tabBarLabelStyle: { marginTop: -5 },
+        tabBarLabelStyle: { 
+          marginTop: -5 ,
+          fontFamily: theme.font.primary,
+          fontSize: theme.fontsize.xs,
+        },
         headerStyle: {
-          backgroundColor: '#F7C5CC',
+          backgroundColor: theme.color.pink,
           height: 110,
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
-          fontSize: 24
+          fontSize: theme.fontsize.xxl,
+          fontFamily: theme.font.primary,
         },
         headerTitleAlign: 'center',
       }}
@@ -115,6 +120,7 @@ const TabNavigator = () => {
         options={{
           tabBarButton: () => null, // Hide the tab icon
           tabBarLabel: () => null,  // Hide the screen label
+          headerTitle: "Join a Queue!"
         }}
       
       />
@@ -125,6 +131,7 @@ const TabNavigator = () => {
         options={{
           tabBarButton: () => null, // Hide the tab icon
           tabBarLabel: () => null,  // Hide the screen label
+          headerTitle: "Your Queue",
         }}
       
       />
@@ -135,6 +142,15 @@ const TabNavigator = () => {
         options={{
           tabBarButton: () => null, // Hide the tab icon
           tabBarLabel: () => null,  // Hide the screen label
+          headerTransparent: true,
+          headerTitle:"",
+          headerRight: () => {
+            return (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <IconAnt name="close" size={30} style={{marginRight: 15, marginTop: -30,}}/>
+                </TouchableOpacity>
+            )
+          }
         }}
       />
 

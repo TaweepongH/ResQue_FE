@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   signupText: {
     fontFamily: theme.font.secondary,
     color: theme.color.red,
-    fontWeight: '500',
+    fontWeight: 'bold',
     textDecorationLine: 'underline',
   },
 });
