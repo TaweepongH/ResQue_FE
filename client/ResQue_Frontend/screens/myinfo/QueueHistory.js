@@ -4,7 +4,7 @@ import QueueHistoryList from '../../Components/QueueHistoryList';
 import { useAuth } from '../../contexts/AuthContext.js'
 import CustomModal from '../../Components/CustomModal';
 import { theme } from '../../styles/theme';
-theme;
+
 
 const QueueHistory = () => {
 
@@ -137,6 +137,7 @@ const QueueHistory = () => {
             </View> 
 
           );
+
 };
     
 const styles = StyleSheet.create({

@@ -9,6 +9,7 @@ import { useAnimatedGestureHandler } from 'react-native-reanimated';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import LoginAPI from './helpers/LoginAPI.js';
+import RegisterAPI from './helpers/RegisterAPI.js';
 
 GoogleSignin.configure({
     webClientId: '350964133055-3vbor7lg8rla3fm17ae14re1uo5rdj5e.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
@@ -20,31 +21,34 @@ const GoogleAuth = () => {
 
     const { setEmailContext, setBearerTokenContext } = useAuth();
 
-    const handleRegistration  = (userData) => {
+    const handleRegistration  = async (userData) => {
 
-        fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-        body: JSON.stringify({
-          email: `${userData.email}`,
-          firstName: `${userData.givenName}`,
-          lastName: `${userData.familyName}`, 
-          active: true,
-          socialMediaToken: `${userData.id}`
+        const registrationData = {
+            email: `${userData.email}`,
+            firstName: `${userData.givenName}`,
+            lastName: `${userData.familyName}`, 
+            socialMediaToken: `${userData.id}`
+          }
 
-        }),
-      }).then((response) => response.text())
-        .then((data) => {
+        try {
 
-            console.log("registration data: ", data);
-
-            LoginAPI(userData.email, '', setBearerTokenContext, setEmailContext, userData.id)
-
-        }).catch((error) => {
-          console.error('Error:', error);
-        });
+            const response = await RegisterAPI(registrationData);
+        
+            if (response.status === 200 || response.status === 400) {
+                console.log("response status: ", response.status);
+                console.log("Registration successful:", response);
+                const loginData = {
+                    email: `${userData.email}`,
+                    socialMediaToken: `${userData.id}`
+                }
+                LoginAPI(loginData, setBearerTokenContext, setEmailContext);
+            } else {
+                console.log("Registration failed");
+                Alert.alert(response);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
 
     }
 
@@ -71,7 +75,6 @@ const GoogleAuth = () => {
 
         } catch (error) {
             console.log("error from auth component: ", error);
-            Alert.alert(error);
             navigation.navigate('Login');
         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
             // user cancelled the login flow

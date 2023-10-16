@@ -30,7 +30,6 @@ const QueueHistoryList = ({partner, dateTime, button, onPress }) => {
             </View>
               <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
                   <Text style={styles.buttonText}>Leave</Text>
-                
               </TouchableOpacity>
         </View>
       );
