@@ -100,7 +100,7 @@ const RestaurantList = () => {
         ) : (
           // Render restaurant data
           restaurants.map((restaurant) => (
-            <RestaurantItem restaurant={restaurant} onPress={handleQuePress}/>
+            <RestaurantItem restaurant={restaurant} onPress={() => {handleQuePress(restaurant)}}/>
           ))
         )}
       </View>

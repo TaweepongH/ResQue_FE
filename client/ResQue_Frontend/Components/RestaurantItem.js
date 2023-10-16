@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     waitListText: {
       color: theme.color.lightpink,
       fontSize: theme.fontsize.xl,
-      fontFamily: theme.font.primary,
+      fontWeight: 'bold',
     },
   });
 

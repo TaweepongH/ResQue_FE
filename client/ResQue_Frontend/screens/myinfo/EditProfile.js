@@ -3,7 +3,6 @@ import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from 'reac
 import { useAuth } from '../../contexts/AuthContext.js';
 import CustomModal from '../../Components/CustomModal.js';
 import { theme } from '../../styles/theme.js';
-theme
 
 
 const EditProfile = ({ navigation, route }) => {
@@ -218,9 +217,8 @@ const styles = StyleSheet.create({
     },
     editText: {
         color: theme.color.white,
-        fontWeight: 'bold',
         textAlign: 'center',
-        fontFamily: theme.font.secondary,
+        fontFamily: theme.font.primary,
         fontSize: theme.fontsize.xl,
         lineHeight: theme.fontsize.xxl,
     },

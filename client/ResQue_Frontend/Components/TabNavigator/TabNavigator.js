@@ -146,8 +146,16 @@ const TabNavigator = () => {
           headerTitle:"",
           headerRight: () => {
             return (
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <IconAnt name="close" size={30} style={{marginRight: 15, marginTop: -30,}}/>
+              <TouchableOpacity 
+                onPress={() => navigation.goBack()}
+                style={{
+                    marginRight: 15, 
+                    marginTop: -30, 
+                    backgroundColor: '#ffffff50',
+                    borderRadius: 5,  
+                }}  
+              >
+                    <IconAnt name="close" size={30}/>
                 </TouchableOpacity>
             )
           }
