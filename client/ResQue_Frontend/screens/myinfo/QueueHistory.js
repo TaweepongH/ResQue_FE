@@ -4,8 +4,6 @@ import QueueHistoryList from '../../Components/QueueHistoryList';
 import { useAuth } from '../../contexts/AuthContext.js'
 import CustomModal from '../../Components/CustomModal';
 
-// use the moment.js library
-
 const QueueHistory = () => {
 
   const { bearerToken } = useAuth();
@@ -132,35 +130,30 @@ const QueueHistory = () => {
                
 
         return <View key={Math.random() * 1000} style={styles.queueItemContainer}>
-          <QueueHistoryList 
-              key={Math.random() * 1000}
-              icon="cloud" 
-              text={
-                <View style={{ flexDirection: 'row', alignItems: 'center',justifyContent:'space-between', }}>
-  <View style={styles.listContainer}>
-    <Text style={styles.queueData}>{queueData.partnerName}</Text>
-    <Text style={styles.queueTime}>
-      {parseTime(queueData.updatedAt._seconds)}
-    </Text>
-  </View>
-  <View> 
-  </View>
-</View>
-  }
-  button={        
-  <TouchableOpacity onPress={() => handleLeave(queueData.partnerId)}>
-      <View style={styles.waitList}>
-        <Text style={styles.waitListText}>Leave</Text>
-      </View>
-    </TouchableOpacity>}
-/>
+                  <QueueHistoryList 
+                      key={Math.random() * 1000}
+                      icon="cloud" 
+                      text={
+                        <View style={{ flexDirection: 'row', alignItems: 'center',justifyContent:'space-between', }}>
+                          <View style={styles.listContainer}>
+                            <Text style={styles.queueData}>{queueData.partnerName}</Text>
+                            <Text style={styles.queueTime}>
+                              {parseTime(queueData.updatedAt._seconds)}
+                            </Text>
+                          </View>
+                        </View>
+                      }
+                      button={        
+                        <TouchableOpacity onPress={() => handleLeave(queueData.partnerId)}>
+                          <View style={styles.waitList}>
+                            <Text style={styles.waitListText}>Leave</Text>
+                          </View>
+                        </TouchableOpacity>     
+                      }
+                    />
+                </View>
 
-
-              </View>
-
-          }) : loading ? <></> :
-
-          <Text> You aren't queue'd up for anything! </Text>      
+          }) : <></>
         }
         </View> 
       );

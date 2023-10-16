@@ -20,7 +20,6 @@ const LoginEmail = () => {
      navigation.navigate('Register');
   };
 
-  // chat gpt suggested i "memoize" these handlers with the useCallback hook because they're likely to receive the same input often. ie. when a user signs in multiple times
   const handleEmailChange = useCallback((text) => {
     setEmail(text);
   }, []);
@@ -34,8 +33,13 @@ const LoginEmail = () => {
   };
 
   const handleLogin = async () => {
+
+    const loginData = {
+      email: email,
+      password: password
+    }
     
-    LoginAPI(email, password, setBearerTokenContext, setEmailContext);
+    LoginAPI(loginData, setBearerTokenContext, setEmailContext);
   
   };
 

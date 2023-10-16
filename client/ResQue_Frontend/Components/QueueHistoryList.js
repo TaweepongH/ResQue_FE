@@ -13,11 +13,10 @@ const QueueHistoryList = ({ icon,text, button }) => {
                 <Text style={styles.buttonText}>{text}</Text>
             </View>
             <View>        
-            <TouchableOpacity>
+            
               <View style={styles.button}>{button}</View>
-            </TouchableOpacity>
+            
             </View>
-    
         </View>
       </View>
       );

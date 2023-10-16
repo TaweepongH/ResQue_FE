@@ -11,6 +11,7 @@ import {
 import { theme } from '../styles/theme';
 import CustomButton from './CustomButton';
 import { useNavigation } from '@react-navigation/native';
+import RegisterAPI from './helpers/RegisterAPI';
 
 const InputField = ({ label, placeholder, onChangeText}) => (
   <>
@@ -36,6 +37,7 @@ const Register = () => {
   const navigation = useNavigation();
 
   const handleEmailChange = (text) => {
+    
     setEmail(text);
   };
 
@@ -51,55 +53,34 @@ const Register = () => {
     setName((prevName) => ({ ...prevName, [key]: value }));
   };
 
-  const handleRegistration = () => {
+  const handleRegistration = async () => {
 
-    console.log('User Email:', email);
-    console.log('User Password:', password);
-
-    console.log('user first name: ', name.firstName);
-    console.log('user last name: ', name.lastName);
+    const registrationBody = {
+      email: email,
+      firstName: name.firstName,
+      lastName: name.lastName,
+      password: password
+    }
 
     if (password !== confirmPassword) {
       Alert.alert('Passwords do not match.');
       return;
     } else {
-      fetch(`https://app-57vwexmexq-uc.a.run.app/api/users/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-        body: JSON.stringify({
-          email: `${email}`,
-          password: `${password}`,
-          firstName: `${name.firstName}`,
-          lastName: `${name.lastName}`, 
-          active: true
-        }),
-      }).then((response) => response.text())
-        .then((data) => {
 
-          console.log("registration data: ", data);
+      try {
+        const response = await RegisterAPI(registrationBody);
+    
+        if (response.ok) {
+          console.log("Registration successful:", response);
+          navigation.navigate('LoginEmail');
+        } else {
+          // Handle the case where registration failed
+          console.log("Registration failed");
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
 
-          // if the email entered is already registered
-          if (JSON.parse(data).message === "User is already registered!") {
-            
-            console.log("testing... ");
-            // Alert.alert(JSON.parse(data).message);
-
-          }
-
-          // if the data returns an object with an ID key, the user has successfully registered
-          if (JSON.parse(data).id) {
-
-            Alert.alert("Success! Thank you. Redirecting you to the Login page");
-            // navigate to the login component only after successfully registering
-            navigation.navigate('LoginEmail');
-
-          }
-
-        }).catch((error) => {
-          console.error('Error:', error);
-        });
     }
 
   }
