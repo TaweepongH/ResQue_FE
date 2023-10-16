@@ -91,7 +91,7 @@ const Search = () => {
   useEffect(() => {
     // get our data set
     fetchData();
-  }, [])
+  }, []) 
 
   useEffect(() => {
     console.log("query value: ", query);

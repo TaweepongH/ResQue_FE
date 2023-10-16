@@ -9,28 +9,27 @@ const QueueConfirm = () => {
 
   const {queData, bearerToken, rstrntData} = useAuth();
 
-  const [loading, setLoading] = useState(false);
-
   const navigation = useNavigation();
-  
-
-  useEffect(() => {
-    console.log("que data: checking !", queData);
-  }, [])
 
   const suffixParse = (num) => {
-    num = num.toString(); // Convert to string and assign back to num
-    const numArray = num.split(''); // Split the string into an array of characters
+    num = num.toString();
+    const lastDigit = num.slice(-1);
   
-    if (numArray[0] === '1' && !numArray[1] || numArray[numArray.length - 1] === '1') {
-      return 'st in line';
-    } else if (numArray[0] === '2' || numArray[numArray.length -1] === '2') {
-      return 'nd in line';
-    } else if (numArray[0] === '3' || numArray[numArray.length -1] === '3') {
-      return 'rd in line';
-    } else {
+    if (num.length >= 2 && num.slice(-2) === '11' || num.slice(-2) === '12' || num.slice(-2) === '13') {
       return 'th in line';
     }
+  
+    switch (lastDigit) {
+      case '1':
+        return 'st in line';
+      case '2':
+        return 'nd in line';
+      case '3':
+        return 'rd in line';
+      default:
+        return 'th in line';
+    }
+
   };
 
   const cancelQue = async () => {
@@ -119,12 +118,6 @@ const QueueConfirm = () => {
           <QueueInfoItem label="Party size" answer={`${queData.partySize}`} />
           <QueueInfoItem label="Estimated wait time" answer={`${queData.queueNo * Math.floor(Math.random() * 5) + 5}`} />
           <QueueInfoItem label="Request" answer={`${queData.request}`} />
-
-          {/* <View>
-            <Text style={styles.queueInfoTxt}>Request</Text>
-            <Text style={{color: theme.color.blackAlt, fontSize: theme.fontsize.md, paddingTop: 10,}}>This is an answer for the request</Text>
-          </View>
-
         </View>
       </View>
       <View style={styles.buttons}>
