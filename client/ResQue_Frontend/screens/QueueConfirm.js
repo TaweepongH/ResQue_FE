@@ -119,12 +119,6 @@ const QueueConfirm = () => {
           <QueueInfoItem label="Party size" answer={`${queData.partySize}`} />
           <QueueInfoItem label="Estimated wait time" answer={`${queData.queueNo * Math.floor(Math.random() * 5) + 5}`} />
           <QueueInfoItem label="Request" answer={`${queData.request}`} />
-
-          {/* <View>
-            <Text style={styles.queueInfoTxt}>Request</Text>
-            <Text style={{color: theme.color.blackAlt, fontSize: theme.fontsize.md, paddingTop: 10,}}>This is an answer for the request</Text>
-          </View>
-
         </View>
       </View>
       <View style={styles.buttons}>

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import IconMat from 'react-native-vector-icons/MaterialIcons';
 import { useAuth } from '../../contexts/AuthContext.js';
-
 import CustomModal from '../../Components/CustomModal.js';
+import { theme } from '../../styles/theme.js';
+theme
 
 
 const EditProfile = ({ navigation, route }) => {
@@ -160,7 +159,7 @@ const ProfileInput = ({ label, placeholderText, onChangeText}) => (
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FEEEEF',
+        backgroundColor: theme.color.lightpink,
         alignItems: 'center',
         padding: 20,
         position: 'relative',
@@ -170,7 +169,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 90,
         aspectRatio: 1,
-        backgroundColor: "#CC313D",
+        backgroundColor: theme.color.red,
         borderRadius: 45,
         marginTop: 20,
         marginBottom: 30,
@@ -178,14 +177,14 @@ const styles = StyleSheet.create({
     profileText: {
         fontSize: 48,
         fontWeight: 'bold',
-        color: "#FEEEEF",
+        color: theme.color.lightpink,
     },
     user: {
         marginBottom: 20,
         marginTop: 40,
     },
     infoContainer: {
-        backgroundColor: 'white',
+        backgroundColor: theme.color.white,
         width: '95%', 
         height: 55,
         paddingHorizontal: 20,
@@ -197,34 +196,33 @@ const styles = StyleSheet.create({
     },
     infoLabel: {
         width: '50%',
-        fontSize: 18,
-        color: '#343434'
+        fontFamily: theme.font.secondary,
+        fontSize: theme.fontsize.lg,
+        lineHeight: theme.fontsize.xl,
+        color: theme.color.blackAlt,
     },
     infoInput: {
         marginTop: 8,
         width: '50%',
-        fontSize: 18, 
+        fontFamily: theme.font.secondary,
+        fontSize: theme.fontsize.lg,
         textAlign: 'right',
         marginBottom: 10,
     },
     editButton: {
-        backgroundColor: '#CC313D',
-        borderRadius: 3,
+        backgroundColor: theme.color.red,
+        borderRadius: 5,
         padding: 10,
         marginTop: 20,
-        width: '80%',
+        width: '90%',
     },
     editText: {
-        color: 'white',
+        color: theme.color.white,
         fontWeight: 'bold',
         textAlign: 'center',
-        fontSize: 18,
-    },
-    closeButton: {
-        position: 'absolute',
-        top: 10,
-        right: 10,
-        zIndex: 1,
+        fontFamily: theme.font.secondary,
+        fontSize: theme.fontsize.xl,
+        lineHeight: theme.fontsize.xxl,
     },
 });
 

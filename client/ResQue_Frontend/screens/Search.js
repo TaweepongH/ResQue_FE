@@ -1,11 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { View, Text, TextInput, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet,ScrollView } from 'react-native';
 import { useAuth } from '../contexts/AuthContext.js';
-import Icon from 'react-native-vector-icons/Feather';
 import CustomModal from '../Components/CustomModal.js';
 import { useNavigation } from '@react-navigation/native';
 import RestaurantItem from '../Components/RestaurantItem.js';
-import { theme } from '../styles/theme.js';
 
 const Search = () => {
 

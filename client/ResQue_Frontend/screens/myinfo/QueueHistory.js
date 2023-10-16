@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import QueueHistoryList from '../../Components/QueueHistoryList';
 import { useAuth } from '../../contexts/AuthContext.js'
 import CustomModal from '../../Components/CustomModal';
-
-// use the moment.js library
+import { theme } from '../../styles/theme';
+theme;
 
 const QueueHistory = () => {
 
@@ -119,103 +119,32 @@ const QueueHistory = () => {
 
   }, [])
 
-    return (
+    return ( 
+      <View style={styles.container}>
+        <CustomModal visible={loading}></CustomModal>
 
-      
-        <View style={styles.container}>
+        { hasQueues ?
+          userQueueData.map((queueData) => {
+            return <QueueHistoryList 
+                key={Math.random() * 1000}
+                dateTime={queueData.updatedAt._seconds}
+                partner={queueData.partnerName}
+                onPress={() => handleLeave(queueData.partnerId)}
+              />
+              }) : loading ? <></> :
+              <Text> You aren't queue'd up for anything! </Text>
+            }
+            </View> 
 
-          <CustomModal visible={loading}></CustomModal>
-
-          { hasQueues ?
-            
-            userQueueData.map((queueData) => {
-               
-
-        return <View key={Math.random() * 1000} style={styles.queueItemContainer}>
-          <QueueHistoryList 
-              key={Math.random() * 1000}
-              icon="cloud" 
-              text={
-                <View style={{ flexDirection: 'row', alignItems: 'center',justifyContent:'space-between', }}>
-  <View style={styles.listContainer}>
-    <Text style={styles.queueData}>{queueData.partnerName}</Text>
-    <Text style={styles.queueTime}>
-      {parseTime(queueData.updatedAt._seconds)}
-    </Text>
-  </View>
-  <View> 
-  </View>
-</View>
-  }
-  button={        
-  <TouchableOpacity onPress={() => handleLeave(queueData.partnerId)}>
-      <View style={styles.waitList}>
-        <Text style={styles.waitListText}>Leave</Text>
-      </View>
-    </TouchableOpacity>}
-/>
-
-
-              </View>
-
-          }) : loading ? <></> :
-
-          <Text> You aren't queue'd up for anything! </Text>      
-        }
-        </View> 
-      );
+          );
 };
     
 const styles = StyleSheet.create({
       container: {
         width:'100%',
         flex: 1,
-        backgroundColor: 'white',
-        paddingTop: 24,
-      },
-      user: {
-        alignItems: 'center',
-        marginBottom: 20,
-      },
-      userProfile: {
-        width: 90,
-        aspectRatio: 1,
-        backgroundColor: "#CC313D",
-        borderRadius: 45,
-        marginBottom: 10,
-      },
-      queueData:{
-        fontSize:15,
-        marginRight:10,
-
-      },
-      queueTime:{
-        fontSize: 12, 
-        marginLeft: 5
-      },
-      profileText: {
-        fontSize: 48,
-        fontWeight: 'bold',
-        color: "#FEEEEF",
-      },
-      userName: {
-        fontSize: 24,
-      },
-      waitList: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 60,
-        height: 40,
-        backgroundColor: '#CC313D',
-        borderRadius: 20,
-        
-      },
-      waitListText: {
-        color: 'white',
-        fontSize: 12,
-      },
-      queueItemContainer: {
-        marginBottom: 16, 
+        backgroundColor: theme.color.white,
+        paddingTop: 15,
       },
 });
     
