@@ -4,6 +4,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'reac
 import { useAuth } from '../contexts/AuthContext';
 import { theme } from '../styles/theme';
 import CustomButton from './CustomButton';
+import LoginAPI from './helpers/LoginAPI';
 
 const LoginEmail = () => {
   const { setEmailContext, setBearerTokenContext, setPasswordContext } = useAuth();
@@ -16,7 +17,6 @@ const LoginEmail = () => {
     navigation.navigate('Register');
   };
 
-  // chat gpt suggested i "memoize" these handlers with the useCallback hook because they're likely to receive the same input often. ie. when a user signs in multiple times
   const handleEmailChange = useCallback((text) => {
     setEmail(text);
   }, []);
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   signupText: {
     fontFamily: theme.font.secondary,
     color: theme.color.red,
-    fontWeight: '500',
+    fontWeight: 'bold',
     textDecorationLine: 'underline',
   },
 });

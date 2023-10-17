@@ -7,6 +7,7 @@ import { useAuth } from '../../contexts/AuthContext.js';
 import ListItem from '../../Components/ListItem';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import QueueHistory from './QueueHistory';
+import { theme } from '../../styles/theme';
 
 const Stack = createStackNavigator();
 
@@ -135,7 +136,7 @@ const MyInfo = ({ navigation: { navigate } }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: theme.color.white,
     paddingTop: 24,
   },
   user: {
@@ -147,17 +148,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 90,
     aspectRatio: 1,
-    backgroundColor: '#CC313D',
+    backgroundColor: theme.color.red,
     borderRadius: 45,
     marginBottom: 10,
   },
   profileText: {
     fontSize: 48,
     fontWeight: 'bold',
-    color: '#FEEEEF',
+    color: theme.color.lightpink,
   },
   userName: {
-    fontSize: 24,
+    fontSize: theme.fontsize.xxl,
+    fontFamily: theme.font.secondary,
+    lineHeight: theme.fontsize.xxl,
   },
   infoContainer: {
     flex: 1,

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 const { Text, StyleSheet } = require("react-native");
 const apiKey = 'nEEEhLarJcEvFiV6K2h1Pp_M3fMYx5whC4xkYbXuYrmpmMxsLXH0O1sCdlZ9B30B83v2GBU08y3XRwSMSqHXzFgCLZLs52Pe4_VfersINvhg9X9F7NM4hDTrnYysZHYx';                
 const searchTerm = 'restaurants'; // Or any other search term
-const location = 'Delta Vancouver'; 
+const location = 'Delta Vancouver'; // change the location and mount this component to generate data for the selected location
 const maxRestarauntsPerArea = 19;
 let operationalDays = [];
 

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext.js';
+import { theme } from '../styles/theme';
 
 const renderButton = (name) => {
   const navigation = useNavigation();
@@ -45,17 +46,19 @@ const renderButton = (name) => {
 const styles = StyleSheet.create({
   button: {
     height: 48,
-    backgroundColor: '#F7C5CC',
+    backgroundColor: theme.color.pink,
     borderWidth: 1,
-    borderColor: '#D9D9D9',
+    borderColor: theme.color.lightgray,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonText: {
-    fontSize: 15,
-    color: 'black',
+    fontFamily: theme.font.secondary,
+    fontSize: theme.fontsize.md,
+    color: theme.color.blackAlt,
     textAlign: 'center',
+    lineHeight: 18,
   },
 });
 

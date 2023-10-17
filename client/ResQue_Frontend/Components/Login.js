@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import logo from '../assets/images/newLogo.png';
 import CustomButton from './CustomButton';
 import { SvgXml } from 'react-native-svg';
 import { theme } from '../styles/theme';

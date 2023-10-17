@@ -3,6 +3,8 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'rea
 import { useAuth } from '../contexts/AuthContext.js';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import CustomModal from './CustomModal.js';
+import { theme } from '../styles/theme';
+import RestaurantItem from './RestaurantItem.js';
 
 const RestaurantList = () => {
   const { bearerToken, setRstrntDataContext } = useAuth();
@@ -85,30 +87,17 @@ const RestaurantList = () => {
       <View style={styles.container}>
         {loading ? (
           <View style={styles.loadingContainer}>
-            <CustomModal visible={loading} message={`fetching data...`} marginTop={250} />
+            <CustomModal visible={loading} message={`Loading...`} marginTop={250} />
           </View>
         ) : (
           // Render restaurant data
           restaurants.map((restaurant) => (
-            <TouchableOpacity
-              key={restaurant.id}
+            <RestaurantItem
+              restaurant={restaurant}
               onPress={() => {
                 handleQuePress(restaurant);
               }}
-            >
-              <View style={styles.restaurantItem}>
-                <Image source={{ uri: restaurant.images[0] }} style={{ width: 100, height: 100, borderRadius: 10 }} />
-                <View style={styles.textContainer}>
-                  <Text style={styles.textCompanyName}>{restaurant.companyName}</Text>
-                  <Text>
-                    {restaurant.address[0]}, {restaurant.address[1]}
-                  </Text>
-                </View>
-                <View style={styles.waitList}>
-                  <Text style={styles.waitListText}>{restaurant.queueCount}</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
+            />
           ))
         )}
       </View>
@@ -117,23 +106,24 @@ const RestaurantList = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 10,
-    marginTop: 20,
-  },
-  selectedAreaText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  textCompanyName: {
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
+  container: {},
   restaurantItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.color.lightgray,
+  },
+  textCompanyName: {
+    fontSize: theme.fontsize.xl,
+    fontFamily: theme.font.secondary,
+    color: theme.color.blackAlt,
+    lineHeight: theme.fontsize.xl,
+  },
+  textAddress: {
+    fontFamily: theme.font.secondary,
+    fontsize: theme.fontsize.lg,
+    color: theme.color.gray,
   },
   textContainer: {
     marginLeft: 10,
@@ -142,14 +132,15 @@ const styles = StyleSheet.create({
   waitList: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 40,
-    height: 40,
-    backgroundColor: '#CC313D',
+    width: 35,
+    height: 35,
+    backgroundColor: theme.color.red,
     borderRadius: 20,
   },
   waitListText: {
-    color: 'white',
-    fontSize: 16,
+    color: theme.color.lightpink,
+    fontSize: theme.fontsize.xl,
+    fontFamily: theme.font.primary,
   },
   loadingContainer: {
     alignItems: 'center',
