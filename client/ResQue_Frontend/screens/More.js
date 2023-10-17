@@ -20,7 +20,7 @@ export const getMoreTabHeaderTitle = (route) => {
     case 'Settings':
       return 'Settings';
     case 'Feedback':
-      return 'Rate your Experience';
+      return 'Rate our app!';
     case 'TermsPolicies':
       return 'Terms and Policies'
   }

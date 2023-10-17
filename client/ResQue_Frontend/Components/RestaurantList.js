@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext.js';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import CustomModal from './CustomModal.js';
 import { theme } from '../styles/theme';
+import RestaurantItem from './RestaurantItem.js';
 
 const RestaurantList = () => {
 
@@ -99,28 +100,7 @@ const RestaurantList = () => {
         ) : (
           // Render restaurant data
           restaurants.map((restaurant) => (
-            <TouchableOpacity key={restaurant.id} onPress={ () => {
-                handleQuePress(restaurant);
-              }}
-            >
-              <View style={styles.restaurantItem}>
-                
-                <Image
-                  source={{ uri: restaurant.images[0] }}
-                  style={{ width: 65, height: 65, borderRadius: 5 }}
-                />
-                <View style={styles.textContainer}>
-                  <Text style={styles.textCompanyName}>{restaurant.companyName}</Text>
-                  <Text style={styles.textAddress}>
-                    {restaurant.address[0]}, {restaurant.address[1]}
-                  </Text>
-                </View>
-                <View style={styles.waitList}>
-                  <Text style={styles.waitListText}>{restaurant.queueCount}</Text>
-                </View>
-                
-              </View>
-            </TouchableOpacity>
+            <RestaurantItem restaurant={restaurant} onPress={() => {handleQuePress(restaurant)}}/>
           ))
         )}
       </View>

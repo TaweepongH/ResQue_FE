@@ -2,6 +2,8 @@ import { View, Text, TouchableOpacity, StyleSheet,Linking } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
+import { theme } from '../styles/theme';
+theme;
 
 const ListItem = ({ text, icon, screen, onPress }) => {
     const navigation = useNavigation();
@@ -22,7 +24,7 @@ const ListItem = ({ text, icon, screen, onPress }) => {
     return (
         <View style={styles.button}>
           <TouchableOpacity style={styles.row} onPress={handlePress}>
-            <IconMat name={icon} size={35} color="#343434" style={styles.icon} />
+            <IconMat name={icon} size={35} color={theme.color.blackAlt} style={styles.icon} />
             <Text style={styles.buttonText}>{text}</Text>
 
             {!(screen == "version") ?
@@ -36,13 +38,13 @@ const ListItem = ({ text, icon, screen, onPress }) => {
 const styles = StyleSheet.create({
     button: {
       justifyContent: 'center',
-      backgroundColor: '#FEEEEF',
+      backgroundColor: theme.color.lightpink,
       width: '90%',
       height: 55,
       marginBottom: 20,
       borderWidth: 0.5,
       borderRadius: 5,
-      borderColor: "#D9D9D9",
+      borderColor: theme.color.lightgray,
     },
     row: {
       flexDirection: 'row',
@@ -50,14 +52,16 @@ const styles = StyleSheet.create({
       paddingHorizontal: 15,
     },
     icon: {
-        marginRight: 20,
+        marginRight: 10,
     },
     buttonText: {
-      fontSize: 20,
-      color: "#343434",
+      fontFamily: theme.font.secondary,
+      fontSize: theme.fontsize.xl,
+      lineHeight: theme.fontsize.xxl,
+      color: theme.color.blackAlt,
     },
     arrow: {
-      color: "#343434",
+      color: theme.color.blackAlt,
       marginLeft: 'auto',
     },
   });

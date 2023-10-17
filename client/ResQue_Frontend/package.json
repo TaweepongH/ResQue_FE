@@ -23,6 +23,7 @@
     "@twotalltotems/react-native-otp-input": "^1.3.11",
     "directory": "^0.1.0",
     "firebase": "^10.1.0",
+    "lodash": "^4.17.21",
     "lottie-ios": "^4.3.1",
     "lottie-react-native": "^6.3.1",
     "react": "18.2.0",

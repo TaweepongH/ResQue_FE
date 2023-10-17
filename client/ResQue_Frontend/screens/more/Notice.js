@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native';
+
 
 const noticeData = [
   {
@@ -39,7 +40,7 @@ const Notice = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {noticeData.map((data, index) => (
         <NoticeCard
           key={data.id} // Use a unique identifier as the key
@@ -49,7 +50,7 @@ const Notice = () => {
           showContent={showContentArray[index]}
         />
       ))}
-    </View>
+    </ScrollView>
   );
 };
 

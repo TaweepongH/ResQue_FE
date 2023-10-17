@@ -1,10 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { View, Text, TextInput, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet,ScrollView } from 'react-native';
 import { useAuth } from '../contexts/AuthContext.js';
-import Icon from 'react-native-vector-icons/Feather';
 import CustomModal from '../Components/CustomModal.js';
-
 import { useNavigation } from '@react-navigation/native';
+import RestaurantItem from '../Components/RestaurantItem.js';
 
 const Search = () => {
 
@@ -111,54 +110,16 @@ const Search = () => {
   return (
     <>
 
-      <ScrollView>
+      <ScrollView style={styles.container}>
       
-        <CustomModal visible={loading} message={`fetching data...`} marginTop={0} />
+        <CustomModal visible={loading} message={`Loading...`} marginTop={0} />
       
         { typed ? 
             searchResults.map((restaurant) => (
-              <TouchableOpacity key={restaurant.id} onPress={ () => {
-                handleQuePress(restaurant);
-              }}
-              >
-                <View style={styles.restaurantItem}>
-                  <Image
-                    source={{ uri: restaurant.images[0] }}
-                    style={{ width: 100, height: 100, borderRadius: 10 }}
-                  />
-                  <View style={styles.textContainer}>
-                    <Text style={styles.textCompanyName}>{restaurant.companyName}</Text>
-                    <Text>
-                      {restaurant.address[0]}, {restaurant.address[1]}
-                    </Text>
-                  </View>
-                  <View style={styles.waitList}>
-                    <Text style={styles.waitListText}>{restaurant.queueCount}</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
+              <RestaurantItem restaurant={restaurant} onPress={handleQuePress}/>
             ))
           : dataSet.map((restaurant) => (
-            <TouchableOpacity key={restaurant.id} onPress={ () => {
-              handleQuePress(restaurant);
-            }}
-            >
-              <View key={restaurant.id} style={styles.restaurantItem}>
-                <Image
-                  source={{ uri: restaurant.images[0] }}
-                  style={{ width: 100, height: 100, borderRadius: 10 }}
-                />
-                <View style={styles.textContainer}>
-                  <Text style={styles.textCompanyName}>{restaurant.companyName}</Text>
-                  <Text>
-                    {restaurant.address[0]}, {restaurant.address[1]}
-                  </Text>
-                </View>
-                <View style={styles.waitList}>
-                  <Text style={styles.waitListText}>{restaurant.queueCount}</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
+            <RestaurantItem restaurant={restaurant} onPress={handleQuePress}/>
           ))
         }
       </ScrollView>
@@ -169,63 +130,7 @@ const Search = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10,
-    marginTop: 20,
-  },
-  searchBar: {
-    width: '100%',
-    height: 40,
-    marginBottom: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#F7C5CC',
-    borderWidth: 0.3,
-    borderRadius: 5,
-    borderColor: '#DADADA',
-    paddingHorizontal: 10,
-  },
-  icon: {
-    paddingRight: 10,
-  },
-  input: {
-    width: '90%',
-    fontSize: 16,
-  },
-  selectedAreaText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  textCompanyName: {
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  restaurantItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  textContainer: {
-    marginLeft: 10,
-    flex: 1,
-  },
-  waitList: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 40,
-    height: 40,
-    backgroundColor: '#CC313D',
-    borderRadius: 20,
-  },
-  waitListText: {
-    color: 'white',
-    fontSize: 16,
-  },
-  loadingContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
+    paddingHorizontal: 12,
   },
 });
 
