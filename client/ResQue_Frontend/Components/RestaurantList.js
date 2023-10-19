@@ -86,18 +86,13 @@ const RestaurantList = () => {
     <ScrollView>
       <View style={styles.container}>
         {loading ? (
-          <View style={styles.loadingContainer}>
+          <View style={styles.loadingContainer}>  
             <CustomModal visible={loading} message={`Loading...`} marginTop={250} />
           </View>
         ) : (
           // Render restaurant data
           restaurants.map((restaurant) => (
-            <RestaurantItem
-              restaurant={restaurant}
-              onPress={() => {
-                handleQuePress(restaurant);
-              }}
-            />
+            <RestaurantItem restaurant={ restaurant } onPress={() => { handleQuePress(restaurant) }}/>
           ))
         )}
       </View>
@@ -106,7 +101,6 @@ const RestaurantList = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
   restaurantItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -124,7 +118,13 @@ const styles = StyleSheet.create({
     fontFamily: theme.font.secondary,
     fontsize: theme.fontsize.lg,
     color: theme.color.gray,
+
   },
+  textAddress: {
+    fontFamily: theme.font.secondary,
+    fontsize: theme.fontsize.lg,
+    color: theme.color.gray,
+  },  
   textContainer: {
     marginLeft: 10,
     flex: 1,

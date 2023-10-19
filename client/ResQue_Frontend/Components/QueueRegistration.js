@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Alert,
-  Dimensions,
-} from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView, Alert, Dimensions } from 'react-native';
+
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
@@ -131,39 +122,52 @@ const QueueRegistration = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity key={restaurant.id} onPress={handleRestaurantDetail}>
-        <View style={styles.restaurantItem}>
-          <Image source={{ uri: restaurant.thumbnailImage }} style={{ width: 65, height: 65, borderRadius: 5 }} />
-          <View style={styles.textContainer}>
-            <Text style={styles.textCompanyName}>{restaurant.name}</Text>
-            <Text style={styles.textAddress}>
-              {restaurant.type} &#183; {restaurant.address}
-            </Text>
-          </View>
-          <SimpleLineIcons name="arrow-right" size={20} />
-        </View>
-      </TouchableOpacity>
-      <View style={styles.separator} />
-      <Text style={styles.titles}>Name</Text>
-      <TextInput style={styles.input} placeholder="Enter your name" value={name} onChangeText={setName} />
-      <Text style={styles.titles}>Phone number</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your phone number"
-        value={phoneNumber}
-        onChangeText={setPhoneNumber}
-      />
-
-      <CustomModal visible={loading} message={'Queing you up'}></CustomModal>
-
-      <Text style={styles.titles}>Please select the number of visitors</Text>
-      <View style={styles.counterContainer}>
-        <Text style={styles.counterLabel}>Adult</Text>
-        <TouchableOpacity style={styles.counterButton} onPress={handleDecreaseAdult}>
-          <Text style={styles.counterButtonText}>-</Text>
+        <TouchableOpacity key={restaurant.id} onPress={handleRestaurantDetail}>
+            <View style={styles.restaurantItem}>
+              <Image
+                source={{ uri: restaurant.thumbnailImage }}
+                style={{ width: 65, height: 65, borderRadius: 5 }}
+              />
+              <View style={styles.textContainer}>
+                <Text style={styles.textCompanyName}>{restaurant.name}</Text>
+                <Text style={styles.textAddress}>
+                  {restaurant.type} &#183;{' '}
+                  {restaurant.address}
+                </Text>
+              </View>
+              <SimpleLineIcons name="arrow-right" size={20}/>
+            </View>
         </TouchableOpacity>
-        <View style={styles.counterValueContainer}>
-          <Text style={styles.counterValue}>{adultCount}</Text>
+        <View style={styles.separator} />
+        <Text style={styles.titles}>Name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your name"
+          value={name}
+          onChangeText={setName}
+        />
+        <Text style={styles.titles}>Phone number</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your phone number"
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
+        />
+
+        <CustomModal visible={loading} message={"Queing you up"}></CustomModal>
+
+        <Text style={styles.titles}>Please select the number of visitors</Text>
+        <View style={styles.counterContainer}>
+          <Text style={styles.counterLabel}>Adult</Text>
+          <TouchableOpacity style={styles.counterButton} onPress={handleDecreaseAdult}>
+            <Text style={styles.counterButtonText}>-</Text>
+          </TouchableOpacity>
+          <View style={styles.counterValueContainer}>
+            <Text style={styles.counterValue}>{adultCount}</Text>
+          </View>
+          <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseAdult}>
+            <Text style={styles.counterButtonText}>+</Text>
+          </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseAdult}>
           <Text style={styles.counterButtonText}>+</Text>
@@ -192,6 +196,7 @@ const QueueRegistration = () => {
       <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
         <Text style={styles.submitButtonText}>Apply</Text>
       </TouchableOpacity>
+
     </View>
   );
 };
@@ -206,7 +211,7 @@ const styles = StyleSheet.create({
   separator: {
     borderBottomWidth: 5,
     borderBottomColor: theme.color.lightgray,
-    position: 'relative',
+    position: 'relative', 
     width: Dimensions.get('window').width,
     left: -12,
   },
@@ -225,7 +230,8 @@ const styles = StyleSheet.create({
     fontFamily: theme.font.secondary,
     fontsize: theme.fontsize.lg,
     color: theme.color.gray,
-  },
+  },  
+
   textContainer: {
     marginLeft: 10,
     flex: 1,

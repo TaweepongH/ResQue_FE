@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet,ScrollView } from 'react-native';
 import { useAuth } from '../contexts/AuthContext.js';
 import CustomModal from '../Components/CustomModal.js';
 import { useNavigation } from '@react-navigation/native';
@@ -81,8 +81,8 @@ const Search = () => {
   useEffect(() => {
     // get our data set
     fetchData();
-  }, []);
 
+  }, []) 
   useEffect(() => {
     console.log('query value: ', query);
     handleFilter(query);
@@ -101,10 +101,10 @@ const Search = () => {
     <>
       <ScrollView style={styles.container}>
         <CustomModal visible={loading} message={`Loading...`} marginTop={0} />
-
         {typed
           ? searchResults.map((restaurant) => <RestaurantItem restaurant={restaurant} onPress={handleQuePress} />)
           : dataSet.map((restaurant) => <RestaurantItem restaurant={restaurant} onPress={handleQuePress} />)}
+
       </ScrollView>
     </>
   );

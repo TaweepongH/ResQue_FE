@@ -28,9 +28,9 @@ const TabNavigator = () => {
         tabBarActiveTintColor: theme.color.red,
         tabBarInactiveTintColor: theme.color.blackAlt,
         // Attention: You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar.  src: https://reactnavigation.org/docs/bottom-tab-navigator
-        tabBarStyle: { position: 'absolute', height: '10%', borderTopWidth: 1 },
-        tabBarLabelStyle: {
-          marginTop: -5,
+        tabBarStyle: { position: 'absolute', height: '10%', borderTopWidth: 1, },
+        tabBarLabelStyle: { 
+          marginTop: -5 ,
           fontFamily: theme.font.primary,
           fontSize: theme.fontsize.xs,
         },
@@ -126,24 +126,24 @@ const TabNavigator = () => {
         component={RestaurantInfo}
         options={{
           tabBarButton: () => null, // Hide the tab icon
-          tabBarLabel: () => null, // Hide the screen label
+          tabBarLabel: () => null,  // Hide the screen label
           headerTransparent: true,
-          headerTitle: '',
+          headerTitle:"",
           headerRight: () => {
             return (
-              <TouchableOpacity
+              <TouchableOpacity 
                 onPress={() => navigation.goBack()}
                 style={{
-                  marginRight: 15,
-                  marginTop: -30,
-                  backgroundColor: '#ffffff50',
-                  borderRadius: 5,
-                }}
+                    marginRight: 15, 
+                    marginTop: -30, 
+                    backgroundColor: '#ffffff50',
+                    borderRadius: 5,  
+                }}  
               >
-                <IconAnt name="close" size={30} />
-              </TouchableOpacity>
-            );
-          },
+                    <IconAnt name="close" size={30}/>
+                </TouchableOpacity>
+            )
+          }
         }}
       />
     </Tab.Navigator>

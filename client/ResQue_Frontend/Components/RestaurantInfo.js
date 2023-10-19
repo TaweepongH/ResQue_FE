@@ -1,26 +1,19 @@
 import React, { useEffect } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  TouchableHighlight,
-  StyleSheet,
-  ScrollView,
-  Linking,
-  Dimensions,
-} from 'react-native';
+
+import { View, Text, Image, TouchableOpacity, TouchableHighlight, StyleSheet, ScrollView, Linking, Dimensions } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import { useAuth } from '../contexts/AuthContext.js';
+
 import { theme } from '../styles/theme.js';
 theme;
 import { useNavigation } from '@react-navigation/native';
 
 const RestaurantInfo = ({ route }) => {
-  const { rstrntData } = useAuth();
+  const {rstrntData } = useAuth();
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -40,7 +33,7 @@ const RestaurantInfo = ({ route }) => {
 
   const handleJoinQueue = () => {
     console.log('Join a Queue button pressed');
-    navigation.navigate('QueueRegistration');
+    navigation.navigate('QueueRegistration')
   };
 
   const handleOpenWebsite = () => {
@@ -54,34 +47,34 @@ const RestaurantInfo = ({ route }) => {
         <View style={styles.header}>
           <Text style={styles.restaurantName}>{restaurant.name}</Text>
           <View style={styles.addressContainer}>
-            <EvilIcons name="location" size={20} color={theme.color.gray} style={{ marginBottom: 10 }} />
+            <EvilIcons name="location" size={20} color={theme.color.gray} style={{ marginBottom: 10 }}/>
             <Text style={styles.addressInfo}>{restaurant.address}</Text>
           </View>
         </View>
         <View style={styles.separator} />
         <View style={styles.infoContainer}>
-          <FontAwesome name="cutlery" size={20} style={styles.icons} />
+          <FontAwesome name="cutlery" size={20} style={styles.icons}/>
           <View style={styles.infoTextContainer}>
             <Text style={styles.infoTitle}>Cuisine</Text>
             <Text style={styles.infoText}>{restaurant.type}</Text>
           </View>
         </View>
         <View style={styles.infoContainer}>
-          <MaterialCommunityIcons name="clock-time-four-outline" size={20} style={styles.icons} />
+          <MaterialCommunityIcons name="clock-time-four-outline" size={20} style={styles.icons}/>
           <View style={styles.infoTextContainer}>
             <Text style={styles.infoTitle}>Business Hours</Text>
             <Text style={styles.infoText}>{restaurant.businessHours}</Text>
           </View>
         </View>
         <View style={styles.infoContainer}>
-          <Ionicons name="call" size={20} style={styles.icons} />
+          <Ionicons name="call" size={20}style={styles.icons} />
           <View style={styles.infoTextContainer}>
             <Text style={styles.infoTitle}>Call</Text>
             <Text style={styles.infoText}>{restaurant.phoneNumber}</Text>
           </View>
         </View>
         <View style={styles.infoContainer}>
-          <MaterialCommunityIcons name="web" size={20} style={styles.icons} />
+          <MaterialCommunityIcons name="web" size={20} style={styles.icons}/>
           <View style={styles.infoTextContainer}>
             <Text style={styles.infoTitle}>Website</Text>
             <TouchableHighlight underlayColor="transparent" onPress={handleOpenWebsite}>
@@ -133,7 +126,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   icons: {
-    color: theme.color.blackAlt,
+    color:theme.color.blackAlt,
     marginTop: -2,
   },
   infoTitle: {
@@ -148,20 +141,20 @@ const styles = StyleSheet.create({
     fontFamily: theme.font.secondary,
     lineHeight: theme.fontsize.lg,
     fontSize: theme.fontsize.md,
-    color: theme.color.blackAlt,
+    color:theme.color.blackAlt,
   },
   separator: {
     borderBottomWidth: 5,
     borderBottomColor: theme.color.lightgray,
-    position: 'relative',
+    position: 'relative', 
     width: Dimensions.get('window').width,
     left: -12,
-    marginVertical: 5,
+    marginVertical:5,
   },
   websiteLink: {
     textDecorationLine: 'underline',
     fontSize: theme.fontsize.md,
-    color: theme.color.blackAlt,
+    color:theme.color.blackAlt,
   },
   btnContainer: {
     alignItems: 'center',
@@ -172,7 +165,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     width: '100%',
-    position: 'absolute',
+    position: 'absolute', 
     bottom: -70,
   },
   joinQueueButtonText: {
