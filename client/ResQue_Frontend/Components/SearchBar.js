@@ -7,32 +7,30 @@ import CustomModal from './CustomModal.js';
 import { useNavigation } from '@react-navigation/native';
 
 const SearchBar = () => {
-
   const { setQueryContext } = useAuth();
 
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (text) => {
-    console.log("search terms in SearchBar: ", text);
+    console.log('search terms in SearchBar: ', text);
     setQueryContext(text);
     setSearchQuery(text);
   };
 
   return (
-        <View style={styles.searchBar}>
-          <Icon name="search" size={20} color="#797979" style={styles.icon} />
-          
-            <TextInput 
-              value={searchQuery}
-              onChangeText={handleSearch}
-              placeholder='Search Restaurants' 
-              style={styles.input}
-              multiline
-            />
+    <View style={styles.searchBar}>
+      <Icon name="search" size={20} color="#797979" style={styles.icon} />
 
-        </View>
+      <TextInput
+        value={searchQuery}
+        onChangeText={handleSearch}
+        placeholder="Search Restaurants"
+        style={styles.input}
+        multiline
+      />
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   searchBar: {
@@ -42,7 +40,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'white',
+    backgroundColor: 'white',
     borderWidth: 0.3,
     borderRadius: 5,
     borderColor: '#DADADA',

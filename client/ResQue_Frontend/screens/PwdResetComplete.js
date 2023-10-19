@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity , StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import { theme } from '../styles/theme';
@@ -14,48 +14,45 @@ const xml = `
 `;
 
 const PwdResetComplete = () => {
-
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const handleReturn = () => {
     navigation.navigate('Login');
-  }
+  };
 
   return (
     <View style={styles.container}>
-      <SvgXml xml={xml} style={styles.bgImage}/>
+      <SvgXml xml={xml} style={styles.bgImage} />
       <View style={styles.items}>
-          <IconAnt name="checkcircleo" size={50} color={theme.color.red}/>
-          <Text style={styles.txt_complete}>Reset Complete!</Text>
+        <IconAnt name="checkcircleo" size={50} color={theme.color.red} />
+        <Text style={styles.txt_complete}>Reset Complete!</Text>
 
-          <CustomButton title="Return to Login" onPress={handleReturn} />
+        <CustomButton title="Return to Login" onPress={handleReturn} />
       </View>
     </View>
   );
-}
+};
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     backgroundColor: theme.color.white,
     alignItems: 'center',
     justifyContent: 'center',
   },
   bgImage: {
-    position:'absolute', 
+    position: 'absolute',
   },
   items: {
     width: '100%',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  txt_complete:{
+  txt_complete: {
     fontFamily: theme.font.primary,
     fontSize: theme.fontsize.xxl,
     fontWeight: '100',
-    marginTop:15,
+    marginTop: 15,
     marginBottom: 20,
   },
 });
-
-
 
 export default PwdResetComplete;

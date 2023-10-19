@@ -16,13 +16,13 @@ export const getMoreTabHeaderTitle = (route) => {
     case 'MoreTab':
       return 'More';
     case 'Notice':
-      return 'Notice';  
+      return 'Notice';
     case 'Settings':
       return 'Settings';
     case 'Feedback':
       return 'Rate our app!';
     case 'TermsPolicies':
-      return 'Terms and Policies'
+      return 'Terms and Policies';
   }
 };
 
@@ -33,9 +33,9 @@ const MoreStack = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="MoreTab" component={More}/>
-      <Stack.Screen name="Notice" component={Notice}/>
-      <Stack.Screen name="Settings" component={Settings}/>
+      <Stack.Screen name="MoreTab" component={More} />
+      <Stack.Screen name="Notice" component={Notice} />
+      <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen name="Feedback" component={Feedback} />
       <Stack.Screen name="TermsPolicies" component={TermsPolicies} />
     </Stack.Navigator>

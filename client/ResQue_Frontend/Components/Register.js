@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { theme } from '../styles/theme';
 import CustomButton from './CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import RegisterAPI from './helpers/RegisterAPI';
 
-const InputField = ({ label, placeholder, onChangeText}) => (
+const InputField = ({ label, placeholder, onChangeText }) => (
   <>
-    <Text style={{ fontSize: theme.fontsize.md, marginBottom: 5, fontFamily: theme.font.secondary, }}>
-      {label}
-    </Text>
+    <Text style={{ fontSize: theme.fontsize.md, marginBottom: 5, fontFamily: theme.font.secondary }}>{label}</Text>
     <TextInput
       style={styles.input_info}
       label={label}
@@ -54,19 +45,16 @@ const Register = () => {
   };
 
   const handleRegistration = async () => {
-
     const registrationBody = {
       email: email,
       firstName: name.firstName,
       lastName: name.lastName,
       password: password
     }
-
     if (password !== confirmPassword) {
       Alert.alert('Passwords do not match.');
       return;
     } else {
-
       try {
         const response = await RegisterAPI(registrationBody);
     
@@ -80,10 +68,8 @@ const Register = () => {
       } catch (error) {
         console.error('Error:', error);
       }
-
     }
-
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -123,7 +109,7 @@ const Register = () => {
           secureTextEntry={false}
         ></InputField>
       </View>
-      <CustomButton title="Register" onPress={handleRegistration}/>
+      <CustomButton title="Register" onPress={handleRegistration} />
     </View>
   );
 };

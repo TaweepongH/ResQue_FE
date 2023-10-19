@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView, Alert, Dimensions } from 'react-native';
+
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
@@ -8,7 +9,6 @@ import CustomModal from './CustomModal.js';
 import { theme } from '../styles/theme';
 
 const QueueRegistration = () => {
-
   const { rstrntData, bearerToken, setQueDataContext } = useAuth();
 
   const navigation = useNavigation();
@@ -20,7 +20,6 @@ const QueueRegistration = () => {
   const [request, setRequest] = useState('');
   const [loading, setLoading] = useState(false);
   const [partySize, setPartySize] = useState(0);
-
 
   const handleDecreaseAdult = () => {
     if (adultCount > 0) {
@@ -45,7 +44,7 @@ const QueueRegistration = () => {
   useEffect(() => {
     setPartySize(childCount + adultCount);
     setRequest(request);
-  }, [handleDecreaseAdult, handleDecreaseChild, handleIncreaseAdult, handleIncreaseChild])
+  }, [handleDecreaseAdult, handleDecreaseChild, handleIncreaseAdult, handleIncreaseChild]);
 
   const handleSubmit = () => {
     console.log('Form submitted!');
@@ -56,72 +55,62 @@ const QueueRegistration = () => {
     console.log('Request:', request);
 
     createQue();
-
   };
 
   const createQue = async () => {
-
     setLoading(true);
 
     const url = 'https://app-57vwexmexq-uc.a.run.app/api/queues/user/createqueue';
 
     try {
-
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
           Authorization: `Bearer ${bearerToken}`,
-        }, 
+        },
         body: JSON.stringify({
-          partnerId: rstrntData.id
-        })
+          partnerId: rstrntData.id,
+        }),
       });
 
       if (response.ok) {
-
         const data = await response.json();
 
         setLoading(false);
 
-        console.log("response msg from backend: ", data);
-      const updatedDataContext = {
-      ...data,
-      partySize,
-      request,
-    };
-    
-    setQueDataContext(updatedDataContext);
-        navigation.navigate('QueueConfirm')
+        console.log('response msg from backend: ', data);
+        const updatedDataContext = {
+          ...data,
+          partySize,
+          request,
+        };
 
-        // then we've got to navigate to the next page. 
+        setQueDataContext(updatedDataContext);
+        navigation.navigate('QueueConfirm');
 
+        // then we've got to navigate to the next page.
       } else {
-
-        console.error("API request failed:", response.status, response);
+        console.error('API request failed:', response.status, response);
 
         if (response.status === 400) {
-          Alert.alert("You are already in line. Please check your que history in the MyInfo tab.")
+          Alert.alert('You are already in line. Please check your que history in the MyInfo tab.');
         }
 
         setLoading(false);
-
       }
-
     } catch (error) {
-      console.error("Network error:", error);
-  // Handle network-related errors
-      Alert.alert("Network error:", error);
+      console.error('Network error:', error);
+      // Handle network-related errors
+      Alert.alert('Network error:', error);
     }
-
-  }
-
+  };
 
   const handleRestaurantDetail = () => {
     // When the "arrow-right" icon is pressed, it navigates to the 'restaurant info' page.
     navigation.navigate('RestaurantInfo');
   };
-  
+
   const restaurant = {
     id: rstrntData.id,
     name: rstrntData.name,
@@ -180,29 +169,34 @@ const QueueRegistration = () => {
             <Text style={styles.counterButtonText}>+</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.counterContainer}>
-          <Text style={styles.counterLabel}>Child (under the age of 5)</Text>
-          <TouchableOpacity style={styles.counterButton} onPress={handleDecreaseChild}>
-            <Text style={styles.counterButtonText}>-</Text>
-          </TouchableOpacity>
-          <View style={styles.counterValueContainer}>
-            <Text style={styles.counterValue}>{childCount}</Text>
-          </View>
-          <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseChild}>
-            <Text style={styles.counterButtonText}>+</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.titles}>Request</Text>
-        <TextInput
-          style={styles.requestInput}
-          placeholder="You can write up to 50 characters maximum."
-          multiline
-          value={request}
-          onChangeText={setRequest}
-        />
-        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-          <Text style={styles.submitButtonText}>Apply</Text>
+        <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseAdult}>
+          <Text style={styles.counterButtonText}>+</Text>
         </TouchableOpacity>
+      </View>
+      <View style={styles.counterContainer}>
+        <Text style={styles.counterLabel}>Child (under the age of 5)</Text>
+        <TouchableOpacity style={styles.counterButton} onPress={handleDecreaseChild}>
+          <Text style={styles.counterButtonText}>-</Text>
+        </TouchableOpacity>
+        <View style={styles.counterValueContainer}>
+          <Text style={styles.counterValue}>{childCount}</Text>
+        </View>
+        <TouchableOpacity style={styles.counterButton} onPress={handleIncreaseChild}>
+          <Text style={styles.counterButtonText}>+</Text>
+        </TouchableOpacity>
+      </View>
+      <Text style={styles.titles}>Request</Text>
+      <TextInput
+        style={styles.requestInput}
+        placeholder="You can write up to 50 characters maximum."
+        multiline
+        value={request}
+        onChangeText={setRequest}
+      />
+      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+        <Text style={styles.submitButtonText}>Apply</Text>
+      </TouchableOpacity>
+
     </View>
   );
 };
@@ -237,6 +231,7 @@ const styles = StyleSheet.create({
     fontsize: theme.fontsize.lg,
     color: theme.color.gray,
   },  
+
   textContainer: {
     marginLeft: 10,
     flex: 1,

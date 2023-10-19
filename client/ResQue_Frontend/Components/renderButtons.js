@@ -6,7 +6,7 @@ const renderButtons = (data, handleAllButtonPress) => {
   const rows = [];
   const columns = 3;
   const totalButtons = data.length;
-  
+
   let startIndex = 0;
   let endIndex = columns + 1;
 

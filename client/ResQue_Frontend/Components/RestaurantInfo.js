@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react';
+
 import { View, Text, Image, TouchableOpacity, TouchableHighlight, StyleSheet, ScrollView, Linking, Dimensions } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useAuth} from '../contexts/AuthContext.js'
+
+import { useAuth } from '../contexts/AuthContext.js';
+
 import { theme } from '../styles/theme.js';
 theme;
 import { useNavigation } from '@react-navigation/native';
 
 const RestaurantInfo = ({ route }) => {
-
   const {rstrntData } = useAuth();
   const navigation = useNavigation();
 
   useEffect(() => {
-    console.log("r data", rstrntData);
-  })
+    console.log('r data', rstrntData);
+  });
 
   const restaurant = {
     id: rstrntData.id,
@@ -86,7 +88,6 @@ const RestaurantInfo = ({ route }) => {
           </TouchableOpacity>
         </View>
       </View>
-
     </View>
   );
 };

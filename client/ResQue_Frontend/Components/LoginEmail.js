@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -7,9 +6,7 @@ import { theme } from '../styles/theme';
 import CustomButton from './CustomButton';
 import LoginAPI from './helpers/LoginAPI';
 
-
 const LoginEmail = () => {
-  
   const { setEmailContext, setBearerTokenContext, setPasswordContext } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +14,7 @@ const LoginEmail = () => {
   const navigation = useNavigation();
 
   const handleSignUp = () => {
-     navigation.navigate('Register');
+    navigation.navigate('Register');
   };
 
   const handleEmailChange = useCallback((text) => {
@@ -27,20 +24,19 @@ const LoginEmail = () => {
   const handlePasswordChange = useCallback((text) => {
     setPassword(text);
   }, []);
-                                           
-   const handleForgotPwd = () => {
-     navigation.navigate('ResetPwd');
+
+  const handleForgotPwd = () => {
+    navigation.navigate('ResetPwd');
   };
 
   const handleLogin = async () => {
-
     const loginData = {
       email: email,
       password: password
     }
     
     LoginAPI(loginData, setBearerTokenContext, setEmailContext);
-  
+ 
   };
 
   return (
@@ -55,7 +51,7 @@ const LoginEmail = () => {
         />
 
         <TextInput
-          style={styles.input_info}                       
+          style={styles.input_info}
           placeholder="Enter your password"
           value={password}
           onChangeText={handlePasswordChange}
@@ -66,18 +62,21 @@ const LoginEmail = () => {
       </View>
 
       <TouchableOpacity style={styles.forgotButton}>
-        <Text style={styles.forgotText} onPress={handleForgotPwd}>Forgot Password ?</Text>
+        <Text style={styles.forgotText} onPress={handleForgotPwd}>
+          Forgot Password ?
+        </Text>
       </TouchableOpacity>
 
       {/* where the handleLogin function is called */}
-      <CustomButton title="Log in" onPress={handleLogin}/>
+      <CustomButton title="Log in" onPress={handleLogin} />
 
       <View style={styles.signupContainer}>
-        <Text style={styles.noAccountText}>Don't have an account?  </Text>
+        <Text style={styles.noAccountText}>Don't have an account? </Text>
         <TouchableOpacity>
-          <Text style={styles.signupText} onPress={handleSignUp}>Sign up</Text>
+          <Text style={styles.signupText} onPress={handleSignUp}>
+            Sign up
+          </Text>
         </TouchableOpacity>
-        
       </View>
     </View>
   );
@@ -134,4 +133,3 @@ const styles = StyleSheet.create({
 });
 
 export default LoginEmail;
-

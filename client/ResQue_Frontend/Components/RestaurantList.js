@@ -7,7 +7,6 @@ import { theme } from '../styles/theme';
 import RestaurantItem from './RestaurantItem.js';
 
 const RestaurantList = () => {
-
   const { bearerToken, setRstrntDataContext } = useAuth();
 
   const [restaurants, setRestaurants] = useState([]);
@@ -20,10 +19,9 @@ const RestaurantList = () => {
 
   useEffect(() => {
     fetchRestaurantData(names);
-  }, [names]); 
+  }, [names]);
 
   const fetchRestaurantData = async (selectedArea) => {
-
     setLoading(true);
 
     if (!selectedArea) {
@@ -33,7 +31,7 @@ const RestaurantList = () => {
     let url;
 
     if (selectedArea === 'All') {
-      url =  'https://app-57vwexmexq-uc.a.run.app/api/partners/all';
+      url = 'https://app-57vwexmexq-uc.a.run.app/api/partners/all';
     } else {
       url = `https://app-57vwexmexq-uc.a.run.app/api/partners/area/${selectedArea}`;
     }
@@ -50,7 +48,7 @@ const RestaurantList = () => {
       if (response.ok) {
         const data = await response.json();
         setRestaurants(data);
-        setLoading(false); 
+        setLoading(false);
       } else {
         console.log('Failed to fetch restaurant data, ', response);
       }
@@ -60,16 +58,15 @@ const RestaurantList = () => {
   };
 
   const handleQuePress = (restaurantData) => {
-
-    console.log("restaurant data: ", restaurantData);
+    console.log('restaurant data: ', restaurantData);
 
     const parseBusinessHours = (array) => {
       const parsedArray = [];
       array.forEach((business) => {
         parsedArray.push([business.start, business.end]);
-      })
-      return parsedArray
-    }
+      });
+      return parsedArray;
+    };
 
     setRstrntDataContext({
       id: restaurantData.id,
@@ -79,28 +76,23 @@ const RestaurantList = () => {
       type: restaurantData.genre,
       businessHours: parseBusinessHours(restaurantData.operationTime),
       phoneNumber: restaurantData.phone,
-      website: restaurantData.email
+      website: restaurantData.email,
     });
 
-    navigation.navigate('QueueRegistration')
-
-  }
+    navigation.navigate('QueueRegistration');
+  };
 
   return (
     <ScrollView>
       <View style={styles.container}>
         {loading ? (
-          
-          <View style={styles.loadingContainer}>
-            
+          <View style={styles.loadingContainer}>  
             <CustomModal visible={loading} message={`Loading...`} marginTop={250} />
-            
           </View>
-          
         ) : (
           // Render restaurant data
           restaurants.map((restaurant) => (
-            <RestaurantItem restaurant={restaurant} onPress={() => {handleQuePress(restaurant)}}/>
+            <RestaurantItem restaurant={ restaurant } onPress={() => { handleQuePress(restaurant) }}/>
           ))
         )}
       </View>
@@ -109,8 +101,6 @@ const RestaurantList = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-  },
   restaurantItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -123,6 +113,12 @@ const styles = StyleSheet.create({
     fontFamily: theme.font.secondary,
     color: theme.color.blackAlt,
     lineHeight: theme.fontsize.xl,
+  },
+  textAddress: {
+    fontFamily: theme.font.secondary,
+    fontsize: theme.fontsize.lg,
+    color: theme.color.gray,
+
   },
   textAddress: {
     fontFamily: theme.font.secondary,

@@ -9,7 +9,6 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import QueueHistory from './QueueHistory';
 import { theme } from '../../styles/theme';
 
-
 const Stack = createStackNavigator();
 
 const MyinfoStack = () => {
@@ -39,7 +38,6 @@ export const getMyInfoTabHeaderTitle = (route) => {
 };
 
 const MyInfo = ({ navigation: { navigate } }) => {
-
   const { bearerToken, setBearerTokenContext } = useAuth();
 
   const [userData, setUserData] = useState({});
@@ -54,23 +52,23 @@ const MyInfo = ({ navigation: { navigate } }) => {
             Authorization: `Bearer ${bearerToken}`,
           },
         });
-  
+
         if (response.ok) {
           const data = await response.json();
           if (data) {
-            console.log("there is data from the current user API! it is: ", data);
+            console.log('there is data from the current user API! it is: ', data);
             setUserData(data);
           } else {
-            console.log("there is no data from the current user API...");
+            console.log('there is no data from the current user API...');
           }
         } else {
-          console.log("HTTP error from the current user API:", response.status);
+          console.log('HTTP error from the current user API:', response.status);
         }
       } catch (error) {
-        console.error("Error from the current user API fetch:", error);
+        console.error('Error from the current user API fetch:', error);
       }
     }
-  }
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -78,7 +76,7 @@ const MyInfo = ({ navigation: { navigate } }) => {
         try {
           await retrieveCurrentUserData();
         } catch (error) {
-          console.log("error calling the fetch current Data function.")
+          console.log('error calling the fetch current Data function.');
         }
       };
 
@@ -87,7 +85,6 @@ const MyInfo = ({ navigation: { navigate } }) => {
   );
 
   const handleLogout = () => {
-
     Alert.alert(
       'Confirm Logout',
       'Are you sure you want to log out?',
@@ -107,7 +104,7 @@ const MyInfo = ({ navigation: { navigate } }) => {
       ],
       { cancelable: false }
     );
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -115,17 +112,19 @@ const MyInfo = ({ navigation: { navigate } }) => {
         <View style={styles.userProfile}>
           <Text style={styles.profileText}>
             {userData.firstName ? userData.firstName[0].toUpperCase() : ''}
-            {userData.lastName ? userData.lastName[0].toUpperCase()  : ''}
-          </Text> 
+            {userData.lastName ? userData.lastName[0].toUpperCase() : ''}
+          </Text>
         </View>
-        <Text style={styles.userName}>{userData.firstName} {userData.lastName}</Text>
+        <Text style={styles.userName}>
+          {userData.firstName} {userData.lastName}
+        </Text>
       </View>
       <View style={styles.infoContainer}>
-        <ListItem 
-          icon="person-outline" 
-          text="Edit profile" 
-          screen="EditProfile" 
-          onPress={() => navigate("EditProfile", userData ) }
+        <ListItem
+          icon="person-outline"
+          text="Edit profile"
+          screen="EditProfile"
+          onPress={() => navigate('EditProfile', userData)}
         />
         <ListItem icon="history" text="Queue History" screen="QueueHistory" />
         <ListItem icon="logout" text="Log out" screen="Login" onPress={() => handleLogout()} />

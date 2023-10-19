@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import { theme } from '../styles/theme';
-theme
+
 const QueueHistoryList = ({partner, dateTime, button, onPress }) => {
 
   const parseTime = (seconds) => {
@@ -34,7 +34,6 @@ const QueueHistoryList = ({partner, dateTime, button, onPress }) => {
         </View>
       );
 }
-
 const styles = StyleSheet.create({
   queueItemContainer: {
     width: '100%',
@@ -66,6 +65,7 @@ const styles = StyleSheet.create({
     lineHeight: theme.fontsize.md,
     color: theme.color.gray,
   },
+
   buttonContainer:{
     backgroundColor: theme.color.red,
     borderRadius: 20,
@@ -80,7 +80,4 @@ const styles = StyleSheet.create({
     color: theme.color.white,
   },
   });
-
-
-
 export default QueueHistoryList;
