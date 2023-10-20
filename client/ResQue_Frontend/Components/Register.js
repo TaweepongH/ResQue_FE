@@ -28,7 +28,6 @@ const Register = () => {
   const navigation = useNavigation();
 
   const handleEmailChange = (text) => {
-    
     setEmail(text);
   };
 
@@ -49,21 +48,21 @@ const Register = () => {
       email: email,
       firstName: name.firstName,
       lastName: name.lastName,
-      password: password
-    }
+      password: password,
+    };
     if (password !== confirmPassword) {
       Alert.alert('Passwords do not match.');
       return;
     } else {
       try {
         const response = await RegisterAPI(registrationBody);
-    
+
         if (response.ok) {
-          console.log("Registration successful:", response);
+          console.log('Registration successful:', response);
           navigation.navigate('LoginEmail');
         } else {
           // Handle the case where registration failed
-          console.log("Registration failed");
+          console.log('Registration failed');
         }
       } catch (error) {
         console.error('Error:', error);
